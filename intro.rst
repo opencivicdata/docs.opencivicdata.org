@@ -50,7 +50,9 @@ Now you're ready to start a new scraper! To copy a skeleton project into a new s
 Pupa will copy the skeleton project into a new albequerque directory with the following structure. ::
 
     albequerque/
-    └── __init__.py
+    ├── __init__.py
+    └── people.py
+
 
 Open up the new :file:`albequerque/__init__.py` file and check out it's contents. It will look like this:
 
@@ -66,19 +68,15 @@ Take a look at the Albequerque-specific changes below:
 .. literalinclude:: albequerque.__init__.diff
     :language: diff
 
-_Change the `jurisdiction_id`_
-
-
-The first edit changes the example `jurisdiction_id` to make it specific to Albequerque, New Mexico, by setting the state abbreviation to "nm" and the place name to "albequerque," followed by a slash and the word "council."
+* Change the `jurisdiction_id`
+  * The first edit changes the example `jurisdiction_id` to make it specific to Albequerque, New Mexico, by setting the state abbreviation to "nm" and the place name to "albequerque," followed by a slash and the word "council."
 
 .. admonition:: Read more about OCD identifiers
 
     :ref:`ocdid`
 
-Change the Basic Jurisdiction Details
-
-
-Next notice that we changed "name", "legislature_name", "legislature_url", all of what are pretty self-explanatory.
+* Change the Basic Jurisdiction Details
+  * Next notice that we changed "name", "legislature_name", "legislature_url", all of what are pretty self-explanatory.
 
 Edit the Term Information
 +++++++++++++++++++++++++++++++

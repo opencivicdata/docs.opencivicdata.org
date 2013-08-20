@@ -10,6 +10,7 @@ make html
 mkdir tmp
 mv ./* tmp
 mv tmp/_build/html/* .
+mv tmp/_static .
 rm -rf tmp/
 
 # Update the new branch.

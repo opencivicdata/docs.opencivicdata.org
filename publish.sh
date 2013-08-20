@@ -14,6 +14,7 @@ rm -rf tmp/
 git add .
 git commit -am"Latest build"
 
+git pull origin gh-pages
 git push origin gh-pages
 
 # Now go back to master.

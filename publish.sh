@@ -2,7 +2,9 @@ git checkout master
 
 # Nuke old gh-pages branch and recreate.
 git branch -D gh-pages
-git checkout -b gh-pages
+git checkout --orphan gh-pages
+
+make html
 
 # Move build into top level; nuke everything else.
 mkdir tmp

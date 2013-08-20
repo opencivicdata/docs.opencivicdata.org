@@ -14,5 +14,7 @@ rm -rf tmp/
 git add .
 git commit -am"Latest build"
 
+git push origin gh-pages
+
 # Now go back to master.
 git checkout master

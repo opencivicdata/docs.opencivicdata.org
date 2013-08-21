@@ -6,9 +6,6 @@ git checkout --orphan gh-pages
 
 make html
 
-# Tell jekyll to stop being stupid
-touch _build/.nojekyll
-
 # Move build into top level; nuke everything else.
 mkdir tmp
 mv ./* tmp
@@ -16,6 +13,9 @@ mv tmp/_build/html/* .
 mv tmp/_static .
 mv tmp/_sources .
 rm -rf tmp/
+
+# Tell jekyll to stop being stupid
+touch .nojekyll
 
 # Update the new branch.
 git add .

@@ -1,11 +1,7 @@
-========
-Octogit
-========
+====================================
+Municipal Scraper Documentation
+====================================
 
-This repository has been created with Octogit.
+This repo contains documentation on how to write and contribute municipal scrapers to the Open Civic Data collection effort.
 
-.. image:: http://myusuf3.github.com/octogit/assets/img/readme_image.png
-
-Author
-======
-Mahdi Yusuf (@myusuf3)
+See them in action at http://opencivicdata.github.io/municipal-scrapers-docs/intro.html.

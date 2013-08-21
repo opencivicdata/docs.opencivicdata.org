@@ -62,3 +62,65 @@ You can see that we create the Legislator, with the only two required
 params (`name` and `post_id`, add the source of the data (most of the time
 this will be the url that you've called with `urlopen`) and yielded the
 Legislator back.
+
+Right. Now let's get back to Memberships. Let's say that we've found
+that John Smith has a membership in the Transportation committee::
+
+    from pupa.scrape import Scraper, Legislator
+    class MyFirstPersonScraper(Scraper):
+        def get_people(self):
+            js = Legislator(name="John Smith", post_id="Ward 1")
+            js.add_source(url="http://example.com")
+            js.add_committee_membership("Transportation",
+                                        role="Chair")
+            yield js
+
+Of course, all of this is well and good if we find all the data on the
+same page. However, commonly, it's much easier to scrape each committee
+from the committee pages, since this will often have the data in
+an easier-to-scrape format.
+
+Rather than write something like::
+
+    from pupa.scrape import Scraper, Legislator, Committee
+    class MyFirstPersonScraper(Scraper):
+        def get_people(self):
+            js = Legislator(name="John Smith", post_id="Ward 1")
+            js.add_source(url="http://example.com")
+
+            members = ["John Smith", "Jos Bleau"]
+
+            committee = Committee("Transportation")
+            committee.add_source("http://example.com/committee/transport")
+            for member in members:
+                committee.add_member(member, role='member')
+
+            yield committee
+            yield js
+
+However, as you can imagine, this gets quite out of hand quite quickly. One
+common pattern is to split the logic into two sections, such as::
+
+
+    from pupa.scrape import Scraper, Legislator, Committee
+    class MyFirstPersonScraper(Scraper):
+        def scrape_legislators(self):
+            js = Legislator(name="John Smith", post_id="Ward 1")
+            js.add_source(url="http://example.com")
+            yield js
+
+        def scrape_committees(self):
+            members = ["John Smith", "Jos Bleau"]
+            committee = Committee("Transportation")
+            committee.add_source("http://example.com/committee/transport")
+            for member in members:
+                committee.add_member(member, role='member')
+
+            yield committee
+
+        def get_people(self):
+            yield self.scrape_legislators()
+            yield self.scrape_committees()
+
+It's worth noting that you should keep in mind `scrape_people` *is* a special
+function (see above), so you should take care not to override this method.

@@ -1,4 +1,6 @@
 
+.. _intro:
+
 Contributing a Municipal Scraper
 ======================================
 
@@ -80,7 +82,7 @@ Edit the Jurisdiction's Metadata
 
 Take a look at the Albuquerque-specific changes below:
 
-.. literalinclude:: albuquerque.__init__.diff
+.. literalinclude:: albuquerque/albuquerque.__init__.diff
     :language: diff
 
 Let's go over the changes made above one at a time.

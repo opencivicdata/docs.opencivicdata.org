@@ -12,6 +12,8 @@ Contents:
    :maxdepth: 2
 
    intro
+   people
+   ocdids
 
 Indices and tables
 ==================

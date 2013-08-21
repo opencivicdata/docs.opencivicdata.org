@@ -53,38 +53,45 @@
 <h2>Setting Up Your Environment<a class="headerlink" href="#setting-up-your-environment" title="Permalink to this headline">¶</a></h2>
 <p>The recommended way to manage dependencies in python is with <a class="reference external" href="https://pypi.python.org/pypi/virtualenv">virtualenv</a>. If virtualenv is new territory for you, go there first and get set up, then check out <a class="reference external" href="http://virtualenvwrapper.readthedocs.org/en/latest/">virtualenvwrapper</a> for extra convenience in setting up, activating, deactivating, and tearing down virtualenvs.</p>
 <p>To get started on your first scraper, create a new virtualenv to manage the dependencies for your code.</p>
-<div class="highlight-python"><pre>$ cd ~/.virtualenvs
-$ virtualenv municipal-scrapers</pre>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> ~/.virtualenvs
+<span class="nv">$ </span>virtualenv municipal-scrapers
+
+<span class="c"># Next activate your virtualenv.</span>
+<span class="nv">$ </span><span class="nb">source </span>municipal-scrapers/bin/activate
+
+<span class="c"># Next, create a directory to hold your scrapers. (Don&#39;t be silly, of course you&#39;ll want to write more than one.)</span>
+<span class="nv">$ </span>mkdir ~/projects/municipal scrapers
+<span class="nv">$ </span><span class="nb">cd</span> !:1
+</pre></div>
 </div>
 <p>Note that you can write scrapers in python 2.7 or python 3.3 or higher.
 To create a virtualenv using a version of python other than your system version, use the -p command line flag:</p>
-<div class="highlight-python"><pre>$ virtualenv -p`which python3.3` municipal-scrapers</pre>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>virtualenv -p<span class="sb">`</span>which python3.3<span class="sb">`</span> municipal-scrapers
+</pre></div>
 </div>
-<p>Next activate your virtualenv:</p>
-<div class="highlight-python"><pre>$ source municipal-scrapers/bin/activate</pre>
-</div>
-<p>Next, create a directory to hold your scrapers. (Don&#8217;t be silly, of course you&#8217;ll want to write more than one.)</p>
-<div class="highlight-python"><pre>$ mkdir ~/projects/municipal scrapers
-$ cd !:1</pre>
-</div>
-<p>And for the record, if you&#8217;re using <a class="reference external" href="http://virtualenvwrapper.readthedocs.org/en/latest/">virtualenvwrapper</a>, the previous four steps can be abbreviated to:</p>
-<div class="highlight-python"><pre>$ mkproject municipal-scrapers</pre>
+<p>And for the record, if you&#8217;re using <a class="reference external" href="http://virtualenvwrapper.readthedocs.org/en/latest/">virtualenvwrapper</a>, the previous four steps be abbreviated to:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>mkproject municipal-scrapers
+</pre></div>
 </div>
 <p>Finally, install <a class="reference external" href="https://github.com/opencivicdata/pupa">pupa</a>, the scraper framework we&#8217;ll be using to scrape municipal data.</p>
-<div class="highlight-python"><pre>$ pip install -e git+git@github.com:opencivicdata/pupa.git#egg=Package</pre>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install -e git+git@github.com:opencivicdata/pupa.git#egg<span class="o">=</span>Package
+</pre></div>
 </div>
 </div>
 <div class="section" id="creating-a-new-scraper">
 <h2>Creating a New Scraper<a class="headerlink" href="#creating-a-new-scraper" title="Permalink to this headline">¶</a></h2>
-<p>Now you&#8217;re ready to start a new scraper! To copy a skeleton project into a new scraper directory, use pupa&#8217;s init command. Let&#8217;s create a new scraper for Albequerque:</p>
-<div class="highlight-python"><pre>$ pupa init albequerque</pre>
+<p>Now you&#8217;re ready to start a new scraper! To copy a skeleton project into a new scraper directory, use pupa&#8217;s init command. Let&#8217;s create a new scraper for Albuquerque:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pupa init albuquerque
+</pre></div>
 </div>
-<p>Pupa will copy the skeleton project into a new albequerque directory with the following structure.</p>
-<div class="highlight-python"><pre>albequerque/
+<p>Pupa will copy the skeleton project into a new albuquerque directory with the following structure.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>tree albuquerque/
+albuquerque/
 ├── __init__.py
-└── people.py</pre>
+└── people.py
+</pre></div>
 </div>
-<p>Open up the new <tt class="file docutils literal"><span class="pre">albequerque/__init__.py</span></tt> file and check out it&#8217;s contents. It will look like this:</p>
+<p>Open up the new <tt class="file docutils literal"><span class="pre">albuquerque/__init__.py</span></tt> file and check out it&#8217;s contents. It will look like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pupa.scrape</span> <span class="kn">import</span> <span class="n">Jurisdiction</span>
 
 <span class="kn">from</span> <span class="nn">.people</span> <span class="kn">import</span> <span class="n">PersonScraper</span>
@@ -124,77 +131,40 @@ $ cd !:1</pre>
         <span class="k">return</span> <span class="p">[</span><span class="s">&#39;2013&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>This file contains a single subclass of a Jurisdiction base class. The jursdiction class represents the municipality we&#8217;re scraping information for, and is the place we&#8217;ll store the metadata required during the scrape. To get started, all we have to do is edit the metadata on this class to be specific to Albequerque.</p>
+<p>This file contains a single subclass of a Jurisdiction base class. The jurisdiction class represents the municipality we&#8217;re scraping information for, and is the place we&#8217;ll store the metadata required during the scrape. To get started, all we have to do is edit the metadata on this class to be specific to Albuquerque.</p>
+<p>Notice also the <cite>get_scraper</cite> function. Your scraper needs to implement this simple function to define what scraper gets used given a <cite>term</cite>, <cite>session</cite>, and <cite>scraper_type</cite>. <cite>scraper_type</cite> will be a string equal to &#8216;people&#8217;, &#8216;bills&#8217;, or &#8216;events&#8217;. As you can see, the default implementation of this function simply returns the <cite>PeopleScraper</cite> if the <cite>scraper_type</cite> is &#8216;people&#8217;, but this function can easily scale up to supply a different people scraper for different terms or even sessions, which might be necessary if the municipality rolls out a new website for a new term, requiring a new scraper.</p>
+<p>This is all well and good, but now let&#8217;s hack this example file to customize it to work for Albuquerque.</p>
 </div>
 <div class="section" id="edit-the-jurisdiction-s-metadata">
 <h2>Edit the Jurisdiction&#8217;s Metadata<a class="headerlink" href="#edit-the-jurisdiction-s-metadata" title="Permalink to this headline">¶</a></h2>
-<p>Take a look at the Albequerque-specific changes below:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span class="gh">diff --git a/albequerque/__init__.py b/albequerque/__init__.py</span>
-<span class="gh">index 3bc66f9..9924eee 100644</span>
-<span class="gd">--- a/albequerque/__init__.py</span>
-<span class="gi">+++ b/albequerque/__init__.py</span>
-<span class="gu">@@ -4,25 +4,20 @@ from .people import PersonScraper</span>
- 
- 
- class Example(Jurisdiction):
-<span class="gd">-    jurisdiction_id = &#39;ocd-jurisdiction/country:us/state:ex/place:example&#39;</span>
-<span class="gi">+    jurisdiction_id = &#39;ocd-jurisdiction/country:us/state:nm/place:albequerque/council&#39;</span>
- 
-     def get_metadata(self):
-         return {
-<span class="gd">-            &#39;name&#39;: &#39;Example&#39;,</span>
-<span class="gd">-            &#39;legislature_name&#39;: &#39;Example Legislature&#39;,</span>
-<span class="gd">-            &#39;legislature_url&#39;: &#39;http://example.com&#39;,</span>
-<span class="gi">+            &#39;name&#39;: &#39;Albequerque City Council&#39;,</span>
-<span class="gi">+            &#39;legislature_name&#39;: &#39;Albequerque City Council&#39;,</span>
-<span class="gi">+            &#39;legislature_url&#39;: &#39;http://www.cabq.gov/council/&#39;,</span>
-             &#39;terms&#39;: [{
-<span class="gd">-                &#39;name&#39;: &#39;2013-2014&#39;,</span>
-<span class="gd">-                &#39;sessions&#39;: [&#39;2013&#39;],</span>
-<span class="gi">+                &#39;name&#39;: &#39;2013-2015&#39;,</span>
-                 &#39;start_year&#39;: 2013,
-<span class="gd">-                &#39;end_year&#39;: 2014</span>
-<span class="gi">+                &#39;end_year&#39;: 2015,</span>
-<span class="gi">+                &#39;sessions&#39;: [&#39;2013&#39;],</span>
-                 }],
-             &#39;provides&#39;: [&#39;people&#39;],
-<span class="gd">-            &#39;parties&#39;: [</span>
-<span class="gd">-                {&#39;name&#39;: &#39;Independent&#39; },</span>
-<span class="gd">-                {&#39;name&#39;: &#39;Green&#39; },</span>
-<span class="gd">-                {&#39;name&#39;: &#39;Bull-Moose&#39;}</span>
-<span class="gd">-               ],</span>
-             &#39;session_details&#39;: {
-                 &#39;2013&#39;: {&#39;_scraped_name&#39;: &#39;2013&#39;}
-                 },
-</pre></div>
-</div>
-<ul class="simple">
-<li>Change the <cite>jurisdiction_id</cite>
-* The first edit changes the example <cite>jurisdiction_id</cite> to make it specific to Albequerque, New Mexico, by setting the state abbreviation to &#8220;nm&#8221; and the place name to &#8220;albequerque,&#8221; followed by a slash and the word &#8220;council.&#8221;</li>
+<p>Take a look at the Albuquerque-specific changes below:</p>
+<p>Let&#8217;s go over the changes made above one at a time.</p>
+<ul>
+<li><p class="first">Change the <cite>jurisdiction_id</cite>:</p>
+<p>The first edit changes the example <cite>jurisdiction_id</cite> to make it specific to Albuquerque, New Mexico, by setting the state abbreviation to &#8220;nm&#8221; and the place name to &#8220;albuquerque,&#8221; followed by a slash and the word &#8220;council.&#8221; Adding &#8220;council&#8221; at the end of the <cite>jurisdiction_id</cite> is simply a convention this project uses when scraping information about a city council. (You can also read more about <a class="reference internal" href="ocdids.html#ocdid"><em>OCD Identifiers</em></a>.)</p>
+</li>
+<li><p class="first">Change the Basic Jurisdiction Details:</p>
+<p>Next notice that we changed <cite>name</cite>, <cite>legislature_name</cite>, <cite>legislature_url</cite>, all of which are pretty self-explanatory. The <cite>legislature_url</cite> is the url of the Albuquerque City Council website we&#8217;ll be scraping.</p>
+</li>
+<li><p class="first">Add the appropriate values for Albuquerque City Council terms and sessions:</p>
+<p>This is the only really tricky part of starting a new jurisdiction. The <cite>term</cite> is the length of time that officials in the Albuquerque City Council hold office. Sometimes this is straight-forward, and few minutes of strategic googling reveals that the council members all serve predictable two-year terms and come up for election every even numbered year, for example. But some jurisdictions have staggered elections in which only some of the council members participate in a given election, while others will be up for election during a later election.</p>
+<p>The rule for choosing the <cite>term</cite> value is actually simple: if the municipality has a uniform term, use that; if it has staggered terms, the term length is the length of time in between elections. So if council members serve two-year terms, but each year staggered elections are held in which only half of the council members are up for re-election, the term length is one year.</p>
+<p>As for the value you&#8217;ll enter into the metadata as the term&#8217;s <cite>name</cite>, by convention the project uses a year range, like &#8216;2013-2014&#8217;.</p>
+<p>How does one go about locating this information? An excellent place to look is in the relevant municipality&#8217;s town charter or equivalent document. In this case, I found Albuquerque&#8217;s town charter by simply googling &#8220;Albuquerque charter&#8221; and clicking the first result, which was a <a class="reference external" href="http://www.cabq.gov/council/documents/charter-review-task-force/city_charter.pdf">PDF of the charter</a> located on the town&#8217;s official .gov website: <a class="reference external" href="http://www.cabq.gov/">http://www.cabq.gov/</a>. Perusing the table of contents, I noticed a section entitled &#8220;Terms of Office&#8221; in Article IV, section 4 of the charter. Here&#8217;s what it says:</p>
+<blockquote>
+<div><p>&#8220;The terms of the office of a Councilor, unless sooner recalled or removed, shall begin on December 1st of the year of election and be four years or until a successor is duly elected and qualified. The Councillors may succeed themselves in office. The terms of office of Councillors shall be staggered with four or five districted Councillors elected every two years.&#8221;</p>
+</div></blockquote>
+<p>Aha. In Albuquerque, each council member serves a four year term, and staggered elections are held every two years. So our term length will be two years. The final step is to figure out the start year in the range we&#8217;ll use as the <cite>term</cite> value, and to do that, we&#8217;ll again turn to Albuquerque&#8217;s official website. This time, some quick research took me to the city&#8217;s <a class="reference external" href="http://www.cabq.gov/voting-elections/candidate-information/2013-general-election-information/2013-general-election-calendar">2013 General Election Calendar</a>. So our term will begin in 2013 with a two-year duration, making our term <cite>name</cite> value &#8216;2013-2015&#8217;.</p>
+<p>Accordingly, in the diff above we changed the name of the term to &#8216;2013-2015&#8217;, added the start and end years of the term as integers, and added the current legislative session of &#8216;2013&#8217; to the term&#8217;s &#8216;sessions&#8217; list, which will expand in the future to include the 2014 and 2015 sessions.</p>
+</li>
+<li><p class="first">Delete the <cite>parties</cite> information:</p>
+<p>This change isn&#8217;t strictly necessary, but I couldn&#8217;t easily located information about party affiliation among Albuquerque council members, so I deleted this dictionary to avoid having inaccurate information in the scraper&#8217;s metadata.</p>
+</li>
 </ul>
-<div class="admonition-read-more-about-ocd-identifiers admonition">
-<p class="first admonition-title">Read more about OCD identifiers</p>
-<p class="last"><a class="reference internal" href="#ocdid"><em>OCD Identifiers</em></a></p>
 </div>
-<ul class="simple">
-<li>Change the Basic Jurisdiction Details
-* Next notice that we changed &#8220;name&#8221;, &#8220;legislature_name&#8221;, &#8220;legislature_url&#8221;, all of what are pretty self-explanatory.</li>
-</ul>
-<div class="section" id="edit-the-term-information">
-<h3>Edit the Term Information<a class="headerlink" href="#edit-the-term-information" title="Permalink to this headline">¶</a></h3>
-<div class="admonition-read-more-about-terms admonition">
-<p class="first admonition-title">Read more about terms</p>
-<p class="last"><a class="reference internal" href="#term"><em>How to Choose the right value for Term</em></a></p>
-</div>
-</div>
-</div>
-<div class="section" id="ocd-identifiers">
-<span id="ocdid"></span><h2>OCD Identifiers<a class="headerlink" href="#ocd-identifiers" title="Permalink to this headline">¶</a></h2>
-<p>Blah blah.</p>
-<div class="section" id="how-to-choose-the-right-value-for-term">
-<span id="term"></span><h3>How to Choose the right value for Term<a class="headerlink" href="#how-to-choose-the-right-value-for-term" title="Permalink to this headline">¶</a></h3>
-<p>Blah blah.</p>
-</div>
+<div class="section" id="get-up-and-stretch">
+<h2>Get Up and Stretch!<a class="headerlink" href="#get-up-and-stretch" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;re done editing the metadata for Albuquerque, and next we&#8217;ll write the people scraper. Go get a refill, then continue on to <a class="reference internal" href="people.html#people"><em>Contributing a Municipal Person Scraper</em></a>.</p>
 </div>
 </div>
 
@@ -209,14 +179,8 @@ $ cd !:1</pre>
 <li><a class="reference internal" href="#">Contributing a Municipal Scraper</a><ul>
 <li><a class="reference internal" href="#setting-up-your-environment">Setting Up Your Environment</a></li>
 <li><a class="reference internal" href="#creating-a-new-scraper">Creating a New Scraper</a></li>
-<li><a class="reference internal" href="#edit-the-jurisdiction-s-metadata">Edit the Jurisdiction&#8217;s Metadata</a><ul>
-<li><a class="reference internal" href="#edit-the-term-information">Edit the Term Information</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#ocd-identifiers">OCD Identifiers</a><ul>
-<li><a class="reference internal" href="#how-to-choose-the-right-value-for-term">How to Choose the right value for Term</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#edit-the-jurisdiction-s-metadata">Edit the Jurisdiction&#8217;s Metadata</a></li>
+<li><a class="reference internal" href="#get-up-and-stretch">Get Up and Stretch!</a></li>
 </ul>
 </li>
 </ul>

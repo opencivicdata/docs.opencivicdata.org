@@ -1,4 +1,6 @@
 
+.. _people:
+
 Contributing a Municipal Person Scraper
 =======================================
 

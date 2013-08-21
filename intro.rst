@@ -93,25 +93,28 @@ Let's go over the changes made above one at a time.
 
   Next notice that we changed `name`, `legislature_name`, `legislature_url`, all of which are pretty self-explanatory. The `legislature_url` is the url of the Albuquerque City Council website we'll be scraping.
 
-- Add the appropriate values for Albuquerque City Council terms and sessions:
-
-  This is the only really tricky part of starting a new jurisdiction. The `term` is the length of time that officials in the Albuquerque City Council hold office. Sometimes this is straight-forward, and few minutes of strategic googling reveals that the council members all serve predictable two-year terms and come up for election every even numbered year, for example. But some jurisdictions have staggered elections in which only some of the council members participate in a given election, while others will be up for election during a later election.
-
-  The rule for choosing the `term` value is actually simple: if the municipality has a uniform term, use that; if it has staggered terms, the term length is the length of time in between elections. So if council members serve two-year terms, but each year staggered elections are held in which only half of the council members are up for re-election, the term length is one year.
-
-  As for the value you'll enter into the metadata as the term's `name`, by convention the project uses a year range, like '2013-2014'.
-
-  How does one go about locating this information? An excellent place to look is in the relevant municipality's town charter or equivalent document. In this case, I found Albuquerque's town charter by simply googling "Albuquerque charter" and clicking the first result, which was a `PDF of the charter <http://www.cabq.gov/council/documents/charter-review-task-force/city_charter.pdf>`_ located on the town's official .gov website: `http://www.cabq.gov/ <http://www.cabq.gov/>`_. Perusing the table of contents, I noticed a section entitled "Terms of Office" in Article IV, section 4 of the charter. Here's what it says:
-
-    "The terms of the office of a Councilor, unless sooner recalled or removed, shall begin on December 1st of the year of election and be four years or until a successor is duly elected and qualified. The Councillors may succeed themselves in office. The terms of office of Councillors shall be staggered with four or five districted Councillors elected every two years."
-
-  Aha. In Albuquerque, each council member serves a four year term, and staggered elections are held every two years. So our term length will be two years. The final step is to figure out the start year in the range we'll use as the `term` value, and to do that, we'll again turn to Albuquerque's official website. This time, some quick research took me to the city's `2013 General Election Calendar <http://www.cabq.gov/voting-elections/candidate-information/2013-general-election-information/2013-general-election-calendar>`_. So our term will begin in 2013 with a two-year duration, making our term `name` value '2013-2015'.
-
-  Accordingly, in the diff above we changed the name of the term to '2013-2015', added the start and end years of the term as integers, and added the current legislative session of '2013' to the term's 'sessions' list, which will expand in the future to include the 2014 and 2015 sessions.
-
 - Delete the `parties` information:
 
   This change isn't strictly necessary, but I couldn't easily located information about party affiliation among Albuquerque council members, so I deleted this dictionary to avoid having inaccurate information in the scraper's metadata.
+
+Alright, these three changes were easy. Now let's enter the jurisdiction's `terms` and `sessions` info.
+
+Choosing the appropriate values for `terms` and `sessions`
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This is the only really tricky part of starting a new jurisdiction. The `term` is the length of time that officials in the Albuquerque City Council hold office. Sometimes this is straight-forward, and few minutes of strategic googling reveals that the council members all serve predictable two-year terms and come up for election every even numbered year, for example. But some jurisdictions have staggered elections in which only some of the council members participate in a given election, while others will be up for election during a later election.
+
+The rule for choosing the `term` value is actually simple: if the municipality has a uniform term, use that; if it has staggered terms, the term length is the length of time in between elections. So if council members serve two-year terms, but each year staggered elections are held in which only half of the council members are up for re-election, the term length is one year.
+
+As for the value you'll enter into the metadata as the term's `name`, by convention the project uses a year range, like '2013-2014'.
+
+How does one go about locating this information? An excellent place to look is in the relevant municipality's town charter or equivalent document. In this case, I found Albuquerque's town charter by simply googling "Albuquerque charter" and clicking the first result, which was a `PDF of the charter <http://www.cabq.gov/council/documents/charter-review-task-force/city_charter.pdf>`_ located on the town's official .gov website: `http://www.cabq.gov/ <http://www.cabq.gov/>`_. Perusing the table of contents, I noticed a section entitled "Terms of Office" in Article IV, section 4 of the charter. Here's what it says:
+
+"The terms of the office of a Councilor, unless sooner recalled or removed, shall begin on December 1st of the year of election and be four years or until a successor is duly elected and qualified. The Councillors may succeed themselves in office. The terms of office of Councillors shall be staggered with four or five districted Councillors elected every two years."
+
+  Aha. In Albuquerque, each council member serves a four year term, and staggered elections are held every two years. So our term length will be two years. The final step is to figure out the start year in the range we'll use as the `term` value, and to do that, we'll again turn to Albuquerque's official website. This time, some quick research took me to the city's `2013 General Election Calendar <http://www.cabq.gov/voting-elections/candidate-information/2013-general-election-information/2013-general-election-calendar>`_. So our term will begin in 2013 with a two-year duration, making our term `name` value '2013-2015'.
+
+Accordingly, in the diff above we changed the name of the term to '2013-2015', added the start and end years of the term as integers, and added the current legislative session of '2013' to the term's 'sessions' list, which will expand in the future to include the 2014 and 2015 sessions.
 
 Get Up and Stretch!
 ----------------------------------------

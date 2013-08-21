@@ -26,7 +26,7 @@ require_clean_work_tree () {
     fi
 }
 
-require_clean_work_tree()
+require_clean_work_tree
 
 git checkout master
 

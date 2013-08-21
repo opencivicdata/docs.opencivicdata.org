@@ -32,6 +32,7 @@ git checkout master
 
 # Nuke old gh-pages branch and recreate.
 git branch -D gh-pages
+git push origin :gh-pages
 git checkout --orphan gh-pages
 
 make html

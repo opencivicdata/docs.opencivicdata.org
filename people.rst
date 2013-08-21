@@ -124,3 +124,40 @@ common pattern is to split the logic into two sections, such as::
 
 It's worth noting that you should keep in mind `scrape_people` *is* a special
 function (see above), so you should take care not to override this method.
+
+Of course, in real scrapers, you'll need to write some code to take care
+of getting the list of people that are in that jurisdiction, or have
+memberships in the Legislature. Hardcoding names, such as in the examples
+above is bad practice, since it's usually easier to just manually enter
+in the data.
+
+As a slightly more fun example, here's a scraper that will scrape the
+Sunlight website for people's information. This is deliberately a mildly
+complex example (as well as being purely for fun!), to get a feel for what
+a working Person scraper may look like::
+
+    import re
+    import lxml
+    from pupa.scrape import Scraper, Legislator, Committee
+    class SunlightPersonScraper(Scraper):
+        def get_people(self):
+            url = "http://sunlightfoundation.com/people/"
+            entry = self.urlopen(url)
+            page = lxml.html.fromstring(entry)
+            page.make_links_absolute(url)
+            for person in page.xpath("//ul[contains(@class, 'sunlightStaff')]//li"):
+                who = person.xpath(".//a")
+                who = who[0] if who else None
+                name = who.text_content().strip()
+                image = person.xpath(".//div[@class='imgWrapper']/@style")
+                image = image[0] if image else None
+                if image:
+                    urls = re.findall("url\((?P<url>.*)\);", image)
+                position = person.xpath(".//span[@class='staffTitle']/text()")[0]
+                position = position.strip()
+                person = Legislator(name=name,
+                                    post_id=position,
+                                    image=image)
+                person.add_link('homepage', who.attrib['href'])
+                person.add_source(url)
+                yield person

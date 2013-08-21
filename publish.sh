@@ -7,8 +7,7 @@ git checkout --orphan gh-pages
 make html
 
 # Tell jekyll to stop being stupid
-touch _build/html/_sources/.nojekyll
-touch _build/html/_static/.nojekyll
+touch _build/.nojekyll
 
 # Move build into top level; nuke everything else.
 mkdir tmp

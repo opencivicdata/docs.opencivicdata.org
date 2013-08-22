@@ -14,7 +14,6 @@ Contents:
    intro
    environment
    jurisdiction
-   people
    pull_request
    ocdids
 

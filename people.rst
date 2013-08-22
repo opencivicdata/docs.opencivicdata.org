@@ -44,3 +44,102 @@ You can see that we create the Legislator, with the only two required
 params (`name` and `post_id`, add the source of the data (most of the time
 this will be the url that you've called with `urlopen`) and yielded the
 Legislator back.
+
+Right. Now let's get back to Memberships. Let's say that we've found
+that John Smith has a membership in the Transportation committee::
+
+    from pupa.scrape import Scraper, Legislator
+    class MyFirstPersonScraper(Scraper):
+        def get_people(self):
+            js = Legislator(name="John Smith", post_id="Ward 1")
+            js.add_source(url="http://example.com")
+            js.add_committee_membership("Transportation",
+                                        role="Chair")
+            yield js
+
+Of course, all of this is well and good if we find all the data on the
+same page. However, commonly, it's much easier to scrape each committee
+from the committee pages, since this will often have the data in
+an easier-to-scrape format.
+
+Rather than write something like::
+
+    from pupa.scrape import Scraper, Legislator, Committee
+    class MyFirstPersonScraper(Scraper):
+        def get_people(self):
+            js = Legislator(name="John Smith", post_id="Ward 1")
+            js.add_source(url="http://example.com")
+
+            members = ["John Smith", "Jos Bleau"]
+
+            committee = Committee("Transportation")
+            committee.add_source("http://example.com/committee/transport")
+            for member in members:
+                committee.add_member(member, role='member')
+
+            yield committee
+            yield js
+
+However, as you can imagine, this gets quite out of hand quite quickly. One
+common pattern is to split the logic into two sections, such as::
+
+
+    from pupa.scrape import Scraper, Legislator, Committee
+    class MyFirstPersonScraper(Scraper):
+        def scrape_legislators(self):
+            js = Legislator(name="John Smith", post_id="Ward 1")
+            js.add_source(url="http://example.com")
+            yield js
+
+        def scrape_committees(self):
+            members = ["John Smith", "Jos Bleau"]
+            committee = Committee("Transportation")
+            committee.add_source("http://example.com/committee/transport")
+            for member in members:
+                committee.add_member(member, role='member')
+
+            yield committee
+
+        def get_people(self):
+            yield self.scrape_legislators()
+            yield self.scrape_committees()
+
+It's worth noting that you should keep in mind `scrape_people` *is* a special
+function (see above), so you should take care not to override this method.
+
+Of course, in real scrapers, you'll need to write some code to take care
+of getting the list of people that are in that jurisdiction, or have
+memberships in the Legislature. Hardcoding names, such as in the examples
+above is bad practice, since it's usually easier to just manually enter
+in the data.
+
+As a slightly more fun example, here's a scraper that will scrape the
+Sunlight website for people's information. This is deliberately a mildly
+complex example (as well as being purely for fun!), to get a feel for what
+a working Person scraper may look like::
+
+    import re
+    import lxml
+    from pupa.scrape import Scraper, Legislator, Committee
+    class SunlightPersonScraper(Scraper):
+        def get_people(self):
+            url = "http://sunlightfoundation.com/people/"
+            entry = self.urlopen(url)
+            page = lxml.html.fromstring(entry)
+            page.make_links_absolute(url)
+            for person in page.xpath("//ul[contains(@class, 'sunlightStaff')]//li"):
+                who = person.xpath(".//a")
+                who = who[0] if who else None
+                name = who.text_content().strip()
+                image = person.xpath(".//div[@class='imgWrapper']/@style")
+                image = image[0] if image else None
+                if image:
+                    urls = re.findall("url\((?P<url>.*)\);", image)
+                position = person.xpath(".//span[@class='staffTitle']/text()")[0]
+                position = position.strip()
+                person = Legislator(name=name,
+                                    post_id=position,
+                                    image=image)
+                person.add_link('homepage', who.attrib['href'])
+                person.add_source(url)
+                yield person

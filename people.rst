@@ -16,6 +16,31 @@ Great. So, let's get started. Our person scraper can be located anywhere, and si
 
 .. literalinclude:: ../pupa/example/people.py
 
+This class won't do anything, and should even result in an error. Let's iterate
+on this concept to work up to something useful.
 
+Every `Person` scraper inherets a `scrape_people` method. Usually it's not
+advised to override this method, rather, implementing a proper
+`get_people` method (which will `yield` back `Person` objects to `scrape_people`
+to save to disk) is the correct way to write a scraper.
 
+You may also yield an iterable of `Person` objects, which helps if you
+are scraping both people and committees for the Jurisdiction, but want
+to keep the scraper logic in their own routines.
 
+As you might have guessed by now, `Person` scrapers scrape many `People`, as
+well as any `Membership` objects that you might find along the way.
+
+Let's take a look at a dead-simple Pupa scraper::
+
+    from pupa.scrape import Scraper, Legislator
+    class MyFirstPersonScraper(Scraper):
+        def get_people(self):
+            js = Legislator(name="John Smith", post_id="Ward 1")
+            js.add_source(url="http://example.com")
+            yield js
+
+You can see that we create the Legislator, with the only two required
+params (`name` and `post_id`, add the source of the data (most of the time
+this will be the url that you've called with `urlopen`) and yielded the
+Legislator back.

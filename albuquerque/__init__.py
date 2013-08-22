@@ -18,6 +18,10 @@ class Example(Jurisdiction):
                 'sessions': ['2013'],
                 }],
             'provides': ['people'],
+            'parties': [
+                {'name': 'Democratic' },
+                {'name': 'Republican' },
+               ],
             'session_details': {
                 '2013': {'_scraped_name': '2013'}
                 },

@@ -17,9 +17,11 @@ To get started on your first scraper, create a new virtualenv to manage the depe
     # Next activate your virtualenv.
     $ source municipal-scrapers/bin/activate
 
-    # Next, create a directory to hold your scrapers. (Don't be silly, of course you'll want to write more than one.)
-    $ mkdir ~/projects/municipal scrapers
-    $ cd !:1
+    # Next, clone the scraper repo you want to contribute to.
+    # For scrapers related to cities in the US, its:
+    $ git clone https://github.com/opencivicdata/municipal-scrapers-us
+    # Or to write a scraper for a Canadian city:
+    $ https://github.com/opencivicdata/municipal-scrapers-ca
 
 Note that you can write scrapers in python 2.7 or python 3.3 or higher.
 To create a virtualenv using a version of python other than your system version, use the -p command line flag:

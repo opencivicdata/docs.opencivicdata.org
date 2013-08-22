@@ -49,9 +49,9 @@ Let's go over the changes made above one at a time.
 
   Next notice that we changed `name`, `legislature_name`, `legislature_url`, all of which are pretty self-explanatory. The `legislature_url` is the url of the Albuquerque City Council website we'll be scraping.
 
-- Delete the `parties` information:
+- Edit the `parties` information:
 
-  This change isn't strictly necessary, but I couldn't easily located information about party affiliation among Albuquerque council members, so I deleted this dictionary to avoid having inaccurate information in the scraper's metadata.
+  Enter the parties information for the target jurisdiction.
 
 Alright, these three changes were easy. Now let's enter the jurisdiction's `terms` and `sessions` info.
 

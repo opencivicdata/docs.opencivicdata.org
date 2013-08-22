@@ -23,6 +23,11 @@ To get started on your first scraper, create a new virtualenv to manage the depe
     # Or to write a scraper for a Canadian city:
     $ https://github.com/opencivicdata/municipal-scrapers-ca
 
+.. seealso::
+
+    Note to self:
+        Is this the correct url for Canada muni scrapers? Or is it Open North's repo? git@github.com:opennorth/mycityhall-scrapers.git
+
 Note that you can write scrapers in python 2.7 or python 3.3 or higher.
 To create a virtualenv using a version of python other than your system version, use the -p command line flag:
 

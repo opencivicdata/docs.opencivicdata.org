@@ -1,124 +1,47 @@
 
 .. _intro:
 
-Contributing a Municipal Scraper
-======================================
 
-This document is meant to provide a tutorial-like overview of the steps toward contributing a munipal scraper to the Open Civic Data project.
+Contributing to the Open Civic Data Effort
+==============================================
 
-The green arrows designate "more info" links leading to advanced sections about the described task.
+This document is meant to provide a tutorial-like overview of the steps toward contributing a munipal scraper to the Open Civic Data organization on Github.
 
+This page provides information about the project and important links, but you can always skip straight to :ref:`getting_started` if you're anxious to write some code.
 
-Setting Up Your Environment
-------------------------------------
+About the Project
+------------------------------------------
 
-The recommended way to manage dependencies in python is with `virtualenv <https://pypi.python.org/pypi/virtualenv>`_. If virtualenv is new territory for you, go there first and get set up, then check out `virtualenvwrapper <http://virtualenvwrapper.readthedocs.org/en/latest/>`_ for extra convenience in setting up, activating, deactivating, and tearing down virtualenvs.
+The `opencivicdata <https://github.com/opencivicdata/>`_ organization on Github is an inter-organizational place to contribute open source code for gathering information on government organizations, people, legislation, and events.
 
-To get started on your first scraper, create a new virtualenv to manage the dependencies for your code.
+.. seealso::
 
-.. code-block:: bash
+    The `opencivicdata <https://github.com/opencivicdata/>`_ organization on Github:
+      `https://github.com/opencivicdata/ <https://github.com/opencivicdata/>`_
 
-    $ cd ~/.virtualenvs
-    $ virtualenv municipal-scrapers
+The organization's page contains a number of a arbitrarily bug-named (and non bug-named) code repositories directed at scraping information on people and organizations (`pupa <https://github.com/opencivicdata/pupa>`_), code to validate the resulting json data (`larvae <https://github.com/opencivicdata/larvae>`_), a web-based adminstrative interface for editing and manually editing the same data (`anthropod <https://github.com/opencivicdata/anthropod>`_), a set of unique "OCD" identifiers for political geography divisions within the United States and Canada (`ocd-division-ids <https://github.com/opencivicdata/ocd-division-ids>`_), a google group where these and other equally exciting topics are discussed in exuisite detail (open-civic-data@googlegroups.com), a web service for querying the hierarchy of OCD division IDs (`locust <https://github.com/opencivicdata/locust>`_), an API for all the resulting scraped data (`imago <https://github.com/opencivicdata/imago>`_), and repositories of municipal scrapers for cities in the United States (`municipal-scrapers <https://github.com/opencivicdata/municipal-scrapers-us>`_) and Canada (`municipal-scrapers-ca <https://github.com/opencivicdata/municipal-scrapers-ca>`_), and, of course, these lovely docs as well (`municipal-scrapers-docs <https://github.com/opencivicdata/municipal-scrapers-docs>`_).
 
-    # Next activate your virtualenv.
-    $ source municipal-scrapers/bin/activate
+The work of this Github organization is a result of the combined efforts of `n` different groups working together in a hurricane of awesomeness and mad clown love, including:
 
-    # Next, create a directory to hold your scrapers. (Don't be silly, of course you'll want to write more than one.)
-    $ mkdir ~/projects/municipal scrapers
-    $ cd !:1
+- James McKinney
+- Others
+- Sunlight Foundation
 
-Note that you can write scrapers in python 2.7 or python 3.3 or higher.
-To create a virtualenv using a version of python other than your system version, use the -p command line flag:
+.. _getting_started:
 
-.. code-block:: bash
+Getting Started
+--------------------
 
-    $ virtualenv -p`which python3.3` municipal-scrapers
-
-And for the record, if you're using `virtualenvwrapper <http://virtualenvwrapper.readthedocs.org/en/latest/>`_, the previous four steps be abbreviated to:
+If you're a reasonably experienced developer comfortable with `virtualenv <http://www.virtualenv.org/en/latest/>`_ and `virtualenvwrapper <http://virtualenvwrapper.readthedocs.org/en/latest/>`_ and don't mind getting set up on your own, simply create a new virtualenv, install pip, clone the scraper repo you want to contribute to, and skip ahead to :ref:`jurisdiction`.
 
 .. code-block:: bash
 
     $ mkproject municipal-scrapers
-
-Finally, install `pupa <https://github.com/opencivicdata/pupa>`_, the scraper framework we'll be using to scrape municipal data.
-
-.. code-block:: bash
-
     $ pip install -e git+git@github.com:opencivicdata/pupa.git#egg=Package
+    $ git clone https://github.com/opencivicdata/municipal-scrapers-us
+    # Or to write a scraper for a Canadian city:
+    $ https://github.com/opencivicdata/municipal-scrapers-ca
 
+If you need a quick refresher on getting your environment setup, first read about :ref:`environment`.
 
-Creating a New Scraper
-----------------------------------------
-
-Now you're ready to start a new scraper! To copy a skeleton project into a new scraper directory, use pupa's init command. Let's create a new scraper for Albuquerque:
-
-.. code-block:: bash
-
-    $ pupa init albuquerque
-
-Pupa will copy the skeleton project into a new albuquerque directory with the following structure.
-
-.. code-block:: bash
-
-    $ tree albuquerque/
-    albuquerque/
-    ├── __init__.py
-    └── people.py
-
-
-Open up the new :file:`albuquerque/__init__.py` file and check out it's contents. It will look like this:
-
-.. literalinclude:: ../pupa/example/__init__.py
-
-This file contains a single subclass of a Jurisdiction base class. The jurisdiction class represents the municipality we're scraping information for, and is the place we'll store the metadata required during the scrape. To get started, all we have to do is edit the metadata on this class to be specific to Albuquerque.
-
-Notice also the `get_scraper` function. Your scraper needs to implement this simple function to define what scraper gets used given a `term`, `session`, and `scraper_type`. `scraper_type` will be a string equal to 'people', 'bills', or 'events'. As you can see, the default implementation of this function simply returns the `PeopleScraper` if the `scraper_type` is 'people', but this function can easily scale up to supply a different people scraper for different terms or even sessions, which might be necessary if the municipality rolls out a new website for a new term, requiring a new scraper.
-
-This is all well and good, but now let's hack this example file to customize it to work for Albuquerque.
-
-Edit the Jurisdiction's Metadata
---------------------------------------
-
-Take a look at the Albuquerque-specific changes below:
-
-.. literalinclude:: albuquerque/albuquerque.__init__.diff
-    :language: diff
-
-Let's go over the changes made above one at a time.
-
-- Change the `jurisdiction_id`:
-
-  The first edit changes the example `jurisdiction_id` to make it specific to Albuquerque, New Mexico, by setting the state abbreviation to "nm" and the place name to "albuquerque," followed by a slash and the word "council." Adding "council" at the end of the `jurisdiction_id` is simply a convention this project uses when scraping information about a city council. (You can also read more about :ref:`ocdid`.)
-
-- Change the Basic Jurisdiction Details:
-
-  Next notice that we changed `name`, `legislature_name`, `legislature_url`, all of which are pretty self-explanatory. The `legislature_url` is the url of the Albuquerque City Council website we'll be scraping.
-
-- Delete the `parties` information:
-
-  This change isn't strictly necessary, but I couldn't easily located information about party affiliation among Albuquerque council members, so I deleted this dictionary to avoid having inaccurate information in the scraper's metadata.
-
-Alright, these three changes were easy. Now let's enter the jurisdiction's `terms` and `sessions` info.
-
-Choosing the appropriate values for `terms` and `sessions`
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-This is the only really tricky part of starting a new jurisdiction. The term is the length of time that officials in the Albuquerque City Council hold office. Sometimes this is straight-forward, and few minutes of strategic googling reveals that the council members all serve predictable two-year terms and come up for election every even numbered year, for example. But some jurisdictions have staggered elections in which only some of the council members participate in a given election, while others will be up for election during a later election.
-
-The rule for determining the term length is actually pretty simple: if the municipality has a uniform term, use that; if it has staggered terms, the term length is the length of time in between elections. So if council members serve two-year terms, but each year staggered elections are held in which only half of the council members are up for re-election, the term length is one year.
-
-As for the value you'll enter into the metadata as the term's `name`, by convention the project uses a year range, like '2013-2014', so you'll also need to figure out the year of the most recent election.
-
-How does one go about locating this information? An excellent place to look is in the relevant municipality's town charter or equivalent document. In this case, I found Albuquerque's town charter by simply googling "Albuquerque charter" and clicking the first result, which was a `PDF of the charter <http://www.cabq.gov/council/documents/charter-review-task-force/city_charter.pdf>`_ located on the town's official .gov website: `http://www.cabq.gov/ <http://www.cabq.gov/>`_. Perusing the table of contents, I noticed a section entitled "Terms of Office" in Article IV, section 4 of the charter. Here's what it says:
-
-  "The terms of the office of a Councilor, unless sooner recalled or removed, shall begin on December 1st of the year of election and be four years or until a successor is duly elected and qualified. The Councillors may succeed themselves in office. The terms of office of Councillors shall be staggered with four or five districted Councillors elected every two years."
-
-Aha. In Albuquerque, each council member serves a four year term, and staggered elections are held every two years. So our term length will be two years. The final step is to figure out the start year in the range we'll use as the term `name` value, and to do that, we'll again turn to Albuquerque's official website. This time, some quick research took me to the city's `2013 General Election Calendar <http://www.cabq.gov/voting-elections/candidate-information/2013-general-election-information/2013-general-election-calendar>`_. So our term will begin in 2013 with a two-year duration, making our term `name` value '2013-2015'.
-
-Accordingly, in the diff above we changed the name of the term to '2013-2015', added the start and end years of the term as integers, and added the current legislative session of '2013' to the term's `sessions` list, which may expand in the future to include the 2014 and 2015 sessions.
-
-Get Up and Stretch!
-----------------------------------------
-
-We're done editing the metadata for Albuquerque, and next we'll write the people scraper. Go get a refill, then continue on to :ref:`people`.
+Onward!

@@ -15,6 +15,7 @@ Contents:
    environment
    jurisdiction
    people
+   pull_request
    ocdids
 
 Indices and tables

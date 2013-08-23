@@ -26,6 +26,9 @@ require_clean_work_tree () {
     fi
 }
 
+# Regenerate the .diff includes.
+./generate_includes.sh
+
 require_clean_work_tree
 
 git checkout master

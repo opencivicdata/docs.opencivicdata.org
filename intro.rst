@@ -18,7 +18,7 @@ The `opencivicdata <https://github.com/opencivicdata/>`_ organization on Github 
 - a google group where these and other equally exciting topics are discussed in exuisite detail (open-civic-data@googlegroups.com)
 - a web service for querying the hierarchy of OCD division IDs (`locust <https://github.com/opencivicdata/locust>`_)
 - an API for all the resulting data (`imago <https://github.com/opencivicdata/imago>`_)
-- repositories of municipal scrapers for cities in the United States (`municipal-scrapers-us <https://github.com/opencivicdata/municipal-scrapers-us>`_) and Canada [correct link?]
+- repositories of municipal scrapers for cities in the United States (`municipal-scrapers-us <https://github.com/opencivicdata/municipal-scrapers-us>`_) and Canada (`municipal-scrapers-us <https://github.com/opencivicdata/municipal-scrapers-ca>`_)
 - and, of course, these lovely docs as well (`municipal-scrapers-docs <https://github.com/opencivicdata/municipal-scrapers-docs>`_).
 
 The storage format for people, organizations, and events collected using these tools is the excellent `Popolo JSON format <http://popoloproject.com/>`_.
@@ -48,8 +48,15 @@ If you're a reasonably experienced developer comfortable with `virtualenv <http:
 
 .. code-block:: bash
 
+    $ # Create a new virtualenv
     $ mkproject municipal-scrapers
+    $ # Install pupa
     $ pip install -e git+git@github.com:opencivicdata/pupa.git#egg=Package
+    $ # Copy the pupa default settings:
+    $ curl -o pupa_settings.py https://raw.github.com/opencivicdata/pupa/master/pupa/core/default_settings.py
+    $ # Clone the repo
     $ git clone https://github.com/opencivicdata/municipal-scrapers-us
-    # Or to write a scraper for a Canadian city:
+    $ # Or to write a scraper for a Canadian city:
     $ https://github.com/opencivicdata/municipal-scrapers-ca
+
+In addition, if you use OS X as your operating system, see the excellent `OSX-specific docs <https://github.com/opennorth/blank-pupa>`_ published by `Open North <https://github.com/opennorth/>`_, then move on to :ref:`jurisdiction`.

@@ -40,7 +40,7 @@ initfile="__init__.py"
 git add $initfile
 git commit $initfile -m"skeleton __init__.py"
 
-cp ../albuquerque/__init__.py
+cp ../albuquerque/__init__.py .
 git diff $initfile > ../includes/__init__.py.diff
 
 # Return the the docs repo.

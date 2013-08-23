@@ -13,10 +13,10 @@ The `opencivicdata <https://github.com/opencivicdata/>`_ organization on Github 
 
 - code for scraping information on people, organizations, and organizations (`pupa <https://github.com/opencivicdata/pupa>`_)
 - code to validate the resulting json data (`larvae <https://github.com/opencivicdata/larvae>`_)
-- a web-based adminstrative interface for editing and manually editing the same data (`anthropod <https://github.com/opencivicdata/anthropod>`_)
-- a set of unique "OCD" identifiers for political geography divisions within the United States and Canada (`ocd-division-ids <https://github.com/opencivicdata/ocd-division-ids>`_)
+- a web-based adminstrative interface for manually editing the same data (`anthropod <https://github.com/opencivicdata/anthropod>`_)
+- a set of unique identifiers for political geography divisions within the United States and Canada (`ocd-division-ids <https://github.com/opencivicdata/ocd-division-ids>`_)
 - a google group where these and other equally exciting topics are discussed in exuisite detail (open-civic-data@googlegroups.com)
-- a web service for querying the hierarchy of OCD division IDs (`locust <https://github.com/opencivicdata/locust>`_)
+- a web service for querying the hierarchy of political geography division IDs (`locust <https://github.com/opencivicdata/locust>`_)
 - an API for all the resulting data (`imago <https://github.com/opencivicdata/imago>`_)
 - repositories of municipal scrapers for cities in the United States (`municipal-scrapers-us <https://github.com/opencivicdata/municipal-scrapers-us>`_) and Canada (`municipal-scrapers-us <https://github.com/opencivicdata/municipal-scrapers-ca>`_)
 - and, of course, these lovely docs as well (`municipal-scrapers-docs <https://github.com/opencivicdata/municipal-scrapers-docs>`_).
@@ -55,8 +55,8 @@ If you're a reasonably experienced developer comfortable with `virtualenv <http:
     $ # Copy the pupa default settings:
     $ curl -o pupa_settings.py https://raw.github.com/opencivicdata/pupa/master/pupa/core/default_settings.py
     $ # Clone the repo
-    $ git clone https://github.com/opencivicdata/municipal-scrapers-us
+    $ git git@github.com:opencivicdata/municipal-scrapers-us.git
     $ # Or to write a scraper for a Canadian city:
-    $ https://github.com/opencivicdata/municipal-scrapers-ca
+    $ git clone git@github.com:opencivicdata/municipal-scrapers-ca.git
 
 In addition, if you use OS X as your operating system, see the excellent `OSX-specific docs <https://github.com/opennorth/blank-pupa>`_ published by `Open North <https://github.com/opennorth/>`_, then move on to :ref:`jurisdiction`.

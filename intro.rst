@@ -5,26 +5,36 @@
 Contributing to the Open Civic Data Effort
 ==============================================
 
-The `opencivicdata <https://github.com/opencivicdata/>`_ organization on Github is an inter-organizational place to contribute open source code for gathering information on government organizations, people, legislation, and events. The `opencivicdata <https://github.com/opencivicdata/>`_ page contains a number of a arbitrarily bug-named (and non bug-named) code repositories, including:
+.. seealso:
 
-- code for scraping information on people and organizations (`pupa <https://github.com/opencivicdata/pupa>`_)
+    By the way, these docs are a work in progress--please don't share yet.
+
+The `opencivicdata <https://github.com/opencivicdata/>`_ organization on Github is an inter-organizational place to contribute open source code for gathering information on government organizations, people, legislation, and events. The `opencivicdata <https://github.com/opencivicdata/>`_ page contains a number of arbitrarily bug-named (and non bug-named) code repositories, including:
+
+- code for scraping information on people, organizations, and organizations (`pupa <https://github.com/opencivicdata/pupa>`_)
 - code to validate the resulting json data (`larvae <https://github.com/opencivicdata/larvae>`_)
 - a web-based adminstrative interface for editing and manually editing the same data (`anthropod <https://github.com/opencivicdata/anthropod>`_)
 - a set of unique "OCD" identifiers for political geography divisions within the United States and Canada (`ocd-division-ids <https://github.com/opencivicdata/ocd-division-ids>`_)
 - a google group where these and other equally exciting topics are discussed in exuisite detail (open-civic-data@googlegroups.com)
 - a web service for querying the hierarchy of OCD division IDs (`locust <https://github.com/opencivicdata/locust>`_)
-- an API for all the resulting data (`imago <https://github.com/opencivicdata/imago>`_), and
-- repositories of municipal scrapers for cities in the United States (`municipal-scrapers-us <https://github.com/opencivicdata/municipal-scrapers-us>`_) and Canada (`municipal-scrapers-ca <https://github.com/opencivicdata/municipal-scrapers-ca>`_), and, of course, these lovely docs as well (`municipal-scrapers-docs <https://github.com/opencivicdata/municipal-scrapers-docs>`_).
+- an API for all the resulting data (`imago <https://github.com/opencivicdata/imago>`_)
+- repositories of municipal scrapers for cities in the United States (`municipal-scrapers-us <https://github.com/opencivicdata/municipal-scrapers-us>`_) and Canada [correct link?]
+- and, of course, these lovely docs as well (`municipal-scrapers-docs <https://github.com/opencivicdata/municipal-scrapers-docs>`_).
+
+The storage format for people, organizations, and events collected using these tools is the excellent `Popolo JSON format <http://popoloproject.com/>`.
 
 .. seealso::
 
     The `opencivicdata <https://github.com/opencivicdata/>`_ organization on Github:
       `https://github.com/opencivicdata/ <https://github.com/opencivicdata/>`_
 
-The work of this Github organization is a result of the combined efforts of `n` different groups working together in a hurricane of awesomeness and mad clown love, including:
+    The Popolo Project homepage:
+        `http://popoloproject.com/ <http://popoloproject.com/>`_
+
+The work of this Github organization is a result of the combined efforts of `n` different groups working together, including:
 
 - James McKinney
-- Others
+- Others XXX: insert more groups
 - Sunlight Foundation
 
 .. _getting_started:

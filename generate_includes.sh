@@ -34,14 +34,17 @@ require_clean_work_tree
 # tutorial.
 
 git init _includes
-
 cp ../pupa/example/__init__.py _includes/
-initfile="_includes/__init__.py"
+cd _includes
+initfile="__init__.py"
 git add $initfile
 git commit $initfile -m"skeleton __init__.py"
 
-cp albuquerque/__init__.py _includes/
-git diff $initfile > includes/__init__.py.diff
+cp ../albuquerque/__init__.py
+git diff $initfile > ../includes/__init__.py.diff
+
+# Return the the docs repo.
+cd ..
 git commit includes/__init__.py.diff -m"updated __init__.py diff"
 
 #rm -rf _includes

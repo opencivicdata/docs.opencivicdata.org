@@ -28,7 +28,7 @@ The storage format for people, organizations, and events collected using these t
     The `opencivicdata <https://github.com/opencivicdata/>`_ organization on Github:
       `https://github.com/opencivicdata/ <https://github.com/opencivicdata/>`_
 
-    The Popolo Project homepage:
+    The `Popolo Project <http://popoloproject.com/>`_ homepage:
         `http://popoloproject.com/ <http://popoloproject.com/>`_
 
 The work of this Github organization is a result of the combined efforts of `n` different groups working together, including:
@@ -42,9 +42,7 @@ The work of this Github organization is a result of the combined efforts of `n` 
 Getting Started
 --------------------
 
-If you need a quick refresher on getting your python environment setup for scraper development, first read about :ref:`environment`.
-
-If you're a reasonably experienced developer comfortable with `virtualenv <http://www.virtualenv.org/en/latest/>`_ and `virtualenvwrapper <http://virtualenvwrapper.readthedocs.org/en/latest/>`_ and don't mind getting set up on your own, simply create a new virtualenv, install `pupa <https://github.com/opencivicdata/pupa>`_, clone the scraper repo you want to contribute to, and skip ahead to :ref:`jurisdiction`.
+If you're a reasonably experienced developer comfortable with `virtualenv <http://www.virtualenv.org/en/latest/>`_ and `virtualenvwrapper <http://virtualenvwrapper.readthedocs.org/en/latest/>`_ and don't mind getting set up on your own, simply create a new virtualenv, install `pupa <https://github.com/opencivicdata/pupa>`_, clone the scraper repo you want to contribute to.
 
 .. code-block:: bash
 
@@ -57,4 +55,13 @@ If you're a reasonably experienced developer comfortable with `virtualenv <http:
     $ # Or to write a scraper for a Canadian city:
     $ git clone git@github.com:opencivicdata/municipal-scrapers-ca.git
 
-In addition, if you use OS X as your operating system, see the excellent `OSX-specific docs <https://github.com/opennorth/blank-pupa>`_ published by `Open North <https://github.com/opennorth/>`_, then move on to :ref:`jurisdiction`.
+Now you're ready to skip ahead to :ref:`jurisdiction`.
+
+For Beginners
+********************
+
+If you're newer to Python and need a quick refresher on getting your python environment setup for scraper development, first read about :ref:`environment`.
+
+For OS X Users
+*****************
+Ff you use OS X as your operating system, see the excellent `OSX-specific docs <https://github.com/opennorth/blank-pupa>`_ published by `Open North <https://github.com/opennorth/>`_, then move on to :ref:`jurisdiction`.

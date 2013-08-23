@@ -17,9 +17,7 @@ To get started on your first scraper, create a new virtualenv to manage the depe
     # Next activate your virtualenv.
     $ source municipal-scrapers/bin/activate
 
-    # Next, clone the scraper repo you want to contribute to.
-
-    # For scrapers related to cities in the US, its:
+    # Next, clone the scraper repo you want to contribute to. For cities in the US, its:
     $ git clone git@github.com:opencivicdata/municipal-scrapers-us.git
 
     # Or to write a scraper for a Canadian city:

@@ -5,13 +5,13 @@
 Creating a New Scraper
 =========================
 
-Now you're ready to start a new scraper! To copy a skeleton project into a new scraper directory, use pupa's init command. Let's create a new scraper for Albuquerque:
+Now you're ready to start a new scraper! To copy a skeleton project into a new scraper directory, use pupa's :program:`init` command. Let's create a new scraper for Albuquerque, New Mexico:
 
 .. code-block:: bash
 
     $ pupa init albuquerque
 
-Pupa will copy the skeleton project into a new albuquerque directory with the following structure.
+Pupa will copy a skeleton project into a new albuquerque directory with the following structure.
 
 .. code-block:: bash
 
@@ -27,7 +27,7 @@ Open up the new :file:`albuquerque/__init__.py` file and check out it's contents
 
 This file contains a single subclass of a Jurisdiction base class. The jurisdiction class represents the municipality we're scraping information for, and is the place we'll store the metadata required during the scrape. To get started, all we have to do is edit the metadata on this class to be specific to Albuquerque.
 
-Notice also the `get_scraper` function. Your scraper needs to implement this simple function to define what scraper gets used given a `term`, `session`, and `scraper_type`. `scraper_type` will be a string equal to 'people', 'bills', or 'events'. As you can see, the default implementation of this function simply returns the `PeopleScraper` if the `scraper_type` is 'people', but this function can easily scale up to supply a different people scraper for different terms or even sessions, which might be necessary if the municipality rolls out a new website for a new term, requiring a new scraper.
+Notice also the `get_scraper` function. Your jurisdiction class needs to implement this simple function to define what scraper gets used given a `term`, `session`, and `scraper_type`. `scraper_type` will be a string equal to ``"people"``, ``"bills"``, or ``"events"``. As you can see, the default implementation of this function simply returns the `PeopleScraper` if the `scraper_type` is 'people', but this function can easily scale up to supply a different people scraper for different terms or even sessions, which might be necessary if the municipality rolls out a new website for a new term, requiring a new scraper.
 
 This is all well and good, but now let's hack this example file to customize it to work for Albuquerque.
 

@@ -21,7 +21,7 @@ The `opencivicdata <https://github.com/opencivicdata/>`_ organization on Github 
 - repositories of municipal scrapers for cities in the United States (`municipal-scrapers-us <https://github.com/opencivicdata/municipal-scrapers-us>`_) and Canada [correct link?]
 - and, of course, these lovely docs as well (`municipal-scrapers-docs <https://github.com/opencivicdata/municipal-scrapers-docs>`_).
 
-The storage format for people, organizations, and events collected using these tools is the excellent `Popolo JSON format <http://popoloproject.com/>`.
+The storage format for people, organizations, and events collected using these tools is the excellent `Popolo JSON format <http://popoloproject.com/>`_.
 
 .. seealso::
 

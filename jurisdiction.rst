@@ -90,7 +90,4 @@ Now that we have created some thoughtful metadata, you might considering :ref:`p
   Github's docs on using pull request:
     `https://help.github.com/articles/using-pull-requests <https://help.github.com/articles/using-pull-requests>`_
 
-Get Up and Stretch!
-----------------------------------------
-
-We're done editing the metadata for Albuquerque, and next we'll write the people scraper. Go get a refill, then continue on to :ref:`people`.
+Get Up and Stretch! We're done editing the metadata for Albuquerque, and next we'll write the people scraper. Go get a refill, then continue on to :ref:`people`.

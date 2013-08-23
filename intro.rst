@@ -52,8 +52,6 @@ If you're a reasonably experienced developer comfortable with `virtualenv <http:
     $ mkproject municipal-scrapers
     $ # Install pupa
     $ pip install -e git+git@github.com:opencivicdata/pupa.git#egg=Package
-    $ # Copy the pupa default settings:
-    $ curl -o pupa_settings.py https://raw.github.com/opencivicdata/pupa/master/pupa/core/default_settings.py
     $ # Clone the repo
     $ git git@github.com:opencivicdata/municipal-scrapers-us.git
     $ # Or to write a scraper for a Canadian city:

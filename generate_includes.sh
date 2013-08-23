@@ -33,7 +33,7 @@ require_clean_work_tree
 # top fo them and output a diff to include in the
 # tutorial.
 
-mkdir _includes
+git init _includes
 
 cp ../pupa/example/__init__.py _includes/
 initfile="_includes/__init__.py"
@@ -44,4 +44,4 @@ cp albuquerque/__init__.py _includes/
 git diff $initfile > includes/__init__.edited.py
 git commit includes/__init__.edited.py -m"updated __init__.py diff"
 
-git rm -rf _includes
+rm -rf _includes

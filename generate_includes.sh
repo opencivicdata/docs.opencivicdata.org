@@ -44,4 +44,4 @@ cp albuquerque/__init__.py _includes/
 git diff $initfile > includes/__init__.edited.py
 git commit includes/__init__.edited.py -m"updated __init__.py diff"
 
-git checkout master
+git reset _includes --hard

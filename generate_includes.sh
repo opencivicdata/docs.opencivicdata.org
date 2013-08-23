@@ -44,4 +44,4 @@ cp albuquerque/__init__.py _includes/
 git diff $initfile > includes/__init__.py.diff
 git commit includes/__init__.py.diff -m"updated __init__.py diff"
 
-rm -rf _includes
+#rm -rf _includes

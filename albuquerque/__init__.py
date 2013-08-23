@@ -3,7 +3,7 @@ from pupa.scrape import Jurisdiction
 from .people import PersonScraper
 
 
-class Example(Jurisdiction):
+class Albequerque(Jurisdiction):
     jurisdiction_id = 'ocd-jurisdiction/country:us/state:nm/place:albequerque/council'
 
     def get_metadata(self):

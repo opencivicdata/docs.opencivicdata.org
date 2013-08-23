@@ -45,6 +45,5 @@ git diff $initfile > ../includes/__init__.py.diff
 
 # Return the the docs repo.
 cd ..
+rm -rf _includes
 git commit includes/__init__.py.diff -m"updated __init__.py diff"
-
-#rm -rf _includes

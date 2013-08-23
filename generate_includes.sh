@@ -13,5 +13,6 @@ git commit $initfile -m"skeleton __init__.py"
 
 cp albuquerque/__init__.py _includes/
 git diff $initfile > includes/__init__.edited.py
+git commit includes/__init__.edited.py -m"updated __init__.py diff"
 
 rm -rf _includes

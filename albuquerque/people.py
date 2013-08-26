@@ -11,6 +11,32 @@ class PersonScraper(Scraper):
         return page
 
     def get_people(self):
+        yield self._scrape_committees()
+        yield self._scrape_people()
+
+    def _scrape_committees(self):
+        url = "http://www.cabq.gov/council/committees"
+        page = self.lxmlize(url)
+        root = page.xpath("//div[@id='parent-fieldname-text']")[0]
+        h3s = root.xpath("./h3")
+        ps = root.xpath("./p")[2:]
+        uls = root.xpath("./ul")
+        for h3, p, ul in zip(h3s, ps, uls):
+            name = h3.text_content()
+            org = Committee(name=name)
+            org.add_source(url)
+
+            for person in ul.xpath(".//li"):
+                who = person.text_content()
+                title = 'member'
+                if ", chair" in who.lower():
+                    title = 'chair'
+                    who = who.replace(", Chair", "")
+                org.add_member(name=who,
+                               role=title)
+                yield org
+
+    def _scrape_people(self):
         url = 'http://www.cabq.gov/council/councilors'
         page = self.lxmlize(url)
         names = page.xpath("//div[@id='parent-fieldname-text']/*")[3:]

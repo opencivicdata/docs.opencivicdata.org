@@ -22,7 +22,8 @@ to clarify what the intent of the scraper is. Let's take a closer look.
 Every `Person` scraper inherets a `scrape_people` method. Usually it's not
 advised to override this method, rather, implementing a proper
 `get_people` method (which will `yield` back `Person` objects to `scrape_people`
-to save to disk) is the correct way to write a scraper.
+to save to disk) is the prefered way to write a scraper. Only in the most
+extreme of cases should `scrape_people` be overridden.
 
 You may also yield an iterable of `Person` objects, which helps if you
 are scraping both people and committees for the Jurisdiction, but want

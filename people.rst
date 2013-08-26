@@ -16,8 +16,8 @@ Great. So, let's get started. Our person scraper can be located anywhere, and si
 
 .. literalinclude:: ../pupa/example/people.py
 
-This class won't do anything, and should even result in an error. Let's iterate
-on this concept to work up to something useful.
+This is the default scraper template, which isn't very useful yet, but it helps
+to clarify what the intent of the scraper is. Let's take a closer look.
 
 Every `Person` scraper inherets a `scrape_people` method. Usually it's not
 advised to override this method, rather, implementing a proper

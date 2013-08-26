@@ -16,6 +16,7 @@ Contents:
    jurisdiction
    pull_request
    ocdids
+   people
 
 Indices and tables
 ==================

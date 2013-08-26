@@ -45,3 +45,19 @@ the only used types are `legislature` and `council`.
 
 The ID looks something like
 `ocd-jurisdiction/country:us/state:ex/place:example`.
+
+This format isn't fully formalized yet, so please take care when using
+these.
+
+
+Person IDs, Org IDs
+===================
+
+The valid types are `person` for a Person, and `organization` for an
+Organization.
+
+Person and Org IDs contain a UUID for the data-part, created by pupa
+using `uuid.uuid1`.
+
+An example of a valid OCD Person ID is
+`ocd-person/ebaff054-05df-11e3-a53b-f0def1bd7298`.

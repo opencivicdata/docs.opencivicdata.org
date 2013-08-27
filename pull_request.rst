@@ -25,6 +25,14 @@ Next set your new remote ``origin`` to your forked repo, and set the original re
 Submit a pull request
 ------------------------------------------------------------------------
 
+Before you submit your Pull Request, it's quite handy to run through a quick
+checklist of common (and easy to catch) gotchas:
+
+  * Have you added yourself to the `AUTHORS` file? If not, please do.
+  * Is your Pull Request up-to-date with the `opencivicdata` repo? If it's
+    not, it might be helpful to jump down to the
+    `Keeping your branch up to date` section below. It's usually quite easy!
+
 Finally, navigate to commit you made to your forked repo, and click the button to submit a pull request.
 
 .. seealso::

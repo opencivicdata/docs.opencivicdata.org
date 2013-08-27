@@ -1,27 +1,34 @@
-.. Municipal Scrapers Contributor's Guide documentation master file, created by
-   sphinx-quickstart on Tue Aug 20 11:00:51 2013.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Open Civic Data
+===============
 
-Municipal Scrapers Contributor's Guide
-==================================================================
+.. seealso:
 
-Contents:
+    These docs are a work in progress--please don't share yet.
+
+
+The `opencivicdata <https://github.com/opencivicdata/>`_ project on Github is an collaborative effort to define schemas and provide tools for gathering information on government organizations, people, legislation, and events.
+
+If you're looking to contribute to the project, you're in the right place.  If you're hoping to use data collected by the project, stay tuned.
+
+.. FIXME: add (link to) API docs here once they're ready
+
+Contributing for developers:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    intro
-   environment
    jurisdiction
    pull_request
+
+Contributing for citizens:
+
+.. TODO: put some docs on Anthropod here
+
+Additional documentation:
+
+.. toctree::
+   :maxdepth: 1
+
    ocdids
    people
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-

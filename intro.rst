@@ -1,67 +1,26 @@
+Getting Started Writing Scrapers
+================================
 
-.. _intro:
+Before you begin, it is expected that you're a somewhat experienced developer comfortable with `GitHub <http://github.com>`_ and Python.  Some virtualenv knowledge might be helpful as well.
 
+.. note::
 
-Contributing to the Open Civic Data Effort
-==============================================
+    * If you're new to Python you can check out `Python on Codeadademy <http://www.codecademy.com/tracks/python>`_ (TODO: or Anthropod).
+    * To get started with Git/GitHub, there's a `Git tutorial <https://help.github.com/articles/set-up-git#platform-all>`_ to get you started.
+    * `virtualenv <httpe://pypi.python.org/pypi/virtualenv>`_ & `virtualenvwrapper <http://virtualenvwrapper.readthedocs.org/en/latest/>`_ are optional tools that will help you keep your Python environment clean if you work on multiple projects.
 
-.. seealso:
+These instructions are intended for a POSIX-like operating system, Linux or OSX.  If you're using Windows you'd benefit from using something like MingW.  If you're using OSX you may find the excellent `OSX-specific docs <https://github.com/opennorth/blank-pupa>`_ published by `Open North <https://github.com/opennorth/>`_  useful.
 
-    By the way, these docs are a work in progress--please don't share yet.
+The first thing to do is to choose a repository to work with.  For the examples here we'll be working with http://github.com/opencivicdata/municipal-scrapers-us/ which is a collection of scrapers for US cities.  If you're working with another country or a special jurisdiction it may be necessary to find a different repository.
 
-The `opencivicdata <https://github.com/opencivicdata/>`_ organization on Github is an inter-organizational place to contribute open source code for gathering information on government organizations, people, legislation, and events. The `opencivicdata <https://github.com/opencivicdata/>`_ page contains a number of arbitrarily bug-named (and non bug-named) code repositories, including:
-
-- code for scraping information on people, organizations, and organizations (`pupa <https://github.com/opencivicdata/pupa>`_)
-- code to validate the resulting json data (`larvae <https://github.com/opencivicdata/larvae>`_)
-- a web-based adminstrative interface for manually editing the same data (`anthropod <https://github.com/opencivicdata/anthropod>`_)
-- a set of unique identifiers for political geography divisions within the United States and Canada (`ocd-division-ids <https://github.com/opencivicdata/ocd-division-ids>`_)
-- a google group where these and other equally exciting topics are discussed in exuisite detail (open-civic-data@googlegroups.com)
-- a web service for querying the hierarchy of political geography division IDs (`locust <https://github.com/opencivicdata/locust>`_)
-- an API for all the resulting data (`imago <https://github.com/opencivicdata/imago>`_)
-- repositories of municipal scrapers for cities in the United States (`municipal-scrapers-us <https://github.com/opencivicdata/municipal-scrapers-us>`_) and Canada (`municipal-scrapers-us <https://github.com/opencivicdata/municipal-scrapers-ca>`_)
-- and, of course, these lovely docs as well (`municipal-scrapers-docs <https://github.com/opencivicdata/municipal-scrapers-docs>`_).
-
-The storage format for people, organizations, and events collected using these tools is the excellent `Popolo JSON format <http://popoloproject.com/>`_.
-
-.. seealso::
-
-    The `opencivicdata <https://github.com/opencivicdata/>`_ organization on Github:
-      `https://github.com/opencivicdata/ <https://github.com/opencivicdata/>`_
-
-    The `Popolo Project <http://popoloproject.com/>`_ homepage:
-        `http://popoloproject.com/ <http://popoloproject.com/>`_
-
-The work of this Github organization is a result of the combined efforts of `n` different groups working together, including:
-
-- James McKinney
-- Others XXX: insert more groups
-- Sunlight Foundation
-
-.. _getting_started:
-
-Getting Started
---------------------
-
-If you're a reasonably experienced developer comfortable with `virtualenv <http://www.virtualenv.org/en/latest/>`_ and `virtualenvwrapper <http://virtualenvwrapper.readthedocs.org/en/latest/>`_ and don't mind getting set up on your own, simply create a new virtualenv, install `pupa <https://github.com/opencivicdata/pupa>`_, clone the scraper repo you want to contribute to.
+Once you've created a fork of the desired repository on GitHub you can set up your local environment.  To do this you'd create a new virtualenv, install `pupa <https://github.com/opencivicdata/pupa>`_, and clone the scraper repo you want to contribute to:
 
 .. code-block:: bash
 
-    $ # Create a new virtualenv
-    $ mkproject municipal-scrapers
-    $ # Install pupa
-    $ pip install -e git+git@github.com:opencivicdata/pupa.git#egg=Package
-    $ # Clone the repo
+    # doing the following inside a virtualenv highly recommended
+    # Install pupa
+    $ pip install -e git+git@github.com:opencivicdata/pupa.git#egg=pupa
+    # Clone the repo
     $ git git@github.com:opencivicdata/municipal-scrapers-us.git
-    $ # Or to write a scraper for a Canadian city:
-    $ git clone git@github.com:opencivicdata/municipal-scrapers-ca.git
 
-Now you're ready to skip ahead to :ref:`jurisdiction`.
-
-For Beginners
-********************
-
-If you're newer to Python and need a quick refresher on getting your python environment setup for scraper development, first read about :ref:`environment`.
-
-For OS X Users
-*****************
-Ff you use OS X as your operating system, see the excellent `OSX-specific docs <https://github.com/opennorth/blank-pupa>`_ published by `Open North <https://github.com/opennorth/>`_, then move on to :ref:`jurisdiction`.
+Now you're ready to proceed to :ref:`jurisdiction`.

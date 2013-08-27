@@ -1,9 +1,5 @@
-
-.. _jurisdiction:
-
-
 Creating a New Scraper
-=========================
+======================
 
 Now you're ready to start a new scraper! To copy a skeleton project into a new scraper directory, use pupa's :program:`init` command. Let's create a new scraper for Albuquerque, New Mexico:
 

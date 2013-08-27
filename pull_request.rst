@@ -3,7 +3,21 @@
 Submitting a Pull Request
 =====================================
 
-To submit a pull request, follow these steps:
+The municipal scraping effort we're working on is extremely friendly to
+contributors of all backgrounds, and we accept code contributions via
+GitHub Pull Requests.
+
+Before you begin, you should create a GitHub account if you don't already
+have one, and learn the basics of using Git (slightly out of scope for this
+document). This guide only assumes elementry proficiency with Git.
+
+Don't worry about a perfect patch series, we're all quite happy to go back
+and forth and work on changes, if they're needed.
+
+In general, if you just keep the Pull Request short and self-contained,
+it will be much easier to review and accept than a change modifying 3
+jurisdictions at once.
+
 
 Fork the repo you want to contribute to
 ---------------------------------------------

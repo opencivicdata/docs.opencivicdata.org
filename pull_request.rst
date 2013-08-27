@@ -57,10 +57,10 @@ Submit a pull request
 Before you submit your Pull Request, it's quite handy to run through a quick
 checklist of common (and easy to catch) gotchas:
 
-  * Have you added yourself to the `AUTHORS` file? If not, please do.
-  * Is your Pull Request up-to-date with the `opencivicdata` repo? If it's
+  * Have you added yourself to the ``AUTHORS`` file? If not, please do.
+  * Is your Pull Request up-to-date with the ``opencivicdata`` repo? If it's
     not, it might be helpful to jump down to the
-    `Keeping your branch up to date` section below. It's usually quite easy!
+    ``Keeping your branch up to date`` section below. It's usually quite easy!
 
 Finally, navigate to commit you made to your forked repo, and click the button to submit a pull request.
 
@@ -82,19 +82,19 @@ without much effort.
     unless you know exaclty why you need to branch off of another branch.
 
 To create a branch, you can simply checkout a new branch (this operation
-creates the branch, so don't worry about using `git branch` just yet.)
+creates the branch, so don't worry about using ``git branch`` just yet.)
 
 .. code-block:: bash
 
     $ git checkout -b bugfix/fix-this-broken-jurisdiction
 
-It's common to prefix a branch with one of `bugfix`, or `feature` (or anything
-else that's short and desriptive). After the prefix, you should add a
+It's common to prefix a branch with one of ``bugfix``, or ``feature`` (or
+anything else that's short and desriptive). After the prefix, you should add a
 descriptive slug related to the change, so that it's easy to remember
 which branch is which.
 
 After this, you can check which branch you're working on by running
-`git branch`, and looking for the marked branch.
+``git branch``, and looking for the marked branch.
 
 .. code-block:: bash
 
@@ -102,7 +102,7 @@ After this, you can check which branch you're working on by running
     * bugfix/fix-this-broken-jurisdiction
       master
 
-To switch back to the master branch (for any reason), you can `checkout` the
+To switch back to the master branch (for any reason), you can ``checkout`` the
 branch again.
 
 .. code-block:: bash
@@ -118,8 +118,8 @@ Keeping your branch up to date
 It saves quite a bit of time if you can ensure that all changes have been
 incorporated in your branch when sending in a Pull Request. Often times
 this is not an issue for short-lived branches, however, sometimes people
-have changed code in the `opencivicdata` repo, and you need to merge
-code from "`upstream`" into your working branch.
+have changed code in the ``opencivicdata`` repo, and you need to merge
+code from "``upstream``" into your working branch.
 
 Let's go over how to do this.
 
@@ -139,6 +139,6 @@ Firstly, be sure that you've commited all your code, and you're up to date.
     $ git checkout bugfix/fix-this-broken-jurisdiction
     $ git merge master
 
-Please do remember to change `bugfix/fix-this-broken-jurisdiction` with the
+Please do remember to change ``bugfix/fix-this-broken-jurisdiction`` with the
 name of your topic branch that you're working on (as seen in the output of the
 first command run).

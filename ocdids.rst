@@ -4,6 +4,38 @@
 OCD Identifiers
 ------------------------------------------
 
+OpenCivicData Identifiers (or OCD IDs) are a common Identifier format used
+in the OpenCivicData projects, in a defined format, ripe for reuse with
+any legislative dataset.
+
+Creating a new OCD ID
+---------------------
+
+Consensus on IDs is needed for a few of the types, but other IDs may be
+issued without any concern at all. The following is a helpful table of when
+it's OK (and not OK) to create new IDs without reaching rough consensus.
+
++-----------------+-------------------------------+
+| OCD ID Type     | Can issue new ID              |
++=================+===============================+
+| person          | Yes (UUID1)                   |
++-----------------+-------------------------------+
+| organization    | Yes (UUID1)                   |
++-----------------+-------------------------------+
+| division        | No (Needs to undergo a review |
+|                 | and survey of entries at that |
+|                 | geopolitical level)           |
++-----------------+-------------------------------+
+| jurisdiction    | No (needs to undergo a review |
+|                 | to ensure we have consistent  |
+|                 | names for legislative bodies  |
++-----------------+-------------------------------+
+
+If you need to create a new ID that requires rough consensus, emailing the
+`OpenCivic Data Mailing List <https://groups.google.com/forum/#!forum/open-civic-data>`_
+with as much detail regarding the situation as you can generally proves
+to be the best way to solicit feedback.
+
 General Format
 ==============
 

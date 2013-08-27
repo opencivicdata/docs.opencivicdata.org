@@ -24,20 +24,20 @@ Fork the repo you want to contribute to
 
 First navigate to the repo you want to contribute to and create a fork. If you're contributing a municipal scraper within the United States, for example, view `that repo's page on Github <https://github.com/opencivicdata/municipal-scrapers-us>`_ and click the ``fork`` button.
 
-This creates a repo (called `municipal-scrapers-us`, if you've followed the
+This creates a repo (called ``municipal-scrapers-us``, if you've followed the
 link just up above) on your personal account that you can commit to.
 
-You can `clone` this repo down to your local machine by using `git clone` (do
+You can ``clone`` this repo down to your local machine by using `git clone` (do
 read up on the `GitHub guide <https://help.github.com/articles/fork-a-repo#step-2-clone-your-fork>`_ if you're having trouble with this step - or git!)
 
-After pulling the repo down, we'll set a new remote called `upstream` to help
-interact with the `opencivicdata` repo later on.
+After pulling the repo down, we'll set a new remote called ``upstream`` to help
+interact with the ``opencivicdata`` repo later on.
 
 .. code-block:: bash
 
     $ git remote add upstream git@github.com:opencivicdata/municipal-scrapers-us.git
 
-If you cloned the `opencivicdata` repo before you forked the repo on GitHub,
+If you cloned the ``opencivicdata`` repo before you forked the repo on GitHub,
 don't worry - you can adjust this fairly quickly!
 
 .. code-block:: bash

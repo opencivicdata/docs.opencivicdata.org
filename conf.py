@@ -10,6 +10,7 @@ import sys, os
 
 extensions = []
 templates_path = ['_templates']
+print os.getcwd(), templates_path
 source_suffix = '.rst'
 master_doc = 'index'
 project = u'Open Civic Data'

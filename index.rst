@@ -17,8 +17,8 @@ Contributing for developers:
 .. toctree::
    :maxdepth: 1
 
-   intro
-   jurisdiction
+   scraper_intro
+   scraper_new
    pull_request
 
 Contributing for citizens:

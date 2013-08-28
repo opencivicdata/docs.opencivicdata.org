@@ -120,7 +120,7 @@ Now, let's take a look at how we can add Vote information to a bill::
                              no_count=0,
                              other_count=1,)
                     v.add_source("http://example.com")
-                    v.add_bill(name="HB 101")
+                    v.add_bill(name=bill.name)
 
                     yield bill
                     yield v

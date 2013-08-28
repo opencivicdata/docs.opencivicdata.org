@@ -94,4 +94,33 @@ Let's take a look at adding a bit more data::
 
 
 You can see that we're adding documents, subjects, a version, and attaching
-a sponsor to it.
+a sponsor to it. All of these methods are documented on the
+:class:`pupa.models.bill.Bill` object. The above is only a subset of the full
+list of valid keyword arguments that may be passed into the methods.
+
+Now, let's take a look at how we can add Vote information to a bill::
+
+            from pupa.scrape import Scraper
+            from pupa.models import Bill, Vote
+            class MyFirstBillScraper(Scraper):
+                def get_bills(self):
+                    bill = Bill(name="HB 101",
+                                session=self.session,
+                                title="A bill for an act for pudding",
+                                organization=self.jurisdiction.metadata['name'])
+                    bill.add_source("http://example.com")
+
+                    v = Vote(organization=self.jurisdiction.metadata['name'],
+                             session=self.session,
+                             date="2013-04",
+                             motion="Pass as amended",
+                             type="reading:3",
+                             passed=True,
+                             yes_count=5,
+                             no_count=0,
+                             other_count=1,)
+                    v.add_source("http://example.com")
+                    v.add_bill(name="HB 101")
+
+                    yield bill
+                    yield v

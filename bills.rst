@@ -50,4 +50,48 @@ object. For a bill action, we should at least have information out to the
 day in which an action was taken, so try to fill that out. Information on
 the time would be nice as well, but is not always there.
 
+Let's take a look at adding a bit more data::
 
+            from pupa.scrape import Scraper
+            from pupa.models import Bill
+            class MyFirstBillScraper(Scraper):
+                def get_bills(self):
+                    bill = Bill(name="HB 101",
+                                session=self.session,
+                                title="A bill for an act for pudding",
+                                organization=self.jurisdiction.metadata['name'])
+
+                    bill.add_sponsor(name="John Smith",
+                                     sponsorship_type="Primary",
+                                     primary=True,
+                                     entity_type="person")
+                    # ``sponsorship_type`` is whatever the upstream site
+                    # calls this sponsorship type.
+
+                    bill.add_subject("pudding")
+
+                    bill.add_document_link(
+                        name="Fiscal Report",
+                        url="http://example.com/2013/pudding/fiscal-report.pdf",
+                        mimetype="application/pdf")
+
+                    bill.add_document_link(
+                        name="Fiscal Report",
+                        url="http://example.com/2013/pudding/fiscal-report.odt",
+                        mimetype="application/vnd.oasis.opendocument.text")
+
+                    bill.add_version_link(
+                        name="As Introduced",
+                        url="http://example.com/2013/hb101-introduce.pdf",
+                        mimetype="application/pdf")
+
+                    bill.add_action(description="Introduced",
+                                    actor="upper",
+                                    date="2013-08-28")
+
+                    bill.add_source("http://example.com")
+                    yield bill
+
+
+You can see that we're adding documents, subjects, a version, and attaching
+a sponsor to it.

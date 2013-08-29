@@ -10,6 +10,35 @@ Resolutions, Bills or city ordinances).
 
 Scrapers should scrape all bills from a session every single night.
 
+Target Data
+-----------
+
+Bill scrapers are used to pull in information regarding Legislation, and basic
+associated metadata.
+
+Bill scrapers should collect all the information it's able to. The most common
+bits of data are:
+
+  * Basic information (name, session, chamber, summary)
+  * Sponsorship information (primary, secondary, etc)
+  * Actions regarding the legislation (introduction date, committee referral,
+    chamber crossover, etc)
+  * Alternate names of the Legislation
+  * Related documents (fiscal reports, supporting data)
+  * Bill versions (Introduced Version, as amended)
+  * Related bills (companion bills, reintroductions)
+  * Subjects (Technology, Transportation, Education)
+
+.. NOTE::
+
+    In addition to the data above, it's common for Bill scrapers to also scrape
+    in Vote information as well, since it's often linked directly from the Vote
+    page.
+
+Overview
+--------
+
+
 Let's start out with a simple scraper::
 
             from pupa.scrape import Scraper

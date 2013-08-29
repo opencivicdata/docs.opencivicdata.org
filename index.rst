@@ -32,3 +32,5 @@ Additional documentation:
 
    ocdids
    people
+   events
+   bills

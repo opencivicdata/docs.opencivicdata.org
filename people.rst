@@ -64,6 +64,11 @@ You may also yield an iterable of `Person` objects, which helps if you
 are scraping both people and committees for the Jurisdiction, but want
 to keep the scraper logic in their own routines.
 
+For more information on the ``scrape_people`` or ``get_people`` methods, you
+might consider reading about
+:meth:`pupa.scrape.base.Scraper.scrape_people` and
+:meth:`pupa.scrape.base.Scraper.get_people` in the Pupa docs.
+
 As you might have guessed by now, `Person` scrapers scrape many `People`, as
 well as any `Membership` objects that you might find along the way.
 

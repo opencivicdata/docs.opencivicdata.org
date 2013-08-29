@@ -57,6 +57,21 @@ and very basic. However, let's ignore the hard-coding of the Bill data (and
 assume that the data is coming from a live website), and work with the Bill
 object a little.
 
+Just like all the other scrapers, you can see the magic ``get_bills`` method
+is present, and invoked from the ``scrape_bills`` method. Care should be
+taken to avoid using the ``scrape_bills`` method name, since this will cause
+unexpected failure.
+
+For more information on the ``scrape_bills`` or ``get_bills`` methods, you
+might consider reading about
+:meth:`pupa.scrape.base.Scraper.scrape_bills` and
+:meth:`pupa.scrape.base.Scraper.get_bills` in the Pupa docs.
+
+``get_bills`` is expected to be a function which returns an iterable of
+OpenCivic objects. Since the ``Bill`` scraper might come across ``Vote``
+objects, it's perfectly fine to return ``Vote`` objects from the
+``get_bills`` method, if it makes sense.
+
 Let's add some basic actions::
 
             from pupa.scrape import Scraper

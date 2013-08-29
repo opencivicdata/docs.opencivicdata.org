@@ -57,7 +57,14 @@ Let's take a look at a dead-simple Pupa event scraper::
 
 As you can see, this looks a lot like a person scraper - the same stuff is going
 on here - the magic ``scrape_events`` method, which invokes the ``get_events``
-method, which should return an iterable of events.
+method, which should return an iterable of OpenCivic objects. In the case of
+the Events scraper, it's not common to come across other OpenCivic objects
+during the scrape, so this will usually just return ``Event`` objects.
+
+For more information on the ``scrape_events`` or ``get_events`` methods, you
+might consider reading about
+:meth:`pupa.scrape.base.Scraper.scrape_events` and
+:meth:`pupa.scrape.base.Scraper.get_events` in the Pupa docs.
 
 However, as before, this is wholly underwhelming - this hardcodes events,
 and doesn't do much with the ``Event`` object at all.
@@ -74,6 +81,18 @@ Let's elaborate a bit on our usage of the ``Event`` object::
                       session=self.session,
                       when=when,
                       location='unknown')
+
+            e.add_location_url("http://example.com/venue/where")
+            e.add_link("http://example.com/event/2013/08/129384/info")
+
+            e.add_document(name='Fiscal Report',
+                           url="http://example.com/event/2013/08/129384/docs/report.xls",
+                           mimetype="application/vnd.ms-excel")
+
+            e.add_participant(name="John Q. Hacker",
+                              type='person',
+                              note='attorney')
+
             e.add_media_link(name="Video of the event",
                              url="http://example.com/video/event.mp4",
                              mimetype='video/mp4')

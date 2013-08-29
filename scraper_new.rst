@@ -76,6 +76,67 @@ Aha. In Albuquerque, each council member serves a four year term, and staggered 
 
 Accordingly, in the diff above we changed the name of the term to ``"2013-2015"``, added the start and end years of the term as integers, and added the current legislative session of ``"2013"`` to the term's `sessions` list, which may expand in the future to include the 2014 and 2015 sessions.
 
+Testing your scraper
+--------------------
+
+Currently, it's slightly harder to ensure that the scraper is working as
+expected without having to dive into the data by hand, or using something
+like ``arthropod`` to view the data.
+
+However, it's easy to run the scraper to ensure that the output JSON is in
+good shape, by spot-checking the data.
+
+Firstly, running the scraper is as easy as running::
+
+    $ pupa update albuquerque
+
+Where ``albuquerque`` is simply a Python-importable path to your Jurisdiction
+definition. From there, the ``Jurisdiction`` object will be able to tell
+``pupa`` where to find the scrapers.
+
+In addition, there are some useful arguments to know about.
+
+Firstly, when doing local testing, ``--fast`` disables Pupa's scrape throttling,
+and uses the ``scrape_cache`` to prevent fetching pages over the line. This is
+useful when doing prototyping, but shouldn't be used regularly, since it puts
+more load on these websites, and will read stale data (if your cache stays
+around).
+
+Secondly, if you've not got MongoDB installed, it's useful to pass ``--scrape``
+to ``pupa``, to prevent the ``--import`` and ``--report`` stages from running,
+which require a running MongoDB server to connect to.
+
+Lastly, being able to restrict which scraper gets run via ``--people``,
+``--bills``, ``--events``, ``--votes`` and ``--speeches`` may help bring
+overall scrape time down.
+
+At any point, you can run::
+
+    $ pupa update -h
+
+
+To get most up-to-date information regarding the invocation of Pupa.
+
+Usually, during rapid development, the invocation would look something like::
+
+    $ pupa update albuquerque --fast --bills
+
+After this completes, the data will be in the ``scraped_data`` folder. Each
+OpenCivic object that gets saved will be written to
+``scraped_data/<jurisdiction_id>/<type>_<tmp_id>.json``.
+
+This object will be a JSON-encoded OpenCivic object, which is a well-documented
+and defined format for Government data.
+
+By spot-checking a few of the entries, you can check to see if data
+looks funny, or if things aren't being categorized properly.
+
+.. NOTE::
+    This is likely to change, eventually a MongoDB-based viewer will be
+    a better way to view such data. For now, most of us are checking up on
+    the raw JSON as we go.
+
+
 Sumbit A Pull Request
 -------------------------
 

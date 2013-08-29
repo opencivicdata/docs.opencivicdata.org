@@ -9,6 +9,15 @@ This document is meant to provide a tutorial-like overview of the steps toward c
 This guide assumes you have a working pupa setup. If you don't please refer to the introduction on :doc:`scraper_intro`.
 
 
+Special notes about People scrapers
+-----------------------------------
+
+The name is a bit misleading - so-called People scrapers actually scrape
+``Person``, ``Organization`` and ``Membership`` objects.
+
+The relationship between these three types is so close that they all should be
+scraped at the same time.
+
 Creating a New Person scraper
 -----------------------------
 

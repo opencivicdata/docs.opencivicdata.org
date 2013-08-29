@@ -22,10 +22,10 @@ Let's take a look at a dead-simple Pupa event scraper::
     class MyFirstEventScraper(Scraper):
         def get_events(self):
             when = dt.datetime.now()
-            e = Event(name="Hearing",
-                      session=self.session,
-                      when=when,
-                      location='unknown')
+            e = Event(name="Hearing",  # Event Name
+                      session=self.session,  # Session the Event is in
+                      when=when,  # When the event will take place
+                      location='unknown')  # Where the event will be
             e.add_source("http://example.com")
             yield e
 
@@ -54,7 +54,8 @@ Let's elaborate a bit on our usage of the ``Event`` object::
             e.add_source("http://example.com")
             yield e
 
-Or, a look at how to use the agenda object::
+OK. Now that we have some basics down, let's take a look at one of the bigger
+chunks of any ``Event`` scraper - adding the Agenda items to the ``Event``::
 
     from pupa.scrape import Scraper
     from pupa.models import Event
@@ -73,6 +74,10 @@ Or, a look at how to use the agenda object::
             item.add_person(person="Joe Smith")
 
             yield e
+
+You can see that we've created an ``EventAgendaItem`` object, which we can use
+to associate entities (such as ``people`` or ``organizations`` with the agenda
+item).
 
 For more information about these objects, feel free to check out
 the docs on the :class:`pupa.models.event.Event` and

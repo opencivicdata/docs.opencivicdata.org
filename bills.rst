@@ -128,4 +128,18 @@ Now, let's take a look at how we can add Vote information to a bill::
                     yield v
                     yield bill
 
+The most interesting thing to note is the use of
+:meth:`pupa.models.vote.Vote.add_bill`, which auto-attaches the Bill to it's
+``bill`` attribute, correctly handing the cross-linking of IDs. You should
+only manually attach a bill if you don't have a ``Bill`` object at ``Vote``
+scrape time.
 
+If you're unable to scrape the ``Vote`` at the same time as you're scraping
+that particular ``Bill``, you can attempt to match by using the alternate
+signature of the ``set_bill`` method::
+
+    v.set_bill("HB 101", chamber="upper")
+
+This call will dispatch based on the type of the first argument. For more
+information, check out the :meth:`pupa.models.vote.Vote.add_bill`
+documentation.

@@ -11,6 +11,32 @@ Events scrapers pull down any and all events that are currently listed (or
 even historical), with as much metadata as we can find (people attending,
 bills up for consideration, etc)
 
+Target Data
+-----------
+
+Event scrapers pull down information regarding upcoming (or even past) Events
+and associated metadata, such as who was there, what was talked about, and
+any supporting material.
+
+Some of the commonly scraped data includes:
+
+* Name of the event
+* When the event starts and ends
+* Items on the Agenda
+
+   * Related entities (people, orgs, bills)
+   * Subject of the agenda item
+   * Related media
+
+* Where the event is to take place
+
+   * Lat / lon (if it exists)
+   * Venue link
+
+* Associated documents
+* Associated people, orgs, participants
+* Any video or audio of the event
+
 Creating a new Events scraper
 -----------------------------
 

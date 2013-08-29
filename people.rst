@@ -18,6 +18,32 @@ The name is a bit misleading - so-called People scrapers actually scrape
 The relationship between these three types is so close that they all should be
 scraped at the same time.
 
+Target Data
+-----------
+
+People scrapers pull in all sorts of information about ``Organization``
+``Membership`` and ``Person`` objects.
+
+The target data commonly includes:
+
+* People, and their posts (what bodies they represent)
+
+  * Alternate names
+  * Current photo
+  * links (homepage, YouTube account, Twitter account)
+  * Contact information (email, physical address, phone number)
+  * Any other identifiers that might be commonly used
+  * Committee memberships
+
+* Orgs (committees, etc)
+
+  * Other names
+  * Commonly used IDs
+  * Contact information for the whole body
+  * Posts (sometimes called seats) on the org
+  * People in each org, and in which seat they sit.
+
+
 Creating a New Person scraper
 -----------------------------
 

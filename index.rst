@@ -20,6 +20,9 @@ Contributing for developers:
    scraper_intro
    scraper_new
    pull_request
+   people
+   events
+   bills
 
 Contributing for citizens:
 
@@ -30,7 +33,8 @@ Additional documentation:
 .. toctree::
    :maxdepth: 1
 
+   data/index
+   data/bill
+   data/vote
+   data/event
    ocdids
-   people
-   events
-   bills

@@ -1,0 +1,217 @@
+**status**
+
+    Allowed Values:
+         * cancelled
+         * tentative
+         * confirmed
+         * passed
+
+
+**_type**
+
+    Allowed Values:
+         * event
+
+
+**description**
+
+
+**links**
+    URLs for documents about the event
+
+
+    Each element in links is an object with the following keys: 
+
+    **note**
+        A note, e.g. 'Wikipedia page'
+
+
+    **url**
+        A URL for a link about the event
+
+
+**updated_at**
+
+
+**sources**
+    URLs for sources relating to the object
+
+
+    Each element in sources is an object with the following keys: 
+
+    **url**
+
+
+    **note**
+
+
+**documents**
+
+
+    Each element in documents is an object with the following keys: 
+
+    **url**
+
+
+    **mimetype**
+
+
+    **name**
+
+
+**end**
+
+
+**name**
+
+
+**media**
+
+
+    Each element in media is an object with the following keys: 
+
+    **date**
+
+        (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+
+
+    **type**
+
+
+    **name**
+
+
+    **links**
+
+
+        Each element in links is an object with the following keys: 
+
+        **mimetype**
+
+
+        **url**
+
+
+    **offset**
+
+
+**created_at**
+
+
+**when**
+
+
+**participants**
+
+
+    Each element in participants is an object with the following keys: 
+
+    **note**
+
+
+    **chamber**
+
+
+    **type**
+
+        Allowed Values:
+             * organization
+             * person
+
+
+    **name**
+
+
+    **id**
+
+
+**location**
+
+
+    **note**
+
+
+    **url**
+
+
+    **name**
+
+
+    **coordinates**
+
+
+        **latitude**
+
+
+        **longitude**
+
+
+**agenda**
+
+
+    Each element in agenda is an object with the following keys: 
+
+    **related_entities**
+
+
+        Each element in related_entities is an object with the following keys: 
+
+        **note**
+
+
+        **type**
+
+
+        **id**
+
+
+        **name**
+
+
+    **media**
+
+
+        Each element in media is an object with the following keys: 
+
+        **date**
+
+            (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+
+
+        **type**
+
+
+        **name**
+
+
+        **links**
+
+
+            Each element in links is an object with the following keys: 
+
+            **mimetype**
+
+
+            **url**
+
+
+        **offset**
+
+
+    **notes**
+
+
+        Each element in notes is an object with the following keys: 
+
+        **description**
+
+
+    **subjects**
+
+
+    **order**
+
+
+    **description**
+
+

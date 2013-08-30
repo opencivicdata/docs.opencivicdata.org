@@ -1,0 +1,228 @@
+**other_titles**
+
+
+    Each element in other_titles is an object with the following keys: 
+
+    **note**
+
+
+    **title**
+
+
+**_type**
+
+    Allowed Values:
+         * bill
+
+
+**documents**
+
+
+    Each element in documents is an object with the following keys: 
+
+    **date**
+
+        (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+
+
+    **type**
+
+        Allowed Values:
+
+
+    **name**
+
+
+    **links**
+
+
+        Each element in links is an object with the following keys: 
+
+        **mimetype**
+
+
+        **url**
+
+
+**name**
+
+
+**title**
+
+
+**created_at**
+
+
+**versions**
+
+
+    Each element in versions is an object with the following keys: 
+
+    **date**
+
+        (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+
+
+    **type**
+
+        Allowed Values:
+
+
+    **name**
+
+
+    **links**
+
+
+        Each element in links is an object with the following keys: 
+
+        **mimetype**
+
+
+        **url**
+
+
+**other_names**
+
+
+    Each element in other_names is an object with the following keys: 
+
+    **note**
+
+
+    **name**
+
+
+**updated_at**
+
+
+**actions**
+
+
+    Each element in actions is an object with the following keys: 
+
+    **date**
+
+        (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+
+
+    **type**
+
+
+    **description**
+
+
+    **actor**
+
+
+    **related_entities**
+
+
+        Each element in related_entities is an object with the following keys: 
+
+        **_type**
+
+            Allowed Values:
+                 * organization
+                 * person
+
+
+        **name**
+
+
+        **id**
+
+
+**sponsors**
+
+
+    Each element in sponsors is an object with the following keys: 
+
+    **_type**
+
+        Allowed Values:
+             * organization
+             * person
+
+
+    **name**
+
+
+    **sponsorship_type**
+
+
+    **primary**
+
+
+    **chamber**
+
+        Allowed Values:
+             * upper
+             * lower
+
+
+    **id**
+
+
+**organization_id**
+
+
+**chamber**
+
+    Allowed Values:
+         * upper
+         * lower
+
+
+**session**
+
+
+**sources**
+    URLs for sources relating to the object
+
+
+    Each element in sources is an object with the following keys: 
+
+    **url**
+
+
+    **note**
+
+
+**related_bills**
+
+
+    Each element in related_bills is an object with the following keys: 
+
+    **session**
+
+
+    **name**
+
+
+    **relation_type**
+
+        Allowed Values:
+             * companion
+
+
+**organization**
+
+
+**type**
+
+
+**summaries**
+
+
+    Each element in summaries is an object with the following keys: 
+
+    **note**
+
+
+    **text**
+
+
+**subject**
+
+

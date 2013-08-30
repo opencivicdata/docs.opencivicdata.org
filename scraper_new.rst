@@ -136,6 +136,90 @@ looks funny, or if things aren't being categorized properly.
     a better way to view such data. For now, most of us are checking up on
     the raw JSON as we go.
 
+If you want to spot-check some data, using a modern POSIX system should
+allow you to run something similar to::
+
+    $ python -mjson.tool $(ls | shuf -n 1) | vim -
+
+Feel free to change ``vim`` to whatever editor you prefer for such tasks.
+
+If you do use vim, there's a helpful
+`JSON Plugin <http://www.vim.org/scripts/script.php?script_id=1945>`_
+
+Post-import spot-checking
++++++++++++++++++++++++++
+
+Validating data in the database is slightly harder (since you have to have
+a running MongoDB server), but allows you to look at the data *after* the
+import process, which means there will be less duplicated entries, and IDs
+will be resolved.
+
+
+By default, Pupa will import entries into the ``opencivicdata`` database,
+but this *may* be overridden on a per-project basis using a ``pupa_settings``
+entry. Double-check by trying to import ``pupa_settings``, and reading it's
+``MONGO_DATABASE`` attribute. If the attribute isn't present, or the settings
+file is otherwise missing, it'll default back to ``opencivicdata`` (you can
+always check the default database by running something like
+``python -c "import pupa.core; print pupa.core.default_settings.MONGO_DATABASE"``
+).
+
+The ``pupa`` repo contains a very basic static checking script, called
+``scruffy``. It's advised that you run ``scruffy`` over your database if you
+have it imported anyway. You can run ``scruffy`` by going to your ``pupa``
+source repo, and ``cd`` into ``tools``.
+
+You can invoke ``sruffy`` by running something like::
+
+    $ python -m scruffy > report.json
+
+Wich will drop a JSON file full of potental issues in the database. Some of
+these are not severe (such as unmatched memberships), and others may be the
+result of buggy code (people without memberships, etc), but there's a good deal
+of code to do basic sanity checking on OCD objects stored in the Database.
+
+If you want a quick overview on what tags are present in the report, you can
+run a command similar to::
+
+    $ python -m json.tool report.json | grep "tagname" | sort | uniq -c
+
+To get a rough feel for what sorts of errors have been detected in the
+database.
+
+The entries in the ``scruffy`` report also contain the IDs of the object which
+presented an error. You can use this to look it up from the DB. The
+``collection`` attribute will let you know which MongoDB collection this item
+is present in, and the ``id`` will give you the MongoDB ``_id``.
+
+As example, given the following JSON fragment::
+
+        {
+            "collection": "people",
+            "data": {
+                ...
+            },
+            "id": "ocd-person/ed7ff556-f9f9-11e2-b7c7-f0def1bd7298",
+            "severity": "important",
+            "tagname": "..."
+        },
+
+We can get the record in question by working with::
+
+    $ mongodb opencivicdata
+    > db.people.find({"_id": "ocd-person/ed7ff556-f9f9-11e2-b7c7-f0def1bd7298"})[0]
+    {
+        ...
+    }
+
+where the MongoDB database (``opencivicdata`` above) is from your Pupa config,
+and the collection (``people`` above) is the ``collection`` from the Scruffy
+report, and the ``_id`` is set to the ``id`` in the scruffy report.
+
+Unless this object is something transiant (such as a ``Membership`` object
+that was converted), the ``_id`` should stay stable enough for testing locally.
+
+Once you deploy the code elsewhere, new IDs will be generated, since the
+database will not have an ID assigned for that entity yet.
 
 Sumbit A Pull Request
 -------------------------

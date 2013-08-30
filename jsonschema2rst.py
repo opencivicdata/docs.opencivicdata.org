@@ -1,0 +1,76 @@
+HEADER_SYMBOL = "=-*~'"
+
+def process(fh, obj, depth=1):
+    if '_order' in obj:
+        _order = obj['_order']
+    else:
+        _order = ((None, obj['properties'].keys()),)
+
+    for section, keys in _order:
+
+        if section:
+            fh.write('%s\n%s\n\n' % (section, HEADER_SYMBOL[depth]*len(section)))
+
+        for key in keys:
+            schema = obj['properties'][key]
+            allowed_types = []
+            enum = None
+            description = None
+            has_properties = False
+            pattern = None
+            minimum = None
+            minItems = None
+            item_properties = None
+            for sk, sv in schema.iteritems():
+                if sk == 'type':
+                    allowed_types = sv
+                elif sk == 'enum':
+                    enum = sv
+                elif sk == 'description':
+                    description = sv
+                elif sk == 'properties':
+                    has_properties = True
+                elif sk == 'pattern':
+                    pattern = sv
+                elif sk == 'minimum':
+                    minimum = sv
+                elif sk == 'minItems':
+                    minItems = sv
+                elif sk in ('required', 'format'):
+                    pass
+                elif sk == 'items':
+                    if 'properties' in sv:
+                        item_properties = sv
+                    else:
+                        pass # TODO: something here
+                else:
+                    raise ValueError('NEW KEY:', sk)
+
+                if isinstance(allowed_types, list):
+                    allowed_types = ', '.join(allowed_types)
+
+            spaces = '    '*depth
+            fh.write('%s**%s**\n' % ('    '*(depth-1), key))
+            if description:
+                fh.write(spaces + description + '\n')
+            #'\n' + spaces + 'Allowed Types: ' + allowed_types
+            if enum is not None:
+                fh.write('\n' + spaces + 'Allowed Values:\n')
+                for item in enum:
+                    fh.write(spaces + '     * ' + item + '\n')
+            if minimum is not None:
+                fh.write('\n' + spaces + '(minimum value: %s)\n' % minimum)
+            if pattern is not None:
+                fh.write('\n'+ spaces + '(must match format: ``%s``)\n' % pattern)
+            fh.write('\n\n')
+            if has_properties:
+                process(fh, schema, depth+1)
+            if item_properties:
+                fh.write(spaces + 'Each element in %s is an object with the following keys: \n\n' % key)
+                process(fh, item_properties, depth+1)
+
+if __name__ == '__main__':
+    from pupa.models.schemas import vote, bill, event
+    process(open('data/_vote.rst-include', 'w'), vote.schema)
+    process(open('data/_bill.rst-include', 'w'), bill.schema)
+    process(open('data/_event.rst-include', 'w'), event.schema)

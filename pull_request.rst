@@ -73,9 +73,15 @@ Finally, navigate to commit you made to your forked repo, and click the button t
 Best Practice
 -------------
 
+.. INFO::
+    This guide won't get into a generic ``git`` tutorial, and assumes
+    elementary proficiency with ``git`` and some knowledge of GitHub.
+
 It's good practice to use a branch when working on the scrapers, this helps
 continue to integrate changes into your branch, and helps you compare changes
-without much effort.
+without much effort. With many people working on the codebase at the same time,
+it's likely we'll end up with changes that impact others sometimes. By using
+a branch, it's much easier to fix these conflicts.
 
 .. warning::
     Please do make sure you always create a branch off the *master* branch.
@@ -91,7 +97,7 @@ creates the branch, so don't worry about using ``git branch`` just yet.)
 It's common to prefix a branch with one of ``bugfix``, or ``feature`` (or
 anything else that's short and desriptive). After the prefix, you should add a
 descriptive slug related to the change, so that it's easy to remember
-which branch is which.
+which branch is which. These are sometimes called "Topic branches".
 
 After this, you can check which branch you're working on by running
 ``git branch``, and looking for the marked branch.
@@ -142,3 +148,14 @@ Firstly, be sure that you've commited all your code, and you're up to date.
 Please do remember to change ``bugfix/fix-this-broken-jurisdiction`` with the
 name of your topic branch that you're working on (as seen in the output of the
 first command run).
+
+Checking what you've changed
+----------------------------
+
+You can check how much has changed at any point very simply, by using
+``git diff``. Something like::
+
+    $ git diff master --color
+
+Can come in quite handy when reviewing changes before sending in a Pull
+Request.

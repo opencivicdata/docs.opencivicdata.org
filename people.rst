@@ -184,3 +184,28 @@ a working Person scraper may look like::
                 person.add_link('homepage', who.attrib['href'])
                 person.add_source(url)
                 yield person
+
+
+Special notes regarding Posts, Memberships and Districts
+--------------------------------------------------------
+
+The keen observer will note that we're using ``post_id`` to note the person's
+primary position (for Legislative scrapers, this will usually be the member's
+ward or district.
+
+Looking at the `Popolo spec <http://popoloproject.com/>`_, you might be
+confused on why this isn't an opaque ID, or some sort of slug.
+
+We use full strings to help avoid second lookups and O(n) search-time from
+a matching org when displaying the Post ID on something like a website (usually
+in some sort of list).
+
+By using the complete text of the post as the ID, we can better use
+``Membership`` objects for display of the data. When we load a membership
+obejct, we can just use the ``post_id`` as the display slug, without having
+to load the ``Organization``, and iterate over the ``post`` objects until
+we find a matching ``post_id``. We're still able to search globally based
+on ``post_id`` by also constraining ``jurisdiction_id`` as well. In
+addition, trying to slugify the ``post_id`` in the scraper is something
+that might be quite error-prone anyway, so there isn't much of an upside
+to trying to keep it as a pure opaque ID or slug.

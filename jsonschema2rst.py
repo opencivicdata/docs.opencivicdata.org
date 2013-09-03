@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 HEADER_SYMBOL = "=-*~'"
 
 def process(fh, obj, depth=1):
@@ -12,7 +14,7 @@ def process(fh, obj, depth=1):
             fh.write('%s\n%s\n\n' % (section, HEADER_SYMBOL[depth]*len(section)))
 
         for key in keys:
-            schema = obj['properties'][key]
+            schema = obj['properties'].pop(key)
             allowed_types = []
             enum = None
             description = None
@@ -53,6 +55,8 @@ def process(fh, obj, depth=1):
             fh.write('%s**%s**\n' % ('    '*(depth-1), key))
             if description:
                 fh.write(spaces + description + '\n')
+            else:
+                print('no description:', key)
             #'\n' + spaces + 'Allowed Types: ' + allowed_types
             if enum is not None:
                 fh.write('\n' + spaces + 'Allowed Values:\n')
@@ -68,6 +72,9 @@ def process(fh, obj, depth=1):
             if item_properties:
                 fh.write(spaces + 'Each element in %s is an object with the following keys: \n\n' % key)
                 process(fh, item_properties, depth+1)
+
+    if obj['properties']:
+        print('Unused keys:', '; '.join(obj['properties'].keys()))
 
 if __name__ == '__main__':
     from pupa.models.schemas import vote, bill, event

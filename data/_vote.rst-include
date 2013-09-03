@@ -65,9 +65,11 @@ Common Fields
     Each element in sources is an object with the following keys: 
 
     **url**
+        URL of resource used to collect information
 
 
     **note**
+        note about what information this URL was used for
 
 
 Relationship to Bill

@@ -62,6 +62,24 @@ is present, and invoked from the ``scrape_bills`` method. Care should be
 taken to avoid using the ``scrape_bills`` method name, since this will cause
 unexpected failure.
 
+The ``organization`` entry is a bit of information to help resolve the correct
+parent org while the bill is being imported. Since we're dealing with
+Legislative bodies, this will be set to the ``chamber`` of the Legislative
+body (since this is the only way to tell different legislatures apart in
+the same Jurisdiction).
+
+The creation of the Bill object in a bicameral body may look like::
+
+    bill = Bill(name="HB 101",
+                session=self.session,
+                title="A bill for an act for pudding",
+                organization="upper")
+
+Omitting the ``organization`` argument will set the param to ``None``, and
+match the organization only if it's there is only one organization in the
+Jurisdiction. If there are two Organizations in a Jurisdiction and the
+``organization`` is set to ``None``, an Exception will be raised. It's 
+
 For more information on the ``scrape_bills`` or ``get_bills`` methods, you
 might consider reading about
 :meth:`pupa.scrape.base.Scraper.scrape_bills` and

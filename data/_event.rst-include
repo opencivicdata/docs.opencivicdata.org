@@ -39,12 +39,6 @@
 
     Each element in sources is an object with the following keys: 
 
-    **url**
-
-
-    **note**
-
-
 **documents**
 
 
@@ -172,31 +166,6 @@
 
 
         Each element in media is an object with the following keys: 
-
-        **date**
-
-            (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
-
-
-        **type**
-
-
-        **name**
-
-
-        **links**
-
-
-            Each element in links is an object with the following keys: 
-
-            **mimetype**
-
-
-            **url**
-
-
-        **offset**
-
 
     **notes**
 

@@ -23,6 +23,7 @@ Contributing for developers:
    people
    events
    bills
+   tips
 
 Contributing for citizens:
 

@@ -77,8 +77,13 @@ The creation of the Bill object in a bicameral body may look like::
 
 Omitting the ``organization`` argument will set the param to ``None``, and
 match the organization only if it's there is only one organization in the
-Jurisdiction. If there are two Organizations in a Jurisdiction and the
-``organization`` is set to ``None``, an Exception will be raised. It's 
+Jurisdiction.
+
+In general, if the ``chamber`` param results in a non-unique query, or if the
+query returns no results, it'll raise a ``ValueError``. To be sure this doesn't
+happen, always include ``chamber`` if the Legislature is bicameral. If the
+Legislature is unicameral, don't worry so much about the ``chamber`` param,
+since it'll default to ``None``.
 
 For more information on the ``scrape_bills`` or ``get_bills`` methods, you
 might consider reading about

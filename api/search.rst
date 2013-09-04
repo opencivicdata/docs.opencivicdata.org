@@ -1,0 +1,166 @@
+Search Endpoints
+================
+
+General information about search endpoints can be found at :ref:`endpoints` and :ref:`search-response`.
+
+Information on common parameters can be found at :ref:`common-parameters`.
+
+This page provides specific parameters and notes on which fields are included in the default response for each of the search endpoints.
+
+.. _jurisdiction-search:
+
+Jurisdiction Search
+-------------------
+
+**Endpoint:** ``/jurisdictions/``
+
+**Default Fields:** All fields in :doc:`/data/jurisdiction` except for terms, session_details, and chambers.
+
+**Sort Options:** Jurisdictions can only be sorted by name.
+
+**Filter Parameters:** There are no filter parameters for jurisdictions.
+
+.. _division-search:
+
+Division Search
+---------------
+
+TODO: write this part from locust
+
+
+.. _organization-search:
+
+Organization Search
+-------------------
+
+**Endpoint:** ``/organizations/``
+
+**Default Fields:** All fields in :doc:`/data/organization` except for contact_details, sources, posts,
+founding_date, and dissolution_date.
+
+**Sort Options:**
+
+* `created_at` - Sort by time object was created, newest objects first. (default)
+* `updated_at` - Sort by time object was updated, most recent first.
+
+**Filter Parameters:**
+
+* `classification`
+* `founding_date`
+* `dissolution_date`
+* `jurisdiction_id`
+* `parent_id`
+* `division_id`
+* `chamber`
+* `name` - Exact match is not necessary, checks for case-insensitive substring matches.
+* `updated_at` - See :ref:`timestamp-parameters`.
+* `created_at` - See :ref:`timestamp-parameters`.
+
+
+.. _person-search:
+
+Person Search
+-------------
+
+**Endpoint:** ``/people/``
+
+**Default Fields:** All fields in :doc:`/data/person` except for contact_details, sources, extras,
+links, birth_date, and death_date.
+
+**Sort Options:**
+
+* `created_at` - Sort by time object was created, newest objects first. (default)
+* `updated_at` - Sort by time object was updated, most recent first.
+
+**Filter Parameters:**
+
+* `name`
+* `gender`
+* `birth_date`
+* `death_date`
+* `updated_at` - See :ref:`timestamp-parameters`.
+* `created_at` - See :ref:`timestamp-parameters`.
+* `member_of` - Parameter should be an Open Civic Data organization_id, will filter returned people
+  to those that are a current member of the given organization.
+* `ever_member_of` - Like member_of but checks all memberships, not only current ones.
+
+.. _bill-search:
+
+Bill Search
+-----------
+
+**Endpoint:** ``/bills/``
+
+**Default Fields:** All fields in :doc:`/data/bill` except for sponsors, sources, actions, links,
+versions, related_bills, summaries, other_titles, and documents.
+
+**Sort Options:**
+
+* `created_at` - Sort by time object was created, newest objects first. (default)
+* `updated_at` - Sort by time object was updated, most recent first.
+
+**Filter Parameters:**
+
+* `name`
+* `chamber`
+* `session`
+* `jurisdiction_id`
+* `type`
+* `subject`
+* `sponsors.id` - Open Civic Data person ID of a sponsor.
+* `updated_at` - See :ref:`timestamp-parameters`.
+* `created_at` - See :ref:`timestamp-parameters`.
+
+TODO: incomplete list?
+
+.. _vote-search:
+
+Vote Search
+-----------
+
+**Endpoint:** ``/votes/``
+
+**Default Fields:** All fields in :doc:`/data/vote` except for roll_call and sources.
+
+**Sort Options:**
+
+* `created_at` - Sort by time object was created, newest objects first. (default)
+* `updated_at` - Sort by time object was updated, most recent first.
+* `date` - Sort by date that the vote took place.
+
+**Filter Parameters:**
+
+* `jurisdiction_id`
+* `date`
+* `passed` - pass `true` to filter to only passed votes, pass `false` to get only failed votes
+* `chamber`
+* `session`
+* `type`
+* `bill.id` - Open Civic Data bill ID of bill vote is attached to.
+* `updated_at` - See :ref:`timestamp-parameters`.
+* `created_at` - See :ref:`timestamp-parameters`.
+
+
+.. _event-search:
+
+Event Search
+------------
+
+**Endpoint:** ``/events/``
+
+**Default Fields:** All fields in :doc:`/data/event` except for sources.
+
+**Sort Options:**
+
+* `created_at` - Sort by time object was created, newest objects first. (default)
+* `updated_at` - Sort by time object was updated, most recent first.
+* `when` - Sort by when the event takes place.
+
+**Filter Parameters:**
+
+* `jurisdiction_id`
+* `participants.id` - filter by Open Civic Data ID of a participant.
+* `agenda.related_entities.id` filter by a related entity's Open Civic Data ID.
+* `when`
+* `updated_at` - See :ref:`timestamp-parameters`.
+* `created_at` - See :ref:`timestamp-parameters`.

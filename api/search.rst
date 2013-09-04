@@ -164,3 +164,71 @@ Event Search
 * `when`
 * `updated_at` - See :ref:`timestamp-parameters`.
 * `created_at` - See :ref:`timestamp-parameters`.
+
+
+General Notes
+-------------
+
+.. _parameters:
+
+Operators
+~~~~~~~~~
+
+All filter parameters are interpreted as direct lookups against the database unless otherwise noted.
+
+Additionally, operators are available.  You can apply an operator by appending ``__op`` to the filter, so ``birth_date`` would become ``birth_date__gt`` if you wanted to use the greater than operator.
+
+Available operators are:
+
++----------+--------------------------------------------------------------------------------------+
+| Operator | Function                                                                             |
++=================================================================================================+
+| __gt     | Greater than.                                                                        |
++----------+--------------------------------------------------------------------------------------+
+| __gte    | Greater than or equal to.                                                            |
++----------+--------------------------------------------------------------------------------------+
+| __lt     | Less than.                                                                           |
++----------+--------------------------------------------------------------------------------------+
+| __lte    | Less than or equal to.                                                               |
++----------+--------------------------------------------------------------------------------------+
+| __ne     | Not equal to.                                                                        |
++----------+--------------------------------------------------------------------------------------+
+| __all    | Content is split by ``,`` - filter ensures all values provided are in the object.    |
++----------+--------------------------------------------------------------------------------------+
+| __in     | Content is split by ``,`` - filter includes objects with any of the values provided. |
++----------+--------------------------------------------------------------------------------------+
+| __nin    | Content is split by ``,`` - filter excludes objects with any of the values provided. |
++----------+--------------------------------------------------------------------------------------+
+
+.. _id-operator:
+
+External IDs
+~~~~~~~~~~~~
+
+In addition to the Open Civic Data ID for an object, it is sometimes necessary to look up an object
+by an external ID.  As objects are pulled into the system from other sources
+(for example `Open States <http://openstates.org>`) we preserve their old IDs in the ``identifiers``
+attribute on the object.  It is possible to query within this object by using ``id__<scheme>=<identifier>``
+as a filter on any query.  For example ``/people/id__openstates=AKL000001`` would return the person that
+had the Open States ID AKL000001.
+
+(This typically shouldn't be combined with other filters since it should always
+only return one item.)
+
+
+.. _timestamp-parameters:
+
+updated_at & created_at
+~~~~~~~~~~~~~~~~~~~~~~~
+
+These parameters are stored in the system as UTC timestamps, not strings.  The following formats are accepted:
+
+* Y-m-d
+* Y-m
+* Y
+* Y-m-dTH:M
+* Y-m-dTH:M:S
+* Y-m-dTH:M:S.f
+* ``now``        - Special input interpreted as the current time. Useful for asking for events that haven't happened yet.
+
+For details on time formats see `Python strftime() and strptime() behavior <http://docs.python.org/2/library/datetime.html#strftime-strptime-behavior>`_.

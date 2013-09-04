@@ -27,7 +27,11 @@ Contributing for developers:
 
 Contributing for citizens:
 
-.. TODO: put some docs on Anthropod here
+.. toctree::
+   :maxdepth: 1
+
+   anthropod/create_org.rst
+   anthropod/add_members.rst
 
 Additional documentation:
 

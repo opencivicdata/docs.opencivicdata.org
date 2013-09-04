@@ -115,3 +115,27 @@ However, this is sometimes needed::
 to get all entries under the 1st ``baz`` under a ``foobar``. It's also worth
 noting that **xpath indexes are 1-based not 0-based**. Start your counts from
 ``1`` not ``0`` and you'll have a much better day!
+
+Axis Overview
+++++++++++++++
+
+XPath also features what are known as the "Axis". The "axis" is a way
+of selecting other nodes via a given node (wich is usually defined by
+an xpath)
+
+The most useful one is ``following-sibling`` or ``parent``
+
+Let's take a look at ``following-sibling``::
+
+    //th[contains(text(), "foo")]/following-sibling::td
+
+This will find any ``th`` elements that contain ``foo`` in the ``text()``,
+and search for any ``td`` elements which *follow* the ``th`` element.
+
+Or, if we look at a ``parent`` relation::
+
+    //img[@id='foo']/parent::div[@class='bar']/text()
+
+will fetch the text of a ``div`` with a ``class`` set to ``bar`` who has a
+sub-node, which is an ``img`` with an ``id`` set to ``foo``. This expression
+will continue all the way back up to the root node.

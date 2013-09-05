@@ -78,6 +78,13 @@ This expression will find all ``div`` objects with an ``id`` of ``joe`` (I know,
 you *should* only use an ``id`` once, but alas sometimes these things happen)
 that are sub-nodes of a ``some-tag`` with a ``class`` of ``foo``.
 
+In addition, you can also limit by other things, too, such as ``text()``::
+
+    //some-other-tag[text()="FULL TEXT"]/*
+
+This will find any ``some-other-tag`` tags that contain ``FULL TEXT`` as their
+``text()`` entry. As you can guess, most XPath expressions (etc) 
+
 Contains queries
 ++++++++++++++++
 
@@ -139,3 +146,17 @@ Or, if we look at a ``parent`` relation::
 will fetch the text of a ``div`` with a ``class`` set to ``bar`` who has a
 sub-node, which is an ``img`` with an ``id`` set to ``foo``. This expression
 will continue all the way back up to the root node.
+
+Writing "defensive" scrapers
+----------------------------
+
+We tend to write very fragile scrapers - prone to break very loudly (and as
+soon as we can) when/if the site changes.
+
+As a general rule, if the site has changed, we have a strong chance of
+pulling in bad data. As a result, we don't want the scraper to continue
+on without throwing an error, so that we can be sure bad data never gets
+imported into the database. We do this by hard-coding very fragile xpaths,
+which use full names (rather than contains, unless there's a reason to),
+and always double-check the incoming data looks sane (or raise an
+``Exception``).

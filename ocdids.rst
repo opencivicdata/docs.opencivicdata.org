@@ -1,10 +1,11 @@
 
 .. _ocdid:
 
+===============
 OCD Identifiers
-------------------------------------------
+===============
 
-OpenCivicData Identifiers (or OCD IDs) are a common Identifier format used
+Open Civic Data Identifiers (or OCD IDs) are a common Identifier format used
 in the OpenCivicData projects, in a defined format, ripe for reuse with
 any legislative dataset.
 
@@ -37,7 +38,7 @@ with as much detail regarding the situation as you can generally proves
 to be the best way to solicit feedback.
 
 General Format
-==============
+--------------
 
 OCD IDs have the general format of:
 
@@ -47,7 +48,7 @@ and a brief overview can be found below.
 
 
 Division IDs
-============
+------------
 
 Division IDs are one of the more common OpenCivic identifiers. Division IDs
 denote a particular geopolitical division. Information regarding valid
@@ -69,7 +70,7 @@ do take a look at the
 
 
 Jurisdiction IDs
-================
+----------------
 
 Jurisdiction IDs are based on the Division IDs, but have a slightly adjusted
 format. The ``type`` shall be set to ``jurisdiction``, and the data half of the
@@ -84,7 +85,7 @@ these.
 
 
 Person IDs, Org IDs
-===================
+-------------------
 
 The valid types are ``person`` for a Person, and ``organization`` for an
 Organization.

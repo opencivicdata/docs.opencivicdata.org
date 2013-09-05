@@ -6,7 +6,7 @@ Contributing a Municipal Person Scraper
 
 This document is meant to provide a tutorial-like overview of the steps toward contributing a munipal Person scraper to the Open Civic Data project.
 
-This guide assumes you have a working pupa setup. If you don't please refer to the introduction on :doc:`scrape/index`.
+This guide assumes you have a working pupa setup. If you don't please refer to the introduction on :doc:`/scrape/index`.
 
 
 Special notes about People scrapers

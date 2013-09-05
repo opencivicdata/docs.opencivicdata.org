@@ -1,9 +1,8 @@
 Open Civic Data
 ===============
 
-.. seealso:
-
-    These docs are a work in progress--please don't share yet.
+.. note::
+    These docs are a work in progress, some described functionality is not yet available.  Please do not share yet.
 
 
 The `opencivicdata <https://github.com/opencivicdata/>`_ project on Github is an collaborative effort to define schemas and provide tools for gathering information on government organizations, people, legislation, and events.
@@ -30,7 +29,7 @@ Contributing for developers:
    scrape/people
    scrape/events
    scrape/bills
-   tips
+   scrape/tips
 
 Contributing for non-developers:
 

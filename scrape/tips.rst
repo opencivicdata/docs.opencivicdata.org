@@ -160,3 +160,44 @@ imported into the database. We do this by hard-coding very fragile xpaths,
 which use full names (rather than contains, unless there's a reason to),
 and always double-check the incoming data looks sane (or raise an
 ``Exception``).
+
+One way that's common to help trigger breakage when table rows get moved
+around is to unpack the list into variables - this also has an added bonus
+of being more descriptive in what is where in the row, which aids in debugging
+a broken scraper. Usually, you'd see something like::
+
+    for row in page.xpath("//table[@id='foo']/tr"):
+        name, district, email = row.xpath("./*")
+
+Which will trigger breakage if the number of rows change. Of course, you
+need to sill assert that you have sane values in such a table, since the
+order of the entries may change, and you'll end up changing everyone's name
+to "District 5".
+
+Another common way of doing this is by blindly using an index off an xpath,
+forcing an ``IndexError`` if the index isn't present. This helps avoid
+queries where nothing is returned, or too little is returned. You should also
+be careful to check the ``len()`` of the values to ensure too much wasn't
+returned as well.
+
+Commonly, scrapers need to normalize and transform bad data into good data (in
+edge-cases, such as setting ``party`` data), and this can be a good place
+to add a quick check that no data we didn't expect made it into the database.
+
+Using a dict to index the scraped data is a good way of doing this::
+
+    party = {"democrat": "Democratic",
+             "republican": "Republican",
+             "independent": "Independent"}[scraped_party.lower().strip()]
+
+You can be sure that if the data wasn't one of the expected 3 that it will
+raise a ``KeyError`` and force someone to ensure the scraped data is
+(in fact) correct (or if a new party needs to be added).
+
+Since this is infrequent enough, this is a pretty good tradeoff for data
+quality (and is slightly easier to maintain than a big ``if``/``elif``/``else``
+block).
+
+The end goal here is to make sure that *no scraper ever allows bad data
+into the database*. So long as your scraper is doing this, you've written
+a defensive scraper!

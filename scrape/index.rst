@@ -23,4 +23,4 @@ Once you've created a fork of the desired repository on GitHub you can set up yo
     # Clone the repo
     $ git git@github.com:opencivicdata/municipal-scrapers-us.git
 
-Now you're ready to proceed to :doc:`scraper_new`.
+Now you're ready to proceed to :doc:`./new`.

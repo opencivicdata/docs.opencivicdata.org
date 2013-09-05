@@ -19,7 +19,7 @@ Pupa will copy a skeleton project into a new albuquerque directory with the foll
 
 Open up the new :file:`albuquerque/__init__.py` file and check out it's contents. It will look like this:
 
-.. literalinclude:: ../pupa/example/__init__.py
+.. literalinclude:: ../../pupa/example/__init__.py
 
 This file contains a single subclass of a Jurisdiction base class. The jurisdiction class represents the municipality we're scraping information for, and is the place we'll store the metadata required during the scrape. To get started, all we have to do is edit the metadata on this class to be specific to Albuquerque.
 
@@ -32,7 +32,7 @@ Edit the Jurisdiction's Metadata
 
 Take a look at the Albuquerque-specific changes below:
 
-.. literalinclude:: includes/__init__.py.diff
+.. literalinclude:: /includes/__init__.py.diff
     :language: diff
 
 Let's go over the changes made above one at a time.

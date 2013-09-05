@@ -73,7 +73,7 @@ Finally, navigate to commit you made to your forked repo, and click the button t
 Best Practice
 -------------
 
-.. INFO::
+.. note::
     This guide won't get into a generic ``git`` tutorial, and assumes
     elementary proficiency with ``git`` and some knowledge of GitHub.
 

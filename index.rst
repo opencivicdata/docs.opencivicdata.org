@@ -9,7 +9,8 @@ The `opencivicdata <https://github.com/opencivicdata/>`_ project on Github is an
 
 If you're looking to contribute to the project or learn how to use the data, you're in the right place.
 
-Accessing the data:
+Accessing the Data
+------------------
 
 .. toctree::
     :maxdepth: 1
@@ -18,7 +19,8 @@ Accessing the data:
     api/search
 
 
-Contributing for developers:
+Contributing for Developers
+---------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -31,7 +33,8 @@ Contributing for developers:
    scrape/bills
    scrape/tips
 
-Contributing for non-developers:
+Contributing for Non-Developers
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -39,7 +42,8 @@ Contributing for non-developers:
    anthropod/create_org.rst
    anthropod/add_members.rst
 
-Additional documentation:
+Other Documentation
+-------------------
 
 .. toctree::
    :maxdepth: 1

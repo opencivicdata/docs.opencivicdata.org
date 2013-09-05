@@ -1,8 +1,8 @@
 
 .. _bills:
 
-Contributing a Municipal Bill Scraper
-=====================================
+Writing a Bill Scraper
+=======================
 
 Bill scrapers are scrapers that pull down all legislatition on a jurisdiction's
 legislative website (including, but not limited to things like House and Senate

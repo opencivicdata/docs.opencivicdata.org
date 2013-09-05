@@ -1,8 +1,8 @@
 
 .. _events:
 
-Contributing a Municipal Events Scraper
-=======================================
+Writing an Events Scraper
+===========================
 
 Events scrapers are one of the more compelling datasets that we are able to
 collect, since it allows for near real-time updating of upcoming events.

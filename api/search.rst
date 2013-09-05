@@ -5,6 +5,8 @@ General information about search endpoints can be found at :ref:`endpoints` and 
 
 Information on common parameters can be found at :ref:`common-parameters`.
 
+For advanced filtering refer to :ref:`parameters`, for looking up data by non-Open Civic Data IDs look at :ref:`id-operator`.
+
 This page provides specific parameters and notes on which fields are included in the default response for each of the search endpoints.
 
 .. _jurisdiction-search:
@@ -25,8 +27,19 @@ Jurisdiction Search
 Division Search
 ---------------
 
-TODO: write this part from locust
+**Endpoint:** ``/divisions/``
 
+**Default Fields:** `id`, `country`, and `display_name`
+
+**Sort Options:** Divisions can only be sorted by their division ID.
+
+**Filter Parameters:**
+
+* `lat` & `lon` - Must be specified together.  The resulting divisions will all contain the specified point.
+* `date` - For obtaining historical boundaries, divisions returned are based on boundaries at a given time. Must be specified in Y-m-d format.
+
+.. note::
+    This endpoint, due to the way that it is handled on the backend, does not support the `fields` parameter.
 
 .. _organization-search:
 
@@ -110,8 +123,6 @@ versions, related_bills, summaries, other_titles, and documents.
 * `sponsors.id` - Open Civic Data person ID of a sponsor.
 * `updated_at` - See :ref:`timestamp-parameters`.
 * `created_at` - See :ref:`timestamp-parameters`.
-
-TODO: incomplete list?
 
 .. _vote-search:
 

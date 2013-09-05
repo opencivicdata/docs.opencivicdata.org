@@ -44,7 +44,7 @@ def process(fh, obj, depth=1):
                     if 'properties' in sv:
                         item_properties = sv
                     else:
-                        pass # TODO: something here
+                        pass # maybe put something here
                 else:
                     raise ValueError('NEW KEY:', sk)
 

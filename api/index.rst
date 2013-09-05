@@ -102,7 +102,8 @@ The following (optional) parameters are common to all API endpoints:
     requests.  (**This parameter is available on both search and object lookup parameters.**)
 
 **sort**
-    Change the sort order of objects returned via a search endpoint.  (TODO: available options)
+    Change the sort order of objects returned via a search endpoint.  See :doc:`search` for
+    available values for each endpoint.
 **page**
     Select a page (0-``meta.max_page``) from the result set in a search endpoint.
 **per_page**

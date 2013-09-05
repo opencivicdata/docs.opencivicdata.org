@@ -5,7 +5,7 @@ Before you begin, it is expected that you're a somewhat experienced developer co
 
 .. note::
 
-    * If you're new to Python you can check out `Python on Codeadademy <http://www.codecademy.com/tracks/python>`_ (TODO: or Anthropod).
+    * If you're new to Python you can check out `Python on Codeadademy <http://www.codecademy.com/tracks/python>`_.
     * To get started with Git/GitHub, there's a `Git tutorial <https://help.github.com/articles/set-up-git#platform-all>`_ to get you started.
     * `virtualenv <httpe://pypi.python.org/pypi/virtualenv>`_ & `virtualenvwrapper <http://virtualenvwrapper.readthedocs.org/en/latest/>`_ are optional tools that will help you keep your Python environment clean if you work on multiple projects.
 

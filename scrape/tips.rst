@@ -127,7 +127,7 @@ Axis Overview
 ++++++++++++++
 
 XPath also features what are known as the "Axis". The "axis" is a way
-of selecting other nodes via a given node (wich is usually defined by
+of selecting other nodes via a given node (which is usually defined by
 an xpath)
 
 The most useful one is ``following-sibling`` or ``parent``

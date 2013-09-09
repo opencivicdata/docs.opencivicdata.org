@@ -61,7 +61,9 @@ Adding contact information is very straightforwarded: for each field, you select
 Optionally Enter Alternate Names
 --------------------------------
 
-If the person has alternate names, like [Antonio "2 Shay" Parkinson](http://openstates.org/tn/legislators/TNL000099/antonio-2-shay-parkinson/)_ of the Tennessee General Assembly, you can enter the alternate name in the boxes provided.
+If the person has alternate names, like
+`Antonio "2 Shay" Parkinson <http://openstates.org/tn/legislators/TNL000099/antonio-2-shay-parkinson/>`_
+of the Tennessee General Assembly, you can enter the alternate name in the boxes provided.
 
 .. image:: ../../_static/person_create_alternate_names.png
   :align: center

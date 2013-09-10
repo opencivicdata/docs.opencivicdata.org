@@ -32,7 +32,10 @@ situation.
 OK. I'm onboard. What next?
 ---------------------------
 
-Great, let's jump right in:
+Great, let's jump right in - the Anthropod instance the Municipal OpenCivic
+project is using can be found at
+`anthro.openstates.org <http://anthro.openstates.org/collect/geo/select/>`_,
+so pop that open and let's start!
 
 .. toctree::
    :maxdepth: 1

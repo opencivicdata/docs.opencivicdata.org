@@ -1,0 +1,90 @@
+Basic Details
+-------------
+
+**name**
+    Name of jurisdiction (e.g. North Carolina General Assembly)
+
+
+**url**
+    URL pointing to jurisdiction's website.
+
+
+**chambers**
+    Dictionary where keys are slugs for chambers (e.g. upper, lower)  and values describe the chamber in human-readable terms.  (only needs to be specified if there are multiple chambers)
+
+
+    Each element in chambers is an object with the following keys: 
+
+    **name**
+        Human-readable name of chamber (e.g. Senate)
+
+
+    **title**
+        Title of an individual in this chamber (e.g. Senator)
+
+
+**terms**
+    List of all terms, in chronological order.
+
+
+    Each element in terms is an object with the following keys: 
+
+    **end_year**
+        Year that term ended.
+
+        (minimum value: 1000)
+
+
+    **start_year**
+        Year that term started.
+
+        (minimum value: 1000)
+
+
+    **name**
+        Name of term, typically a year span (e.g. 2011-2012)
+
+
+    **sessions**
+        List of sessions within this term. Each session must also appear in session_details
+
+
+**session_details**
+    Dictionary describing sessions, each key is a session slug that must also appear in one ``sessions`` list in ``terms``.  Values consist of several fields giving more detail about the session.
+
+
+    Each element in session_details is an object with the following keys: 
+
+    **type**
+        Type of session: primary or special.
+
+
+    **start_date**
+        Start date of session.
+
+
+    **end_date**
+        End date of session.
+
+
+Additional Metadata
+-------------------
+
+**feature_flags**
+    A way to mark certain features as available on a per-jurisdiction basis.
+
+
+**building_maps**
+    Links to image/PDF maps of the building.
+
+
+    Each element in building_maps is an object with the following keys: 
+
+    **url**
+        URL to map image/PDF
+
+
+    **name**
+        Name of map (e.g. Floor 1)
+
+

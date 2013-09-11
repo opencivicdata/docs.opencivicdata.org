@@ -49,7 +49,7 @@ Basics
     List of summaries of bill, each item in list has a note and text attribute.
 
 
-    Each element in summaries is an object with the following keys:
+    Each element in summaries is an object with the following keys: 
 
     **note**
         note describing source of summary
@@ -74,16 +74,16 @@ Common Fields
     URLs for sources relating to the object
 
 
-    Each element in sources is an object with the following keys:
+    Each element in sources is an object with the following keys: 
 
 Other/Related Bills
 -------------------
 
 **other_titles**
-    list of other titles this bill is known by.A common use is when a state provides a common title and a long or technical title as well.  It is also acceptable to include popular but unofficial titles of the bill as well, such as'Obamacare' for the 'Patient Protection and Affordable Care Act.' `note` can be used to describe the relationship this has to the bill, for example Obamacare might be noted as a colloquial name. Each item in the list has a title and a note.
+    list of other titles this bill is known by.A common use is when a state provides a common title and a long or technical title as well.  It is also acceptable to include popular but unofficial titles of the bill as well, such as'Obamacare' for the 'Patient Protection and Affordable Care Act.'`note` can be used to describe the relationship this has to the bill, for example Obamacare might be noted as a colloquial name. Each item in the list has a title and a note.
 
 
-    Each element in other_titles is an object with the following keys:
+    Each element in other_titles is an object with the following keys: 
 
     **note**
         Note describing source.
@@ -97,7 +97,7 @@ Other/Related Bills
     list of other names this bill is known by in the current session, for example if HB 33 and SB 17 refer to the same bill this prevents having to have identical entries for each.
 
 
-    Each element in other_names is an object with the following keys:
+    Each element in other_names is an object with the following keys: 
 
     **note**
         note describing why this name is attached
@@ -111,7 +111,7 @@ Other/Related Bills
     Links to related bills.  Currently only used for companion bills, but extensible for other uses.
 
 
-    Each element in related_bills is an object with the following keys:
+    Each element in related_bills is an object with the following keys: 
 
     **session**
         Session of related bill.
@@ -135,7 +135,7 @@ Sponsors and Actions
     List of entities responsible for sponsoring/authoring the bill.
 
 
-    Each element in sponsors is an object with the following keys:
+    Each element in sponsors is an object with the following keys: 
 
     **_type**
         Type of entity if the sponsor has been resolved to another entity in the database.
@@ -173,7 +173,7 @@ Sponsors and Actions
     List of actions taken on the bill.
 
 
-    Each element in actions is an object with the following keys:
+    Each element in actions is an object with the following keys: 
 
     **date**
         date of action
@@ -197,7 +197,7 @@ Sponsors and Actions
         list of related entities for the action, such as related committee for a referral or a person for a sponsorship.
 
 
-        Each element in related_entities is an object with the following keys:
+        Each element in related_entities is an object with the following keys: 
 
         **_type**
             Type of entity if the sponsor has been resolved to another entity in the database.
@@ -222,7 +222,7 @@ Documents and Versions
     Any non-version related documents, elements are identical to versions.
 
 
-    Each element in documents is an object with the following keys:
+    Each element in documents is an object with the following keys: 
 
     **date**
         Document posting date
@@ -244,7 +244,7 @@ Documents and Versions
         List of links to text for this document (pdf, html, etc.).
 
 
-        Each element in links is an object with the following keys:
+        Each element in links is an object with the following keys: 
 
         **mimetype**
             mimetype of document
@@ -258,7 +258,7 @@ Documents and Versions
     Versions of a bill's text (First Printing, As Amended, etc.)
 
 
-    Each element in versions is an object with the following keys:
+    Each element in versions is an object with the following keys: 
 
     **date**
         Version posting date
@@ -280,7 +280,7 @@ Documents and Versions
         List of links for this version (pdf, html, etc.).
 
 
-        Each element in links is an object with the following keys:
+        Each element in links is an object with the following keys: 
 
         **mimetype**
             mimetype of document

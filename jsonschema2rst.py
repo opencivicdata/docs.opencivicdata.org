@@ -40,9 +40,9 @@ def process(fh, obj, depth=1):
                     minimum = sv
                 elif sk == 'minItems':
                     minItems = sv
-                elif sk in ('required', 'format'):
+                elif sk in ('required', 'format', 'maximum', 'minimum'):
                     pass
-                elif sk == 'items':
+                elif sk in ('items', 'additionalProperties'):
                     if 'properties' in sv:
                         item_properties = sv
                     else:
@@ -79,7 +79,8 @@ def process(fh, obj, depth=1):
         print('Unused keys:', '; '.join(obj['properties'].keys()))
 
 if __name__ == '__main__':
-    from pupa.models.schemas import vote, bill, event
+    from pupa.models.schemas import vote, bill, event, jurisdiction
     process(open('data/_vote.rst-include', 'w'), vote.schema)
     process(open('data/_bill.rst-include', 'w'), bill.schema)
     process(open('data/_event.rst-include', 'w'), event.schema)
+    process(open('data/_jurisdiction.rst-include', 'w'), jurisdiction.schema)

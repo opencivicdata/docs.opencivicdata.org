@@ -8,25 +8,25 @@ Select a Place
 
 To create a new organization, navigate to the anthropod home page and click on the button to create a new organization. The page will prompt you to select a place to associate with the new organization. Organizations are related to geographic divisions, which form a hierarchy.
 
-.. image:: ../../_static/create_org_select_form.png
+.. image:: ../_static/create_org_select_form.png
   :align: center
   :width: 75%
 
 This page enables you to drill down to the correct place. For example, if you need to add an organization for the town council of Cary, North Carolina, you could first search for "carolina" and select it from the results.
 
-.. image:: ../../_static/create_org_select_state.png
+.. image:: ../_static/create_org_select_state.png
   :align: center
   :width: 75%
 
 Once you select North Carolina, a second search box will appear. This box allows you to search all the divisions directly below North Carolina in the hierarchy. Now you can enter "Cary" to search for the town of Cary.
 
-.. image:: ../../_static/create_org_select_city.png
+.. image:: ../_static/create_org_select_city.png
   :align: center
   :width: 75%
 
 Now we have located the political division we need to associate the Cary Town Council with, so hit the submit button. The site will display a list of all the organizations currently associated with the selected place. If the city council for Cary, NC hasn't been created yet, hit the button to create a new organization.
 
-.. image:: ../../_static/create_org_button.png
+.. image:: ../_static/create_org_button.png
   :align: center
   :width: 75%
 
@@ -35,7 +35,7 @@ Enter the Organization's Details
 
 Now we can go ahead and enter the organization's information into the system. First, choose a name for the new organization. Using the full name of the organization, "Cary Town Council." Next, choose the organization's classification from the dropdown menu. In the case of city and town councils, the classification type will be "legislature."  The third box, "division_id" is prefilled with the id of the geographic division we selected.
 
-.. image:: ../../_static/create_org_form_details.png
+.. image:: ../_static/create_org_form_details.png
   :align: center
   :width: 75%
 
@@ -60,7 +60,7 @@ Number of Seats
 
 For the Cary Town Council, the posts will look like this:
 
-.. image:: ../../_static/create_org_form_posts.png
+.. image:: ../_static/create_org_form_posts.png
   :align: center
   :width: 75%
 
@@ -69,7 +69,7 @@ Enter a Source URL
 
 Enter in the urls you used to locate the above information. Use the official website of the organization if possible. The note field is optional.
 
-.. image:: ../../_static/create_org_form_sources.png
+.. image:: ../_static/create_org_form_sources.png
   :align: center
   :width: 75%
 
@@ -80,7 +80,7 @@ Enter the Organization's Contact Details
 
 Adding contact information is very straightforwarded: for each field, you select a field type, a value, and optionally add a note. This allows you to add multiple phone numbers, for example.
 
-.. image:: ../../_static/create_org_form_contacts.png
+.. image:: ../_static/create_org_form_contacts.png
   :align: center
   :width: 75%
 

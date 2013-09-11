@@ -39,6 +39,7 @@ Contributing for Non-Developers
 .. toctree::
    :maxdepth: 1
 
+   anthropod/index.rst
    anthropod/create_org.rst
    anthropod/add_members.rst
 

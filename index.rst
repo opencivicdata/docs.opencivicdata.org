@@ -50,6 +50,7 @@ Other Documentation
    :maxdepth: 1
 
    data/index
+   data/jurisdiction
    data/bill
    data/vote
    data/event

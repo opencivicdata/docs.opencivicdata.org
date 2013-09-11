@@ -51,7 +51,10 @@ Other Documentation
 
    data/index
    data/jurisdiction
+   data/person
+   data/organization
    data/bill
    data/vote
    data/event
+   data/division
    ocdids

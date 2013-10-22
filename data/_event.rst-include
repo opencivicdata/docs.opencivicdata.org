@@ -181,6 +181,38 @@ Linked Entities
 
         Each element in media is an object with the following keys: 
 
+        **date**
+            date of the recording.
+
+            (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+
+
+        **type**
+            type of the set of recordings, such as "recording" or "testimony".
+
+
+        **name**
+            name of the media link, such as "Recording of the meeting" or "Discussion of construction near the watershed"
+
+
+        **links**
+            List of links to the same media item, each with a different MIME type.
+
+
+            Each element in links is an object with the following keys: 
+
+            **mimetype**
+                Mimetype of the media, such as video/mp4 or audio/webm
+
+
+            **url**
+                URL where this media may be accessed
+
+
+        **offset**
+            Offset where the related part starts. This is optional and may be ommited entirely.
+
+
     **notes**
         List of notes taken during this agenda item, may be used to construct meeting minutes.
 
@@ -237,4 +269,12 @@ Common Fields
 
 
     Each element in sources is an object with the following keys: 
+
+    **url**
+        URL of resource used to collect information
+
+
+    **note**
+        note about what information this URL was used for
+
 

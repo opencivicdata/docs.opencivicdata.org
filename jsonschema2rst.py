@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
 from __future__ import print_function
+import copy
 
 HEADER_SYMBOL = "=-*~'"
 
 def process(fh, obj, depth=1):
+    obj = copy.deepcopy(obj)
     if '_order' in obj:
         _order = obj['_order']
     else:
@@ -72,15 +74,19 @@ def process(fh, obj, depth=1):
             if has_properties:
                 process(fh, schema, depth+1)
             if item_properties:
-                fh.write(spaces + 'Each element in %s is an object with the following keys: \n\n' % key)
+                fh.write(spaces + 'Each element in %s is an object with the following keys: \n\n'
+                         % key)
+                print(key, item_properties)
                 process(fh, item_properties, depth+1)
 
     if obj['properties']:
         print('Unused keys:', '; '.join(obj['properties'].keys()))
 
 if __name__ == '__main__':
-    from pupa.models.schemas import vote, bill, event, jurisdiction
+    from pupa.models.schemas import vote, bill, event, jurisdiction, person, organization
     process(open('data/_vote.rst-include', 'w'), vote.schema)
     process(open('data/_bill.rst-include', 'w'), bill.schema)
     process(open('data/_event.rst-include', 'w'), event.schema)
     process(open('data/_jurisdiction.rst-include', 'w'), jurisdiction.schema)
+    process(open('data/_person.rst-include', 'w'), person.schema)
+    process(open('data/_organization.rst-include', 'w'), organization.schema)

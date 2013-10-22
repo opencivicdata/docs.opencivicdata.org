@@ -1,0 +1,146 @@
+Basics
+------
+
+**name**
+    A person's preferred full name
+
+
+**image**
+    A URL of a head shot
+
+
+**contact_details**
+    Contact information for this entity.
+
+
+    Each element in contact_details is an object with the following keys: 
+
+    **note**
+        for grouping data by location/etc.
+
+
+    **type**
+        type of contact (e.g. phone, email, address)
+
+
+    **value**
+        actual phone number/email address/etc.
+
+
+    **label**
+        human readable label
+
+
+**links**
+    URLs for documents about the person
+
+
+    Each element in links is an object with the following keys: 
+
+    **note**
+        A note, e.g. 'Wikipedia page'
+
+
+    **url**
+        A URL for a document about the person
+
+
+Extended Details
+----------------
+
+**gender**
+    A gender
+
+
+**summary**
+    A one-line account of a person's life
+
+
+**biography**
+    An extended account of a person's life
+
+
+**birth_date**
+    A date of birth
+
+    (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+
+
+**death_date**
+    A date of death
+
+    (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+
+
+**sort_name**
+    A name to use in a lexicographically ordered list
+
+
+Alternate Names/Identifiers
+---------------------------
+
+**identifiers**
+    IDs other than the primary ID that the object may be known by.
+
+
+    Each element in identifiers is an object with the following keys: 
+
+    **scheme**
+        What service this identifier is used by.
+
+
+    **identifier**
+        The 3rd-party identifier, such as OKL0001000.
+
+
+**other_names**
+    Alternate or former names for this object.
+
+
+    Each element in other_names is an object with the following keys: 
+
+    **note**
+        An optional note describing where this alternate name came from or its relationship to the entity.
+
+
+    **name**
+        An alternate name this object is sometimes known by.
+
+
+    **end_date**
+        The date at which this name was no longer valid. (null if still valid/valid indefinitely)
+
+        (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+
+
+    **start_date**
+        The date at which this name became valid.(null if unknown/valid indefinitely)
+
+        (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+
+
+Common Fields
+-------------
+
+**updated_at**
+    the time that the object was last updated
+
+
+**created_at**
+    the time that this object was first created
+
+
+**sources**
+    URLs for sources relating to the object
+
+
+    Each element in sources is an object with the following keys: 
+
+    **url**
+        URL of resource used to collect information
+
+
+    **note**
+        note about what information this URL was used for
+
+

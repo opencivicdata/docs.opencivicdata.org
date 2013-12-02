@@ -79,7 +79,7 @@ The following (optional) parameters are common to all API endpoints:
     especially for mobile applications.
 
     By default, search responses return a somewhat minimal representation of each object, that
-    subset can be shrunk or expanded via fields.  Similarly, an object lookup response returns
+    subset can be shrunk or expanded via ``fields``.  Similarly, an object lookup response returns
     the complete object, but if only a subset is needed ``fields`` can be used to scale down
     the response size.
 
@@ -90,7 +90,7 @@ The following (optional) parameters are common to all API endpoints:
     * specifying ``?fields=created_at,memberships.organization_id`` would just include
       the three fields ``created_at`` and ``memberships.organization_id``.
       Note that ``memberships`` may not be included in the default search response but fields is
-      used here to grab a superset (and in this case, a portion of an object as well).
+      used here to grab a subset (and in this case, a portion of an object as well).
 
     Note: some fields (such as ``id``) are required and will always be returned regardless of
     their inclusion in ``fields``.

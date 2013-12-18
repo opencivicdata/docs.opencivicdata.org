@@ -11,7 +11,7 @@ Before you begin, it is expected that you're a somewhat experienced developer co
 
 .. note::
 
-    If you're interested in writing scrapers in Ruby, you may want to check out `pupa-ruby <https://github.com/opennorth/pupa-ruby>` by our friends at OpenNorth.
+    If you're interested in writing scrapers in Ruby, you may want to check out `pupa-ruby <https://github.com/opennorth/pupa-ruby>`_ by our friends at OpenNorth.
     
 
 These instructions are intended for a POSIX-like operating system, Linux or OSX.  If you're using Windows you'd benefit from using something like `MinGW <http://www.mingw.org/>`_.  If you're using OSX you may find the excellent `OSX-specific docs <https://github.com/opennorth/blank-pupa>`_ published by `Open North <https://github.com/opennorth/>`_  useful.

@@ -6,7 +6,7 @@ Creating a new organization involves two steps. First, we need to choose a geogr
 Select a Place
 ++++++++++++++++++++++++
 
-To create a new organization, navigate to the anthropod home page and click on the button to create a new organization. The page will prompt you to select a place to associate with the new organization. Organizations are related to geographic divisions, which form a hierarchy.
+To create a new organization, navigate to the Open Civic Data Editor `home page <http://editor.opencivicdata.org/collect/>`_ and click on the button to `create a new organization <http://editor.opencivicdata.org/collect/org/create/>`_. The page will prompt you to select a place to associate with the new organization. Organizations are related to geographic divisions, which form a hierarchy.
 
 .. image:: ../_static/create_org_select_form.png
   :align: center

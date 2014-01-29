@@ -11,7 +11,7 @@ The Open Civic Data specifications define the following core types:
 
 **jurisdiction**
     A governing body that exists within a division.
-    While 'Florida' would be a Jurisdiction, the Florida State Legislature would be a jurisdiction.
+    While 'Florida' would be a division, the Florida State Legislature would be a jurisdiction.
 
     Jurisdictions IDs take the form ``ocd-jurisdiction/<jurisdiction_id>/<jurisdiction_type>`` where ``jurisdiction_id`` is the ID for the related division without the `ocd-division/` prefix and ``jurisdiction_type`` is `council`, `legislature`, etc.
 

@@ -1,25 +1,28 @@
-Anthropod
-=========
+.. |--| unicode:: U+2013   .. en dash
+.. |---| unicode:: U+2014  .. em dash, trimming surrounding whitespace
+   :trim:
+
+Using the Open Civic Data Editor
+===================================
 
 
-Welcome! This documentation is about a tool that we call
-`Anthropod <https://github.com/opencivicdata/anthropod>`_.
-Anthropod is a user-friendly interface to allow activists to manually
-curate data regarding Legislative bodies.
+Welcome! This documentation is about a tool that we call the
+`Open Civic Data Editor <https://github.com/opencivicdata/anthropod>`_.
+The OCD Editor is a user-friendly interface to allow activists to manually curate data regarding Legislative bodies.
 
 This lets interested contributors collect data and curate the data when
 it would be too painful to write (and maintain!) a scraper. Often times the
 data that we collect doesn't change enough (or there isn't enough of it)
 to make the time spent writing a scraper worth the effort.
 
-This is where Anthropod comes in. Using anthropod, you can output data in the
+This is where the Editor comes in. Using the Editor, you can output data in the
 same format as the scrapers output, or even manually augment or correct
 the data that the scrapers pulled in.
 
-Why use Anthropod?
-------------------
+Why use the Open Civic Data Editor?
+-------------------------------------
 
-Anthropod is just another means of collecting data. When data is really hard
+Open Civic Data Editor is just another means of collecting data. When data is really hard
 to continually scrape and update, it makes sense to spend the man-hours
 that would have gone to developing a scraper on manually collecting the data
 instead.
@@ -32,9 +35,8 @@ situation.
 OK. I'm onboard. What next?
 ---------------------------
 
-Great, let's jump right in - the Anthropod instance the Municipal OpenCivic
-project is using can be found at
-`anthro.openstates.org <http://anthro.openstates.org/collect/geo/select/>`_,
+Great, let's jump right in |---| the Open Civic Data Editor can be found at
+`editor.opencivicdata.org <http://editor.opencivicdata.org/collect/geo/select/>`_,
 so pop that open and let's start!
 
 .. toctree::

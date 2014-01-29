@@ -10,7 +10,7 @@ Basics
 * All responses are JSON unless otherwise specified.
 * Errors will be returned with 400 status code and a JSON object containing an 'error' key with a
   human-readable description of the error that occured.
-* An API key is required, it should be passed as the parameter ``apikey``.  A key can be obtained at `http://api.sunlightfoundation.com <http://api.sunlightfoundation.com>`_.
+* An API key is required, it should be passed as the parameter ``apikey`` or the header ``X-APIKEY``.  A key can be obtained at `http://api.sunlightfoundation.com <http://api.sunlightfoundation.com>`_.
 * All changes to the API will be announced on the `Open Civic Data Google Group <https://groups.google.com/forum/?fromgroups#!forum/open-civic-data>`_.
 
 .. _endpoints:

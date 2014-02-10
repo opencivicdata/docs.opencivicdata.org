@@ -5,7 +5,7 @@ Before you begin, it is expected that you're a somewhat experienced developer co
 
 .. note::
 
-    * If you're new to Python you can check out `Python on Codeadademy <http://www.codecademy.com/tracks/python>`_.
+    * If you're new to Python you can check out `Python on Codeacademy <http://www.codecademy.com/tracks/python>`_.
     * If you're interested in writing scrapers in Ruby, you may want to check out `pupa-ruby <https://github.com/opennorth/pupa-ruby>`_ by our friends at OpenNorth.
 
     * To get started with Git/GitHub, there's a `Git tutorial <https://help.github.com/articles/set-up-git#platform-all>`_ to get you started.

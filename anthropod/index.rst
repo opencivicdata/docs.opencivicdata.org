@@ -36,7 +36,7 @@ OK. I'm onboard. What next?
 ---------------------------
 
 Great, let's jump right in |---| the Open Civic Data Editor can be found at
-`editor.opencivicdata.org <http://editor.opencivicdata.org/collect/geo/select/>`_,
+`editor.opencivicdata.org <http://editor.opencivicdata.org/>`_,
 so pop that open and let's start!
 
 .. toctree::

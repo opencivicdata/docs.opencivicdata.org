@@ -21,6 +21,6 @@ Once you've created a fork of the desired repository on GitHub you can set up yo
     # Install pupa
     $ pip install -e git+git@github.com:opencivicdata/pupa.git#egg=pupa
     # Clone the repo
-    $ git git@github.com:opencivicdata/municipal-scrapers-us.git
+    $ git clone https://github.com/opencivicdata/municipal-scrapers-us.git
 
 Now you're ready to proceed to :doc:`./new`.

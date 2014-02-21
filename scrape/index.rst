@@ -23,7 +23,7 @@ Once you've created a fork of the desired repository on GitHub you can set up yo
 
     # doing the following inside a virtualenv highly recommended
     # Install pupa
-    $ pip install -e git+git@github.com:opencivicdata/pupa.git#egg=pupa
+    $ pip install -e https://github.com/opencivicdata/pupa.git
     # Clone the repo
     $ git clone https://github.com/opencivicdata/municipal-scrapers-us.git
 

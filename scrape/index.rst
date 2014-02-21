@@ -3,6 +3,8 @@ Getting Started Writing Scrapers
 
 Before you begin, it is expected that you're a somewhat experienced developer comfortable with `GitHub <http://github.com>`_ and Python.  Some virtualenv knowledge might be helpful as well.
 
+It is also likely helpful to be familiar with `XPath <http://www.w3schools.com/xpath/xpath_syntax.asp>`_, but any scraping library can be used.
+
 .. note::
 
     * If you're new to Python you can check out `Python on Codeacademy <http://www.codecademy.com/tracks/python>`_.

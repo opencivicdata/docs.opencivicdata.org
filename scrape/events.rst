@@ -45,7 +45,7 @@ Let's take a look at a dead-simple Pupa event scraper::
     from pupa.scrape import Scraper
     from pupa.models import Event
     import datetime as dt
-    class MyFirstEventScraper(Scraper):
+    class EventScraper(Scraper):
         def get_events(self):
             when = dt.datetime.now()
             e = Event(name="Hearing",  # Event Name
@@ -74,7 +74,7 @@ Let's elaborate a bit on our usage of the ``Event`` object::
     from pupa.scrape import Scraper
     from pupa.models import Event
     import datetime as dt
-    class MyFirstEventScraper(Scraper):
+    class EventScraper(Scraper):
         def get_events(self):
             when = dt.datetime.now()
             e = Event(name="Hearing",
@@ -105,7 +105,7 @@ chunks of any ``Event`` scraper - adding the Agenda items to the ``Event``::
     from pupa.scrape import Scraper
     from pupa.models import Event
     import datetime as dt
-    class MyFirstEventScraper(Scraper):
+    class EventScraper(Scraper):
         def get_events(self):
             when = dt.datetime.now()
             e = Event(name="Hearing",

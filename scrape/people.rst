@@ -54,7 +54,7 @@ Great. So, let's get started. Our person scraper can be located anywhere, and si
 This is the default scraper template, which isn't very useful yet, but it helps
 to clarify what the intent of the scraper is. Let's take a closer look.
 
-Every `Person` scraper inherets a `scrape_people` method. Usually it's not
+Every `Person` scraper inherits a `scrape_people` method. Usually it's not
 advised to override this method, rather, implementing a proper
 `get_people` method (which will `yield` back `Person` objects to `scrape_people`
 to save to disk) is the prefered way to write a scraper. Only in the most

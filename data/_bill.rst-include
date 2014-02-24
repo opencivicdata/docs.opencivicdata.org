@@ -41,9 +41,13 @@ Basics
     array of types (e.g. bill, resolution)
 
 
+    Each element in type is of type (string)
+
 **subject**
     List of related subjects.
 
+
+    Each element in subject is of type (string)
 
 **summaries**
     List of summaries of bill, each item in list has a note and text attribute.
@@ -192,6 +196,8 @@ Sponsors and Actions
     **type**
         array of normalized action types
 
+
+        Each element in type is of type (string)
 
     **description**
         description of the action taken as given by source

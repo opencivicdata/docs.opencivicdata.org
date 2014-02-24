@@ -27,6 +27,8 @@ def process(fh, obj, depth=1):
             minimum = None
             minItems = None
             item_properties = None
+            list_property_type = None
+            list_property_enum = None
             for sk, sv in schema.iteritems():
                 if sk == 'type':
                     allowed_types = sv
@@ -48,7 +50,11 @@ def process(fh, obj, depth=1):
                     if 'properties' in sv:
                         item_properties = sv
                     else:
-                        pass # maybe put something here
+                        for ik, iv in sv.items():
+                            if ik == 'type':
+                                list_property_type = iv
+                            elif ik == 'enum':
+                                list_property_enum = iv
                 else:
                     raise ValueError('NEW KEY:', sk)
 
@@ -76,8 +82,16 @@ def process(fh, obj, depth=1):
             if item_properties:
                 fh.write(spaces + 'Each element in %s is an object with the following keys: \n\n'
                          % key)
-                print(key, item_properties)
                 process(fh, item_properties, depth+1)
+            if list_property_type:
+                if isinstance(list_property_type, list):
+                    list_property_type = '|'.join(list_property_type)
+                fh.write(spaces + 'Each element in %s is of type (%s)' % (key, list_property_type))
+                if list_property_enum is not None:
+                    fh.write('\n' + spaces*2 + 'Allowed Values:\n')
+                    for item in list_property_enum:
+                        fh.write(spaces + '     * ' + item + '\n')
+                fh.write('\n\n')
 
     if obj['properties']:
         print('Unused keys:', '; '.join(obj['properties'].keys()))

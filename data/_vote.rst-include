@@ -6,7 +6,7 @@ Basic Fields
 
 
 **organization_id**
-    name of the voting organization
+    id of the voting organization
 
 
 **_type**
@@ -41,6 +41,16 @@ Basic Fields
 
 **type**
     array of types
+
+
+    Each element in type is of type (string)
+        Allowed Values:
+         * passage
+         * amendment
+         * reading:2
+         * reading:3
+         * veto_override
+         * other
 
 
 **passed**

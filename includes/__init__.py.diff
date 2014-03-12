@@ -1,8 +1,8 @@
 diff --git a/__init__.py b/__init__.py
-index 3bc66f9..ac6956b 100644
+index c631b1b..6c9c825 100644
 --- a/__init__.py
 +++ b/__init__.py
-@@ -3,25 +3,24 @@ from pupa.scrape import Jurisdiction
+@@ -3,21 +3,20 @@ from pupa.scrape import Jurisdiction
  from .people import PersonScraper
  
  

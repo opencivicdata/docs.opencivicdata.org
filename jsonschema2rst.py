@@ -27,6 +27,7 @@ def process(fh, obj, depth=1):
             minimum = None
             minItems = None
             item_properties = None
+            required = None
             for sk, sv in schema.iteritems():
                 if sk == 'type':
                     allowed_types = sv
@@ -42,7 +43,9 @@ def process(fh, obj, depth=1):
                     minimum = sv
                 elif sk == 'minItems':
                     minItems = sv
-                elif sk in ('required', 'format', 'maximum', 'minimum'):
+                elif sk == 'required':
+                    required = sv
+                elif sk in ('format', 'maximum', 'minimum'):
                     pass
                 elif sk in ('items', 'additionalProperties'):
                     if 'properties' in sv:
@@ -58,7 +61,12 @@ def process(fh, obj, depth=1):
             spaces = '    '*depth
             fh.write('%s**%s**\n' % ('    '*(depth-1), key))
             if description:
-                fh.write(spaces + description + '\n')
+                fh.write(spaces + description)
+            if required:
+                fh.write(' (Required)')
+            if nullable:
+                fh.write(spaces + ' (Nullable)')
+            fh.write('\n')
             else:
                 print('no description:', key)
             #'\n' + spaces + 'Allowed Types: ' + allowed_types

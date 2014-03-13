@@ -2,11 +2,11 @@ Basics
 ------
 
 **name**
-    A primary name, e.g. a legally recognized name
+    A primary name, e.g. a legally recognized name **(required)**
 
 
 **classification**
-    The type of organization represented by this entity.
+    An organization category, e.g. committee     **(required, nullable)**
 
     Allowed Values:
          * legislature
@@ -16,129 +16,125 @@ Basics
 
 
 **parent_id**
-    Open Civic Data ID of organization that contains this organization.
+    The ID of the organization that contains this organization     **(required, nullable)**
 
 
 **contact_details**
-    Contact information for this entity.
+    Contact information for this entity. **(required, minItems: 0)**
 
 
     Each element in contact_details is an object with the following keys: 
 
     **note**
-        for grouping data by location/etc.
+        for grouping data by location/etc.         **(required, nullable)**
 
 
     **type**
-        type of contact (e.g. phone, email, address)
+        type of contact (e.g. phone, email, address) **(required)**
 
 
     **value**
-        actual phone number/email address/etc.
+        actual phone number/email address/etc. **(required)**
 
 
     **label**
-        human readable label
+        human readable label         **(required, nullable)**
 
 
 **links**
-    URLs for documents about the person
+    URLs for documents about the person **(required, minItems: 0)**
 
 
     Each element in links is an object with the following keys: 
 
     **note**
-        A note, e.g. 'Wikipedia page'
+        A note, e.g. 'Wikipedia page'         **(required, nullable)**
 
 
     **url**
-        A URL for a document about the person
+        A URL for a document about the person **(required)**
 
 
 Posts
 -----
 
 **posts**
-    Positions that exist independently of the person holding them. (such as chairman or minority whip)
+    Posts within the organization **(required, minItems: 0)**
 
 
     Each element in posts is an object with the following keys: 
 
     **contact_details**
-        Contact information for this entity.
+        Contact information for this entity. **(required, minItems: 0)**
 
 
         Each element in contact_details is an object with the following keys: 
 
         **note**
-            for grouping data by location/etc.
+            for grouping data by location/etc.             **(required, nullable)**
 
 
         **type**
-            type of contact (e.g. phone, email, address)
+            type of contact (e.g. phone, email, address) **(required)**
 
 
         **value**
-            actual phone number/email address/etc.
+            actual phone number/email address/etc. **(required)**
 
 
         **label**
-            human readable label
+            human readable label             **(required, nullable)**
 
 
     **end_date**
-        Ending date of the post.
+        The date on which the post was eliminated         **(required, nullable)**
 
         (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
     **links**
-        URLs for documents about the person
+        URLs for documents about the person **(required, minItems: 0)**
 
 
         Each element in links is an object with the following keys: 
 
         **note**
-            A note, e.g. 'Wikipedia page'
+            A note, e.g. 'Wikipedia page'             **(required, nullable)**
 
 
         **url**
-            A URL for a document about the person
+            A URL for a document about the person **(required)**
 
 
     **label**
-        A label describing the post.
-
-
-    **organization_id**
-        The ID of the organization in which the post is held
+        A label describing the post **(required)**
 
 
     **role**
-        The role that the holder of the post fulfills
-
-
-    **start_date**
-        Startting date of the post.
-
-        (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+        The function that the holder of the post fulfills         **(required, nullable)**
 
 
     **id**
-        The post's unique identifier
+        The post's unique identifier         **(required, nullable)**
+
+
+    **start_date**
+        The date on which the post was created         **(required, nullable)**
+
+        (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
 Extended Details
 ----------------
 
 **founding_date**
-    A date of founding
+    A date of founding     **(required, nullable)**
 
     (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
 **dissolution_date**
-    A date of dissolution
+    A date of dissolution     **(required, nullable)**
 
     (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
@@ -147,41 +143,41 @@ Alternate Names/Identifiers
 ---------------------------
 
 **identifiers**
-    IDs other than the primary ID that the object may be known by.
+    IDs other than the primary ID that the object may be known by. **(required, minItems: 0)**
 
 
     Each element in identifiers is an object with the following keys: 
 
     **scheme**
-        What service this identifier is used by.
+        What service this identifier is used by.         **(required, nullable)**
 
 
     **identifier**
-        The 3rd-party identifier, such as OKL0001000.
+        The 3rd-party identifier, such as OKL0001000. **(required)**
 
 
 **other_names**
-    Alternate or former names for this object.
+    Alternate or former names for this object. **(required, minItems: 0)**
 
 
     Each element in other_names is an object with the following keys: 
 
     **note**
-        An optional note describing where this alternate name came from or its relationship to the entity.
+        An optional note describing where this alternate name came from or its relationship to the entity.         **(required, nullable)**
 
 
     **name**
-        An alternate name this object is sometimes known by.
+        An alternate name this object is sometimes known by. **(required)**
 
 
     **end_date**
-        The date at which this name was no longer valid. (null if still valid/valid indefinitely)
+        The date at which this name was no longer valid. (null if still valid/valid indefinitely)         **(required, nullable)**
 
         (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
     **start_date**
-        The date at which this name became valid.(null if unknown/valid indefinitely)
+        The date at which this name became valid.(null if unknown/valid indefinitely)         **(required, nullable)**
 
         (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
@@ -190,24 +186,24 @@ Common Fields
 -------------
 
 **updated_at**
-    the time that the object was last updated
+    The time at which the resource was last modified     **(required, nullable)**
 
 
 **created_at**
-    the time that this object was first created
+    The time at which the resource was created     **(required, nullable)**
 
 
 **sources**
-    URLs for sources relating to the object
+    URLs for sources relating to the object **(required, minItems: 1)**
 
 
     Each element in sources is an object with the following keys: 
 
     **url**
-        URL of resource used to collect information
+        URL of resource used to collect information **(required)**
 
 
     **note**
-        note about what information this URL was used for
+        note about what information this URL was used for         **(required, nullable)**
 
 

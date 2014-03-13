@@ -85,7 +85,7 @@ def process(fh, obj, depth=1):
                 if required:
                     fh.write(' **(required, minItems: %d)**' % (minItems or 0))
             else:
-                if required
+                if required:
                     fh.write(' **(required)**')
             fh.write('\n')
 

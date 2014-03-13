@@ -69,7 +69,12 @@ def process(fh, obj, depth=1):
                     allowed_types = ', '.join(allowed_types)
 
             spaces = '    '*depth
-            fh.write('%s**%s**\n' % ('    '*(depth-1), key))
+
+            # Write the property name.
+            fh.write('%s**%s** ' % ('    '*(depth-1), key))
+
+            # Write the property type, newline.
+            fh.write('(*%s*)\n' % allowed_types)
             if description:
                 fh.write(spaces + description)
             else:
@@ -80,11 +85,7 @@ def process(fh, obj, depth=1):
                 if required:
                     fh.write(' **(required, minItems: %d)**' % (minItems or 0))
             else:
-                if required and nullable:
-                    fh.write(spaces + ' **(required, nullable)**')
-                elif nullable:
-                    fh.write(' **(nullable)**')
-                elif required:
+                if required:
                     fh.write(' **(required)**')
             fh.write('\n')
 

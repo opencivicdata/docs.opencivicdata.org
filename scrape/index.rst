@@ -3,6 +3,8 @@ Getting Started Writing Scrapers
 
 Before you begin, it is expected that you're a somewhat experienced developer comfortable with `GitHub <http://github.com>`_ and Python.  Some virtualenv knowledge might be helpful as well.
 
+It is also likely helpful to be familiar with `XPath <http://www.w3schools.com/xpath/xpath_syntax.asp>`_, but any scraping library can be used.
+
 .. note::
 
     * If you're new to Python you can check out `Python on Codeacademy <http://www.codecademy.com/tracks/python>`_.
@@ -23,7 +25,7 @@ Once you've created a fork of the desired repository on GitHub you can set up yo
 
     # doing the following inside a virtualenv highly recommended
     # Install pupa
-    $ pip install -e https://github.com/opencivicdata/pupa.git
+    $ pip install -e git+https://github.com/opencivicdata/pupa.git#egg=pupa
     # Clone the repo
     $ git clone https://github.com/opencivicdata/municipal-scrapers-us.git
 

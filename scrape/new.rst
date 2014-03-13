@@ -19,7 +19,7 @@ Pupa will copy a skeleton project into a new albuquerque directory with the foll
 
 Open up the new :file:`albuquerque/__init__.py` file and check out it's contents. It will look like this:
 
-.. literalinclude:: ../../pupa/example/__init__.py
+.. literalinclude:: ../albuquerque/__init__.py
 
 This file contains a single subclass of a Jurisdiction base class. The jurisdiction class represents the municipality we're scraping information for, and is the place we'll store the metadata required during the scrape. To get started, all we have to do is edit the metadata on this class to be specific to Albuquerque.
 
@@ -79,19 +79,14 @@ Accordingly, in the diff above we changed the name of the term to ``"2013-2015"`
 Testing your scraper
 --------------------
 
-Currently, it's slightly harder to ensure that the scraper is working as
-expected without having to dive into the data by hand, or using something
-like ``arthropod`` to view the data.
+As you develop it will be a good idea to run the scraper to ensure that the output JSON is in good shape.
 
-However, it's easy to run the scraper to ensure that the output JSON is in
-good shape, by spot-checking the data.
-
-Firstly, running the scraper is as easy as running::
+Run the scraper::
 
     $ pupa update albuquerque
 
 Where ``albuquerque`` is simply a Python-importable path to your Jurisdiction
-definition. From there, the ``Jurisdiction`` object will be able to tell
+definition. From there, the ``jurisdiction`` object will be able to tell
 ``pupa`` where to find the scrapers.
 
 In addition, there are some useful arguments to know about.
@@ -169,7 +164,7 @@ The ``pupa`` repo contains a very basic static checking script, called
 have it imported anyway. You can run ``scruffy`` by going to your ``pupa``
 source repo, and ``cd`` into ``tools``.
 
-You can invoke ``sruffy`` by running something like::
+You can invoke ``scruffy`` by running something like::
 
     $ python -m scruffy > report.json
 

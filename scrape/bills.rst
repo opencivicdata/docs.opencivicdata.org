@@ -117,6 +117,10 @@ object. For a bill action, we should at least have information out to the
 day in which an action was taken, so try to fill that out. Information on
 the time would be nice as well, but is not always there.
 
+``add_action`` takes an argument, ``actor``, which is related to the ``chamber``
+field in the OpenStates conversion, which should be set to a name that can be
+related to the ``legislature`` organization.
+
 Let's take a look at adding a bit more data::
 
             from pupa.scrape import Scraper

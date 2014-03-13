@@ -1,31 +1,31 @@
 Basics
 ------
 
-**_type**
+**_type** (*string*)
     All bills have a _type field set to bill. **(required)**
 
     Allowed Values:
          * bill
 
 
-**organization**
-    name of the legislative body that this bill belongs to     **(required, nullable)**
+**organization** (*string, null*)
+    name of the legislative body that this bill belongs to **(required)**
 
 
-**organization_id**
-    ID of legislative body that this bill belongs to     **(required, nullable)**
+**organization_id** (*string, null*)
+    ID of legislative body that this bill belongs to **(required)**
 
 
-**session**
+**session** (*string*)
     associated with one of the jurisdiction's sessions **(required)**
 
 
-**name**
+**name** (*string*)
     jurisdiction-assigned permanent name.  Must be unique within a given session (e.g. HB 3).  Note: not to be confused with ``title``. **(required)**
 
 
-**chamber**
-    chamber vote took place in (if legislature is bicameral, otherwise null)     **(required, nullable)**
+**chamber** (*string, null*)
+    chamber vote took place in (if legislature is bicameral, otherwise null) **(required)**
 
     Allowed Values:
          * upper
@@ -33,107 +33,107 @@ Basics
          * joint
 
 
-**title**
+**title** (*string*)
     primary display title for the bill **(required)**
 
 
-**type**
+**type** (*array*)
     array of types (e.g. bill, resolution) **(required, minItems: 0)**
 
 
     Each element in type is of type (string)
 
-**subject**
+**subject** (*array*)
     List of related subjects. **(required, minItems: 0)**
 
 
     Each element in subject is of type (string)
 
-**summaries**
+**summaries** (*array*)
     List of summaries of bill, each item in list has a note and text attribute. **(required, minItems: 0)**
 
 
     Each element in summaries is an object with the following keys: 
 
-    **note**
-        note describing source of summary         **(required, nullable)**
+    **note** (*string, null*)
+        note describing source of summary **(required)**
 
 
-    **text**
+    **text** (*string*)
         Summary of bill. **(required)**
 
 
 Common Fields
 -------------
 
-**updated_at**
+**updated_at** (*string, datetime*)
     the time that the object was last updated
 
 
-**created_at**
+**created_at** (*string, datetime*)
     the time that this object was first created
 
 
-**sources**
+**sources** (*array*)
     URLs for sources relating to the object **(required, minItems: 1)**
 
 
     Each element in sources is an object with the following keys: 
 
-    **url**
+    **url** (*string*)
         URL of resource used to collect information **(required)**
 
 
-    **note**
-        note about what information this URL was used for         **(required, nullable)**
+    **note** (*null, string*)
+        note about what information this URL was used for **(required)**
 
 
 Other/Related Bills
 -------------------
 
-**other_titles**
+**other_titles** (*array*)
     list of other titles this bill is known by.A common use is when a state provides a common title and a long or technical title as well.  It is also acceptable to include popular but unofficial titles of the bill as well, such as'Obamacare' for the 'Patient Protection and Affordable Care Act.'`note` can be used to describe the relationship this has to the bill, for example Obamacare might be noted as a colloquial name. Each item in the list has a title and a note. **(required, minItems: 0)**
 
 
     Each element in other_titles is an object with the following keys: 
 
-    **note**
-        Note describing source.         **(required, nullable)**
+    **note** (*string, null*)
+        Note describing source. **(required)**
 
 
-    **title**
+    **title** (*string*)
         Alternate title. **(required)**
 
 
-**other_names**
+**other_names** (*array*)
     list of other names this bill is known by in the current session, for example if HB 33 and SB 17 refer to the same bill this prevents having to have identical entries for each. **(required, minItems: 0)**
 
 
     Each element in other_names is an object with the following keys: 
 
-    **note**
-        note describing why this name is attached         **(required, nullable)**
+    **note** (*string, null*)
+        note describing why this name is attached **(required)**
 
 
-    **name**
+    **name** (*string*)
         name (e.g. HB 22) **(required)**
 
 
-**related_bills**
+**related_bills** (*array*)
     Links to related bills.  Currently only used for companion bills, but extensible for other uses. **(required, minItems: 0)**
 
 
     Each element in related_bills is an object with the following keys: 
 
-    **session**
+    **session** (*string*)
         Session of related bill. **(required)**
 
 
-    **name**
+    **name** (*string*)
         Name of related bill. **(required)**
 
 
-    **relation_type**
+    **relation_type** (*string*)
         Currently should be 'companion', others may be added in the future. **(required)**
 
         Allowed Values:
@@ -143,164 +143,164 @@ Other/Related Bills
 Sponsors and Actions
 --------------------
 
-**sponsors**
+**sponsors** (*array*)
     List of entities responsible for sponsoring/authoring the bill. **(required, minItems: 0)**
 
 
     Each element in sponsors is an object with the following keys: 
 
-    **_type**
-        Type of entity if the sponsor has been resolved to another entity in the database.         **(required, nullable)**
+    **_type** (*string, null*)
+        Type of entity if the sponsor has been resolved to another entity in the database. **(required)**
 
         Allowed Values:
              * organization
              * person
 
 
-    **name**
+    **name** (*string*)
         Name of sponsor, as given by source. **(required)**
 
 
-    **sponsorship_type**
+    **sponsorship_type** (*string*)
         Type of sponsorship, via upstream source. **(required)**
 
 
-    **primary**
+    **primary** (*boolean*)
         Indicates if sponsor is considered primary by source **(required)**
 
 
-    **chamber**
-        Chamber of sponsor.         **(required, nullable)**
+    **chamber** (*string, null*)
+        Chamber of sponsor. **(required)**
 
         Allowed Values:
              * upper
              * lower
 
 
-    **id**
-        ID of entity if the sponsor has been resolved to another entity in the database.         **(required, nullable)**
+    **id** (*string, null*)
+        ID of entity if the sponsor has been resolved to another entity in the database. **(required)**
 
 
-**actions**
+**actions** (*array*)
     List of actions taken on the bill. **(required, minItems: 0)**
 
 
     Each element in actions is an object with the following keys: 
 
-    **date**
+    **date** (*string*)
         date of action **(required)**
 
         (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
-    **type**
+    **type** (*array*)
         array of normalized action types **(required, minItems: 0)**
 
 
         Each element in type is of type (string)
 
-    **description**
+    **description** (*string*)
         description of the action taken as given by source **(required)**
 
 
-    **actor**
-        name for the actor (e.g. 'upper', 'lower', etc.)         **(required, nullable)**
+    **actor** (*string, null*)
+        name for the actor (e.g. 'upper', 'lower', etc.) **(required)**
 
 
-    **related_entities**
+    **related_entities** (*array*)
         list of related entities for the action, such as related committee for a referral or a person for a sponsorship. **(required, minItems: 0)**
 
 
         Each element in related_entities is an object with the following keys: 
 
-        **_type**
-            Type of entity if the sponsor has been resolved to another entity in the database.             **(required, nullable)**
+        **_type** (*string, null*)
+            Type of entity if the sponsor has been resolved to another entity in the database. **(required)**
 
             Allowed Values:
                  * organization
                  * person
 
 
-        **name**
+        **name** (*string*)
             Name of entity given by source data **(required)**
 
 
-        **id**
-            ID of entity if the sponsor has been resolved to another entity in the database.             **(required, nullable)**
+        **id** (*string, null*)
+            ID of entity if the sponsor has been resolved to another entity in the database. **(required)**
 
 
 Documents and Versions
 ----------------------
 
-**documents**
+**documents** (*array*)
     Any non-version related documents, elements are identical to versions. **(required, minItems: 0)**
 
 
     Each element in documents is an object with the following keys: 
 
-    **date**
-        Document posting date         **(required, nullable)**
+    **date** (*string, null*)
+        Document posting date **(required)**
 
         (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
-    **type**
-        Type of document         **(required, nullable)**
+    **type** (*string, null*)
+        Type of document **(required)**
 
         Allowed Values:
 
 
-    **name**
+    **name** (*string*)
         Name of document **(required)**
 
 
-    **links**
+    **links** (*array*)
         List of links to text for this document (pdf, html, etc.). **(required, minItems: 0)**
 
 
         Each element in links is an object with the following keys: 
 
-        **mimetype**
-            mimetype of document             **(required, nullable)**
+        **mimetype** (*string, null*)
+            mimetype of document **(required)**
 
 
-        **url**
+        **url** (*string*)
             URL to document **(required)**
 
 
-**versions**
+**versions** (*array*)
     Versions of a bill's text (First Printing, As Amended, etc.) **(required, minItems: 0)**
 
 
     Each element in versions is an object with the following keys: 
 
-    **date**
-        Version posting date         **(required, nullable)**
+    **date** (*string, null*)
+        Version posting date **(required)**
 
         (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
-    **type**
-        Type of version         **(required, nullable)**
+    **type** (*string, null*)
+        Type of version **(required)**
 
         Allowed Values:
 
 
-    **name**
+    **name** (*string*)
         Name of version **(required)**
 
 
-    **links**
+    **links** (*array*)
         List of links for this version (pdf, html, etc.). **(required, minItems: 0)**
 
 
         Each element in links is an object with the following keys: 
 
-        **mimetype**
-            mimetype of document             **(required, nullable)**
+        **mimetype** (*string, null*)
+            mimetype of document **(required)**
 
 
-        **url**
+        **url** (*string*)
             URL to document **(required)**
 
 

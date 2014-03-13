@@ -1,27 +1,27 @@
 Basic Fields
 ------------
 
-**organization**
-    name of the voting organization     **(required, nullable)**
+**organization** (*string, null*)
+    name of the voting organization **(required)**
 
 
-**organization_id**
-    id of the voting organization     **(required, nullable)**
+**organization_id** (*string, null*)
+    id of the voting organization **(required)**
 
 
-**_type**
+**_type** (*string*)
     All vote objects must have a _type field set to vote. **(required)**
 
     Allowed Values:
          * vote
 
 
-**session**
+**session** (*string*)
     Associated with one of the jurisdiction's sessions **(required)**
 
 
-**chamber**
-    chamber vote took place in (if legislature is bicameral, otherwise null)     **(required, nullable)**
+**chamber** (*string, null*)
+    chamber vote took place in (if legislature is bicameral, otherwise null) **(required)**
 
     Allowed Values:
          * upper
@@ -29,17 +29,17 @@ Basic Fields
          * joint
 
 
-**date**
+**date** (*string*)
     date of the action **(required)**
 
     (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
-**motion**
+**motion** (*string*)
     description of motion (from upstream source) **(required)**
 
 
-**type**
+**type** (*array*)
     array of types **(required, minItems: 0)**
 
 
@@ -53,74 +53,74 @@ Basic Fields
          * other
 
 
-**passed**
+**passed** (*boolean*)
     boolean indicating if vote passed **(required)**
 
 
 Common Fields
 -------------
 
-**updated_at**
+**updated_at** (*string, datetime*)
     the time that the object was last updated
 
 
-**created_at**
+**created_at** (*string, datetime*)
     the time that this object was first created
 
 
-**sources**
+**sources** (*array*)
     URLs for sources relating to the object **(required, minItems: 1)**
 
 
     Each element in sources is an object with the following keys: 
 
-    **url**
+    **url** (*string*)
         URL of resource used to collect information **(required)**
 
 
-    **note**
-        note about what information this URL was used for         **(required, nullable)**
+    **note** (*null, string*)
+        note about what information this URL was used for **(required)**
 
 
 Relationship to Bill
 --------------------
 
-**bill**
-    Related bill, votes will have a non-null bill object ifthey are related to a bill. Bills will have the following fields:     **(required, nullable)**
+**bill** (*object, null*)
+    Related bill, votes will have a non-null bill object ifthey are related to a bill. Bills will have the following fields: **(required)**
 
 
-    **chamber**
-        bill's chamber if vote was on a bill (and legislature is bicameral, otherwise null)         **(required, nullable)**
+    **chamber** (*string, null*)
+        bill's chamber if vote was on a bill (and legislature is bicameral, otherwise null) **(required)**
 
         Allowed Values:
              * upper
              * lower
 
 
-    **id**
-        bill's internal id if bill was matched with an object in the database         **(required, nullable)**
+    **id** (*string, null*)
+        bill's internal id if bill was matched with an object in the database **(required)**
 
 
-    **name**
+    **name** (*string*)
         bill name (e.g. HB 21) **(required)**
 
 
 Vote Counts
 -----------
 
-**vote_counts**
+**vote_counts** (**)
     list of objects with vote_type and count properties **(required)**
 
 
     Each element in vote_counts is an object with the following keys: 
 
-    **count**
+    **count** (*integer*)
         number of people voting this way **(required)**
 
         (minimum value: 0)
 
 
-    **vote_type**
+    **vote_type** (*string*)
         (e.g. yes, no, not-voting) **(required)**
 
         Allowed Values:
@@ -131,25 +131,25 @@ Vote Counts
              * other
 
 
-**roll_call**
+**roll_call** (**)
     list of individual legislator votes **(required)**
 
 
     Each element in roll_call is an object with the following keys: 
 
-    **person**
+    **person** (*object*)
         person object representing the voter **(required)**
 
 
-        **name**
+        **name** (*string*)
             person's name as provided by the source **(required)**
 
 
-        **id**
-            person's internal id if they've been matched to an entity in the database             **(required, nullable)**
+        **id** (*string, null*)
+            person's internal id if they've been matched to an entity in the database **(required)**
 
 
-    **vote_type**
+    **vote_type** (*string*)
         (e.g. yes, no, not-voting) **(required)**
 
         Allowed Values:

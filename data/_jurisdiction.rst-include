@@ -1,94 +1,94 @@
 Basic Details
 -------------
 
-**name**
+**name** (*string*)
     Name of jurisdiction (e.g. North Carolina General Assembly) **(required)**
 
 
-**url**
+**url** (*string*)
     URL pointing to jurisdiction's website. **(required)**
 
 
-**chambers**
+**chambers** (*object*)
     Dictionary where keys are slugs for chambers (e.g. upper, lower)  and values describe the chamber in human-readable terms.  (only needs to be specified if there are multiple chambers) **(required)**
 
 
     Each element in chambers is an object with the following keys: 
 
-    **name**
+    **name** (*string*)
         Human-readable name of chamber (e.g. Senate) **(required)**
 
 
-    **title**
+    **title** (*string*)
         Title of an individual in this chamber (e.g. Senator) **(required)**
 
 
-**terms**
+**terms** (*array*)
     List of all terms, in chronological order. **(required, minItems: 1)**
 
 
     Each element in terms is an object with the following keys: 
 
-    **end_year**
+    **end_year** (*integer*)
         Year that term ended. **(required)**
 
         (minimum value: 1000)
 
 
-    **start_year**
+    **start_year** (*integer*)
         Year that term started. **(required)**
 
         (minimum value: 1000)
 
 
-    **name**
+    **name** (*string*)
         Name of term, typically a year span (e.g. 2011-2012) **(required)**
 
 
-    **sessions**
+    **sessions** (*array*)
         List of sessions within this term. Each session must also appear in session_details **(required, minItems: 1)**
 
 
         Each element in sessions is of type (string)
 
-**session_details**
+**session_details** (*object*)
     Dictionary describing sessions, each key is a session slug that must also appear in one ``sessions`` list in ``terms``.  Values consist of several fields giving more detail about the session. **(required)**
 
 
     Each element in session_details is an object with the following keys: 
 
-    **type**
+    **type** (*string*)
         Type of session: primary or special.
 
 
-    **start_date**
+    **start_date** (*datetime*)
         Start date of session.
 
 
-    **end_date**
+    **end_date** (*datetime*)
         End date of session.
 
 
 Additional Metadata
 -------------------
 
-**feature_flags**
+**feature_flags** (*array*)
     A way to mark certain features as available on a per-jurisdiction basis. **(required, minItems: 0)**
 
 
     Each element in feature_flags is of type (string)
 
-**building_maps**
+**building_maps** (*array*)
     Links to image/PDF maps of the building. **(required, minItems: 0)**
 
 
     Each element in building_maps is an object with the following keys: 
 
-    **url**
+    **url** (*string*)
         URL to map image/PDF **(required)**
 
 
-    **name**
+    **name** (*string*)
         Name of map (e.g. Floor 1) **(required)**
 
 

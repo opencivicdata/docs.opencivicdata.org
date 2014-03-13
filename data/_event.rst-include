@@ -2,30 +2,30 @@ Basics
 ------
 
 **_type**
-    All events must have a _type field set to one of the entries in the enum below.
+    All events must have a _type field set to one of the entries in the enum below. **(required)**
 
     Allowed Values:
          * event
 
 
 **name**
-    A simple name of the event, such as "Fiscal subcommittee hearing on pudding cups"
+    A simple name of the event, such as "Fiscal subcommittee hearing on pudding cups" **(required)**
 
 
 **description**
-    A longer description describing the event. As an example, "Topics for discussion include this that and the other thing. In addition, lunch will be served".
+    A longer description describing the event. As an example, "Topics for discussion include this that and the other thing. In addition, lunch will be served".     **(required, nullable)**
 
 
 **when**
-    Starting date / time of the event. This should be fully timezone qualified.
+    Starting date / time of the event. This should be fully timezone qualified. **(required)**
 
 
 **end**
-    Ending date / time of the event. This should be fully timezone qualified.
+    Ending date / time of the event. This should be fully timezone qualified.     **(required, nullable)**
 
 
 **status**
-    String that denotes the status of the meeting. This is useful for showing the meeting is cancelled in a machine-readable way.
+    String that denotes the status of the meeting. This is useful for showing the meeting is cancelled in a machine-readable way.     **(required, nullable)**
 
     Allowed Values:
          * cancelled
@@ -35,11 +35,11 @@ Basics
 
 
 **location**
-    Where the event will take place.
+    Where the event will take place. **(required)**
 
 
     **note**
-        human readable notes regarding the location, something like "The meeting will take place at the Minority Whip's desk on the floor"
+        human readable notes regarding the location, something like "The meeting will take place at the Minority Whip's desk on the floor"         **(required, nullable)**
 
 
     **url**
@@ -47,92 +47,92 @@ Basics
 
 
     **name**
-        name of the location, such as "City Hall, Boston, MA, USA", or "Room E201, Dolan Science Center, 20700 North Park Blvd University Heights Ohio, 44118"
+        name of the location, such as "City Hall, Boston, MA, USA", or "Room E201, Dolan Science Center, 20700 North Park Blvd University Heights Ohio, 44118" **(required)**
 
 
     **coordinates**
-        coordinates where this event will take place. If the location hasn't (or isn't) geolocated or geocodable, than this should be set to null.
+        coordinates where this event will take place. If the location hasn't (or isn't) geolocated or geocodable, than this should be set to null.         **(required, nullable)**
 
 
         **latitude**
-            latitude of the location, if any
+            latitude of the location, if any **(required)**
 
 
         **longitude**
-            longitude of the location, if any
+            longitude of the location, if any **(required)**
 
 
 Linked Entities
 ---------------
 
 **media**
-    This "special" schema is used in two places in the Event schema, on the top level and inside the agenda item. This is an optional component that may be omited entirely from a document.
+    This "special" schema is used in two places in the Event schema, on the top level and inside the agenda item. This is an optional component that may be omited entirely from a document. **(required, minItems: 0)**
 
 
     Each element in media is an object with the following keys: 
 
     **date**
-        date of the recording.
+        date of the recording.         **(required, nullable)**
 
         (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
     **type**
-        type of the set of recordings, such as "recording" or "testimony".
+        type of the set of recordings, such as "recording" or "testimony". **(required)**
 
 
     **name**
-        name of the media link, such as "Recording of the meeting" or "Discussion of construction near the watershed"
+        name of the media link, such as "Recording of the meeting" or "Discussion of construction near the watershed" **(required)**
 
 
     **links**
-        List of links to the same media item, each with a different MIME type.
+        List of links to the same media item, each with a different MIME type. **(required, minItems: 0)**
 
 
         Each element in links is an object with the following keys: 
 
         **mimetype**
-            Mimetype of the media, such as video/mp4 or audio/webm
+            Mimetype of the media, such as video/mp4 or audio/webm             **(required, nullable)**
 
 
         **url**
-            URL where this media may be accessed
+            URL where this media may be accessed **(required)**
 
 
     **offset**
-        Offset where the related part starts. This is optional and may be ommited entirely.
+        Offset where the related part starts. This is optional and may be ommited entirely.         **(required, nullable)**
 
 
 **links**
-    Links related to the event that are not documents or items in the Agenda. This is filled with helpful links for the event, such as a committee's homepage, reference material or links to learn more about subjects related to the event.
+    Links related to the event that are not documents or items in the Agenda. This is filled with helpful links for the event, such as a committee's homepage, reference material or links to learn more about subjects related to the event. **(required, minItems: 0)**
 
 
     Each element in links is an object with the following keys: 
 
     **note**
-        Human-readable name of the link. Something like "Historical precedent for popsicle procurement"
+        Human-readable name of the link. Something like "Historical precedent for popsicle procurement"         **(required, nullable)**
 
 
     **url**
-        A URL for a link about the event
+        A URL for a link about the event **(required)**
 
 
 **participants**
-    List of participants in the event. This includes committees invited, legislators chairing the event or people who are attending.
+    List of participants in the event. This includes committees invited, legislators chairing the event or people who are attending. **(required, minItems: 0)**
 
 
     Each element in participants is an object with the following keys: 
 
     **note**
-        Note regarding the relationship, such as `chair` for the chair of a meeting.
+        Note regarding the relationship, such as `chair` for the chair of a meeting. **(required)**
 
 
     **chamber**
-        Optional field storing the chamber of the related participant.
+        Optional field storing the chamber of the related participant.         **(required, nullable)**
 
 
     **type**
-        What type of entity is this? `person` may be used if the person is not a Legislator, butattending the event, such as an invited speaker or one who is offering testimony.
+        What type of entity is this? `person` may be used if the person is not a Legislator, butattending the event, such as an invited speaker or one who is offering testimony. **(required)**
 
         Allowed Values:
              * organization
@@ -140,119 +140,119 @@ Linked Entities
 
 
     **name**
-        Human readable name of the entitity.
+        Human readable name of the entitity. **(required)**
 
 
     **id**
-        ID of the participant
+        ID of the participant         **(required, nullable)**
 
 
 **agenda**
-    Agenda of the event, if any. This contains information about the meeting's agenda, such as bills to discuss or people to present.
+    Agenda of the event, if any. This contains information about the meeting's agenda, such as bills to discuss or people to present. **(required, minItems: 0)**
 
 
     Each element in agenda is an object with the following keys: 
 
     **related_entities**
-        Entities that relate to this agenda item, such as presenters, legislative instruments, or committees.
+        Entities that relate to this agenda item, such as presenters, legislative instruments, or committees. **(required, minItems: 0)**
 
 
         Each element in related_entities is an object with the following keys: 
 
         **note**
-            human readable string (if any) noting the relationship between the entity and the agenda item, such as "Jeff will be presenting on the effects of too much cookie dough"
+            human readable string (if any) noting the relationship between the entity and the agenda item, such as "Jeff will be presenting on the effects of too much cookie dough"             **(required, nullable)**
 
 
         **type**
-            type of the related object, like `bill` or `organization`.
+            type of the related object, like `bill` or `organization`. **(required)**
 
 
         **id**
-            ID of the related entity
+            ID of the related entity             **(required, nullable)**
 
 
         **name**
-            human readable string representing the entity, such as `John Q. Smith`.
+            human readable string representing the entity, such as `John Q. Smith`. **(required)**
 
 
     **media**
-        This "special" schema is used in two places in the Event schema, on the top level and inside the agenda item. This is an optional component that may be omited entirely from a document.
+        This "special" schema is used in two places in the Event schema, on the top level and inside the agenda item. This is an optional component that may be omited entirely from a document. **(required, minItems: 0)**
 
 
         Each element in media is an object with the following keys: 
 
         **date**
-            date of the recording.
+            date of the recording.             **(required, nullable)**
 
             (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
         **type**
-            type of the set of recordings, such as "recording" or "testimony".
+            type of the set of recordings, such as "recording" or "testimony". **(required)**
 
 
         **name**
-            name of the media link, such as "Recording of the meeting" or "Discussion of construction near the watershed"
+            name of the media link, such as "Recording of the meeting" or "Discussion of construction near the watershed" **(required)**
 
 
         **links**
-            List of links to the same media item, each with a different MIME type.
+            List of links to the same media item, each with a different MIME type. **(required, minItems: 0)**
 
 
             Each element in links is an object with the following keys: 
 
             **mimetype**
-                Mimetype of the media, such as video/mp4 or audio/webm
+                Mimetype of the media, such as video/mp4 or audio/webm                 **(required, nullable)**
 
 
             **url**
-                URL where this media may be accessed
+                URL where this media may be accessed **(required)**
 
 
         **offset**
-            Offset where the related part starts. This is optional and may be ommited entirely.
+            Offset where the related part starts. This is optional and may be ommited entirely.             **(required, nullable)**
 
 
     **notes**
-        List of notes taken during this agenda item, may be used to construct meeting minutes.
+        List of notes taken during this agenda item, may be used to construct meeting minutes. **(required, minItems: 0)**
 
 
         Each element in notes is an object with the following keys: 
 
         **description**
-            simple string containing the content of the note.
+            simple string containing the content of the note. **(required)**
 
 
     **subjects**
-        List of related topics of this agenda item relates to.
+        List of related topics of this agenda item relates to. **(required, minItems: 0)**
 
 
         Each element in subjects is of type (string)
 
     **order**
-        order of this item, useful for re-creating meeting minutes. This may be ommited entirely. It may also optionally contains "dots" to denote nested agenda items, such as "1.1.2.1" or "2", which may go on as needed.
+        order of this item, useful for re-creating meeting minutes. This may be ommited entirely. It may also optionally contains "dots" to denote nested agenda items, such as "1.1.2.1" or "2", which may go on as needed.         **(required, nullable)**
 
 
     **description**
-        Human-readable string that represents this agenda item. A good example would be something like The Committee will consider SB 2339, HB 100
+        Human-readable string that represents this agenda item. A good example would be something like The Committee will consider SB 2339, HB 100 **(required)**
 
 
 **documents**
-    Links to related documents for the event. Usually, this includes things like pre-written testimony, spreadsheets or a slide deck that a presenter will use.
+    Links to related documents for the event. Usually, this includes things like pre-written testimony, spreadsheets or a slide deck that a presenter will use. **(required, minItems: 0)**
 
 
     Each element in documents is an object with the following keys: 
 
     **url**
-        URL where the content may be found.
+        URL where the content may be found. **(required)**
 
 
     **mimetype**
-        Mimetype of the document.
+        Mimetype of the document. **(required)**
 
 
     **name**
-        name of the document. Something like "Fiscal Report" or "John Smith's Slides".
+        name of the document. Something like "Fiscal Report" or "John Smith's Slides". **(required)**
 
 
 Common Fields
@@ -267,16 +267,16 @@ Common Fields
 
 
 **sources**
-    URLs for sources relating to the object
+    URLs for sources relating to the object **(required, minItems: 1)**
 
 
     Each element in sources is an object with the following keys: 
 
     **url**
-        URL of resource used to collect information
+        URL of resource used to collect information **(required)**
 
 
     **note**
-        note about what information this URL was used for
+        note about what information this URL was used for         **(required, nullable)**
 
 

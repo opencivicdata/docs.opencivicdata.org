@@ -2,57 +2,57 @@ Basic Details
 -------------
 
 **name**
-    Name of jurisdiction (e.g. North Carolina General Assembly)
+    Name of jurisdiction (e.g. North Carolina General Assembly) **(required)**
 
 
 **url**
-    URL pointing to jurisdiction's website.
+    URL pointing to jurisdiction's website. **(required)**
 
 
 **chambers**
-    Dictionary where keys are slugs for chambers (e.g. upper, lower)  and values describe the chamber in human-readable terms.  (only needs to be specified if there are multiple chambers)
+    Dictionary where keys are slugs for chambers (e.g. upper, lower)  and values describe the chamber in human-readable terms.  (only needs to be specified if there are multiple chambers) **(required)**
 
 
     Each element in chambers is an object with the following keys: 
 
     **name**
-        Human-readable name of chamber (e.g. Senate)
+        Human-readable name of chamber (e.g. Senate) **(required)**
 
 
     **title**
-        Title of an individual in this chamber (e.g. Senator)
+        Title of an individual in this chamber (e.g. Senator) **(required)**
 
 
 **terms**
-    List of all terms, in chronological order.
+    List of all terms, in chronological order. **(required, minItems: 1)**
 
 
     Each element in terms is an object with the following keys: 
 
     **end_year**
-        Year that term ended.
+        Year that term ended. **(required)**
 
         (minimum value: 1000)
 
 
     **start_year**
-        Year that term started.
+        Year that term started. **(required)**
 
         (minimum value: 1000)
 
 
     **name**
-        Name of term, typically a year span (e.g. 2011-2012)
+        Name of term, typically a year span (e.g. 2011-2012) **(required)**
 
 
     **sessions**
-        List of sessions within this term. Each session must also appear in session_details
+        List of sessions within this term. Each session must also appear in session_details **(required, minItems: 1)**
 
 
         Each element in sessions is of type (string)
 
 **session_details**
-    Dictionary describing sessions, each key is a session slug that must also appear in one ``sessions`` list in ``terms``.  Values consist of several fields giving more detail about the session.
+    Dictionary describing sessions, each key is a session slug that must also appear in one ``sessions`` list in ``terms``.  Values consist of several fields giving more detail about the session. **(required)**
 
 
     Each element in session_details is an object with the following keys: 
@@ -73,22 +73,22 @@ Additional Metadata
 -------------------
 
 **feature_flags**
-    A way to mark certain features as available on a per-jurisdiction basis.
+    A way to mark certain features as available on a per-jurisdiction basis. **(required, minItems: 0)**
 
 
     Each element in feature_flags is of type (string)
 
 **building_maps**
-    Links to image/PDF maps of the building.
+    Links to image/PDF maps of the building. **(required, minItems: 0)**
 
 
     Each element in building_maps is an object with the following keys: 
 
     **url**
-        URL to map image/PDF
+        URL to map image/PDF **(required)**
 
 
     **name**
-        Name of map (e.g. Floor 1)
+        Name of map (e.g. Floor 1) **(required)**
 
 

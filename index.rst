@@ -1,10 +1,6 @@
 Open Civic Data
 ===============
 
-.. note::
-    These docs are a work in progress, some described functionality is not yet available.  Please do not share yet.
-
-
 The `opencivicdata <https://github.com/opencivicdata/>`_ project on Github is an collaborative effort to define schemas and provide tools for gathering information on government organizations, people, legislation, and events.
 
 If you're looking to contribute to the project or learn how to use the data, you're in the right place.
@@ -43,13 +39,14 @@ Contributing for Non-Developers
    anthropod/create_org.rst
    anthropod/add_members.rst
 
-Other Documentation
+Adopting the OCD Specification
 -------------------
 
 .. toctree::
    :maxdepth: 1
 
-   data/index
+   data/introduction
+   data/datatypes
    data/jurisdiction
    data/person
    data/organization

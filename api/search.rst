@@ -38,9 +38,6 @@ Division Search
 * `lat` & `lon` - Must be specified together.  The resulting divisions will all contain the specified point.
 * `date` - For obtaining historical boundaries, divisions returned are based on boundaries at a given time. Must be specified in Y-m-d format.
 
-.. note::
-    This endpoint, due to the way that it is handled on the backend, does not support the `fields` parameter.
-
 .. _organization-search:
 
 Organization Search

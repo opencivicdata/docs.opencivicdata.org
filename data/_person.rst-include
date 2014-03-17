@@ -1,120 +1,116 @@
 Basics
 ------
 
-**name**
-    A person's preferred full name
+**name** (*string*)
+    A person's preferred full name **(required)**
 
 
-**image**
-    A URL of a head shot
+**image** (*string, null*)
+    A URL of a head shot **(required)**
 
 
-**contact_details**
-    Contact information for this entity.
+**contact_details** (*array*)
+    Contact information for this entity. **(required, minItems: 0)**
 
 
     Each element in contact_details is an object with the following keys: 
 
-    **note**
-        for grouping data by location/etc.
+    **note** (*string, null*)
+        for grouping data by location/etc. **(required)**
 
 
-    **type**
-        type of contact (e.g. phone, email, address)
+    **type** (*string*)
+        type of contact (e.g. phone, email, address) **(required)**
 
 
-    **value**
-        actual phone number/email address/etc.
+    **value** (*string*)
+        actual phone number/email address/etc. **(required)**
 
 
-    **label**
-        human readable label
+    **label** (*string, null*)
+        human readable label **(required)**
 
 
-**links**
-    URLs for documents about the person
+**links** (*array*)
+    URLs for documents about the person **(required, minItems: 0)**
 
 
     Each element in links is an object with the following keys: 
 
-    **note**
-        A note, e.g. 'Wikipedia page'
+    **note** (*string, null*)
+        A note, e.g. 'Wikipedia page' **(required)**
 
 
-    **url**
-        A URL for a document about the person
+    **url** (*string*)
+        A URL for a document about the person **(required)**
 
 
 Extended Details
 ----------------
 
-**gender**
-    A gender
+**gender** (*string, null*)
+    A gender **(required)**
 
 
-**summary**
-    A one-line account of a person's life
+**summary** (*string, null*)
+    A one-line account of a person's life **(required)**
 
 
-**biography**
-    An extended account of a person's life
+**biography** (*string, null*)
+    An extended account of a person's life **(required)**
 
 
-**birth_date**
-    A date of birth
-
-    (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
-
-
-**death_date**
-    A date of death
+**birth_date** (*string, null*)
+    A date of birth **(required)**
 
     (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
-**sort_name**
-    A name to use in a lexicographically ordered list
+**death_date** (*string, null*)
+    A date of death **(required)**
+
+    (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
 Alternate Names/Identifiers
 ---------------------------
 
-**identifiers**
-    IDs other than the primary ID that the object may be known by.
+**identifiers** (*array*)
+    IDs other than the primary ID that the object may be known by. **(required, minItems: 0)**
 
 
     Each element in identifiers is an object with the following keys: 
 
-    **scheme**
-        What service this identifier is used by.
+    **scheme** (*string, null*)
+        What service this identifier is used by. **(required)**
 
 
-    **identifier**
-        The 3rd-party identifier, such as OKL0001000.
+    **identifier** (*string*)
+        The 3rd-party identifier, such as OKL0001000. **(required)**
 
 
-**other_names**
-    Alternate or former names for this object.
+**other_names** (*array*)
+    Alternate or former names for this object. **(required, minItems: 0)**
 
 
     Each element in other_names is an object with the following keys: 
 
-    **note**
-        An optional note describing where this alternate name came from or its relationship to the entity.
+    **note** (*string, null*)
+        An optional note describing where this alternate name came from or its relationship to the entity. **(required)**
 
 
-    **name**
-        An alternate name this object is sometimes known by.
+    **name** (*string*)
+        An alternate name this object is sometimes known by. **(required)**
 
 
-    **end_date**
-        The date at which this name was no longer valid. (null if still valid/valid indefinitely)
+    **end_date** (*string, null*)
+        The date at which this name was no longer valid. (null if still valid/valid indefinitely) **(required)**
 
         (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
-    **start_date**
-        The date at which this name became valid.(null if unknown/valid indefinitely)
+    **start_date** (*string, null*)
+        The date at which this name became valid.(null if unknown/valid indefinitely) **(required)**
 
         (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
@@ -122,25 +118,25 @@ Alternate Names/Identifiers
 Common Fields
 -------------
 
-**updated_at**
-    the time that the object was last updated
+**updated_at** (*string, datetime, null*)
+    The time at which the resource was last modified **(required)**
 
 
-**created_at**
-    the time that this object was first created
+**created_at** (*string, datetime, null*)
+    The time at which the resource was created **(required)**
 
 
-**sources**
-    URLs for sources relating to the object
+**sources** (*array*)
+    URLs for sources relating to the object **(required, minItems: 1)**
 
 
     Each element in sources is an object with the following keys: 
 
-    **url**
-        URL of resource used to collect information
+    **url** (*string*)
+        URL of resource used to collect information **(required)**
 
 
-    **note**
-        note about what information this URL was used for
+    **note** (*null, string*)
+        note about what information this URL was used for **(required)**
 
 

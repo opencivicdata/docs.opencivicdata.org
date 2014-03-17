@@ -27,6 +27,8 @@ def process(fh, obj, depth=1):
             minimum = None
             minItems = None
             item_properties = None
+            required = True
+            nullable = None
             list_property_type = None
             list_property_enum = None
             for sk, sv in schema.iteritems():
@@ -44,7 +46,9 @@ def process(fh, obj, depth=1):
                     minimum = sv
                 elif sk == 'minItems':
                     minItems = sv
-                elif sk in ('required', 'format', 'maximum', 'minimum'):
+                elif sk == 'required':
+                    required = sv
+                elif sk in ('format', 'maximum', 'minimum'):
                     pass
                 elif sk in ('items', 'additionalProperties'):
                     if 'properties' in sv:
@@ -58,15 +62,33 @@ def process(fh, obj, depth=1):
                 else:
                     raise ValueError('NEW KEY:', sk)
 
+                if 'null' in allowed_types:
+                    nullable = True
+
                 if isinstance(allowed_types, list):
                     allowed_types = ', '.join(allowed_types)
 
             spaces = '    '*depth
-            fh.write('%s**%s**\n' % ('    '*(depth-1), key))
+
+            # Write the property name.
+            fh.write('%s**%s** ' % ('    '*(depth-1), key))
+
+            # Write the property type, newline.
+            fh.write('(*%s*)\n' % allowed_types)
             if description:
-                fh.write(spaces + description + '\n')
+                fh.write(spaces + description)
             else:
                 print('no description:', key)
+
+            # If not an array, specify requiredness, nullability.
+            if allowed_types == 'array':
+                if required:
+                    fh.write(' **(required, minItems: %d)**' % (minItems or 0))
+            else:
+                if required:
+                    fh.write(' **(required)**')
+            fh.write('\n')
+
             #'\n' + spaces + 'Allowed Types: ' + allowed_types
             if enum is not None:
                 fh.write('\n' + spaces + 'Allowed Values:\n')

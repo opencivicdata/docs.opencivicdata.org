@@ -10,7 +10,7 @@ Basics
 * All responses are JSON unless otherwise specified.
 * Errors will be returned with 400 status code and a JSON object containing an 'error' key with a
   human-readable description of the error that occured.
-* An API key is required, it should be passed as the parameter ``apikey`` or the header ``X-APIKEY``.  A key can be obtained at `http://api.sunlightfoundation.com <http://sunlightfoundation.com/api/>`_.
+* An API key is required, it should be passed as the parameter ``apikey`` or the header ``X-APIKEY``.  A key can be obtained at `http://sunlightfoundation.com/api/ <http://sunlightfoundation.com/api/>`_.
 * All changes to the API will be announced on the `Open Civic Data Google Group <https://groups.google.com/forum/?fromgroups#!forum/open-civic-data>`_.
 
 .. _endpoints:
@@ -71,7 +71,7 @@ All search endpoints return paginated responses in the following format:
 Common Parameters
 -----------------
 
-The following (optional) parameters are common to all API endpoints:
+The following (optional) parameters are common across API endpoints:
 
 **fields**
     The fields parameter can be used to specify which fields you want to be returned in the
@@ -95,15 +95,13 @@ The following (optional) parameters are common to all API endpoints:
     Note: some fields (such as ``id``) are required and will always be returned regardless of
     their inclusion in ``fields``.
 
-    (**This parameter is available on both search and object lookup parameters.**)
-
 **callback**
     The callback parameter is used for making `JSONP <http://en.wikipedia.org/wiki/JSONP>`_
-    requests.  (**This parameter is available on both search and object lookup parameters.**)
+    requests.
 
 **sort**
     Change the sort order of objects returned via a search endpoint.  See :doc:`search` for
-    available values for each endpoint.
+    available values for each endpoint
 **page**
     Select a page (0-``meta.max_page``) from the result set in a search endpoint.
 **per_page**

@@ -109,6 +109,28 @@ versions, related_bills, summaries, other_titles, and documents.
 * `created_at` - Sort by time object was created, newest objects first. (default)
 * `updated_at` - Sort by time object was updated, most recent first.
 
+**Full Text Search:**
+
+By specifying the `q` parameter a full text search can be performed against the text of the bill.
+
+This parameter follows the following rules:
+
++----------------------+------------------------------------------------------------------------+
+| search term          | result                                                                 |
++======================+============================+===========================================+
+| `q=termA termB`      | termA and termB must be present                                        |
++----------------------+------------------------------------------------------------------------+
+| `q=termA AND termB`  | termA and termB must be present, same as not specifying an operator    |
++----------------------+------------------------------------------------------------------------+
+| `q=termA OR termB`   | termA or termB must be present                                         |
++----------------------+------------------------------------------------------------------------+
+| `q="termA termB"`    | "termA termB" is interpreted as a single string that must be present   |
++----------------------+------------------------------------------------------------------------+
+| `q=termA NOT termB`  | termA must be present without termB                                    |
++----------------------+------------------------------------------------------------------------+
+
+Additionally, parentheses are allowed for grouping purposes.
+
 **Filter Parameters:**
 
 * `name`

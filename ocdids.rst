@@ -1,4 +1,3 @@
-
 .. _ocdid:
 
 ===============
@@ -43,7 +42,7 @@ General Format
 OCD IDs have the general format of:
 
 ``ocd-${type}/${data}``. Some valid types are ``division``, ``jurisdiction``,
-and ``person``. Each type has it's own format (for the data half of the ID),
+and ``person``. Each type has its own format (for the data half of the ID),
 and a brief overview can be found below.
 
 

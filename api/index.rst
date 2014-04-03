@@ -10,7 +10,7 @@ Basics
 * All responses are JSON unless otherwise specified.
 * Errors will be returned with 400 status code and a JSON object containing an 'error' key with a
   human-readable description of the error that occured.
-* An API key is required, it should be passed as the parameter ``apikey`` or the header ``X-APIKEY``.  A key can be obtained at `http://sunlightfoundation.com/api/ <http://sunlightfoundation.com/api/>`_.
+* An API key is required, it should be passed as the parameter ``apikey`` or the header ``X-APIKEY``.  A key can be obtained at `https://sunlightfoundation.com/api/ <https://sunlightfoundation.com/api/>`_.
 * All changes to the API will be announced on the `Open Civic Data Google Group <https://groups.google.com/forum/?fromgroups#!forum/open-civic-data>`_.
 
 .. _endpoints:
@@ -20,11 +20,14 @@ Endpoints
 
 The Open Civic Data API consists of two types of endpoints, search and object lookup.
 
-Object lookup endpoints can be thought of as permanent URIs for objects, they take the form ``http://api.opencivicdata.org/<ocd-id>`` and return a single JSON object.
+Object lookup endpoints can be thought of as permanent URIs for objects, they take the form ``https://api.opencivicdata.org/<ocd-id>`` and return a single JSON object.
 
-Search endpoints are in the form ``http://api.opencivicdata.org/<type>/?<parameters>``.
+.. note:
+    A plain HTTP endpoint is also available, but HTTPS is considered the default.
 
-(For example: ``http://api.opencivicdata.org/people/?name=Obama`` would return legislators named 'Obama'.)
+Search endpoints are in the form ``https://api.opencivicdata.org/<type>/?<parameters>``.
+
+(For example: ``https://api.opencivicdata.org/people/?name=Obama`` would return legislators named 'Obama'.)
 
 The search endpoints are:
 
@@ -96,7 +99,7 @@ The following (optional) parameters are common across API endpoints:
     their inclusion in ``fields``.
 
 **callback**
-    The callback parameter is used for making `JSONP <http://en.wikipedia.org/wiki/JSONP>`_
+    The callback parameter is used for making `JSONP <https://en.wikipedia.org/wiki/JSONP>`_
     requests.
 
 **sort**

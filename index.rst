@@ -39,13 +39,14 @@ Contributing for Non-Developers
    anthropod/create_org.rst
    anthropod/add_members.rst
 
-Other Documentation
+Adopting the OCD Specification
 -------------------
 
 .. toctree::
    :maxdepth: 1
 
-   data/index
+   data/introduction
+   data/datatypes
    data/jurisdiction
    data/person
    data/organization

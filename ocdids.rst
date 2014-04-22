@@ -68,6 +68,8 @@ do take a look at the
 `ocd-division-ids repo <https://github.com/opencivicdata/ocd-division-ids>`_.
 
 
+.. _jurisdiction-ids:
+
 Jurisdiction IDs
 ----------------
 

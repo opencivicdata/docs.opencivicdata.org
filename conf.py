@@ -8,6 +8,7 @@ try:
 except ImportError:
     html_theme = 'default'
 
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -62,6 +63,10 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
+<<<<<<< HEAD
+=======
+html_theme = 'sphinx_rtd_theme'
+>>>>>>> 526a2ec1efdc9ff5cc39a5e56144adeb797d45e6
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the

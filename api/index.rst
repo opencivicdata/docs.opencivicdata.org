@@ -2,7 +2,7 @@ API Overview
 ============
 
 The Open Civic Data API is a JSON API that provides search and lookup across all information
-captured by the project.
+captured by the project. The Open Civic Data API consists of two types of endpoints, **search** and **object lookup**.
 
 Basics
 ------
@@ -12,29 +12,23 @@ Basics
   human-readable description of the error that occured.
 * An API key is required, it should be passed as the parameter ``apikey`` or the header ``X-APIKEY``.  A key can be obtained at `https://sunlightfoundation.com/api/ <https://sunlightfoundation.com/api/>`_.
 * All changes to the API will be announced on the `Open Civic Data Google Group <https://groups.google.com/forum/?fromgroups#!forum/open-civic-data>`_.
-
-.. _endpoints:
-
-Endpoints
----------
-
-The Open Civic Data API consists of two types of endpoints, **search** and **object lookup**.
-
-.. note::
-    A plain HTTP endpoint is also available, but HTTPS is considered the default.
+* A plain HTTP endpoint is also available, but HTTPS is considered the default.
 
 
-Object lookup endpoints
-^^^^^^^^^^^^^^^^^^^^^^^
+Object Lookup Endpoints
+-----------------------
 
-Object lookup endpoints can be thought of as permanent URIs for objects, they take the form ``https://api.opencivicdata.org/<ocd-id>`` and return a single JSON object.
+Object lookup endpoints can be thought of as permanent URIs for objects, they take the form ``https://api.opencivicdata.org/<ocd-id>`` and return a single JSON object. For example, ``https://api.opencivicdata.org/ocd-division/country:us/state:hi`` would return an object describing the U.S. state of Hawaii, which has a division id of **ocd-division/country:us/state:hi**.
 
 .. See :doc:`object` for examples
 
-Search endpoints
-^^^^^^^^^^^^^^^^^^^^^^^
 
-Search endpoints are in the form ``https://api.opencivicdata.org/<type>/?<parameters>``, where type is an Open Civic Data object type. For example: ``https://api.opencivicdata.org/people/?name=Obama`` would return a list of people whose name contains 'Obama'.
+.. _search-endpoints:
+
+Search Endpoints
+----------------
+
+Search endpoints are in the form ``https://api.opencivicdata.org/<type>/?<parameters>``, where type is an Open Civic Data object type. For example: ``https://api.opencivicdata.org/people/?name=Obama`` would return a list of people whose name contains **Obama**.
 
 The search endpoints are:
 

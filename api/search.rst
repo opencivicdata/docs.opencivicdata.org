@@ -1,7 +1,7 @@
 API Search Endpoints
 ================
 
-General information about search endpoints can be found at :ref:`endpoints` and :ref:`search-response`.
+General information about search endpoints can be found at :ref:`search-endpoints` and :ref:`search-response`.
 
 Information on common parameters can be found at :ref:`common-parameters`.
 

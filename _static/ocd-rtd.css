@@ -6,3 +6,15 @@
 .wy-menu-vertical ul {
     margin-bottom: 10px;
 }
+
+.rst-content dl p {
+    margin-bottom: 6px !important;
+}
+
+.rst-content dd > dl dd {
+    margin-bottom: 6px !important;
+}
+
+.rst-content dd > dl p {
+    margin-bottom: 2px !important;
+}

@@ -1,0 +1,8 @@
+@import url('css/theme.css');
+/*
+    This should be importing the readthedocs theme
+ */
+
+.wy-menu-vertical ul {
+    margin-bottom: 10px;
+}

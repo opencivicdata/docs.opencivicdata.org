@@ -1,11 +1,11 @@
 Basics
 ------
 
-**name** (*string*)
+name (*string*)
     A primary name, e.g. a legally recognized name **(required)**
 
 
-**classification** (*string, null*)
+classification (*string, null*)
     An organization category, e.g. committee **(required)**
 
     Allowed Values:
@@ -15,125 +15,125 @@ Basics
          * commission
 
 
-**parent_id** (*string, null*)
+parent_id (*string, null*)
     The ID of the organization that contains this organization **(required)**
 
 
-**contact_details** (*array*)
+contact_details (*array*)
     Contact information for this entity. **(required, minItems: 0)**
 
 
-    Each element in contact_details is an object with the following keys: 
+    Each element in contact_details is an object with the following keys:
 
-    **note** (*string, null*)
-        for grouping data by location/etc. **(required)**
-
-
-    **type** (*string*)
-        type of contact (e.g. phone, email, address) **(required)**
+        note (*string, null*)
+            for grouping data by location/etc. **(required)**
 
 
-    **value** (*string*)
-        actual phone number/email address/etc. **(required)**
+        type (*string*)
+            type of contact (e.g. phone, email, address) **(required)**
 
 
-    **label** (*string, null*)
-        human readable label **(required)**
+        value (*string*)
+            actual phone number/email address/etc. **(required)**
 
 
-**links** (*array*)
+        label (*string, null*)
+            human readable label **(required)**
+
+
+links (*array*)
     URLs for documents about the person **(required, minItems: 0)**
 
 
-    Each element in links is an object with the following keys: 
+    Each element in links is an object with the following keys:
 
-    **note** (*string, null*)
-        A note, e.g. 'Wikipedia page' **(required)**
+        note (*string, null*)
+            A note, e.g. 'Wikipedia page' **(required)**
 
 
-    **url** (*string*)
-        A URL for a document about the person **(required)**
+        url (*string*)
+            A URL for a document about the person **(required)**
 
 
 Posts
 -----
 
-**posts** (*array*)
+posts (*array*)
     Posts within the organization **(required, minItems: 0)**
 
 
-    Each element in posts is an object with the following keys: 
+    Each element in posts is an object with the following keys:
 
-    **contact_details** (*array*)
-        Contact information for this entity. **(required, minItems: 0)**
-
-
-        Each element in contact_details is an object with the following keys: 
-
-        **note** (*string, null*)
-            for grouping data by location/etc. **(required)**
+        contact_details (*array*)
+            Contact information for this entity. **(required, minItems: 0)**
 
 
-        **type** (*string*)
-            type of contact (e.g. phone, email, address) **(required)**
+            Each element in contact_details is an object with the following keys:
+
+                note (*string, null*)
+                    for grouping data by location/etc. **(required)**
 
 
-        **value** (*string*)
-            actual phone number/email address/etc. **(required)**
+                type (*string*)
+                    type of contact (e.g. phone, email, address) **(required)**
 
 
-        **label** (*string, null*)
-            human readable label **(required)**
+                value (*string*)
+                    actual phone number/email address/etc. **(required)**
 
 
-    **end_date** (*string, null*)
-        The date on which the post was eliminated **(required)**
-
-        (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+                label (*string, null*)
+                    human readable label **(required)**
 
 
-    **links** (*array*)
-        URLs for documents about the person **(required, minItems: 0)**
+        end_date (*string, null*)
+            The date on which the post was eliminated **(required)**
+
+            (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
-        Each element in links is an object with the following keys: 
-
-        **note** (*string, null*)
-            A note, e.g. 'Wikipedia page' **(required)**
+        links (*array*)
+            URLs for documents about the person **(required, minItems: 0)**
 
 
-        **url** (*string*)
-            A URL for a document about the person **(required)**
+            Each element in links is an object with the following keys:
+
+                note (*string, null*)
+                    A note, e.g. 'Wikipedia page' **(required)**
 
 
-    **label** (*string*)
-        A label describing the post **(required)**
+                url (*string*)
+                    A URL for a document about the person **(required)**
 
 
-    **role** (*string, null*)
-        The function that the holder of the post fulfills **(required)**
+        label (*string*)
+            A label describing the post **(required)**
 
 
-    **id** (*string, null*)
-        The post's unique identifier **(required)**
+        role (*string, null*)
+            The function that the holder of the post fulfills **(required)**
 
 
-    **start_date** (*string, null*)
-        The date on which the post was created **(required)**
+        id (*string, null*)
+            The post's unique identifier **(required)**
 
-        (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+
+        start_date (*string, null*)
+            The date on which the post was created **(required)**
+
+            (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
 Extended Details
 ----------------
 
-**founding_date** (*string, null*)
+founding_date (*string, null*)
     A date of founding **(required)**
 
     (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
-**dissolution_date** (*string, null*)
+dissolution_date (*string, null*)
     A date of dissolution **(required)**
 
     (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
@@ -142,68 +142,68 @@ Extended Details
 Alternate Names/Identifiers
 ---------------------------
 
-**identifiers** (*array*)
+identifiers (*array*)
     IDs other than the primary ID that the object may be known by. **(required, minItems: 0)**
 
 
-    Each element in identifiers is an object with the following keys: 
+    Each element in identifiers is an object with the following keys:
 
-    **scheme** (*string, null*)
-        What service this identifier is used by. **(required)**
-
-
-    **identifier** (*string*)
-        The 3rd-party identifier, such as OKL0001000. **(required)**
+        scheme (*string, null*)
+            What service this identifier is used by. **(required)**
 
 
-**other_names** (*array*)
+        identifier (*string*)
+            The 3rd-party identifier, such as OKL0001000. **(required)**
+
+
+other_names (*array*)
     Alternate or former names for this object. **(required, minItems: 0)**
 
 
-    Each element in other_names is an object with the following keys: 
+    Each element in other_names is an object with the following keys:
 
-    **note** (*string, null*)
-        An optional note describing where this alternate name came from or its relationship to the entity. **(required)**
-
-
-    **name** (*string*)
-        An alternate name this object is sometimes known by. **(required)**
+        note (*string, null*)
+            An optional note describing where this alternate name came from or its relationship to the entity. **(required)**
 
 
-    **end_date** (*string, null*)
-        The date at which this name was no longer valid. (null if still valid/valid indefinitely) **(required)**
-
-        (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+        name (*string*)
+            An alternate name this object is sometimes known by. **(required)**
 
 
-    **start_date** (*string, null*)
-        The date at which this name became valid.(null if unknown/valid indefinitely) **(required)**
+        end_date (*string, null*)
+            The date at which this name was no longer valid. (null if still valid/valid indefinitely) **(required)**
 
-        (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+            (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
+
+
+        start_date (*string, null*)
+            The date at which this name became valid.(null if unknown/valid indefinitely) **(required)**
+
+            (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
 Common Fields
 -------------
 
-**updated_at** (*string, datetime, null*)
+updated_at (*string, datetime, null*)
     The time at which the resource was last modified **(required)**
 
 
-**created_at** (*string, datetime, null*)
+created_at (*string, datetime, null*)
     The time at which the resource was created **(required)**
 
 
-**sources** (*array*)
+sources (*array*)
     URLs for sources relating to the object **(required, minItems: 1)**
 
 
-    Each element in sources is an object with the following keys: 
+    Each element in sources is an object with the following keys:
 
-    **url** (*string*)
-        URL of resource used to collect information **(required)**
+        url (*string*)
+            URL of resource used to collect information **(required)**
 
 
-    **note** (*null, string*)
-        note about what information this URL was used for **(required)**
+        note (*null, string*)
+            note about what information this URL was used for **(required)**
 
 

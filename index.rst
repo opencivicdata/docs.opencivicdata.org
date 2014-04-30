@@ -40,7 +40,7 @@ Contributing for Non-Developers
    anthropod/add_members.rst
 
 Adopting the OCD Specification
--------------------
+------------------------------
 
 .. toctree::
    :maxdepth: 1

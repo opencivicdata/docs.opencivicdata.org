@@ -18,7 +18,6 @@ except ImportError:
 
 extensions = []
 templates_path = ['_templates']
-print os.getcwd(), templates_path
 source_suffix = '.rst'
 master_doc = 'index'
 project = u'Open Civic Data'
@@ -63,10 +62,8 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-<<<<<<< HEAD
-=======
-html_theme = 'sphinx_rtd_theme'
->>>>>>> 526a2ec1efdc9ff5cc39a5e56144adeb797d45e6
+if os.environ.get('READTHEDOCS', None) == 'True':
+    html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the

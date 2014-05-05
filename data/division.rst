@@ -4,45 +4,45 @@ Division Objects
 Basic Details
 -------------
 
-**id**
+id
     Open Civic Data division ID.
 
-**country**
+country
     Two-letter `ISO-3166 alpha-2 <http://en.wikipedia.org/wiki/ISO_3166-1>`_ country code.
     (e.g. 'us', 'ca')
 
-**display_name**
+display_name
     Human-readable name for division.
 
 Additional Fields
 -----------------
 
-**geometries**
+geometries
     A list of associated geometries, each of which has the following fields:
 
-    **start**
+    start
         Best approximation of date boundary became effective.
-    **end**
+    end
         Best approximation of date boundary was replaced or made obsolete (null for current boundaries).
-    **boundary**
+    boundary
         Boundary object- fields are determined from underlying data source, but always provides:
 
-        **centroid**
+            **centroid**
 
-        Object containing the centroid, not guaranteed to be within the object.
+                Object containing the centroid, not guaranteed to be within the object.
 
-        Example::
+                Example::
 
-            { "type": "Point", "coordinates": [-176.59989528409687, 51.88215100813731] }
+                    { "type": "Point", "coordinates": [-176.59989528409687, 51.88215100813731] }
 
-        **extent**
+            **extent**
 
-        Object describing the extents.  [left-most, lower-most, right-most, upper-most]
+                Object describing the extents.  [left-most, lower-most, right-most, upper-most]
 
-        Example::
+                Example::
 
-            [ -176.71309799999997, 51.80080899999999, -176.46673599999997, 51.95761899999999 ]
+                    [ -176.71309799999997, 51.80080899999999, -176.46673599999997, 51.95761899999999 ]
 
 
-**children**
+children
     A list of child jurisdiction ids.

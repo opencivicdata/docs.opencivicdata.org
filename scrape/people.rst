@@ -2,7 +2,7 @@
 .. _people:
 
 Writing a Person Scraper
-=========================
+========================
 
 This document is meant to provide a tutorial-like overview of the steps toward contributing a munipal Person scraper to the Open Civic Data project.
 

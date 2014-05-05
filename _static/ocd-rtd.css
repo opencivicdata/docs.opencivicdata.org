@@ -3,8 +3,22 @@
     This should be importing the readthedocs theme
  */
 
-.wy-menu-vertical ul {
-    margin-bottom: 10px;
+
+.wy-menu-vertical li ul {
+    display: block;
+}
+
+.wy-menu-vertical li a {
+    font-weight: bold;
+}
+
+.wy-menu-vertical li ul li a {
+    padding-left: 2.6em;
+    color: #808080;
+}
+
+.wy-menu-vertical li ul li.current > a, .wy-menu-vertical li.current ul li a {
+    padding-left: 2.6em;
 }
 
 .rst-content dl p {

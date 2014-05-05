@@ -1,5 +1,5 @@
-Open Civic Data API Overview
-============================
+API Overview
+============
 
 The Open Civic Data API is a JSON API that provides search and lookup across all information
 captured by the project.
@@ -20,10 +20,20 @@ Endpoints
 
 The Open Civic Data API consists of two types of endpoints, search and object lookup.
 
+.. _object-endpoints:
+
+Object Lookup Endpoints
+~~~~~~~~~~~~~~~~~~~~~~~
+
 Object lookup endpoints can be thought of as permanent URIs for objects, they take the form ``https://api.opencivicdata.org/<ocd-id>`` and return a single JSON object.
 
 .. note:
     A plain HTTP endpoint is also available, but HTTPS is considered the default.
+
+.. _search-endpoints:
+
+Search Endpoints
+~~~~~~~~~~~~~~~~
 
 Search endpoints are in the form ``https://api.opencivicdata.org/<type>/?<parameters>``.
 
@@ -66,7 +76,7 @@ All search endpoints return paginated responses in the following format:
             "max_page": 1,          // maximum ?page=<page> parameter
             "total_count": 180,     // total number of objects returned by query
         },
-        "results": [ ... ]          // list of result objects 
+        "results": [ ... ]          // list of result objects
     }
 
 .. _common-parameters:

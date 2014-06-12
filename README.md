@@ -1,9 +1,14 @@
-Municipal Scraper Documentation
-====================================
+Open Civic Data Technical Documentation
+=======================================
 
-This repo contains documentation on how to write and contribute municipal scrapers to the Open Civic Data collection effort.
+This repository contains documentation for developers including:
 
-See them in action at http://opencivicdata.readthedocs.org/.
+* Writing Scrapers using Pupa
+* The Open Civic Data API
+* Open Civic Data's Data Type Specifications
+* Open Civic Data Proposals
+
+Read these docs at http://docs.opencivicdata.org/
 
 
 Issues?

@@ -1,6 +1,12 @@
 Getting Started Writing Scrapers
 ================================
 
+.. warning::
+    Parts of Open Civic Data underwent a large refactor as of mid-2014, some information on this
+    page may be out of date.   We're working on updating this documentation as soon as possible.
+
+    We'll remove these messages from pages as they're updated and vetted.
+
 While we strive to make writing scrapers as simple as possible, there are a few prerequisites:
 
 * `Python`_ (or Ruby using `pupa-ruby <https://github.com/opennorth/pupa-ruby>`_)

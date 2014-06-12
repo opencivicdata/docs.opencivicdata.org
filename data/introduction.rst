@@ -1,6 +1,12 @@
 Adopting the OCD Specification
 ==============================
 
+.. warning::
+    Parts of Open Civic Data underwent a large refactor as of mid-2014, some information on this
+    page may be out of date.   We're working on updating this documentation as soon as possible.
+
+    We'll remove these messages from pages as they're updated and vetted.
+
 If you're a city or vendor looking to adopt the OCD specification, this section serves as an implementation guide, including working examples from the OCD API. When you've implemented any one of the OCD elements, please `contact us <mailto:opencivicdata@sunlightfoundation.com>`_ so we can begin collecting your data into Open Civic Data. 
 
 To begin, you'll want to find the :doc:`division id <division>` for your locality.

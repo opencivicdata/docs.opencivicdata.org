@@ -1,6 +1,12 @@
 Open Civic Data API Overview
 ============================
 
+.. warning::
+    Parts of Open Civic Data underwent a large refactor as of mid-2014, some information on this
+    page may be out of date.   We're working on updating this documentation as soon as possible.
+
+    We'll remove these messages from pages as they're updated and vetted.
+
 The Open Civic Data API is a JSON API that provides search and lookup across all information
 captured by the project.
 

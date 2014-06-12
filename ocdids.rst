@@ -4,6 +4,12 @@
 OCD Identifiers
 ===============
 
+.. warning::
+    Parts of Open Civic Data underwent a large refactor as of mid-2014, some information on this
+    page may be out of date.   We're working on updating this documentation as soon as possible.
+
+    We'll remove these messages from pages as they're updated and vetted.
+
 Open Civic Data Identifiers (or OCD IDs) are a common Identifier format used
 in the OpenCivicData projects, in a defined format, ripe for reuse with
 any legislative dataset.

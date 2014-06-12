@@ -1,6 +1,13 @@
 Creating a New Scraper
 ======================
 
+.. warning::
+    Parts of Open Civic Data underwent a large refactor as of mid-2014, some information on this
+    page may be out of date.   We're working on updating this documentation as soon as possible.
+
+    We'll remove these messages from pages as they're updated and vetted.
+
+
 If you've followed the directions at :doc:`index` then you're ready to start a new scraper.
 
 We'll be creating a new people scraper for Seattle, but simply subsititute your own city name for Seattle as you follow these next few steps.

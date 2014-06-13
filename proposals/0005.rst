@@ -129,16 +129,11 @@ area, area_id
     the ``Jurisdiction``.  (See `Areas vs. Jurisdictions and Divisions`_)
 
 member, member_id
-    We based our inclusion of ``person`` & ``person_id`` on an earlier version of the Popolo spec,
-    and so do not support Organization-Organization memberships.
+    We do not support Organization-Organization memberships, and therefore use the more specific
+    ``person`` and ``person_id`` fields
 
 Additional Fields
 ~~~~~~~~~~~~~~~~~
-
-person, person_id
-    The person that is a member of the organization is referred to by this name (& key).  This is
-    in lieu of ``member``, ``member_id`` which was a name change Popolo introduced to allow
-    Organization-Organization memberships.
 
 extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.

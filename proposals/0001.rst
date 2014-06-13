@@ -61,8 +61,8 @@ Our process is intentionally lean at the moment, as we try to get it up and
 running.
 
 To submit a proposal, write a text document in the and submit it as a
-pull request to this GitHub repository (https://github.com/opencivicdata/proposals).
-Put it in the "drafts" directory of the repository and give it a short name
+pull request to this GitHub repository (https://github.com/opencivicdata/docs.opencivicdata.org).
+Put it in the "proposals/drafts" directory of the repository and give it a short name
 that describes the feature, e.g. "formal-xml-serialization.rst".
 
 The proposal format is reStructuredText, with "Created," "Author" and "Status"

@@ -51,7 +51,16 @@ url
 classification
     The type of jurisdiction being defined, current options are:
 
-    * government     - A general government, for a city, county, state, or country.
+    * government     - A combined government for a city, county, state, or country where the
+                       legislature and executive (and possibly judicial) branches form a cohesive
+                       whole that should be considered as one.  (The United States is one such
+                       example.)
+    * legislature    - A legislature in a region in which there is no unified legislative-executive
+                       government.  An example would be a Parliament in
+                       `Westminster systems <http://en.wikipedia.org/wiki/Westminster_system>`_.
+    * executive      - An executive branch in a region in which there is no unified
+                       legislative-executive government.  An example would be the cabinet in
+                       `Westminster systems <http://en.wikipedia.org/wiki/Westminster_system>`_.
     * school_system  - A school system that is independent from a city/county government.
 
 division, division_id

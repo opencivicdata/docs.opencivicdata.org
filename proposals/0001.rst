@@ -96,8 +96,8 @@ Discussion and Acceptance of a Proposal
 After something has been proposed, the merits will be discussed, the proposal edited, with a goal of reaching a general consensus.  
 
 As a guiding principle these discussions should be as open as possible, suitable places include:
-* The `docs.opencivicdat.org issue tracker <https://github.com/opencivicdata/docs.opencivicdata.org/issues>`_.
-* In pull requests on the same repository.
+
+* Issues or pull requests on `docs.opencivicdata.org issue tracker <https://github.com/opencivicdata/docs.opencivicdata.org/issues>`_ (tag these with the *proposal* tag).
 * The `Open Civic Data mailing list <https://groups.google.com/forum/#!forum/open-civic-data>`_.
 
 Note that final acceptance (or rejection) must be announced via the mailing list, and to include as many people as possible it is recommended that questions needing broad consensus take place there, while GitHub is more suitable for more isolated concerns and revisions.

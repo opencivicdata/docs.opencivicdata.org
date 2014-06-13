@@ -1,0 +1,696 @@
+===============
+OCDEP 4: Events
+===============
+
+:Created: 2014-06-09
+:Author: Paul Tagliamonte
+:Status: Draft
+
+Overview
+========
+
+Definition of Open Civic Data Events.
+
+Definitions
+-----------
+
+Event
+    Something happening at a given time and location, past, present or future.
+
+Media
+    Audio and/or Video recordings.
+
+Agenda
+    Points to be discussed at the event.
+
+Rationale
+=========
+
+A core part of the democratic process is ensuring that citizens have representation and a say in how the government operates. One important way in which this happens is through hearings and opportunities for public testimony. As such, Open Civic Data Events need to be able to store data such as hearings, and provide structure to represent this aspect of government.
+
+Implementation
+==============
+
+Core Fields
+-----------
+
+name
+    Name of the event, examples include "Fiscal committee meeting on April 10th" or "Appropriations - S/C on Article II"
+
+start_time
+    Fully timezone aware datetime set to the start time of the event.
+
+Optional Fields
+---------------
+
+all_day
+    Boolean value set to boolean ``True`` if the event is an all-day event, otherwise it must be set to the boolean value ``False``.
+
+end_time
+    Fully timezone aware datetime set to the end time of the event.
+
+status
+    Status of the event, values are currently:
+      * ``cancelled`` for a cancelled event
+      * ``tentative`` for an event which is scheduled but not confirmed.
+      * ``confirmed`` for an event which is confirmed as happening.
+      * ``passed`` for a past event.
+
+Location
+--------
+
+name
+    Name of the location, such as "City Hall, Boston, MA, USA",
+    or "221B Baker Street".
+
+note
+    Optional human readable note to help with getting to the meeting place,
+    such as "The meeting will take place at the Minority Whip's desk on the
+    floor"
+
+url
+    Optional URI of the venue, such as a webpage.
+
+coordinates
+    Object to store the exact coordinates of the venue. This object has two keys, ``latitude`` and ``longitude``.
+
+
+Participants
+------------
+
+name
+    Name of the participant
+
+id
+    Open Civic Data ID of the participants
+
+type
+    Type of the participant, either ``person`` or ``organization``.
+
+note
+    Human readable note regarding the relationship
+
+
+Agenda Items
+------------
+
+Agenda items are the list of topics to be discussed at the meeting, as well as metadata related to the topic or proceeding.
+
+Required Fields
++++++++++++++++
+
+description
+    Description of the agenda item. Examples include "Consideration of SB 2339, HB 100" or "John Q. Public will give testimony".
+
+Optional Fields
++++++++++++++++
+
+related_entities
+    List of objects as defined in ``Related Entities``.
+
+media
+    List of media objects, as defined in the ``Media``.
+
+notes
+    List of strings, which store any notes taken during the event while discussing this item.
+
+subjects
+    List of subjects (stored as strings) of this item.
+
+
+Related Entities
+++++++++++++++++
+
+type
+    Type of the related entity, such as ``bill``, ``person``, or ``organization``.
+
+id
+    Open Civic Data ID of the entity.
+
+name
+    Human-readable name of this entity, such as "John Q. Smith", or "HB 101".
+
+note
+    Optional note regarding the relation between this entity and the agenda item, such as "Jeff will be presenting on the effects of the watershed contstruction".
+
+
+Documents
+---------
+
+Related documents to the event, things like pre-written testimony, spreadsheets or a slide deck should be related here.
+
+name
+    Name of the document. Examples include "Fiscal Report" or "John Smith's slides"
+
+url
+    URI where the content may be found.
+
+mimetype
+    Full IANA mimetype of the remote content.
+
+
+Links
+-----
+
+Links are a list of related URLs which are not documents, media or agenda items. Examples include a committee's homepage, reference material or links to learn more about subjects related to the event.
+
+note
+    Human-readable name of the link.
+
+url
+    URI pointing to the resource referenced.
+
+Media
+-----
+
+Media, most often recordings of the event, are extremely useful for those who wish to review what was dicsussed at a meeting, and provides a record of resolutions to issues discussed.
+
+Required Fields
++++++++++++++++
+
+name
+    A required string that describes the particular media link. Examples include "Discussion of the contstruction near the watershed" or "Fiscal committee meeting on April 9th."
+
+
+type
+    What kind of media this is, as defined below in the section ``Defined Types``.
+
+links
+    List of objects which contain two keys, ``url`` and ``mimetype``. ``url`` is a fully qualified URI to the media. ``mimetype`` is the full IANA mimetype of the content at the URI.
+
+
+Optional Fields
++++++++++++++++
+
+date
+    A string in ``YYYY-MM-DD`` format which stores the date of the recording.
+
+offset
+    Integer offset into the media to use as a starting point. This is defined as
+    a nonzero positive integer, the value of which is the number of seconds into
+    the recording to skip to. Implementations should use this (if present) as the
+    starting point when playing back video.
+
+Defined Types
++++++++++++++
+
+recording
+    A recording of the event
+
+testimony
+    recorded testimony, either pre-recorded and submitted, or a recording made at the event.
+
+
+Examples
+--------
+
+
+Example::
+
+    {
+        "_id": "ocd-event/146e36d8-d243-11e3-ad6e-f0def1bd7298",
+        "_type": "event",
+        "agenda": [
+            {
+                "description": "Opening remarks from Speaker Andy Tobin",
+                "order": 1,
+                "subjects": [],
+                "media": [],
+                "notes": [],
+                "related_entities": [
+                    {
+                        "id": "ocd-person/072c3c11-cd8c-4544-9ab1-b60486e1832e",
+                        "name": "Andy Tobin",
+                        "note": "speaker"
+                    }
+                ]
+            },
+            {
+                "description": "Presentation by Director Henry Darwin, Arizona Department of Environmental Quality, regarding the Environmental Protection Agency (EPA) Clean Power Plan proposed rule",
+                "order": 2,
+                "subjects": ["epa", "green energy", "environmental issues"],
+                "media": [],
+                "notes": [],
+                "related_entities": [
+                    {
+                        "id": "ocd-person/a284a515-32b2-4338-a38d-1938a4ac9f8f",
+                        "name": "Henry Darwin",
+                        "note": null
+                    },
+                    {
+                        "id": "ocd-organization/684139f7-b5a5-4702-9a92-2be976b29eef",
+                        "name": "Environmental Protection Agency (EPA)",
+                        "note": null
+                    }
+                ]
+            },
+            {
+                "description": "Public Testimony",
+                "order": 3,
+                "subjects": [],
+                "media": [],
+                "notes": [],
+                "related_entities": []
+            },
+        ],
+        "all_day": false,
+        "description": null,
+        "documents": [
+            {
+                "name": "Agenda",
+                "url": "http://committee.example.com/agenda.pdf",
+                "mimetype": "application/pdf",
+            }
+        ],
+        "end": null,
+        "extras": {},
+        "links": [
+            {
+                "name": "EPA Website",
+                "url": "http://www.epa.gov/"
+            }
+        ],
+        "location": {
+            "coordinates": {
+                "latitude": "33.448040",
+                "longitude": "-112.097379"
+            },
+            "name": "State Legislative Building",
+            "note": null
+        },
+        "media": [
+            {
+                "date": "2014-04-12",
+                "links": [
+                    {
+                        "mimetype": "video/mp4",
+                        "url": "http://example.com/video.mp4"
+                    },
+                    {
+                        "mimetype": "video/webm",
+                        "url": "http://example.com/video.webm"
+                    }
+                ],
+                "name": "Recording of the meeting",
+                "offset": 19,
+                "type": "recording"
+            }
+        ],
+        "name": "Meeting of the Committee on Energy",
+        "participants": [
+            {
+                "id": "ocd-organization/487b972c-4aa6-40e7-b355-0d73580e06e8",
+                "name": "Committee on Energy",
+                "note": "Host Committee"
+            },
+            {
+                "id": "ocd-person/072c3c11-cd8c-4544-9ab1-b60486e1832e",
+                "name": "Andy Tobin",
+                "note": "Speaker"
+            }
+        ],
+        "sources": [
+            {
+                "note": "scraped source",
+                "url": "http://example.com/events"
+            }
+        ],
+        "status": "passed",
+        "type": "event",
+        "start_date": 1408932805.0
+    }
+
+Defined Schema
+==============
+
+Schema::
+
+    media_schema = {
+        "description": ("This \"special\" schema is used in two places in the Event"
+                        " schema, on the top level and inside the agenda item. This is an"
+                        " optional component that may be omited entirely from a document."),
+        "items": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": ('name of the media link, such as "Recording of'
+                                    ' the meeting" or "Discussion of construction'
+                                    ' near the watershed"'),
+                },
+
+                "type": {
+                    "type": "string",
+                    "description": ('type of the set of recordings, such as'
+                                    ' "recording" or "testimony".'),
+                },
+
+                "date": {
+                    "pattern": "^([0-9]{4})?(-[0-9]{2}){0,2}$",
+                    "type": "string", "blank": True,
+                    "description": "date of the recording.",
+                },
+
+                "offset": {
+                    "type": ["number", "null"],
+                    "description": ("Offset where the related part starts. This is"
+                                    " optional and may be ommited entirely."),
+                },
+
+                "links": {
+                    "description": ("List of links to the same media item, each"
+                                    " with a different MIME type."),
+                    "items": {
+                        "properties": {
+                            "mimetype": {
+                                "description": ("Mimetype of the media, such"
+                                                " as video/mp4 or audio/webm"),
+                                "type": ["string", "null"]
+                            },
+
+                            "url": {
+                                "type": "string",
+                                "description": "URL where this media may be accessed",
+                            },
+
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+            },
+            "type": "object"
+        },
+        "type": "array"
+    }
+
+    schema = {
+        "description": "event data",
+
+        "_order": (
+            ('Basics', ('name', 'description', 'when', 'end', 'status', 'location')),
+            ('Linked Entities', ('media', 'links', 'participants', 'agenda', 'documents',)),
+            ('Common Fields', ['updated_at', 'created_at', 'sources']),
+        ),
+
+        "properties": {
+            "name": {
+                "type": "string",
+                "description": ('A simple name of the event, such as "Fiscal'
+                                ' subcommittee hearing on pudding cups"')
+            },
+
+            "all_day": {
+                "type": ["boolean"],
+                "description": ("Indicates if the event is an all-day event"),
+            },
+
+            "classification": {
+                "type": ["string"],
+                "description": ("type of event"),
+            },
+            # TODO: turn into enum
+
+            "updated_at": {
+                "type": ["string", "datetime"],
+                "required": False,
+                "description": "the time that this object was last updated.",
+            },
+
+            "created_at": {
+                "type": ["string", "datetime"],
+                "required": False,
+                "description": "the time that this object was first created.",
+            },
+
+            "description": {
+                "type": "string", "blank": True,
+                "description": ('A longer description describing the event. As an'
+                                ' example, "Topics for discussion include this that'
+                                ' and the other thing. In addition, lunch will be'
+                                ' served".'),
+            },
+
+            "start_time": {
+                "type": ["datetime"],
+                "description": ("Starting date / time of the event. This should be"
+                                " fully timezone qualified."),
+            },
+
+            "end_time": {
+                "type": ["datetime", "null"],
+                "description": ("Ending date / time of the event. This should"
+                                " be fully timezone qualified."),
+            },
+
+
+            "status": {
+                "type": "string", "blank": True,
+                "enum": ["cancelled", "tentative", "confirmed", "passed"],
+                "description": ("String that denotes the status of the meeting."
+                                " This is useful for showing the meeting is cancelled"
+                                " in a machine-readable way."),
+            },
+
+            "location": {
+                "description": "Where the event will take place.",
+                "type": "object",
+                "properties": {
+
+                    "name": {
+                        "type": "string",
+                        "description": ('name of the location, such as "City Hall,'
+                                        ' Boston, MA, USA", or "Room E201, Dolan'
+                                        ' Science Center, 20700 North Park Blvd'
+                                        ' University Heights Ohio, 44118"'),
+                    },
+
+                    "note": {
+                        "type": "string", "blank": True,
+                        "description": ('human readable notes regarding the location,'
+                                        ' something like "The meeting will take place'
+                                        ' at the Minority Whip\'s desk on the floor"')
+                    },
+
+                    "url": {
+                        "required": False,
+                        "type": "string",
+                        "description": "URL of the location, if applicable.",
+                    },
+
+                    "coordinates": {
+                        "description": ('coordinates where this event will take'
+                                        ' place. If the location hasn\'t (or isn\'t)'
+                                        ' geolocated or geocodable, than this should'
+                                        ' be set to null.'),
+                        "type": ["object", "null"],
+                        "properties": {
+                            "latitude": {
+                                "type": "string",
+                                "description": "latitude of the location, if any",
+                            },
+
+                            "longitude": {
+                                "type": "string",
+                                "description": "longitude of the location, if any",
+                            }
+                        }
+                    },
+                },
+            },
+
+            "media": media_schema,
+
+            "documents": {
+                "description": ("Links to related documents for the event. Usually,"
+                                " this includes things like pre-written testimony,"
+                                " spreadsheets or a slide deck that a presenter will"
+                                " use."),
+                "items": {
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": ('name of the document. Something like'
+                                            ' "Fiscal Report" or "John Smith\'s'
+                                            ' Slides".'),
+                        },
+
+                        "url": {
+                            "type": "string",
+                            "description": "URL where the content may be found.",
+                        },
+
+                        "mimetype": {
+                            "type": "string",
+                            "description": "Mimetype of the document.",
+                        },
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+
+            "links": {
+                "description": ("Links related to the event that are not documents"
+                                " or items in the Agenda. This is filled with helpful"
+                                " links for the event, such as a committee's homepage,"
+                                " reference material or links to learn more about subjects"
+                                " related to the event."),
+                "items": {
+                    "properties": {
+
+                        "note": {
+                            "description": ('Human-readable name of the link. Something'
+                                            ' like "Historical precedent for popsicle procurement"'),
+                            "type": "string",
+                            "blank": True,
+                        },
+
+                        "url": {
+                            "description": "A URL for a link about the event",
+                            "format": "uri",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+
+            "participants": {
+                "description": ("List of participants in the event. This includes"
+                                " committees invited, legislators chairing the event"
+                                " or people who are attending."),
+                "items": {
+                    "properties": {
+
+                        "name": {
+                            "type": "string",
+                            "description": "Human readable name of the entitity.",
+                        },
+
+                        "id": {
+                            "type": ["string", "null"],
+                            "description": "ID of the participant",
+                        },
+
+                        "type": {
+                            "enum": ["organization", "person"],
+                            "type": "string",
+                            "description": ("What type of entity is this? `person`"
+                                            " may be used if the person is not a Legislator,"
+                                            " butattending the event, such as an"
+                                            " invited speaker or one who is offering"
+                                            " testimony."),
+                        },
+
+                        "note": {
+                            "type": "string",
+                            "description": ("Note regarding the relationship, such"
+                                            " as `chair` for the chair of a meeting."),
+                        },
+
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+
+            "agenda": {
+                "description": ("Agenda of the event, if any. This contains information"
+                                " about the meeting's agenda, such as bills to"
+                                " discuss or people to present."),
+                "items": {
+                    "properties": {
+                        "description": {
+                            "type": "string",
+
+                            "description": ("Human-readable string that represents this"
+                                            " agenda item. A good example would be something like"
+                                            " The Committee will consider SB 2339, HB 100"),
+                        },
+
+                        "order": {
+                            "type": ["string", "null"],
+                            "description": ("order of this item, useful for re-creating"
+                                            " meeting minutes. This may be ommited entirely."
+                                            " It may also optionally contains \"dots\""
+                                            " to denote nested agenda items, such as \"1.1.2.1\""
+                                            " or \"2\", which may go on as needed."),
+                        },
+
+                        "subjects": {
+                            "description": ("List of related topics of this agenda"
+                                            " item relates to."),
+                            "items": {"type": "string"},
+                            "type": "array"
+                        },
+
+                        "media": media_schema,
+
+                        "notes": {
+                            "description": ("Notes taken during this agenda"
+                                            " item, may be used to construct meeting minutes."),
+                            "type": "string", "blank": True,
+                        },
+
+                        "related_entities": {
+                            "description": ("Entities that relate to this agenda"
+                                            " item, such as presenters, legislative"
+                                            " instruments, or committees."),
+                            "items": {
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "description": ("type of the related object, like"
+                                                        " `bill` or `organization`."),
+                                    },
+
+                                    "id": {
+                                        "type": ["string", "null"],
+                                        "description": "ID of the related entity",
+                                    },
+
+                                    "name": {
+                                        "type": "string",
+                                        "description": ("human readable string"
+                                                        " representing the entity,"
+                                                        " such as `John Q. Smith`."),
+                                    },
+
+                                    "note": {
+                                        "type": ["string", "null"],
+                                        "description": ("human readable string (if any) noting"
+                                                        " the relationship between the entity and"
+                                                        " the agenda item, such as \"Jeff"
+                                                        " will be presenting on the effects"
+                                                        " of too much cookie dough\""),
+                                    },
+                                },
+                                "type": "object",
+                            },
+                            "minItems": 0,
+                            "type": "array",
+                        },
+                    },
+                    "type": "object"
+                },
+                "minItems": 0,
+                "type": "array"
+            },
+            "sources": sources,
+            "extras": extras,
+        },
+        "type": "object"
+    }
+
+
+Further Reading
+===============
+
+Many ideas here were based on the work in `Open States Schema <https://github.com/sunlightlabs/billy/blob/master/billy/schemas/event.json>`_.
+
+Copyright
+=========
+
+This document has been placed in the public domain per the Creative Commons
+CC0 1.0 Universal license (http://creativecommons.org/publicdomain/zero/1.0/deed).

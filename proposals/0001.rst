@@ -1,0 +1,115 @@
+===============================
+OCDEP 1: Purpose and Guidelines
+===============================
+
+:Created: 2014-06-05
+:Author: James Turk
+:Status: Draft
+
+What is a OCDEP?
+================
+
+A OCDEP is a design document providing information to the Open Civic Data community, or describing a new feature
+or process for Open Civic Data. OCDEPs provide concise technical specifications of features, along with rationales.
+
+We intend the proposal process to be the primary mechanism for proposing major new features, 
+for collecting community input on issues, and for documenting design decisions that have gone into Open Civic Data.
+
+The concept of OCDEPs is a blatant copy of Python's PEPs (http://www.python.org/dev/peps/) and Django's use of DEPs.
+
+Rationale
+=========
+
+We're introducing the concept of OCDEPs in Open Civic Data in order to formalize the process of making significant
+changes to the project.
+
+Now that Open Civic Data is beginning to gain traction, we want to use this to avoid duplicate effort (by announcing
+intentions) and to avoid developers from feeling like they're building atop unstable ground.
+
+While there will still be discussions that take place on the Google Group (https://groups.google.com/forum/#!forum/open-civic-data)
+and in IRC, etc. it is expected that all major decisions will take place via the approval of a OCDEP.
+
+
+When to write a proposal
+========================
+
+Taking inspriration from Django's DEP-0001 (https://github.com/django/deps/blob/master/deps/0001.rst) 
+we too wish to avoid introducing "bureaucracy for bureaucracy's sake" and so have a relatively simple process
+reflecting the small size of the project.
+
+Proposals should be for significant additions or changes, especially those that would introduce some sort of
+compatibility issue for downstream users.
+
+Examples of things that will fall under the proposal process:
+
+* addition of a new type to Open Civic Data
+
+* backwards incompatible changes to the API response format
+
+* significant new functionality to the API (such as a new method, probably not a single new field in a response)
+
+And things that will *not* require a proposal:
+
+* purely technical changes, such as a backend refactor
+
+* bugfixes
+
+Submitting a Proposal
+=====================
+
+Our process is intentionally lean at the moment, as we try to get it up and
+running.
+
+To submit a proposal, write a text document in the and submit it as a
+pull request to this GitHub repository (https://github.com/opencivicdata/proposals).
+Put it in the "drafts" directory of the repository and give it a short name
+that describes the feature, e.g. "formal-xml-serialization.rst".
+
+The proposal format is reStructuredText, with "Created," "Author" and "Status"
+fields near the top. For example, look at the top of this document. "Status"
+should be "Draft" to start.
+
+Beyond that, a proposal should include the following sections:
+
+* Overview. A sentence or short paragraph describing the feature.
+
+* Rationale. A few paragraphs describing why this feature is needed
+  and what specific problem(s) it solves.
+
+* Implementation. A technical description of how this feature will
+  be implemented. This may or may not include code snippets.
+
+* Copyright. A statement placing the document in the public domain via the
+  CC0 1.0 Universal License. For example, see the bottom of this document.
+
+Once you've written a proposal and submitted the pull request, post a message about
+it to the open-civic-data mailing list (https://groups.google.com/forum/#!forum/open-civic-data). 
+
+At that point, the core Open Civic Data team will make sure it's technically feasible, not spam, etc., 
+assign it a number and commit it to the repository.
+This doesn't mean the feature will be implemented; it merely means the proposal is officially a OCDEP.
+
+
+Acceptance of a Proposal
+========================
+
+After something has been proposed, the merits will be discussed, the proposal edited, with a goal of reaching a general consensus.  
+At this point the proposal status will be changed (from Draft) to Accepted, Rejected, or Withdrawn.
+
+If an agreement cannot be reached the core Open Civic Data team reserves the right to accept or reject the proposal.  
+Additionally, the core team may choose to set the status to Deferred, indicating that no decision has been made and 
+the issue can be revisited at some future point.
+
+
+Implementation of a Proposal
+============================
+
+Once a proposal has been marked as Accepted, implementation can begin (if it hasn't already) and upon reasonable completion the proposal
+will be marked as Final, indicating that future changes to this feature or component will require an additional proposal.
+
+
+Copyright
+=========
+
+This document has been placed in the public domain per the Creative Commons
+CC0 1.0 Universal license (http://creativecommons.org/publicdomain/zero/1.0/deed).

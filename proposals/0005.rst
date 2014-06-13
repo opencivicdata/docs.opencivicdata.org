@@ -1,0 +1,165 @@
+======================================================
+OCDEP 5: People, Organizations, Posts, and Memberships
+======================================================
+
+:Created: 2014-06-12
+:Author: James Turk
+:Status: Draft
+
+Overview
+========
+
+Adoption of `Popolo <http://popoloproject.com/>`_ types for the Open Civic Data Person, Organization, Post, and Membership types.
+
+Definitions
+-----------
+
+Person
+    An individual that has served in a political office.
+
+Organization
+    A group of people, typically in a legislative or rule-making context.
+
+Post
+    A position in an organization that exists independently of the person holding it.
+
+Membership
+    A relationship between a Person and an Organization, possibly including a Post.
+
+Rationale
+=========
+
+At the core of the Open Civic Data mission is helping people discover who represents them and the structure of their government.  People, Posts, Organizations, and Memberships are the means to describing that structure.
+
+Furthermore, we have adopted (with minor differences) the Popolo schemas for these objects in the aim of being interoperable with a wide range of civic software that is being built, and due to the technical merits and completeness of the specification.
+
+
+Implementation
+==============
+
+To avoid duplicating the entire Popolo specification, this proposal only aims to highlight the differences (omitted or added fields) between Popolo and the Open Civic Data implementation.
+
+Person
+------
+
+The basis for the Open Civic Data ``Person`` object is the `Popolo Person <http://popoloproject.com/specs/person.html>`_.
+
+Omitted Fields
+~~~~~~~~~~~~~~
+
+Several fields have been omitted:
+
+family_name, given_name, additional_name, honorific_prefix, honorific_suffix, patronymic_name
+    Due to the inherent fragile nature of trying to segment names, all name fields other than
+    ``name``, ``sort_name``, and ``other_names`` are omitted to avoid implying that they can be
+    relied upon.
+
+email
+    Considered redundant with using an entry in ``Person.contact_details`` with type ``email``.
+
+
+Additional Fields
+~~~~~~~~~~~~~~~~~
+
+extras
+    Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
+
+Organization
+------------
+
+The basis for the Open Civic Data ``Organization`` object is the `Popolo Organization <http://popoloproject.com/specs/organization.html>`_.
+
+Omitted Fields
+~~~~~~~~~~~~~~
+
+area, area_id
+    Open Civic Data does not make use of the Popolo ``Area`` type, instead favoring the concept of
+    the ``Jurisdiction``.  (See `Areas vs. Jurisdictions and Divisions`_)
+
+
+Additional Fields
+~~~~~~~~~~~~~~~~~
+
+chamber
+    Used to distinguish between upper and lower legislative organizations (House/Senate for instance).
+
+jurisdiction, jurisdiction_id
+    An organization exists as part of a ``Jurisdiction`` (See `Areas vs. Jurisdictions and Divisions`_)
+
+extras
+    Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
+
+Post
+----
+
+The basis for the Open Civic Data ``Post`` object is the `Popolo Post <http://popoloproject.com/specs/post.html>`_.
+
+
+Omitted Fields
+~~~~~~~~~~~~~~
+
+other_label
+    This field was added to Popolo after our adoption, and we have not yet found a need to add it.
+
+area, area_id
+    Open Civic Data does not make use of the Popolo ``Area`` type, instead favoring the concept of
+    the ``Jurisdiction``.  (See `Areas vs. Jurisdictions and Divisions`_)
+
+Additional Fields
+~~~~~~~~~~~~~~~~~
+
+division, division_id
+    An post may have an associated ``Division``, which is essentially an ``Area``. (See `Areas vs. Jurisdictions and Divisions`_)
+
+extras
+    Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
+
+
+Membership
+----------
+
+The basis for the Open Civic Data ``Membership`` object is the `Popolo Membership <http://popoloproject.com/specs/membership.html>`_.
+
+
+Omitted Fields
+~~~~~~~~~~~~~~
+
+area, area_id
+    Open Civic Data does not make use of the Popolo ``Area`` type, instead favoring the concept of
+    the ``Jurisdiction``.  (See `Areas vs. Jurisdictions and Divisions`_)
+
+member, member_id
+    We based our inclusion of ``person`` & ``person_id`` on an earlier version of the Popolo spec,
+    and so do not support Organization-Organization memberships.
+
+Additional Fields
+~~~~~~~~~~~~~~~~~
+
+person, person_id
+    The person that is a member of the organization is referred to by this name (& key).  This is
+    in lieu of ``member``, ``member_id`` which was a name change Popolo introduced to allow
+    Organization-Organization memberships.
+
+extras
+    Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
+
+
+Areas vs. Jurisdictions and Divisions
+-------------------------------------
+
+Open Civic Data uses the concept of Jurisdictions, which represent governments with authority over a given area.
+There are two reasons Open Civic Data uses ``Jurisdiction`` and ``Division`` instead of Popolo's ``Area``:
+
+First, and most simply, our use of jurisdiction predates the addition of the ``Area`` type to Popolo.
+
+Second, the reason we have not made an effort to switch to Area everywhere that this concept does not distinguish between certain cases that are important for our purposes such as two governments that might coexist with the same boundaries.
+(An example of this would be when a school board and a city council both have jurisdiction over a city but can not be considered the same entity.)
+
+``Area`` does (in essence) equate to ``Division`` however, and the different terminology a remnant of decisions made prior to ``Area`` being introduced in Popolo.
+
+
+Copyright
+=========
+
+This document has been placed in the public domain per the Creative Commons
+CC0 1.0 Universal license (http://creativecommons.org/publicdomain/zero/1.0/deed).

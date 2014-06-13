@@ -17,3 +17,4 @@ If you're looking to contribute to the project or learn how to use the data, you
     api/index
     scrape/index
     data/index
+    proposals/index

@@ -1,0 +1,87 @@
+======================
+OCDEP 3: Jurisdictions
+======================
+
+:Created: 2014-06-12
+:Author: James Turk
+:Status: Draft
+
+Overview
+========
+
+Definition of the Open Civic Data Jurisdiction type.
+
+
+Rationale
+=========
+
+A Jurisdiction represents a logical unit of governance.
+
+Examples would include: the United States Federal Government, the Government of the District of Columbia,
+the Lexington-Fayette Urban County Government, or the Wake County Public School System.
+
+The following would not be considered Jurisdictions:
+
+* Bethesda, MD - Bethesda is a `Census Designated Place <http://en.wikipedia.org/wiki/Census-designated_place>`_ and as such has no formal government.
+* North Carolina's General Assembly - The General Assembly is part of the state government, and would be an ``Organization`` within North Carolina's government.
+
+Additionally, Open Civic Data Jurisdictions should not be confused with the concept of judicial jurisdiction, whichis an altogether different issue that we do not attempt to address.
+
+All entities within the Open Civic Data ecosystem are related (directly or indirectly) to a Jurisdiction, and so, along with Divisions (which Jurisdictions themselves depend upon), Jurisdictions can be viewed as one of the foundational pieces of Open Civic Data.
+
+Implementation
+==============
+
+The Jurisdiction type has the following properties:
+
+id
+    An ID in the format ``ocd-jurisdiction/country:<country_code>(/<type>:<type_id>)*/<classification>`` (where the first part of the ID is identical to the related ``Division``.)
+
+    The following pattern should be used create a ``jurisdiction_id`` given a ``division_id`` and ``classification``::
+
+        jurisdiction_id = (division_id.replace('ocd-division', 'ocd-jurisdiction') +
+                            '/' + classification)
+
+name
+    The common name of the Jurisdiction, such as 'Wyoming' or 'Hope County School System'
+
+url
+    The primary website of the body represented.
+
+classification
+    The type of jurisdiction being defined, current options are:
+
+    * government     - A general government, for a city, county, state, or country.
+    * school_system  - A school system that is independent from a city/county government.
+
+division, division_id
+    A link to an Open Civic Data division (or the object itself embedded within the Jurisdiction).
+
+legislative_sessions
+    A list of sub-objects representing times when the jurisdiction's legislature has met (if one exists).
+
+    name
+        The canonical name of the session.
+
+    classification
+        The type of session, choices are:
+
+        * primary   - A regularly scheduled session.
+        * special   - Any session that is not regularly scheduled.
+
+    start_date
+        Start date of session in YYYY-MM-DD format (may be approximate by leaving off -MM-DD or -DD portion).
+
+    end_date
+        End date of session in YYYY-MM-DD format (may be approximate by leaving off -MM-DD or -DD portion).
+
+feature_flags
+    A list of features that are present for data in this jurisdiction.  The definition of these
+    flags is currently left up to individual implementors.
+
+
+Copyright
+=========
+
+This document has been placed in the public domain per the Creative Commons
+CC0 1.0 Universal license (http://creativecommons.org/publicdomain/zero/1.0/deed).

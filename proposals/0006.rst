@@ -1,0 +1,210 @@
+==============
+OCDEP 6: Bills
+==============
+
+:Created: 2014-06-16
+:Author: James Turk
+:Status: Draft
+
+Overview
+========
+
+Definition of Open Civic Data Bill schema.
+
+Rationale
+=========
+
+Bills are the primary artifact of legislatures, proposals to modify or create laws.  Open Civic Data
+Bills are the representation of this concept, which may sometimes be known by other names such as
+Proposal, Resolution, or Measure.
+
+Implementation
+==============
+
+id
+    A unique ID in the format ``ocd-bill/{uuid}``.
+
+session, session_id
+    A reference to a ``legislative_session`` from the relevant ``Jurisdiction`` (see :ref:`OCDEP3` for details)
+
+name
+    A name for the bill, such as 'HB 1' or '2117'.  (Not to be confused with ``title``.)
+
+title
+    The current title of the bill, such as 'The Patient Protectionand Affordable Care Act'.
+
+from_organization, from_organization_id
+    **optional**
+    The organization that the bill was originally introduced in.  In the US this would be the organization
+    representing the House if it were a House bill or resolution, and the Senate if it were a Senate bill.
+
+    This field can be omitted if it is not known or there is not a single chamber of introduction (such as
+    a Joint Resolution).
+
+classification
+    A list of classifications for this bill, suggested values would be things like 'bill',
+    'resolution', 'constitutional amendment', etc.
+
+subject
+    **optional**
+    A curated list of subject areas that this bill is a part of.
+
+summaries
+    A list of objects representing available summaries of the bill, each with the following fields:
+
+    text
+        The text of the summary.
+
+    note
+        **optional**
+        A note about the origin of the summary, such as 'minority caucus report'.
+
+other_titles
+    A list of objects representing alternate titles for the bill.
+
+    text
+        The text of an alternate title that someone might use to refer to the bill,
+        an example might be "Obamacare" for the Affordable Care Act.
+
+    note
+        **optional**
+        A note describing the origin of the title.
+
+other_names
+    A list of objects representing alternate names for the bill. (See the description above of
+    name and title to understand the distinction between other_titles and other_names).
+
+    Also note that this is to refer to bills that have multiple names, such as in Tennessee where
+    bills are given a House and Senate number but have shared history.  In states where there
+    are two related bills with distinct parallel histories, a second Bill object should be
+    created and the ``related_bill`` property (described below) should be used.
+
+    name
+        The alternate name (e.g. HB 7)
+
+    note
+        **optional**
+        A note describing the reason for the alternate name.
+
+actions
+    A list of objects representing individual actions that take place on a bill, comprising the
+    legislative history of the proposal in question.  Actions consist of the following properties:
+
+    organization
+        The organization that this action took place within.
+
+    text
+        The text description of the action.
+
+    date
+        The date the action occurred in YYYY-MM-DD format. (can be partial by omitting -MM-DD or
+        -DD component).
+
+    classification
+        A list of classifications for this actions, suggested values would be things like
+        'passage', 'introduction', etc.
+
+    related_entities
+        A list of all related entities (such as legislators mentioned by name in the action).
+        Each entity has the following fields:
+
+        name
+            The upstream-given name of this related entity.
+
+        entity_type
+            'organization' or 'person' - the type of entity that is related
+
+        organization, organization_id
+            If the ``entity_type`` is 'organization' and the entity is resolved, will be the
+            organization that is related.
+
+        person, person_id
+            If the ``entity_type`` is 'person' and the entity is resolved, will be the
+            person that is related.
+
+    sponsors
+        A list of all sponsoring people and organizations.
+
+        primary
+            A boolean that is true if the sponsor can be considered 'primary.'  The exact meaning
+            of this is jurisdiction-dependent.
+
+        classification
+            The classification of the sponsor, such as 'cosponsor' or 'author'.
+
+        name
+            The upstream-given name of this sponsor.
+
+        entity_type
+            'organization' or 'person' - the type of the sponsor.
+
+        organization, organization_id
+            If the ``entity_type`` is 'organization' and the entity is resolved, will be the
+            sponsoring organization.
+
+        person, person_id
+            If the ``entity_type`` is 'person' and the entity is resolved, will be the
+            sponsoring individual.
+
+    versions
+        All versions of the bill.
+
+        name
+            Name of the version (e.g. 'Introduced', 'Engrossed', etc.)
+        type
+            The type of the version.
+        date
+            The date the version was published in YYYY-MM-DD format (partial dates are acceptable).
+        links
+            Links to instances of the version.  A link is a specific formatting of the version,
+            not to be confused with versions (each of which should have their own ``versions``
+            instance).  So if a document is available as a PDF and an HTML each will have a link.
+            Has the following properties:
+
+            url
+                URL of the link.
+            mimetype
+                The mimetype of the link.
+
+
+
+    documents
+        All documents related to the bill with the exception of versions (which are part of
+        the above ``versions``).
+
+        name
+            Name of the document (e.g. 'Introduced', 'Engrossed', etc.)
+        type
+            The type of the document.
+        date
+            The date the document was published in YYYY-MM-DD format
+            (partial dates are acceptable).
+        links
+            Links to instances of the document.  (See above description of ``versions.links`` for
+            details.)  Has the following properties:
+
+            url
+                URL of the link.
+            mimetype
+                The mimetype of the link.
+
+    sources
+        List of sources used in assembling this object.  Has the following properties:
+
+        url
+            URL of the resource.
+        note
+            **optional**
+            Description of what this source was used for.
+
+
+Further Reading
+===============
+
+Many ideas here were based on the work in `Open States <https://github.com/sunlightlabs/billy/blob/master/billy/schemas/bill.json>`_.
+
+Copyright
+=========
+
+This document has been placed in the public domain per the Creative Commons
+CC0 1.0 Universal license (http://creativecommons.org/publicdomain/zero/1.0/deed).

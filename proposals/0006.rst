@@ -27,8 +27,8 @@ id
 session, session_id
     A reference to a ``legislative_session`` from the relevant ``Jurisdiction`` (see :ref:`OCDEP3` for details)
 
-name
-    A name for the bill, such as 'HB 1' or '2117'.  (Not to be confused with ``title``.)
+identifier
+    A name for the bill, such as 'HB 1' or '2117'.
 
 title
     The current title of the bill, such as 'The Patient Protectionand Affordable Care Act'.
@@ -49,11 +49,12 @@ subject
     **optional**
     A curated list of subject areas that this bill is a part of.
 
-summaries
-    A list of objects representing available summaries of the bill, each with the following fields:
+abstracts
+    A list of objects representing available abstracts (aka summaries) for the bill, each with the
+    following fields:
 
-    text
-        The text of the summary.
+    abstract
+        The text of the abstract.
 
     note
         **optional**
@@ -62,7 +63,7 @@ summaries
 other_titles
     A list of objects representing alternate titles for the bill.
 
-    text
+    title
         The text of an alternate title that someone might use to refer to the bill,
         an example might be "Obamacare" for the Affordable Care Act.
 
@@ -70,9 +71,8 @@ other_titles
         **optional**
         A note describing the origin of the title.
 
-other_names
-    A list of objects representing alternate names for the bill. (See the description above of
-    name and title to understand the distinction between other_titles and other_names).
+other_identifiers
+    A list of objects representing alternate identifiers for the bill.
 
     Also note that this is to refer to bills that have multiple names, such as in Tennessee where
     bills are given a House and Senate number but have shared history.  In states where there
@@ -85,6 +85,12 @@ other_names
     note
         **optional**
         A note describing the reason for the alternate name.
+
+    scheme
+        **optional**
+        If the identifier belongs to a 3rd-party site (such as OpenStates.org assigned bill ids)
+        it must provide a scheme, scheme should be omitted if it is an identifier from the
+        primary source.
 
 actions
     A list of objects representing individual actions that take place on a bill, comprising the
@@ -149,10 +155,8 @@ actions
     versions
         All versions of the bill.
 
-        name
-            Name of the version (e.g. 'Introduced', 'Engrossed', etc.)
-        type
-            The type of the version.
+        note
+            Note describing the version (e.g. 'Introduced', 'Engrossed', etc.)
         date
             The date the version was published in YYYY-MM-DD format (partial dates are acceptable).
         links
@@ -163,8 +167,8 @@ actions
 
             url
                 URL of the link.
-            mimetype
-                The mimetype of the link.
+            media_type
+                The `media type <http://en.wikipedia.org/wiki/Internet_media_type>`_ of the link.
 
 
 
@@ -172,10 +176,9 @@ actions
         All documents related to the bill with the exception of versions (which are part of
         the above ``versions``).
 
-        name
-            Name of the document (e.g. 'Introduced', 'Engrossed', etc.)
-        type
-            The type of the document.
+        note
+            Note describing the document's relation to the bill (e.g. 'Fiscal Note',
+            'Committee Report', etc.)
         date
             The date the document was published in YYYY-MM-DD format
             (partial dates are acceptable).
@@ -185,8 +188,8 @@ actions
 
             url
                 URL of the link.
-            mimetype
-                The mimetype of the link.
+            media_type
+                The `media type <http://en.wikipedia.org/wiki/Internet_media_type>`_ of the link.
 
     sources
         List of sources used in assembling this object.  Has the following properties:

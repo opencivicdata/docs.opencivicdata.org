@@ -128,12 +128,19 @@ actions
             If the ``entity_type`` is 'person' and the entity is resolved, will be the
             person that is related.
 
-    sponsors
+    sponsorships
         A list of all sponsoring people and organizations.
 
         primary
             A boolean that is true if the sponsor can be considered 'primary.'  The exact meaning
             of this is jurisdiction-dependent.
+
+            **Note:** this can often be derived from classification, but can often be highly
+            jurisdiction dependent (among US states for example the terms author, sponsor,
+            cosponsor, and coauthor can mean quite different things).  Because of this, and the
+            frequent need to indicate which author(s) should be displayed in a short list of
+            sponsors when the full list might be half of the legislature or more, we've chosen
+            to include this field.
 
         classification
             The classification of the sponsor, such as 'cosponsor' or 'author'.

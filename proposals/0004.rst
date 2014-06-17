@@ -139,14 +139,14 @@ Documents
 
 Related documents to the event, things like pre-written testimony, spreadsheets or a slide deck should be related here.
 
-name
-    Name of the document. Examples include "Fiscal Report" or "John Smith's slides"
+note
+    Relationship of the document to the event. Examples include "Fiscal Report" or "John Smith's slides"
 
 url
     URI where the content may be found.
 
-mimetype
-    Full IANA mimetype of the remote content.
+media_type
+    Full IANA media type of the remote content.
 
 
 Links
@@ -176,7 +176,7 @@ type
     What kind of media this is, as defined below in the section ``Defined Types``.
 
 links
-    List of objects which contain two keys, ``url`` and ``mimetype``. ``url`` is a fully qualified URI to the media. ``mimetype`` is the full IANA mimetype of the content at the URI.
+    List of objects which contain two keys, ``url`` and ``media_type``. ``url`` is a fully qualified URI to the media. ``media_type`` is the full IANA media type of the content at the URI.
 
 
 Optional Fields
@@ -257,9 +257,9 @@ Example::
         "description": null,
         "documents": [
             {
-                "name": "Agenda",
+                "note": "Agenda",
                 "url": "http://committee.example.com/agenda.pdf",
-                "mimetype": "application/pdf",
+                "media_type": "application/pdf",
             }
         ],
         "end": null,
@@ -283,11 +283,11 @@ Example::
                 "date": "2014-04-12",
                 "links": [
                     {
-                        "mimetype": "video/mp4",
+                        "media_type": "video/mp4",
                         "url": "http://example.com/video.mp4"
                     },
                     {
-                        "mimetype": "video/webm",
+                        "media_type": "video/webm",
                         "url": "http://example.com/video.webm"
                     }
                 ],
@@ -361,8 +361,8 @@ Schema::
                                     " with a different MIME type."),
                     "items": {
                         "properties": {
-                            "mimetype": {
-                                "description": ("Mimetype of the media, such"
+                            "media_type": {
+                                "description": ("media type of the media, such"
                                                 " as video/mp4 or audio/webm"),
                                 "type": ["string", "null"]
                             },
@@ -519,9 +519,9 @@ Schema::
                             "description": "URL where the content may be found.",
                         },
 
-                        "mimetype": {
+                        "media_type": {
                             "type": "string",
-                            "description": "Mimetype of the document.",
+                            "description": "media type of the document.",
                         },
                     },
                     "type": "object"

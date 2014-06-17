@@ -63,11 +63,11 @@ classification
     * executive      - An executive branch in a region in which there is no unified
                        legislative-executive government.  An example would be the cabinet in
                        `Westminster systems <http://en.wikipedia.org/wiki/Westminster_system>`_.
-    * school_system  - A school system that is independent from a city/county government.
-    * park_district  - A park district that is independent from a city/county government.
-    * sewerage_district - A sewerage district that is independent from a city/county government.
-    * forest_preserve_district - A forest preserve district that is independent from city/county government
-    * transity_authority - An independent transit autority
+    * school  - A school system that is independent from a city/county government.
+    * park  - An independent park district.
+    * sewer - An independent sewer district.
+    * forest_preserve - An independent forest preserve district.
+    * transit - An independent transit district or authority
 
 division, division_id
     A link to an Open Civic Data division (or the object itself embedded within the Jurisdiction).

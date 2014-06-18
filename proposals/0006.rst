@@ -99,8 +99,8 @@ actions
     organization
         The organization that this action took place within.
 
-    text
-        The text description of the action.
+    description
+        Description of the action.
 
     date
         The date the action occurred in YYYY-MM-DD format. (can be partial by omitting -MM-DD or

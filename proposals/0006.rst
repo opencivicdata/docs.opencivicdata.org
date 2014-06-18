@@ -200,6 +200,13 @@ documents
         media_type
             The `media type <http://en.wikipedia.org/wiki/Internet_media_type>`_ of the link.
 
+created_at
+    Time that this object was created at in the system, not to be confused with the date of
+    introduction.
+
+updated_at
+    Time that this object was last updated in the system, not to be confused with the last action.
+
 sources
     List of sources used in assembling this object.  Has the following properties:
 
@@ -209,6 +216,8 @@ sources
         **optional**
         Description of what this source was used for.
 
+extras
+    Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
 
 Further Reading
 ===============

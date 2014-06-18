@@ -78,6 +78,10 @@ organization, organization_id
 session, session_id
     Reference to the ``Jurisdiction.legislative_session`` the ``VoteEvent`` takes place in.
 
+bill, bill_id
+    **optional**
+    Reference to the ``Bill`` object the ``VoteEvent`` is related to (if the vote in question is on a bill).
+
 votes
     A list of objects representing individual legislator's votes.  (Popolo refers to these as
     `Vote <http://popoloproject.com/specs/vote.html>`_).

@@ -138,7 +138,7 @@ Semantics
 Governance
 ----------
 
-This project has an informal governance structure, led by the project's early contributors and informed by the `Open Civic Data Google Group <https://groups.google.com/forum/#!forum/open-civic-data>`_.  Responsibility for a country's identifiers may be assigned to organizations.
+This project has an informal governance structure, led by the project's early contributors and informed by the `Open Civic Data Google Group <https://groups.google.com/forum/#!forum/open-civic-data>`_.  Responsibility for a country's identifiers may be assigned to country-specific organizations.
 
 Examples
 --------

@@ -7,10 +7,11 @@ OCDEP 1: Purpose and Guidelines
 :Status: Draft
 
 What is an OCDEP?
-================
+=================
 
-An OCDEP is a design document providing information to the Open Civic Data community, or describing a new feature
-or process for Open Civic Data. OCDEPs provide concise technical specifications of features, along with rationales.
+An OCDEP (OCD Enhancement Project) is a design document providing information to the Open Civic Data community, 
+or describing a new feature or process for Open Civic Data. OCDEPs provide concise technical specifications of features, 
+along with rationales.
 
 We intend the proposal process to be the primary mechanism for proposing major new features, 
 for collecting community input on issues, and for documenting design decisions that have gone into Open Civic Data.

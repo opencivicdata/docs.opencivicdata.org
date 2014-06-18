@@ -27,7 +27,7 @@ The following would not be considered Jurisdictions:
 * Bethesda, MD - Bethesda is a `Census Designated Place <http://en.wikipedia.org/wiki/Census-designated_place>`_ and as such has no formal government.
 * North Carolina's General Assembly - The General Assembly is part of the state government, and would be an ``Organization`` within North Carolina's government.
 
-Additionally, Open Civic Data Jurisdictions should not be confused with the concept of judicial jurisdiction, whichis an altogether different issue that we do not attempt to address.
+Additionally, Open Civic Data Jurisdictions should not be confused with the concept of judicial jurisdiction, which is an altogether different issue that we do not attempt to address.
 
 All entities within the Open Civic Data ecosystem are related (directly or indirectly) to a Jurisdiction, and so, along with Divisions (which Jurisdictions themselves depend upon), Jurisdictions can be viewed as one of the foundational pieces of Open Civic Data.
 

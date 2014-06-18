@@ -73,8 +73,8 @@ Omitted Fields
 ~~~~~~~~~~~~~~
 
 area, area_id
-    Open Civic Data does not make use of the Popolo ``Area`` type, instead favoring the concept of
-    the ``Jurisdiction``.  (See `Areas vs. Jurisdictions and Divisions`_)
+    Open Civic Data does not make use of the Popolo ``Area`` type here,
+    instead favoring the concept of ``Jurisdiction`` as described in :ref:`OCDEP3`.  (See :ref:`areas`)
 
 
 Additional Fields
@@ -84,7 +84,7 @@ chamber
     Used to distinguish between upper and lower legislative organizations (House/Senate for instance).
 
 jurisdiction, jurisdiction_id
-    An organization exists as part of a ``Jurisdiction`` (See `Areas vs. Jurisdictions and Divisions`_)
+    An organization exists as part of a ``Jurisdiction`` as described in :ref:`OCDEP3`.  (See :ref:`areas`)
 
 extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
@@ -101,15 +101,15 @@ Omitted Fields
 other_label
     This field was added to Popolo after our adoption, and we have not yet found a need to add it.
 
-area, area_id
-    Open Civic Data does not make use of the Popolo ``Area`` type, instead favoring the concept of
-    the ``Jurisdiction``.  (See `Areas vs. Jurisdictions and Divisions`_)
 
 Additional Fields
 ~~~~~~~~~~~~~~~~~
 
 division, division_id
-    An post may have an associated ``Division``, which is essentially an ``Area``. (See `Areas vs. Jurisdictions and Divisions`_)
+    An post may have an associated ``Division``, which is a synonym of Popolo's ``Area``. (See :ref:`areas`)
+
+    These fields are synonymous with ``area`` and ``area_id``.
+    It is strongly suggested that both exist for compatibility reasons.
 
 extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
@@ -125,8 +125,7 @@ Omitted Fields
 ~~~~~~~~~~~~~~
 
 area, area_id
-    Open Civic Data does not make use of the Popolo ``Area`` type, instead favoring the concept of
-    the ``Jurisdiction``.  (See `Areas vs. Jurisdictions and Divisions`_)
+    Memberships are not used to relate to defined areas/divisions, this must be done through a ``Post``.
 
 member, member_id
     We do not support Organization-Organization memberships, and therefore use the more specific
@@ -138,19 +137,22 @@ Additional Fields
 extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
 
+.. _areas:
 
-Areas vs. Jurisdictions and Divisions
--------------------------------------
 
-Open Civic Data uses the concept of Jurisdictions, which represent governments with authority over a given area.
-There are two reasons Open Civic Data uses ``Jurisdiction`` and ``Division`` instead of Popolo's ``Area``:
+Areas, Divisions, and Jurisdictions
+-----------------------------------
 
-First, and most simply, our use of jurisdiction predates the addition of the ``Area`` type to Popolo.
+Two main differences have emerged between our handling of political areas and that of Popolo:
 
-Second, the reason we have not made an effort to switch to Area everywhere that this concept does not distinguish between certain cases that are important for our purposes such as two governments that might coexist with the same boundaries.
-(An example of this would be when a school board and a city council both have jurisdiction over a city but can not be considered the same entity.)
+The first difference is the use of ``Division`` instead of ``Area`` on ``Post``.  ``Division`` in Open Civic Data
+predates ``Area``'s inclusion in Popolo, but the two are now essentially synonymous.  For compatibility reasons
+Open Civic Data will continue to use the term Division, but for compatibility with other Popolo-based
+systems ``area`` and ``area_id`` should be present in any API.
 
-``Area`` does (in essence) equate to ``Division`` however, and the different terminology a remnant of decisions made prior to ``Area`` being introduced in Popolo.
+Additionally, Open Civic Data uses the concept of Jurisdictions, which represent entities with authority over a given area.  (For more detail on Jurisdictions see :ref:`OCDEP3`.)
+
+Due to the presence of Jurisdictions, a decision was made to not use ``area & area_id`` on Organizations, instead  ``Organization`` objects are linked instead to a ``Jurisdiction``.  A link to ``Division`` (a synonym for ``Area`` does exist on ``Jurisdiction`` so it is still possible to get the ``Area`` represented by an ``Organization``).
 
 
 Copyright

@@ -1,0 +1,168 @@
+.. _OCDEP7:
+
+==============
+OCDEP 7: Votes
+==============
+
+:Created: 2014-06-18
+:Author: James Turk
+:Status: Draft
+
+Overview
+========
+
+Definition of the Open Civic Data Vote type.
+
+(Based in part on `Popolo <http://popoloproject.com/>`_ types for the Open Civic Data Vote and VoteEvent).
+
+
+Rationale
+=========
+
+Determining how legislators have voted on specific proposals is a vital component to creating
+legislative accountability.  The ``Vote`` type and its related subtypes exist to enable the recording
+of Votes (meaning the outcome of a proposal as well as the individual positions of legislators).
+
+An attempt has been made to reconcile our ``Vote`` type (originally based in Open States work)
+with the schema put forward by the `Popolo specification <http://popoloproject.com/specs/vote-event.html>`_.
+
+
+Implementation
+==============
+
+Because at the time of writing (June 2014) the Popolo vote specification was still somewhat in a
+state of flux we've included pieces of the specification here for consistency.
+
+
+VoteEvent
+---------
+
+Because the term 'vote' can mean multiple things, Popolo makes use of the term ``VoteEvent`` to describe
+the actual event of a legislative vote taking place and the term ``Vote`` for a legislator's vote
+in a given ``VoteEvent``.  We generally use that terminology here, with the exception that the recommended API endpoint and ID scheme for ``VoteEvent`` objects will use ``vote`` and ``ocd-vote/{{uuid}}`` for VoteEvent.
+
+Each ``VoteEvent`` has the following fields:
+
+id
+    Open Civic Data-style id, in the format ``ocd-vote/{{uuid}}``.
+
+identifier
+    **optional**
+    Upstream identifier if one exists, such as 'Roll Call #2372'.
+
+motion (``motion.text``)
+    The motion being voted upon.
+
+    Will be represented in JSON as an object with a single ``text`` key.
+
+    In Popolo there is a `Motion <http://popoloproject.com/specs/motion.html>`_ class that has additional properties, only text is supported at this time.
+
+
+start_date
+    Time at which the vote begins.  In flexible YYYY-MM-DD format.
+
+end_date
+    **optional**
+    Time at which the vote ends, should such a time exist.    In flexible YYYY-MM-DD format.
+
+classification
+    A list of strings classifying the type of vote.  Examples might be 'committee-referral',
+    'passage', 'tabling'.
+
+result
+    The outcome of the vote, can be 'pass' or 'fail'.
+
+organization, organization_id
+    The ``Organization`` in which the ``VoteEvent`` took place.
+
+session, session_id
+    Reference to the ``Jurisdiction.legislative_session`` the ``VoteEvent`` takes place in.
+
+votes
+    A list of objects representing individual legislator's votes.  (Popolo refers to these as
+    `Vote <http://popoloproject.com/specs/vote.html>`_).
+
+    This list may not be present if the individual voters are not known, for example in the case of a
+    voice vote.
+
+    Each element has the following properties:
+
+    voter_name
+        The name of the voter as it appears on the primary source.  (Useful for when it cannot yet
+        be resolved to a specific individual.)
+
+    voter, voter_id
+        A reference to the ``Person`` responsible for the vote.  (may be null if the ``voter_name``
+        has not been resolved to an individual.)
+
+    option
+        The opinion of the ``voter`` casting this ``Vote``.  See :ref:`voting-options`.
+
+counts
+    A list of count objects (what Popolo calls `Count <http://popoloproject.com/specs/count.html>`_).
+
+    These represent the total number of individuals voting a particular way.  Each has two properties:
+
+    option
+        The voting option being tallied.  See :ref:`voting-options`.
+
+    count
+        The total number of individuals voting this way.  (Should match the sum of the ``votes``
+        with the same ``option`` in almost every case, assuming they are present.)
+
+created_at
+    Time that this object was created at in the system, not to be confused with the start_date.
+
+updated_at
+    Time that this object was last updated in the system.
+
+sources
+    List of sources used in assembling this object.  Has the following properties:
+
+    url
+        URL of the resource.
+    note
+        **optional**
+        Description of what this source was used for.
+
+extras
+    Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
+
+
+.. _voting-options:
+
+Voting Options
+~~~~~~~~~~~~~~
+
+The possible values of ``counts.option`` and ``votes.option`` are as follows:
+
+* ``yes``
+* ``no``
+* ``abstain``
+* ``absent``
+* ``not voting``
+* ``paired``
+
+Additional values will be added in the future as needed.
+
+
+Differences from Popolo
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* ``VoteEvent`` has ``classification`` and ``extra`` attributes which are not defined in Popolo.
+
+* Instead of using Popolo's ``context``, Open Civic Data uses the ``session`` to tie to a ``Jurisdiction``'s ``legislative_session``.
+
+* ``Vote`` objects (within ``VoteEvent.votes``) have a ``voter_name`` property that is used for when a voter cannot be linked to a known ``Person``.  Additionally, ``voter`` can only link to a ``Person``.
+
+* ``Vote`` objects also do not currently support the ``group``, ``role``, ``weight``, or ``pair`` properties.  There is a chance these will be adopted in the future after their use is necessary.  
+
+* ``Motion`` objects from Popolo are represented simply as ``motion.text``, this is future-proof
+  should we ever choose to adopt additional ``Motion`` properties.
+
+
+Copyright
+=========
+
+This document has been placed in the public domain per the Creative Commons
+CC0 1.0 Universal license (http://creativecommons.org/publicdomain/zero/1.0/deed).

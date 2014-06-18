@@ -6,10 +6,10 @@ OCDEP 1: Purpose and Guidelines
 :Author: James Turk
 :Status: Draft
 
-What is a OCDEP?
+What is an OCDEP?
 ================
 
-A OCDEP is a design document providing information to the Open Civic Data community, or describing a new feature
+An OCDEP is a design document providing information to the Open Civic Data community, or describing a new feature
 or process for Open Civic Data. OCDEPs provide concise technical specifications of features, along with rationales.
 
 We intend the proposal process to be the primary mechanism for proposing major new features, 
@@ -27,7 +27,7 @@ Now that Open Civic Data is beginning to gain traction, we want to use this to a
 intentions) and to avoid developers from feeling like they're building atop unstable ground.
 
 While there will still be discussions that take place on the Google Group (https://groups.google.com/forum/#!forum/open-civic-data)
-and in IRC, etc. it is expected that all major decisions will take place via the approval of a OCDEP.
+and in IRC, etc. it is expected that all major decisions will take place via the approval of an OCDEP.
 
 
 When to write a proposal
@@ -87,7 +87,7 @@ it to the open-civic-data mailing list (https://groups.google.com/forum/#!forum/
 
 At that point, the core Open Civic Data team will make sure it's technically feasible, not spam, etc., 
 assign it a number and commit it to the repository.
-This doesn't mean the feature will be implemented; it merely means the proposal is officially a OCDEP.
+This doesn't mean the feature will be implemented; it merely means the proposal is officially an OCDEP.
 
 
 Discussion and Acceptance of a Proposal

@@ -48,7 +48,7 @@ name
     The common name of the Jurisdiction, such as 'Wyoming' or 'Hope County School System'
 
 url
-    The primary website of the body represented.
+    The primary website of the Jurisdiction.
 
 classification
     The type of jurisdiction being defined, current options are:

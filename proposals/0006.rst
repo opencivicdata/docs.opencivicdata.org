@@ -128,86 +128,86 @@ actions
             If the ``entity_type`` is 'person' and the entity is resolved, will be the
             person that is related.
 
-    sponsorships
-        A list of all sponsoring people and organizations.
+sponsorships
+    A list of all sponsoring people and organizations.
 
-        primary
-            A boolean that is true if the sponsor can be considered 'primary.'  The exact meaning
-            of this is jurisdiction-dependent.
+    primary
+        A boolean that is true if the sponsor can be considered 'primary.'  The exact meaning
+        of this is jurisdiction-dependent.
 
-            **Note:** this can often be derived from classification, but can often be highly
-            jurisdiction dependent (among US states for example the terms author, sponsor,
-            cosponsor, and coauthor can mean quite different things).  Because of this, and the
-            frequent need to indicate which author(s) should be displayed in a short list of
-            sponsors when the full list might be half of the legislature or more, we've chosen
-            to include this field.
+        **Note:** this can often be derived from classification, but can often be highly
+        jurisdiction dependent (among US states for example the terms author, sponsor,
+        cosponsor, and coauthor can mean quite different things).  Because of this, and the
+        frequent need to indicate which author(s) should be displayed in a short list of
+        sponsors when the full list might be half of the legislature or more, we've chosen
+        to include this field.
 
-        classification
-            The classification of the sponsor, such as 'cosponsor' or 'author'.
+    classification
+        The classification of the sponsor, such as 'cosponsor' or 'author'.
 
-        name
-            The upstream-given name of this sponsor.
+    name
+        The upstream-given name of this sponsor.
 
-        entity_type
-            'organization' or 'person' - the type of the sponsor.
+    entity_type
+        'organization' or 'person' - the type of the sponsor.
 
-        organization, organization_id
-            If the ``entity_type`` is 'organization' and the entity is resolved, will be the
-            sponsoring organization.
+    organization, organization_id
+        If the ``entity_type`` is 'organization' and the entity is resolved, will be the
+        sponsoring organization.
 
-        person, person_id
-            If the ``entity_type`` is 'person' and the entity is resolved, will be the
-            sponsoring individual.
+    person, person_id
+        If the ``entity_type`` is 'person' and the entity is resolved, will be the
+        sponsoring individual.
 
-    versions
-        All versions of the bill.
+versions
+    All versions of the bill.
 
-        note
-            Note describing the version (e.g. 'Introduced', 'Engrossed', etc.)
-        date
-            The date the version was published in YYYY-MM-DD format (partial dates are acceptable).
-        links
-            Links to 'available forms' of the version.  Each version can be available in
-            multiple forms such as PDF and HTML.  (For those familiar with DCAT this is the same
-            as the ``Distribution`` class.)
-            Has the following properties:
-
-            url
-                URL of the link.
-            media_type
-                The `media type <http://en.wikipedia.org/wiki/Internet_media_type>`_ of the link.
-
-
-
-    documents
-        All documents related to the bill with the exception of versions (which are part of
-        the above ``versions``).
-
-        note
-            Note describing the document's relation to the bill (e.g. 'Fiscal Note',
-            'Committee Report', etc.)
-        date
-            The date the document was published in YYYY-MM-DD format
-            (partial dates are acceptable).
-        links
-            Links to 'available forms' of the document.  Each document can be available in
-            multiple forms such as PDF and HTML.  (For those familiar with DCAT this is the same
-            as the ``Distribution`` class.)
-            Has the following properties:
-
-            url
-                URL of the link.
-            media_type
-                The `media type <http://en.wikipedia.org/wiki/Internet_media_type>`_ of the link.
-
-    sources
-        List of sources used in assembling this object.  Has the following properties:
+    note
+        Note describing the version (e.g. 'Introduced', 'Engrossed', etc.)
+    date
+        The date the version was published in YYYY-MM-DD format (partial dates are acceptable).
+    links
+        Links to 'available forms' of the version.  Each version can be available in
+        multiple forms such as PDF and HTML.  (For those familiar with DCAT this is the same
+        as the ``Distribution`` class.)
+        Has the following properties:
 
         url
-            URL of the resource.
-        note
-            **optional**
-            Description of what this source was used for.
+            URL of the link.
+        media_type
+            The `media type <http://en.wikipedia.org/wiki/Internet_media_type>`_ of the link.
+
+
+
+documents
+    All documents related to the bill with the exception of versions (which are part of
+    the above ``versions``).
+
+    note
+        Note describing the document's relation to the bill (e.g. 'Fiscal Note',
+        'Committee Report', etc.)
+    date
+        The date the document was published in YYYY-MM-DD format
+        (partial dates are acceptable).
+    links
+        Links to 'available forms' of the document.  Each document can be available in
+        multiple forms such as PDF and HTML.  (For those familiar with DCAT this is the same
+        as the ``Distribution`` class.)
+        Has the following properties:
+
+        url
+            URL of the link.
+        media_type
+            The `media type <http://en.wikipedia.org/wiki/Internet_media_type>`_ of the link.
+
+sources
+    List of sources used in assembling this object.  Has the following properties:
+
+    url
+        URL of the resource.
+    note
+        **optional**
+        Description of what this source was used for.
 
 
 Further Reading

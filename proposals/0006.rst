@@ -167,9 +167,9 @@ actions
         date
             The date the version was published in YYYY-MM-DD format (partial dates are acceptable).
         links
-            Links to instances of the version.  A link is a specific formatting of the version,
-            not to be confused with versions (each of which should have their own ``versions``
-            instance).  So if a document is available as a PDF and an HTML each will have a link.
+            Links to 'available forms' of the version.  Each version can be available in
+            multiple forms such as PDF and HTML.  (For those familiar with DCAT this is the same
+            as the ``Distribution`` class.)
             Has the following properties:
 
             url
@@ -190,8 +190,10 @@ actions
             The date the document was published in YYYY-MM-DD format
             (partial dates are acceptable).
         links
-            Links to instances of the document.  (See above description of ``versions.links`` for
-            details.)  Has the following properties:
+            Links to 'available forms' of the document.  Each document can be available in
+            multiple forms such as PDF and HTML.  (For those familiar with DCAT this is the same
+            as the ``Distribution`` class.)
+            Has the following properties:
 
             url
                 URL of the link.

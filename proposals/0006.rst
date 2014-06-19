@@ -24,14 +24,14 @@ Implementation
 id
     A unique ID in the format ``ocd-bill/{uuid}``.
 
-session, session_id
-    A reference to a ``legislative_session`` from the relevant ``Jurisdiction`` (see :ref:`OCDEP3` for details)
+session
+    A reference to a ``legislative_session`` from the relevant ``Jurisdiction`` (see :ref:`OCDEP3` for details). This must contain the ``name`` attribute at minimum, but ``may`` contain any valid object that is found in the ``Jurisdiction.legislative_session`` object.
 
 identifier
     A name for the bill, such as 'HB 1' or '2117'.
 
 title
-    The current title of the bill, such as 'The Patient Protectionand Affordable Care Act'.
+    The current title of the bill, such as 'The Patient Protection and Affordable Care Act'.
 
 from_organization, from_organization_id
     **optional**
@@ -50,7 +50,7 @@ subject
     A curated list of subject areas that this bill is a part of.
 
 abstracts
-    A list of objects representing available abstracts (aka summaries) for the bill, each with the
+    A list of objects representing available abstracts (sometimes called summaries) for the bill, each with the
     following fields:
 
     abstract
@@ -58,7 +58,7 @@ abstracts
 
     note
         **optional**
-        A note about the origin of the summary, such as 'minority caucus report'.
+        A note about the origin of the summary, such as "Republican Caucus Summary" or "Library of Congress Summary"
 
 other_titles
     A list of objects representing alternate titles for the bill.
@@ -96,7 +96,7 @@ actions
     A list of objects representing individual actions that take place on a bill, comprising the
     legislative history of the proposal in question.  Actions consist of the following properties:
 
-    organization
+    organization, organization_id
         The organization that this action took place within.
 
     description

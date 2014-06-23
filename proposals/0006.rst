@@ -24,7 +24,7 @@ Implementation
 id
     A unique ID in the format ``ocd-bill/{uuid}``.
 
-session
+legislative_session
     A reference to a ``legislative_session`` from the relevant ``Jurisdiction`` (see :ref:`OCDEP3` for details). This must contain the ``name`` attribute at minimum, but ``may`` contain any valid object that is found in the ``Jurisdiction.legislative_session`` object.
 
 identifier

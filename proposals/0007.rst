@@ -73,7 +73,7 @@ result
 organization, organization_id
     The ``Organization`` in which the ``VoteEvent`` took place.
 
-session, session_id
+legislative_session, legislative_session_id
     Reference to the ``Jurisdiction.legislative_session`` the ``VoteEvent`` takes place in.
 
 bill, bill_id

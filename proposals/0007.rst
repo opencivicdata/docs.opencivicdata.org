@@ -50,12 +50,14 @@ identifier
     **optional**
     Upstream identifier if one exists, such as 'Roll Call #2372'.
 
-motion (``motion.text``)
-    The motion being voted upon.
+motion
+    The motion being voted upon.  Represented as an object with ``text`` and ``classification`` elements.
 
-    Will be represented in JSON as an object with a single ``text`` key.
+    ``text`` is a required string describing the motion.
 
-    In Popolo there is a `Motion <http://popoloproject.com/specs/motion.html>`_ class that has additional properties, only text is supported at this time.
+    ``classification`` is a list of classifiers (e.g. 'bill-passage') and can also be an empty list.
+
+    In Popolo there is a `Motion <http://popoloproject.com/specs/motion.html>`_ class that has additional properties, only text and classification are supported at this time.
 
 
 start_date
@@ -64,10 +66,6 @@ start_date
 end_date
     **optional**
     Time at which the vote ends, should such a time exist.    In flexible YYYY-MM-DD format.
-
-classification
-    A list of strings classifying the type of vote.  Examples might be 'committee-referral',
-    'passage', 'tabling'.
 
 result
     The outcome of the vote, can be 'pass' or 'fail'.

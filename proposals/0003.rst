@@ -75,8 +75,11 @@ division, division_id
 legislative_sessions
     A list of sub-objects representing times when the jurisdiction's legislature has met (if one exists).
 
+    identifier
+        An identifier that uniquely identifies the session within the context of the Jurisdiction. (e.g. 2009)
+
     name
-        The canonical name of the session.
+        The canonical name of the session. (e.g. 2009 Regular Session)
 
     classification
         The type of session, choices are:

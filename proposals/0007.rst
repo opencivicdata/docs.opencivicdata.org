@@ -108,7 +108,7 @@ counts
     option
         The voting option being tallied.  See :ref:`voting-options`.
 
-    count
+    value
         The total number of individuals voting this way.  (Should match the sum of the ``votes``
         with the same ``option`` in almost every case, assuming they are present.)
 

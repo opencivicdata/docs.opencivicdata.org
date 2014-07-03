@@ -79,8 +79,8 @@ other_identifiers
     are two related bills with distinct parallel histories, a second Bill object should be
     created and the ``related_bill`` property (described below) should be used.
 
-    name
-        The alternate name (e.g. HB 7)
+    identifier
+        The alternate identifier (e.g. HB 7)
 
     note
         **optional**

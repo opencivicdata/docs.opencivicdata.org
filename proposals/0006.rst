@@ -128,6 +128,30 @@ actions
             If the ``entity_type`` is 'person' and the entity is resolved, will be the
             person that is related.
 
+related_bills
+    List of all related (but distinct) bills.  An example might be a bill that was introduced
+    in a prior session (and thus is similar but has different legislative history).
+
+    An array of entities with the following fields:
+
+    identifier
+        The identifier of the related bill, such as SB 22.
+
+    legislative_session
+        A link to the legislative session the related bill is from.
+
+    relation_type
+        Description of the relation between the two bills, can be:
+
+        * companion - A companion bill introduced in the same session in opposite chamber.
+        * prior-session - Same bill as introduced in a prior session.
+        * replaced-by - A bill that was replaced by another bill.
+        * replaces - A bill that supercedes another bill.
+
+    related_bill, related_bill_id
+        If the related bill exists in the data set, a link to the complete record for the bill.
+        (**can be null if no such link has yet been made**)
+
 sponsorships
     A list of all sponsoring people and organizations.
 

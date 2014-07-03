@@ -43,6 +43,12 @@ start_time
 Optional Fields
 ---------------
 
+description
+    Description of the Event.
+
+location
+    Location object, as defined in the Location section below.
+
 all_day
     Boolean value set to boolean ``True`` if the event is an all-day event, otherwise it must be set to the boolean value ``False``.
 

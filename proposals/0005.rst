@@ -80,9 +80,6 @@ area, area_id
 Additional Fields
 ~~~~~~~~~~~~~~~~~
 
-chamber
-    Used to distinguish between upper and lower legislative organizations (House/Senate for instance).
-
 jurisdiction, jurisdiction_id
     An organization exists as part of a ``Jurisdiction`` as described in :ref:`OCDEP3`.  (See :ref:`areas`)
 

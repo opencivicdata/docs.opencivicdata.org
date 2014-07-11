@@ -42,10 +42,10 @@ classification
     ``committee-meeting`` and ``hearing``.
 
 start_time
-    Fully timezone aware datetime set to the start time of the event if
-    serialized, except in the case of POSIX serialization, which must always
-    be in UTC time. When reading the time in, it should be made timezone
-    aware using the timezone field.
+    Starting time of the event. This field is serialized as an ISO 8601
+    datetime string, normalized to UTC, and must be fully datetime aware.
+    ISO 8601 defines times expressed in UTC with a special UTC designator
+    ("Z") as the timezone.
 
 timezone
     This must always be set to the timezone in which the event is held. This
@@ -65,10 +65,10 @@ all_day
     Boolean value set to boolean ``True`` if the event is an all-day event, otherwise it must be set to the boolean value ``False``.
 
 end_time
-    Fully timezone aware datetime set to the end time of the event if
-    serialized, except in the case of POSIX serialization, which must always
-    be in UTC time. When reading the time in, it should be made timezone
-    aware using the timezone field.
+    Ending time of the event. This field is serialized as an ISO 8601
+    datetime string, normalized to UTC, and must be fully datetime aware.
+    ISO 8601 defines times expressed in UTC with a special UTC designator
+    ("Z") as the timezone.
 
 status
     Status of the event, values are currently:

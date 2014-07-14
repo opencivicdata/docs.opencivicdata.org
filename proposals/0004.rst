@@ -161,7 +161,7 @@ subjects
 Related Entities
 ++++++++++++++++
 
-type
+entity_type
     Type of the related entity, such as ``bill``, ``person``, or ``organization``.
 
 id
@@ -518,7 +518,7 @@ Schema::
                         "related_entities": {
                             "items": {
                                 "properties": {
-                                    "type": {
+                                    "entity_type": {
                                         "type": "string",
                                     },
 

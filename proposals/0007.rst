@@ -100,6 +100,10 @@ votes
     option
         The opinion of the ``voter`` casting this ``Vote``.  See :ref:`voting-options`.
 
+    note
+        A freeform text field describing any additional information about the vote.  An example
+        might be an excuse if the option is 'excused'.
+
 counts
     A list of count objects (what Popolo calls `Count <http://popoloproject.com/specs/count.html>`_).
 
@@ -158,6 +162,8 @@ Differences from Popolo
 * ``Vote`` objects (within ``VoteEvent.votes``) have a ``voter_name`` property that is used for when a voter cannot be linked to a known ``Person``.  Additionally, ``voter`` can only link to a ``Person``.
 
 * ``Vote`` objects also do not currently support the ``group``, ``role``, ``weight``, or ``pair`` properties.  There is a chance these will be adopted in the future after their use is necessary.  
+
+* ``Vote`` objects have a ``note`` property that is not present in Popolo's specification.
 
 * ``Motion`` objects from Popolo are represented simply as ``motion.text``, this is future-proof
   should we ever choose to adopt additional ``Motion`` properties.

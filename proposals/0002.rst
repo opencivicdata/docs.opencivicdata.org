@@ -50,7 +50,7 @@ country_code
 type
     The type of boundary.  (e.g. `country`, `state`, `town`, `city`, `cd`, `sldl`, `sldu`)
 
-    * Valid characters are lowercase UTF-8 letters, dash (-), and underscore (\_).
+    * Valid characters are lowercase UTF-8 letters, hyphen (-), and underscore (\_).
     * Use existing types where possible.
 
 type_id

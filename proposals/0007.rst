@@ -157,8 +157,6 @@ Differences from Popolo
 
 * ``VoteEvent`` has ``classification`` and ``extra`` attributes which are not defined in Popolo.
 
-* Instead of using Popolo's ``context``, Open Civic Data uses the ``session`` to tie to a ``Jurisdiction``'s ``legislative_session``.
-
 * ``Vote`` objects (within ``VoteEvent.votes``) have a ``voter_name`` property that is used for when a voter cannot be linked to a known ``Person``.  Additionally, ``voter`` can only link to a ``Person``.
 
 * ``Vote`` objects also do not currently support the ``group``, ``role``, ``weight``, or ``pair`` properties.  There is a chance these will be adopted in the future after their use is necessary.  

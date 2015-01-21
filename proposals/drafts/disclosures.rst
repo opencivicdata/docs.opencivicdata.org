@@ -212,10 +212,10 @@ identifier
     An identifier that uniquely identifies the form
 
 form_type
-    An identifier that points to the type of form
+    An identifier that points to the type of form. See ``FormType`` section below.
 
 fields
-    A list of sub-objects representing fields in the form. See ``Field`` section below
+    A list of sub-objects representing fields in the form. See ``Field`` section below.
 
 FormType
 ~~~~~~~~
@@ -238,7 +238,7 @@ identifier
     An identifier that uniquely identifies the field
 
 field_type
-    An identifier that points to the type of field
+    An identifier that points to the type of field. See ``FieldType`` section below.
 
 value
     The value of the field
@@ -264,10 +264,10 @@ identifier
     An identifier that uniquely identifies the schedule
 
 schedule_type
-    An identifier that points to the schedule's type. See ``Type`` section below
+    An identifier that points to the schedule's type. See ``ScheduleType`` section below
 
 lines
-    A list of sub-objects representing lines in the schedule. See ``Line`` section below
+    A list of sub-objects representing lines in the schedule. See ``Line`` object below
 
 ScheduleType
 ~~~~~~~~~~~~

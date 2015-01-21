@@ -206,6 +206,9 @@ authority, authority_id
 reporting_period
     The reporting period to which this registration was submitted.
 
+registration_type
+    The type of the registration, as categorized by the relevant authority
+
 lobbyists
     Where the registrant is an organization and the registration lists that organization's lobbyists, a list of Open Civic Data people IDs, one for each lobbyist
 
@@ -272,6 +275,9 @@ document_id
 
 reporting_period
     The reporting period to which this report was submitted.
+
+report_type
+    The type of this report, as categorized by the relevant authority.
 
 registrant, registrant_id
     The organization or individual who is registering.

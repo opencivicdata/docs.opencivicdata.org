@@ -117,6 +117,9 @@ related_entities
         * foreign-entity
         * affiliate
 
+disclosed_events
+    A list of events disclosed. See ``DisclosedEvent`` object below.
+
 forms
     **optional**
     A list of forms associated with this disclosure. See ``Form`` object below.
@@ -203,6 +206,34 @@ amends_type
 amendment
     **optional**
     A boolean that is true if this is a registration type that is reserved for amending other registration types
+
+DisclosedEvent
+--------------
+The basis for the DisclosedEvent is the Open Civic Data ``Event`` type, as described in `OCDEP 4: Events <http://opencivicdata.readthedocs.org/en/latest/proposals/0004.html>`_. Constraints on field values specified below
+
+identifier
+    An identifier that uniquely identifies the event.
+
+classification
+    As defined in the ``Event`` type, where values are extended to include:
+
+    * lobbying
+    * contribution
+
+participants
+    Participants associated with the event. 
+
+    note
+        As defined on the ``Event`` type, where values identifies the role of the participant. Choices include the following, and may be updated:
+        * lobbyist      - (lobbying) person who actually did the lobbying
+        * lobbied       - (lobbying) organizations and/or individuals that were lobbied
+        * regarding     - (lobbying) bills, regulations or other matters that can be identified
+        * contributor   - (contributions) the source of the transaction
+        * recipient     - (contributions) the target of the contribution
+        * lender        - (contributions) the source of a loan
+        * borrower      - (contributions) the recipient of a loan
+        * creditor      - (contributions) entity to which a debt is owed
+        * debtors       - (contributions) entity which owes a debt
 
 Form
 ----

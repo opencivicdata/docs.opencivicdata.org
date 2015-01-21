@@ -225,15 +225,15 @@ participants
 
     note
         As defined on the ``Event`` type, where values identifies the role of the participant. Choices include the following, and may be updated:
-            * lobbyist      - (lobbying) person who actually did the lobbying
-            * lobbied       - (lobbying) organizations and/or individuals that were lobbied
-            * regarding     - (lobbying) bills, regulations or other matters that can be identified
-            * contributor   - (contributions) the source of the transaction
-            * recipient     - (contributions) the target of the contribution
-            * lender        - (contributions) the source of a loan
-            * borrower      - (contributions) the recipient of a loan
-            * creditor      - (contributions) entity to which a debt is owed
-            * debtor        - (contributions) entity which owes a debt
+          * lobbyist      - (lobbying) person who actually did the lobbying
+          * lobbied       - (lobbying) organizations and/or individuals that were lobbied
+          * regarding     - (lobbying) bills, regulations or other matters that can be identified
+          * contributor   - (contributions) the source of the transaction
+          * recipient     - (contributions) the target of the contribution
+          * lender        - (contributions) the source of a loan
+          * borrower      - (contributions) the recipient of a loan
+          * creditor      - (contributions) entity to which a debt is owed
+          * debtor        - (contributions) entity which owes a debt
 
 Form
 ----

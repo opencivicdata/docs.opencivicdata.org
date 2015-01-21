@@ -191,7 +191,7 @@ classification
     * registration  - registers a person or organization with a DisclosureAuthority
     * report        - makes a periodic report to a DisclosureAuthority
 
-category
+arena
     The category of the disclosure type. Current values include:
         
     * lobbying      - Disclosures related to lobbying

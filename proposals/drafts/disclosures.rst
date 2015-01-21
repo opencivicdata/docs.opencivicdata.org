@@ -188,6 +188,9 @@ identifier
 name
     The canonical name of the disclosure type
 
+description
+    Description of the disclosure type
+
 classification
     The classification of the disclosure type. Current values include:
     

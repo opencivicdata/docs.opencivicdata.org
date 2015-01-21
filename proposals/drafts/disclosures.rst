@@ -115,7 +115,7 @@ related_entities
         * client
         * beneficiary
         * foreign-entity
-        * sponsoring-organization
+        * affiliate
 
 forms
     **optional**

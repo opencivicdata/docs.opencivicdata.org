@@ -89,17 +89,17 @@ registration_types
 
     forms
         **optional**
-        A list of identifiers for the forms associated with this report type
+        A list of identifiers for the forms associated with this report type. See ``Forms`` section below.
 
         identifier
-        The identifier of the form
+            The identifier of the form
 
     schedules
         **optional**
-        A list of identifiers for the schedules associated with this report type
+        A list of identifiers for the schedules associated with this report type. See ``Schedules`` section below.
 
         identifier
-        The identifier of the schedule
+            The identifier of the schedule
 
 report_types
     A list of sub-objects representing the types of reports submitted to this authority
@@ -123,43 +123,17 @@ report_types
 
     forms
         **optional**
-        A list of identifiers for the forms associated with this report type
+        A list of identifiers for the forms associated with this report type. See ``Forms`` section below.
 
         identifier
-        The identifier of the form
+            The identifier of the form
 
     schedules
         **optional**
-        A list of identifiers for the schedules associated with this report type
+        A list of identifiers for the schedules associated with this report type. See ``Schedules`` section below.
 
         identifier
-        The identifier of the schedule
-
-forms
-    **optional**
-    A list of sub-objects representing the forms published by this authority
-
-    identifier
-        An identifier that uniquely identifies the form
-
-    name
-        The canonical name of the form
-
-    description
-        description of the form
-
-schedules
-    **optional**
-    A list of sub-objects representing the schedules published by this authority
-
-    identifier
-        An identifier that uniquely identifies the schedule
-
-    name
-        The canonical name of the schedule
-
-    description
-        description of the schedule
+            The identifier of the schedule
 
 reporting_periods
     A list of the reporting periods defined by this authority
@@ -187,6 +161,33 @@ reporting_periods
 
     end_date
         End date of the reporting period
+
+Forms
+~~~~~
+    A list of sub-objects representing the forms published by this authority
+
+    identifier
+        An identifier that uniquely identifies the form
+
+    name
+        The canonical name of the form
+
+    description
+        description of the form
+
+Schedules
+~~~~~~~~~
+    A list of sub-objects representing the schedules published by this authority
+
+    identifier
+        An identifier that uniquely identifies the schedule
+
+    name
+        The canonical name of the schedule
+
+    description
+        description of the schedule
+
 
 Registrations and reports both relate three things: the registrant, the disclosure authority, and the official document submitted.
 

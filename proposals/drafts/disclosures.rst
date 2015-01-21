@@ -48,20 +48,8 @@ DisclosureAuthority
 -------------------
 The basis for the DisclosureAuthority is the Open Civic Data ``Organization`` type, as described in `OCDEP 5: People, Organizations, Posts, and Memberships <http://opencivicdata.readthedocs.org/en/latest/proposals/0005.html>`_.
 
-disclosure_classification
+disclosure_types
     A list of disclosure types that this authority is responsible for collecting and/or publishing. 
-    
-    identifier
-        A unique identifier for this disclosure type.
-
-    name
-        The canonical name for this disclosure type.
-
-    classification
-        Choices are:
-        
-        * lobbying      - Disclosures related to lobbying
-        * contributions - Disclosures related to political contributions
 
 reporting_periods
     A list of the reporting periods defined by this authority
@@ -203,6 +191,12 @@ classification
     * registration  - registers a person or organization with a DisclosureAuthority
     * report        - makes a periodic report to a DisclosureAuthority
 
+category
+    The category of the disclosure type. Current values include:
+        
+    * lobbying      - Disclosures related to lobbying
+    * contributions - Disclosures related to political contributions
+
 amends_type
     The identifier of the disclosure type that this disclosure type is able to amend. Can be the same as identifier, where future submissions supercede past submissions.
 
@@ -276,7 +270,7 @@ lines
     A list of sub-objects representing lines in the schedule. See ``Line`` section below
 
 ScheduleType
-~~~~~~~~
+~~~~~~~~~~~~
 The type of a schedule
 
 identifier
@@ -302,7 +296,7 @@ value
     The value of the line
 
 LineType
-~~~~~~~~~
+~~~~~~~~
 The type of a line
 
 identifier

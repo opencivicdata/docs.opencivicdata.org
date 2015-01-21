@@ -346,9 +346,10 @@ id
     Open Civic Data-style id in the format ``ocd-disclosure/lobbying/event/{{uuid}}``
 
 classification
-    As defined in the ``Event`` type, where values are extended to include ``lobbying-contact``.
+    As defined in the ``Event`` type, where values are extended to include ``lobbying-contact``
 
 participants
+    Participants associated with the event. Includes lobbyists, lobbied organizations and/or lobbied individuals, and bills.
 
     note
         As defined on the ``Event`` type, where values identifies the role of the participant. choices are:

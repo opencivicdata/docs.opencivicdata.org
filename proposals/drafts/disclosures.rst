@@ -22,10 +22,10 @@ DisclosureAuthority
     The authority to which disclosures must be submitted.
 
 LobbyingRegistration
-    A record of registration to engage in lobbying activity, submitted by a registrant ``organization`` or ``person`` to the ``organization`` responsible for collecting lobbying disclosures. An example is the `LD-1 form <http://soprweb.senate.gov/index.cfm?event=getFilingDetails&filingID=11886c30-f2fa-4994-8c05-575f715f614e&filingTypeID=1>`, submitted to the United States Congress.
+    A record of registration to engage in lobbying activity, submitted by a registrant ``organization`` or ``person`` to the ``organization`` responsible for collecting lobbying disclosures. An example is the `LD-1 form <http://soprweb.senate.gov/index.cfm?event=getFilingDetails&filingID=11886c30-f2fa-4994-8c05-575f715f614e&filingTypeID=1>`_, submitted to the United States Congress.
 
 LobbyingReport
-    A record submitted by a registrant ``organization`` or ``person``, reporting zero or more objects of type ``LobbyingActivity`` over some time interval. An example is the quarterly `LD-2 form <http://soprweb.senate.gov/index.cfm?event=getFilingDetails&filingID=670410d5-de38-43a7-b4b3-ab5760d47f6f&filingTypeID=69>`, submitted to the United States congress.
+    A record submitted by a registrant ``organization`` or ``person``, reporting zero or more objects of type ``LobbyingActivity`` over some time interval. An example is the quarterly `LD-2 form <http://soprweb.senate.gov/index.cfm?event=getFilingDetails&filingID=670410d5-de38-43a7-b4b3-ab5760d47f6f&filingTypeID=69>`_, submitted to the United States congress.
 
 LobbyingEvent
      A subtype of ``Event``. Contact with an official ``organization`` that constitutes lobbying as defined by the appropriate ``jurisdiction``. These are understood to have been carried out by a ``registrant`` on behalf of a ``client``.

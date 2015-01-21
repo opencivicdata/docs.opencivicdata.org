@@ -31,10 +31,10 @@ LobbyingEvent
      A subtype of ``Event``. Contact with an official ``organization`` that constitutes lobbying as defined by the appropriate ``jurisdiction``. These are understood to have been carried out by a ``registrant`` on behalf of a ``client``.
 
 ContributionsRegistration
-    A record of an ``organization``'s registration as a contributor and/or reciepient of contributions. An example is `FEC Form 1 <http://docquery.fec.gov/cgi-bin/dcdev/forms/C00295527/245548/>`, submitted to the United States Federal Elections Commission.
+    A record of an ``organization``'s registration as a contributor and/or reciepient of contributions. An example is `FEC Form 1 <http://docquery.fec.gov/cgi-bin/dcdev/forms/C00295527/245548/>`_, submitted to the United States Federal Elections Commission.
 
 ContributionsReport
-    A record of a registered ``organization``'s contributions, reciepts, disbursements, loans, expenditures and any other transactions it is required to disclose. An example is `FEC Form 3 <http://docquery.fec.gov/cgi-bin/dcdev/forms/C00431445/959763/>`, submitted to the United States Federal Elections Commission.
+    A record of a registered ``organization``'s contributions, reciepts, disbursements, loans, expenditures and any other transactions it is required to disclose. An example is `FEC Form 3 <http://docquery.fec.gov/cgi-bin/dcdev/forms/C00431445/959763/>`_, submitted to the United States Federal Elections Commission.
 
 ContributionsEvent
     A subtype of ``Event``. An itemized transaction representing a contribution, reciept, disbursement, loan, expenditure or any other transactions that must be disclosed by a registered ``organization``.
@@ -50,7 +50,7 @@ Implementation
 DisclosureAuthority
 -------------------
 
-The basis for the DisclosureAuthority is the Open Civic Data ``Organization`` type, as described in `OCDEP 5: People, Organizations, Posts, and Memberships <http://opencivicdata.readthedocs.org/en/latest/proposals/0005.html>`.
+The basis for the DisclosureAuthority is the Open Civic Data ``Organization`` type, as described in `OCDEP 5: People, Organizations, Posts, and Memberships <http://opencivicdata.readthedocs.org/en/latest/proposals/0005.html>`_.
 
 disclosure_types
     A list of disclosure types that this authority is responsible for collecting and/or publishing. 
@@ -340,7 +340,7 @@ extras
 
 LobbyingEvent
 -------------
-The basis for the LobbyingEvent is the Open Civic Data ``Event`` type, as described in `OCDEP 4: Events <http://opencivicdata.readthedocs.org/en/latest/proposals/0004.html>`. Constraints on field values specified below
+The basis for the LobbyingEvent is the Open Civic Data ``Event`` type, as described in `OCDEP 4: Events <http://opencivicdata.readthedocs.org/en/latest/proposals/0004.html>`_. Constraints on field values specified below
 
 id
     Open Civic Data-style id in the format ``ocd-disclosure/lobbying/event/{{uuid}}``

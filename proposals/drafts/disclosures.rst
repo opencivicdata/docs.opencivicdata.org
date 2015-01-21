@@ -85,7 +85,7 @@ Disclosure
 ----------
 
 id
-    Identifier that uniquely identifies the disclosure.
+    Open Civic Data-style id in the format ``ocd-disclosure/{{this.disclosure_type.arena}}/{{uuid}}``
 
 registrant, registrant_id
     The organization or individual who is registering.
@@ -125,9 +125,9 @@ schedules
     **optional**
     A list of schedules associated with this report type. See ``Schedules`` section below.
 
-document_id
+official_identifier
     **optional**
-    Upstream identifier of the associated document if one exists, such as the filing ID assigned by the Senate Office of Public Record
+    Upstream identifier of the disclosure if one exists, such as the filing ID assigned by the Senate Office of Public Record
 
 submitted_date
     **optional**

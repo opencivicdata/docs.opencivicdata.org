@@ -191,13 +191,13 @@ name
 description
     Description of the disclosure type
 
-classification
-    The classification of the disclosure type. Current values include:
+action
+    The action performed by this disclosure type. Current values include:
     
     * registration  - registers a person or organization with a DisclosureAuthority
     * report        - makes a periodic report to a DisclosureAuthority
 
-arena
+classification
     The category of the disclosure type. Current values include:
         
     * lobbying      - Disclosures related to lobbying

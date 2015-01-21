@@ -119,11 +119,11 @@ related_entities
 
 forms
     **optional**
-    A list of forms associated with this report type. See ``Forms`` section below.
+    A list of forms associated with this disclosure. See ``Form`` object below.
 
 schedules
     **optional**
-    A list of schedules associated with this report type. See ``Schedules`` section below.
+    A list of schedules associated with this disclosure. See ``Schedule`` object below.
 
 official_identifier
     **optional**

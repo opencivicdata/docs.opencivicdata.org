@@ -233,7 +233,7 @@ participants
         * lender        - (contributions) the source of a loan
         * borrower      - (contributions) the recipient of a loan
         * creditor      - (contributions) entity to which a debt is owed
-        * debtors       - (contributions) entity which owes a debt
+        * debtor        - (contributions) entity which owes a debt
 
 Form
 ----

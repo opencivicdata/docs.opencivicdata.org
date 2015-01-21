@@ -340,7 +340,7 @@ extras
 
 LobbyingEvent
 -------------
-The basis for the LobbyingEvent is the Open Civic Data ``Event`` type, as described in `OCDEP 4: Events <http://opencivicdata.readthedocs.org/en/latest/proposals/0005.html>`. Constraints on field values specified below
+The basis for the LobbyingEvent is the Open Civic Data ``Event`` type, as described in `OCDEP 4: Events <http://opencivicdata.readthedocs.org/en/latest/proposals/0004.html>`. Constraints on field values specified below
 
 id
     Open Civic Data-style id in the format ``ocd-disclosure/lobbying/event/{{uuid}}``

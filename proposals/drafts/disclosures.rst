@@ -162,34 +162,31 @@ reporting_periods
     end_date
         End date of the reporting period
 
-Forms
-~~~~~
-    A list of sub-objects representing the forms published by this authority
+Form
+~~~~
+Object representing forms used for making disclosures
 
-    identifier
-        An identifier that uniquely identifies the form
+identifier
+    An identifier that uniquely identifies the form
 
-    name
-        The canonical name of the form
+name
+    The canonical name of the form
 
-    description
-        description of the form
+description
+    description of the form
 
-Schedules
-~~~~~~~~~
-    A list of sub-objects representing the schedules published by this authority
+Schedule
+~~~~~~~~
+Object representing schedules used for making disclosures
 
-    identifier
-        An identifier that uniquely identifies the schedule
+identifier
+    An identifier that uniquely identifies the schedule
 
-    name
-        The canonical name of the schedule
+name
+    The canonical name of the schedule
 
-    description
-        description of the schedule
-
-
-Registrations and reports both relate three things: the registrant, the disclosure authority, and the official document submitted.
+description
+    description of the schedule
 
 LobbyingRegistration
 --------------------

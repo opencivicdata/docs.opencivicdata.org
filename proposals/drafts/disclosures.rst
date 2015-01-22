@@ -93,7 +93,7 @@ registrant, registrant_id
 authority, authority_id
     The organization that the registration is due to.
 
-reporting_period
+reporting_period, reporting_period_id
     The reporting period to which this registration was submitted.
 
 disclosure_type

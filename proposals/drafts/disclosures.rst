@@ -344,7 +344,463 @@ description
 
 
 
-DefinedSchema
--------------
+Defined Schema
+--------------
 
-TODO
+Schema::
+
+    field_type_schema = {
+        "properties": {
+            "identifier": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "description": {
+                "type": "string"
+            }
+        },
+        "type": "object"
+    }
+
+    field_schema = {
+        "properties": {
+            "identifier": {
+                "type": "string"
+            },
+            "field_type": field_type_schema,
+            "value": {
+                "type": "any"
+            }
+        },
+        "type": "object"
+    }
+
+    form_type_schema = {
+        "properties": {
+            "identifier": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "description": {
+                "type": "string"
+            }
+        },
+        "type": "object"
+    }
+
+    form_schema = {
+        "properties": {
+            "identifier": {
+                "type": "string"
+            },
+            "form_type": form_type_schema,
+            "fields": {
+                "items": {
+                    "properties": field_schema,
+                },
+                "type": "array"
+            }
+        },
+        "type": "object"
+    }
+
+    line_type_schema = {
+        "properties": {
+            "identifier": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "description": {
+                "type": "string"
+            }
+        },
+        "type": "object"
+    }
+
+    line_schema = {
+        "properties": {
+            "identifier": {
+                "type": "string"
+            },
+            "line_type": line_type_schema,
+            "value": {
+                "type": "any"
+            }
+        },
+        "type": "object"
+    }
+
+    schedule_type_schema = {
+        "properties": {
+            "identifier": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "description": {
+                "type": "string"
+            }
+        },
+        "type": "object"
+    }
+
+    schedule_schema = {
+        "properties": {
+            "identifier": {
+                "type": "string"
+            },
+            "form_type": schedule_type_schema,
+            "lines": {
+                "items": {
+                    "properties": line_schema,
+                },
+                "type": "array"
+            }
+        },
+        "type": "object"
+    }
+
+    disclosure_actions = ["registration", "report"]
+
+    disclosure_classifications = ["lobbying", "contributions"]
+
+    disclosure_participant_roles = ["lobbyist",
+                                    "lobbied",
+                                    "regarding",
+                                    "contributor",
+                                    "recipient",
+                                    "lender",
+                                    "borrower",
+                                    "creditor",
+                                    "debtor"]
+
+    disclosure_type_schema = {
+        "properties": {
+            "identifier": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "description": {
+                "type": "string"
+            },
+            "action": {
+                "type": "string",
+                "enum": disclosure_actions
+            },
+            "classification": {
+                "type": "string",
+                "enum": disclosure_classifications
+            },
+            "amends_type": {
+                "type": "string"
+            },
+            "amendment": {
+                "type": "boolean"
+            }
+        },
+        "type": "object"
+    }
+
+    disclosed_event_schema = {
+        "properties": {
+            "identifier": {
+                "type": "string"
+            },
+            "classification": {
+                "type": "string",
+                "enum": disclosure_actions
+            },
+            "name": {
+                "type": "string"
+            },
+            "start_time": {
+                "type": "datetime"
+            },
+            "timezone": {
+                "type": "string"
+            },
+            "all_day": {
+                "type": "boolean"
+            },
+            "end_time": {
+                "type": ["datetime", "null"]
+            },
+            "status": {
+                "type": "string",
+                "blank": True,
+                "enum": ["cancelled", "tentative", "confirmed", "passed"],
+            },
+            "description": {
+                "type": "string",
+                "blank": True
+            },
+            "location": {
+                "type": "object",
+                "properties": {
+
+                    "name": {
+                        "type": "string"
+                    },
+
+                    "note": {
+                        "type": "string",
+                        "blank": True
+                    },
+
+                    "url": {
+                        "required": False,
+                        "type": "string",
+                    },
+
+                    "coordinates": {
+                        "type": ["object", "null"],
+                        "properties": {
+                            "latitude": {
+                                "type": "string",
+                            },
+
+                            "longitude": {
+                                "type": "string",
+                            }
+                        }
+                    },
+                },
+            },
+
+            "media": media_schema,
+
+            "documents": {
+                "items": {
+                    "properties": {
+                        "note": {
+                            "type": "string"
+                        },
+                        "url": {
+                            "type": "string"
+                        },
+                        "media_type": {
+                            "type": "string"
+                        },
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+
+            "links": {
+                "items": {
+                    "properties": {
+
+                        "note": {
+                            "type": "string",
+                            "blank": True
+                        },
+
+                        "url": {
+                            "format": "uri",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+
+            "participants": {
+                "items": {
+                    "properties": {
+
+                        "name": {
+                            "type": "string",
+                        },
+
+                        "id": {
+                            "type": ["string", "null"]
+                        },
+
+                        "type": {
+                            "enum": ["organization", "person"],
+                            "type": "string"
+                        },
+
+                        "note": {
+                            "type": "string",
+                            "enum": disclosure_participant_roles
+                        },
+
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+
+            "agenda": {
+                "items": {
+                    "properties": {
+                        "description": {
+                            "type": "string"
+                        },
+
+                        "order": {
+                            "type": ["string", "null"]
+                        },
+
+                        "subjects": {
+                            "items": {"type": "string"},
+                            "type": "array"
+                        },
+
+                        "media": media_schema,
+
+                        "notes": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "minItems": 0
+                        },
+
+                        "related_entities": {
+                            "items": {
+                                "properties": {
+                                    "entity_type": {
+                                        "type": "string"
+                                    },
+
+                                    "id": {
+                                        "type": ["string", "null"]
+                                    },
+
+                                    "name": {
+                                        "type": "string"
+                                    },
+
+                                    "note": {
+                                        "type": ["string", "null"]
+                                    },
+                                },
+                                "type": "object"
+                            },
+                            "minItems": 0,
+                            "type": "array"
+                        },
+                    },
+                    "type": "object"
+                },
+                "minItems": 0,
+                "type": "array"
+            },
+            "sources": sources,
+            "extras": extras
+        },
+        "type": "object"
+    }
+
+    disclosure_related_entity_roles = ["client",
+                                       "beneficiary",
+                                       "foreign-entity",
+                                       "affiliate"]
+
+    disclosure_schema = {
+        "properties": {
+            "id": {
+                "type": "string"
+            },
+            "registrant": {
+                "type": "string"
+            },
+            "registrant_id": {
+                "type": "string"
+            },
+            "authority": {
+                "type": "string"
+            },
+            "authority_id": {
+                "type": "string"
+            },
+            "reporting_period": {
+                "type": "string"
+            },
+            "reporting_period_id": {
+                "type": "string"
+            },
+            "disclosure_type": disclosure_type_schema,
+            "related_entities": {
+                "items": {
+                    "properties": {
+                        "entity_type": {
+                            "type": "string"
+                        },
+                        "id": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "note": {
+                            "type": "string",
+                            "enum": disclosure_related_entity_roles,
+                        },
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "disclosed_events": {
+                "items": disclosed_event_schema,
+                "type": "array"
+            },
+            "forms": {
+                "items": form_schema,
+                "type": "array"
+            },
+            "schedules": {
+                "items": schedule_schema,
+                "type": "array"
+            },
+            "official_identifier": {
+                "type": "string"
+            },
+            "submitted_date": {
+                "type": fuzzy_date_blank
+            },
+            "effective_date": {
+                "type": fuzzy_date_blank
+            },
+            "created_at": {
+                "type": "datetime"
+            },
+            "updated_at": {
+                "type": "datetime"
+            },
+            "documents": {
+                "items": {
+                    "properties": {
+                        "note": {
+                            "type": "string"
+                        },
+                        "url": {
+                            "type": "string"
+                        },
+                        "media_type": {
+                            "type": "string"
+                        },
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "sources": sources,
+            "extras": extras
+        },
+        "type": "object"
+    }

@@ -120,14 +120,6 @@ related_entities
 disclosed_events
     A list of events disclosed. See ``DisclosedEvent`` object below.
 
-forms
-    **optional**
-    A list of forms associated with this disclosure. See ``Form`` object below.
-
-schedules
-    **optional**
-    A list of schedules associated with this disclosure. See ``Schedule`` object below.
-
 official_identifier
     **optional**
     Upstream identifier of the disclosure if one exists, such as the filing ID assigned by the Senate Office of Public Record
@@ -534,14 +526,6 @@ Schema::
             },
             "disclosed_events": {
                 "items": disclosed_event_schema,
-                "type": "array"
-            },
-            "forms": {
-                "items": form_schema,
-                "type": "array"
-            },
-            "schedules": {
-                "items": schedule_schema,
                 "type": "array"
             },
             "official_identifier": {

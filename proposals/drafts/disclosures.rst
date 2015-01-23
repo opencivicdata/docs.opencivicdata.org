@@ -9,11 +9,7 @@ OCDEP: Disclosures
 Overview
 ========
 
-Definition of the `Disclosure` type, a top-level type that models officially submitted disclosure records. There may be subtypes, each corresponding to particular kinds of disclosure (eg, lobbying disclosure or campaign finance disclosure).
-
-`Disclosure` subtypes dealing with lobbying include `LobbyingRegistration` and `LobbyingReport`. Individual instances of lobbying are `Events` of type `LobbyingEvent`.
-
-`Disclosure` subtypes dealing with political contributions include `ContributionsRegistration` and `ContributionsReport`. Individual transactions are `Events` of type `ContributionsEvent`.
+Definition of the ``Disclosure`` type, a top-level type that models officially submitted disclosure records. In addition, the ``DisclosureAuthority`` and ``DisclosureEvent``.
 
 Definitions
 -----------
@@ -24,17 +20,8 @@ DisclosureAuthority
 Disclosure
     The act of disclosing information to a DisclosureAuthority.
 
-Form
-    A form submitted as part of a disclosure
-
-Field
-    A field submitted as part of a form
-
-Schedule
-    A schedule submitted as part of a disclosure
-
-Line
-    A line item submitted as part of a schedule
+DisclosureEvent
+    The actual event being disclosed. Rather than employ a taxonomy of event types, events can be identified with one another to the extent that they share participant types and participant roles. Participant roles are expressed through the "note" field. A sufficiently expressive list of roles should allow full coverage of multiple disclosure authorities and jurisdictions without sacrificing comparability.
 
 Rationale
 =========

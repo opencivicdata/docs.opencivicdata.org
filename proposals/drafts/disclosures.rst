@@ -103,6 +103,7 @@ related_entities
         * beneficiary
         * foreign-entity
         * affiliate
+        * lobbyist
 
 disclosed_events
     A list of events disclosed. See ``DisclosedEvent`` object below.

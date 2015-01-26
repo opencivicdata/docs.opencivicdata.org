@@ -41,8 +41,8 @@ disclosure_types
 reporting_periods
     A list of the reporting periods defined by this authority
 
-    identifier
-        A unique identifier for the reporting period
+    id
+        A unique id for the reporting period
 
     description
         Description of the reporting period
@@ -107,9 +107,9 @@ related_entities
 disclosed_events
     A list of events disclosed. See ``DisclosedEvent`` object below.
 
-official_identifier
+identifiers
     **optional**
-    Upstream identifier of the disclosure if one exists, such as the filing ID assigned by the Senate Office of Public Record
+    Upstream ids of the disclosure if any exist, such as the filing ID assigned by the Senate Office of Public Record
 
 submitted_date
     **optional**
@@ -161,8 +161,8 @@ extras
 Disclosure Type
 ~~~~~~~~~~~~~~~
 
-identifier
-    An identifier that uniquely identifies the disclosure type.
+id
+    An id that uniquely identifies the disclosure type.
 
 name
     The canonical name of the disclosure type
@@ -183,7 +183,7 @@ classification
     * contributions - Disclosures related to political contributions
 
 amends_type
-    The identifier of the disclosure type that this disclosure type is able to amend. Can be the same as identifier, where future submissions supercede past submissions.
+    The id of the disclosure type that this disclosure type is able to amend. Can be the same as id, where future submissions supercede past submissions.
 
 amendment
     **optional**
@@ -193,8 +193,8 @@ DisclosedEvent
 --------------
 The basis for the DisclosedEvent is the Open Civic Data ``Event`` type, as described in `OCDEP 4: Events <http://opencivicdata.readthedocs.org/en/latest/proposals/0004.html>`_. Constraints on field values specified below
 
-identifier
-    An identifier that uniquely identifies the event.
+id
+    An id that uniquely identifies the event.
 
 classification
     As defined in the ``Event`` type, where values are extended to include:
@@ -239,7 +239,7 @@ Schema::
 
     disclosure_type_schema = {
         "properties": {
-            "identifier": {
+            "id": {
                 "type": "string"
             },
             "name": {
@@ -268,7 +268,7 @@ Schema::
 
     disclosed_event_schema = {
         "properties": {
-            "identifier": {
+            "id": {
                 "type": "string"
             },
             "classification": {
@@ -515,7 +515,7 @@ Schema::
                 "items": disclosed_event_schema,
                 "type": "array"
             },
-            "official_identifier": {
+            "official_id": {
                 "type": "string"
             },
             "submitted_date": {

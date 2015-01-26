@@ -168,6 +168,9 @@ id
 name
     The canonical name of the disclosure type
 
+authority, authority_id
+    The authority to which this disclosure type is submitted
+
 description
     Description of the disclosure type
 
@@ -244,6 +247,12 @@ Schema::
                 "type": "string"
             },
             "name": {
+                "type": "string"
+            },
+            "authority": {
+                "type": "string"
+            },
+            "authority_id": {
                 "type": "string"
             },
             "description": {

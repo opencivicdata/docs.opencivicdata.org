@@ -65,7 +65,7 @@ reporting_periods
     end_date
         End date of the reporting period
 
-    disclosures
+    disclosure_types
         disclosures accepted during the reporting period
 
 Disclosure

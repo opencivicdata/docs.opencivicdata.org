@@ -99,6 +99,7 @@ links, birth_date, and death_date.
 * `member_of` - Parameter should be an Open Civic Data organization_id, will filter returned people
   to those that are a current member of the given organization.
 * `ever_member_of` - Like member_of but checks all memberships, not only current ones.
+* `lat` & `lon` - Must be specified together.  Returns any people holding a post whose division's boundary contains the point.
 
 .. _bill-search:
 

@@ -17,7 +17,7 @@ If you're already well-versed in Python, GitHub, and basics of web scraping you 
 
 .. note::
 
-    These instructions are intended for Linux or OSX.  If you're using Windows you'll probably benefit from using something like `MinGW <http://www.mingw.org/>`_ or a VM running Linux.  If you're using OSX you may also find the excellent `OSX-specific docs <https://github.com/opennorth/blank-pupa>`_ published by `Open North <https://github.com/opennorth/>`_  useful.
+    These instructions are intended for Linux or OS X.  If you're using Windows you'll probably benefit from using something like `MinGW <http://www.mingw.org/>`_ or a VM running Linux.  If you're using OS X you may also find the excellent `OS X-specific docs <https://github.com/opennorth/opennorth.ca/wiki/Python-Quick-Start%3A-OS-X>`_ published by `Open North <https://github.com/opennorth/>`_  useful.
 
 
 Python

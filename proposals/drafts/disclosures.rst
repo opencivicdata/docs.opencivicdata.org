@@ -50,7 +50,7 @@ reporting_periods
 ReportingPeriod
 ~~~~~~~~~~~~~~~
     id
-        A unique id for the reporting period
+        Open Civic Data-style id in the format ``ocd-disclosure/{{uuid}}``
 
     description
         Description of the reporting period
@@ -83,7 +83,7 @@ Disclosure
 ----------
 
 id
-    Open Civic Data-style id in the format ``ocd-disclosure/{{this.disclosure_type.arena}}/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-disclosure/{{uuid}}``
 
 registrant, registrant_id
     The organization or individual who is registering.
@@ -174,7 +174,7 @@ Disclosure Type
 ~~~~~~~~~~~~~~~
 
 id
-    An id that uniquely identifies the disclosure type.
+    Open Civic Data-style id in the format ``ocd-disclosure/{{uuid}}``
 
 name
     The canonical name of the disclosure type
@@ -209,7 +209,7 @@ DisclosedEvent
 The basis for the DisclosedEvent is the Open Civic Data ``Event`` type, as described in `OCDEP 4: Events <http://opencivicdata.readthedocs.org/en/latest/proposals/0004.html>`_. Constraints on field values specified below
 
 id
-    An id that uniquely identifies the event.
+    Open Civic Data-style id in the format ``ocd-event/{{uuid}}``
 
 classification
     As defined in the ``Event`` type, where values are extended to include:

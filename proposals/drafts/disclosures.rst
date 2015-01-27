@@ -1857,17 +1857,17 @@ Lobbying Report Example::
                     },
                 ],
                 "expenses": {
-                    "expense_amount": null,
-                    "expense_method_a": false,
-                    "expense_method_c": false,
-                    "expense_method_b": false,
-                    "expense_less_than_five_thousand": false,
-                    "expense_five_thousand_or_more": false
+                    "expense_amount": None,
+                    "expense_method_a": False,
+                    "expense_method_c": False,
+                    "expense_method_b": False,
+                    "expense_less_than_five_thousand": False,
+                    "expense_five_thousand_or_more": False
                 },
                 "income": {
-                    "income_less_than_five_thousand": false,
+                    "income_less_than_five_thousand": False,
                     "income_amount": 50000.0,
-                    "income_five_thousand_or_more": true
+                    "income_five_thousand_or_more": True
                 },
 
             }

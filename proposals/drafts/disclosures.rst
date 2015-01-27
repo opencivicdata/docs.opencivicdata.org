@@ -39,13 +39,24 @@ disclosure_types
     A list of disclosure types that this authority is responsible for collecting and/or publishing. 
 
 reporting_periods
-    A list of the reporting periods defined by this authority
+    A list of the reporting periods defined by this authority. See ``ReportingPeriod`` section below.
 
     id
         A unique id for the reporting period
 
     description
         Description of the reporting period
+
+ReportingPeriod
+~~~~~~~~~~~~~~~
+    id
+        A unique id for the reporting period
+
+    description
+        Description of the reporting period
+
+    authorities
+        A list of ``DisclosureAuthority`` entities that define the reporting period
 
     period_type
         The duration of the period. Choices are:

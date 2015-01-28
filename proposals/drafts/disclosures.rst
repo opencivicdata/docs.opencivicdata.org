@@ -35,18 +35,6 @@ DisclosureAuthority
 -------------------
 The basis for the DisclosureAuthority is the Open Civic Data ``Organization`` type, as described in `OCDEP 5: People, Organizations, Posts, and Memberships <http://opencivicdata.readthedocs.org/en/latest/proposals/0005.html>`_.
 
-disclosure_types
-    A list of disclosure types that this authority is responsible for collecting and/or publishing. 
-
-reporting_periods
-    A list of the reporting periods defined by this authority. See ``ReportingPeriod`` section below.
-
-    id
-        A unique id for the reporting period
-
-    description
-        Description of the reporting period
-
 ReportingPeriod
 ~~~~~~~~~~~~~~~
     id

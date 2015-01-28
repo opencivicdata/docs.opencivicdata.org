@@ -210,15 +210,17 @@ participants
 
     note
         As defined on the ``Event`` type, where values identifies the role of the participant. Choices include the following, and may be updated:
-          * lobbyist      - (lobbying) person who actually did the lobbying
-          * lobbied       - (lobbying) organizations and/or individuals that were lobbied
-          * regarding     - (lobbying) bills, regulations or other matters that can be identified
-          * contributor   - (contributions) the source of the transaction
-          * recipient     - (contributions) the target of the contribution
-          * lender        - (contributions) the source of a loan
-          * borrower      - (contributions) the recipient of a loan
-          * creditor      - (contributions) entity to which a debt is owed
-          * debtor        - (contributions) entity which owes a debt
+          * lobbyist         - (lobbying) person who actually did the lobbying
+          * lobbied          - (lobbying) organizations and/or individuals that were lobbied
+          * regarding        - (lobbying) bills, regulations or other matters that can be identified
+          * contributor      - (contributions) the source of the transaction
+          * recipient        - (contributions) the target of the contribution
+          * lender           - (contributions) the source of a loan
+          * borrower         - (contributions) the recipient of a loan
+          * creditor         - (contributions) entity to which a debt is owed
+          * debtor           - (contributions) entity which owes a debt
+          * lobbyist-added   - (lobbying) person added as a lobbyist in a registrant-client relationship
+          * lobbyist-removed - (lobbying) person removed as a lobbyist in a registrant-client relationship
 
 
 Defined Schema
@@ -1632,7 +1634,7 @@ Lobbying Report Example::
                         "entity_type": "person",
                         "id": "ocd-person/53a6918a-a5ea-11e4-9771-bb010e0210e2",
                         "name": "Jim Twaddell",
-                        "note": "lobbyist",
+                        "note": "lobbyist-added",
                         "memberships": [
                             {
                                 "organization": {
@@ -1662,7 +1664,7 @@ Lobbying Report Example::
                         "entity_type": "person",
                         "id": "ocd-person/53a6918a-a5ea-11e4-9771-bb010e0210e2",
                         "name": "Jeremy Scott",
-                        "note": "lobbyist",
+                        "note": "lobbyist-added",
                         "memberships": [
                             {
                                 "organization": {
@@ -1692,7 +1694,7 @@ Lobbying Report Example::
                         "entity_type": "person",
                         "id": "ocd-person/e47bebbc-a5ed-11e4-9771-bb010e0210e2",
                         "name": "Ilsa Halpern Paul",
-                        "note": "lobbyist",
+                        "note": "lobbyist-added",
                         "memberships": [
                             {
                                 "organization": {
@@ -1722,7 +1724,7 @@ Lobbying Report Example::
                         "entity_type": "person",
                         "id": "ocd-person/b5e9e3d8-a5ef-11e4-9771-bb010e0210e2",
                         "name": "Rebecca McGrath",
-                        "note": "lobbyist",
+                        "note": "lobbyist-added",
                         "memberships": [
                             {
                                 "organization": {
@@ -1752,7 +1754,7 @@ Lobbying Report Example::
                         "entity_type": "person",
                         "id": "ocd-person/53a6918a-a5ea-11e4-9771-bb010e0210e2",
                         "name": "Julie Hyams",
-                        "note": "lobbyist",
+                        "note": "lobbyist-added",
                         "memberships": [
                             {
                                 "organization": {
@@ -1782,7 +1784,7 @@ Lobbying Report Example::
                         "entity_type": "person",
                         "id": "ocd-person/53a6918a-a5ea-11e4-9771-bb010e0210e2",
                         "name": "Erin Morton",
-                        "note": "lobbyist"
+                        "note": "lobbyist-added"
                     },
                     {
                         "entity_type": "organization",
@@ -1829,7 +1831,7 @@ Lobbying Report Example::
                         "entity_type": "person",
                         "id": "ocd-person/32d71548-a5f3-11e4-9771-bb010e0210e2",
                         "name": "Andrew Bowman",
-                        "note": "removed"
+                        "note": "lobbyist-removed"
                     }
                 ]
             }

@@ -37,35 +37,35 @@ The basis for the DisclosureAuthority is the Open Civic Data ``Organization`` ty
 
 ReportingPeriod
 ~~~~~~~~~~~~~~~
-    id
-        Open Civic Data-style id in the format ``ocd-disclosure/{{uuid}}``
+id
+    Open Civic Data-style id in the format ``ocd-disclosure/{{uuid}}``
 
-    description
-        Description of the reporting period
+description
+    Description of the reporting period
 
-    authorities
-        A list of ``DisclosureAuthority`` entities that define the reporting period
+authorities
+    A list of ``DisclosureAuthority`` entities that define the reporting period
 
-    period_type
-        The duration of the period. Choices are:
+period_type
+    The duration of the period. Choices are:
 
-        * daily         - reports due on a daily basis
-        * weekly        - reports due on a weekly basis
-        * monthly       - reports due on a monthly basis
-        * quarterly     - reports due on a quarterly basis
-        * semi-annually - reports due twice a year
-        * annually      - reports due once per year
-        * cycle         - reports due once per election cycle
-        * defined       - reports due as specially defined by statute or by the authority
+    * daily         - reports due on a daily basis
+    * weekly        - reports due on a weekly basis
+    * monthly       - reports due on a monthly basis
+    * quarterly     - reports due on a quarterly basis
+    * semi-annually - reports due twice a year
+    * annually      - reports due once per year
+    * cycle         - reports due once per election cycle
+    * defined       - reports due as specially defined by statute or by the authority
 
-    start_date
-        Start date of the reporting period
+start_date
+    Start date of the reporting period
 
-    end_date
-        End date of the reporting period
+end_date
+    End date of the reporting period
 
-    disclosure_types
-        disclosures accepted during the reporting period
+disclosure_types
+    disclosures accepted during the reporting period
 
 Disclosure
 ----------

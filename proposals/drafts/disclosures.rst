@@ -9,18 +9,21 @@ OCDEP: Disclosures
 Overview
 ========
 
-Definition of the ``Disclosure`` type, a top-level type that models officially submitted disclosure records. In addition, the ``DisclosureAuthority`` and ``DisclosureEvent``.
+Definition of the ``Disclosure`` type and the ``ReportingPeriod`` type, top-level types that model officially submitted disclosure records. In addition, a subtype of ``Organization`` called ``DisclosureAuthority`` and a subtype of ``Event`` called ``DisclosureEvent``.
 
 Definitions
 -----------
 
-DisclosureAuthority
-    The authority to which disclosures must be submitted.
-
 Disclosure
     The act of disclosing information to a DisclosureAuthority.
 
-DisclosureEvent
+ReportingPeriod
+    The duration of time that a disclosure refers to.
+
+DisclosureAuthority
+    The authority to which disclosures must be submitted.
+
+DisclosedEvent
     The actual event being disclosed. Rather than employ a taxonomy of event types, events can be identified with one another to the extent that they share participant types and participant roles. Participant roles are expressed through the "note" field. A sufficiently expressive list of roles should allow full coverage of multiple disclosure authorities and jurisdictions without sacrificing comparability.
 
 Rationale
@@ -36,7 +39,7 @@ DisclosureAuthority
 The basis for the DisclosureAuthority is the Open Civic Data ``Organization`` type, as described in `OCDEP 5: People, Organizations, Posts, and Memberships <http://opencivicdata.readthedocs.org/en/latest/proposals/0005.html>`_.
 
 ReportingPeriod
-~~~~~~~~~~~~~~~
+---------------
 id
     Open Civic Data-style id in the format ``ocd-disclosure/{{uuid}}``
 
@@ -64,9 +67,6 @@ start_date
 end_date
     End date of the reporting period
 
-disclosure_types
-    disclosures accepted during the reporting period
-
 Disclosure
 ----------
 
@@ -81,9 +81,6 @@ authority, authority_id
 
 reporting_period, reporting_period_id
     The reporting period to which this registration was submitted.
-
-disclosure_type
-    the type of the disclosure. See ``DisclosureType`` section below.
 
 related_entities
     A list of sub-objects that are related to this disclosure
@@ -158,43 +155,9 @@ sources
 extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
 
-Disclosure Type
-~~~~~~~~~~~~~~~
-
-id
-    Open Civic Data-style id in the format ``ocd-disclosure/{{uuid}}``
-
-name
-    The canonical name of the disclosure type
-
-authority, authority_id
-    The authority to which this disclosure type is submitted
-
-description
-    Description of the disclosure type
-
-action
-    The action performed by this disclosure type. Current values include:
-    
-    * registration  - registers a person or organization with a DisclosureAuthority
-    * report        - makes a periodic report to a DisclosureAuthority
-
-classification
-    The category of the disclosure type. Current values include:
-        
-    * lobbying      - Disclosures related to lobbying
-    * contributions - Disclosures related to political contributions
-
-amends_type
-    The id of the disclosure type that this disclosure type is able to amend. Can be the same as id, where future submissions supercede past submissions.
-
-amendment
-    **optional**
-    A boolean that is true if this is a registration type that is reserved for amending other registration types
-
 DisclosedEvent
 --------------
-The basis for the DisclosedEvent is the Open Civic Data ``Event`` type, as described in `OCDEP 4: Events <http://opencivicdata.readthedocs.org/en/latest/proposals/0004.html>`_. Constraints on field values specified below
+The basis for the DisclosedEvent is the Open Civic Data ``Event`` type, as described in `OCDEP 4: Events <http://opencivicdata.readthedocs.org/en/latest/proposals/0004.html>`_. The distinguishing features are the prescribed field values specified below.
 
 id
     Open Civic Data-style id in the format ``ocd-event/{{uuid}}``
@@ -241,41 +204,6 @@ Schema::
                                     "borrower",
                                     "creditor",
                                     "debtor"]
-
-    disclosure_type_schema = {
-        "properties": {
-            "id": {
-                "type": "string"
-            },
-            "name": {
-                "type": "string"
-            },
-            "authority": {
-                "type": "string"
-            },
-            "authority_id": {
-                "type": "string"
-            },
-            "description": {
-                "type": "string"
-            },
-            "action": {
-                "type": "string",
-                "enum": disclosure_actions
-            },
-            "classification": {
-                "type": "string",
-                "enum": disclosure_classifications
-            },
-            "amends_type": {
-                "type": "string"
-            },
-            "amendment": {
-                "type": "boolean"
-            }
-        },
-        "type": "object"
-    }
 
     disclosed_event_schema = {
         "properties": {
@@ -500,7 +428,6 @@ Schema::
             "reporting_period_id": {
                 "type": "string"
             },
-            "disclosure_type": disclosure_type_schema,
             "related_entities": {
                 "items": {
                     "properties": {
@@ -665,18 +592,6 @@ Lobbying Registration Example::
       ]
     }
 
-    # DisclosureType
-    fed_lobbying_registration = {
-        "identifier": "6c75ebe0-a35e-11e4-9771-bb010e0210e2",
-        "name": "Federal Lobbying Disclosure Act Registration",
-        "authority": "Senate Office of Public Record",
-        "authority_id": "d006f8f6-a35a-11e4-9771-bb010e0210e2",
-        "description": "An individual or organization's registration as a lobbyist or lobbying organization with the Senate Office of Public Record (US)",
-        "action": "registration",
-        "classification": "lobbying",
-        "amends_type": "6c75ebe0-a35e-11e4-9771-bb010e0210e2",
-    }
-
     #ReportingPeriod
     reporting_period_eg_one =  {
         "id": "ocd-disclosure/reporting-period/d577982e-a55b-11e4-9771-bb010e0210e2",
@@ -687,11 +602,7 @@ Lobbying Registration Example::
         ],
         "period_type": "quarterly",
         "start_date": "2013-04-01",
-        "end_date": "2013-06-30",
-        "disclosure_types": [
-            fed_lobbying_registration,
-            fed_lobbying_report
-        ]
+        "end_date": "2013-06-30"
     }
 
     registrant_eg_one = {
@@ -852,7 +763,6 @@ Lobbying Registration Example::
         "authority": "Senate Office of Public Record",
         "authority_id": "d006f8f6-a35a-11e4-9771-bb010e0210e2",
         "reporting_period": "d577982e-a55b-11e4-9771-bb010e0210e2",
-        "disclosure_type": fed_lobbying_registration,
         "related_entities": [],
         "identifiers": [
             {
@@ -1108,11 +1018,7 @@ Lobbying Report Example::
         ],
         "period_type": "quarterly",
         "start_date": "2013-07-01",
-        "end_date": "2013-09-30",
-        "disclosure_types": [
-            fed_lobbying_registration,
-            fed_lobbying_report
-        ]
+        "end_date": "2013-09-30"
     }
 
     filing_documents_two = [
@@ -1234,7 +1140,6 @@ Lobbying Report Example::
         "authority_id": "d006f8f6-a35a-11e4-9771-bb010e0210e2",
         "reporting_period_id": "ocd-disclosure/reporting-period/e9aaedd4-a5e5-11e4-9771-bb010e0210e2",
         "reporting_period": "Federal Lobbying Disclosure: 2013, Third Quarter",
-        "disclosure_type": fed_lobbying_registration,
         "related_entities": [],
         "identifiers": [
             {

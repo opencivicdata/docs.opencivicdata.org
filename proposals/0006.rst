@@ -4,7 +4,7 @@ OCDEP 6: Bills
 
 :Created: 2014-06-16
 :Author: James Turk
-:Status: Draft
+:Status: Accepted
 
 Overview
 ========

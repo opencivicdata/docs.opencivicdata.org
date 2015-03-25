@@ -4,7 +4,7 @@ OCDEP 4: Events
 
 :Created: 2014-06-09
 :Author: Paul Tagliamonte
-:Status: Draft
+:Status: Accepted
 
 Overview
 ========

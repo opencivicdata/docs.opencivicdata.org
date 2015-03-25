@@ -6,7 +6,7 @@ OCDEP 3: Jurisdictions
 
 :Created: 2014-06-12
 :Author: James Turk
-:Status: Draft
+:Status: Accepted
 
 Overview
 ========

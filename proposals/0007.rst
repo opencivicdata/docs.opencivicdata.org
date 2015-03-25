@@ -6,7 +6,7 @@ OCDEP 7: Votes
 
 :Created: 2014-06-18
 :Author: James Turk
-:Status: Draft
+:Status: Accepted
 
 Overview
 ========

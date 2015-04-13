@@ -1,12 +1,6 @@
 Getting Started Writing Scrapers
 ================================
 
-.. warning::
-    Parts of Open Civic Data underwent a large refactor as of mid-2014, some information on this
-    page may be out of date.   We're working on updating this documentation as soon as possible.
-
-    We'll remove these messages from pages as they're updated and vetted.
-
 While we strive to make writing scrapers as simple as possible, there are a few prerequisites:
 
 * `Python`_ (or Ruby using `pupa-ruby <https://github.com/opennorth/pupa-ruby>`_)
@@ -21,11 +15,13 @@ If you're already well-versed in Python, GitHub, and basics of web scraping you 
 
 
 Python
-------
-
+-----
+ 
 If you aren't already familiar with Python you might want to start with `Python on Codecademy <http://www.codecademy.com/tracks/python>`_.
 
-If you're just getting started using Python 3.3 (or newer) is recommended, for the time being Python 2.7 is still supported as well.
+.. note::
+
+    Make sure you are using Python 3.3 or newer.
 
 Having a reasonable local development environment is recommended, `virtualenv <httpe://pypi.python.org/pypi/virtualenv>`_ & `virtualenvwrapper <http://virtualenvwrapper.readthedocs.org/en/latest/>`_ are optional tools that will help you keep your Python environment clean if you work on multiple projects.
 
@@ -55,11 +51,11 @@ Most likely you'll be creating a fork of one of the existing scraper repositorie
 
 * `scrapers-us-municipal <https://github.com/opencivicdata/scrapers-us-municipal>`_ - US municipal governments
 * `scrapers-ca <https://github.com/opencivicdata/scrapers-ca>`_ - Canadian legislative
-* `scrapers-us-state-executive <https://github.com/opencivicdata/scrapers-us-state-executive>`_ - US state executives
+* `scrapers-us-municipal <https://github.com/influence-usa/scrapers-us-state>`_ - US state influence data
 
 If your scraper falls into one of those categories you should fork it and create a new directory within that repository.  We'd also suggest you work on a branch to make merging changes as easy as possible.
 
-If you're hoping to create a scraper for a type of jurisdiction not yet covered please email the `Open Civic Data list <https://groups.google.com/forum/#!forum/open-civic-data>`_ and we can work with you to decide the best way to proceed.
+If you're hoping to create a scraper for something not yet covered please email the `Open Civic Data list <https://groups.google.com/forum/#!forum/open-civic-data>`_ and we can work with you to decide the best way to proceed.
 
 Once you've chosen a repository you'll need to install the `pupa` library, as well as any other dependencies (like `lxml`) that you'll be using to do your scraping.
 
@@ -68,13 +64,13 @@ An example of how you might configure your setup:
 .. code-block:: bash
 
     # using a virtualenv highly recommended
-    $ mkvirtualenv opencivicdata
+    $ mkvirtualenv -p `which python3` opencivicdata
     # Install pupa
     $ pip install -U pupa
     # Clone the repo that you forked on GitHub
-    $ git clone git@github.com:<yourusername>/scrapers-us-municipal.git
+    $ git clone git@github.com:<yourusername>/scrapers-us-state.git
     # Switch to a branch to make pulling your work later as easy as possible
-    $ cd scrapers-us-municipal
+    $ cd scrapers-us-state
     $ git checkout -b <new-branch-name>
     # ...do work...
     $ git push -u origin <new-branch-name>

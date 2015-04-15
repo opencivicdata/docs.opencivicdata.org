@@ -80,7 +80,7 @@ This is the only really tricky part of starting a new jurisdiction. The term is 
 
 The rule for determining the term length is actually pretty simple:
 
-Step 1: Figure out the `term` lenth
+Step 1: Figure out the `term` length
 ***************************************
 
 If the municipality has a uniform term, use that; if it has staggered terms, the term length is the length of time in between elections. So if council members serve two-year terms, but each year staggered elections are held in which only half of the council members are up for re-election, the term length is one year.

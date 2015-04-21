@@ -146,7 +146,8 @@ Additionally, parentheses are allowed for grouping purposes.
 * `jurisdiction_id`
 * `type`
 * `subject`
-* `sponsors.id` - Open Civic Data person ID of a sponsor.
+* `sponsorships__person__id` - Open Civic Data person ID of a sponsor.
+* `sponsorships__organization__id` - Open Civic Data organization ID of a sponsor.
 * `updated_at` - See :ref:`timestamp-parameters`.
 * `created_at` - See :ref:`timestamp-parameters`.
 
@@ -173,7 +174,7 @@ Vote Search
 * `chamber`
 * `session`
 * `type`
-* `bill.id` - Open Civic Data bill ID of bill vote is attached to.
+* `bill_id` - Open Civic Data bill ID of bill vote is attached to.
 * `updated_at` - See :ref:`timestamp-parameters`.
 * `created_at` - See :ref:`timestamp-parameters`.
 
@@ -197,7 +198,11 @@ Event Search
 
 * `jurisdiction_id`
 * `participants.id` - filter by Open Civic Data ID of a participant.
-* `agenda.related_entities.id` filter by a related entity's Open Civic Data ID.
+* Filter by related entities by Open Civic Data ID
+    * `agenda__related_entities__bill_id` - filter by bill.
+    * `agenda__related_entities__organization_id` - filter by organization.
+    * `agenda__related_entities__person_id` - filter by person.
+    * `agenda__related_entities__vote_id` - filter by vote.
 * `when`
 * `updated_at` - See :ref:`timestamp-parameters`.
 * `created_at` - See :ref:`timestamp-parameters`.

@@ -59,7 +59,7 @@ If your scraper falls into one of those categories you should fork it and create
 
 If you're hoping to create a scraper for something not yet covered please email the `Open Civic Data list <https://groups.google.com/forum/#!forum/open-civic-data>`_ and we can work with you to decide the best way to proceed.
 
-Once you've chosen a repository you'll need to install the `pupa` library, as well as any other dependencies (like `lxml`) that you'll be using to do your scraping. If you're using an existing repo, you should be able to get all necessary libraries by installing the requirements listed in that repository's requirements.txt file.
+Once you've chosen a repository you'll need to install the `pupa` library (the first syllable of pupa is pronounced 'pew' as in 'pew pew pew pew pew'). Also install any other dependencies (like `lxml`) that you'll be using to do your scraping. If you're using an existing repo, you should be able to get all necessary libraries by installing the requirements listed in that repository's requirements.txt file.
 
 An example of how you might configure your setup:
 

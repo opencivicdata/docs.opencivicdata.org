@@ -66,7 +66,8 @@ In addition, every scraper needs to define at least one organization. In this ca
 
 Finally, the file created by pupa init adds posts to the organization. Scrapers can run without posts, so if you won't be looking at people, feel free to delete this line. But if you will be scraping people, you should add the posts you'll be scraping. For example, for the Seattle City Council, you'll want to add a post for each of the 9 seats (called Positions in Seattle). For Position 1, we'd set the label to "Council Position 1" and the role to "Councilmember".
 
-Once the orginazitaion is created and the positions are added, yield the organization.
+Once the orginazitaion is created and the positions are added, yield the organization. (If you're not familiar with yield and generators in python, we recommend `this talk <https://www.youtube.com/watch?v=EnSu9hHGq5o#t=13m00s>`_ from PyCon 2013.)
 
 You can create as many organizations as needed. For Seattle, you might also want an executive so you can scrape the mayor's office, and add the mayor as a position. Yield each organization after adding it. Don't worry about adding every committee - organizations such as committees can be added later when you find them with a scraper.
 
+You're now set up to scrape data! Next up we'll discuss how to scrape events, bills and people.

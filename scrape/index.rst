@@ -14,8 +14,9 @@ Writing Scrapers
 
    basics
    new
-   pull_request
    bills
    events
    people
+   run_scraper
+   pull_request
    tips

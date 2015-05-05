@@ -4,13 +4,6 @@
 Writing an Events Scraper
 ===========================
 
-.. warning::
-    Parts of Open Civic Data underwent a large refactor as of mid-2014, some information on this
-    page may be out of date.   We're working on updating this documentation as soon as possible.
-
-    We'll remove these messages from pages as they're updated and vetted.
-
-
 Events listings are one of the more compelling datasets that we are able to collect, since it allows for near real-time updating of upcoming events. Events include hearings, meetings, or bascially anything with a date and time listed by the organization you're scraping.
 
 Target Data

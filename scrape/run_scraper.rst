@@ -54,3 +54,120 @@ Feel free to change ``vim`` to whatever editor you prefer for such tasks.
 
 If you do use vim, there's a helpful
 `JSON Plugin <http://www.vim.org/scripts/script.php?script_id=1945>`_
+
+Here is an example JSON file you'd get if you run the events scraper we created in :doc:`events`, although note that your IDs will be different::
+
+    {
+        "_id": "efa7ccee-f4d6-11e4-b1eb-843a4bcaaa18",
+        "agenda": [
+            {
+                "description": "Testimony from concerned citizens",
+                "media": [
+                    {
+                        "date": "",
+                        "links": [
+                            {
+                                "media_type": "application/pdf",
+                                "url": "http://example.com/hearing/testimony.pdf"
+                            }
+                        ],
+                        "note": "Written version of testimony"
+                    }
+                ],
+                "notes": [],
+                "order": "0",
+                "related_entities": [
+                    {
+                        "entity_type": "committee",
+                        "name": "Transportation",
+                        "note": "participant"
+                    },
+                    {
+                        "entity_type": "committee",
+                        "name": "Environment and Natural Resources",
+                        "note": "participant"
+                    },
+                    {
+                        "entity_type": "person",
+                        "name": "Jane Brown",
+                        "note": "participant"
+                    },
+                    {
+                        "entity_type": "person",
+                        "name": "Alicia Jones",
+                        "note": "participant"
+                    },
+                    {
+                        "entity_type": "person",
+                        "name": "Fred Green",
+                        "note": "participant"
+                    },
+                    {
+                        "entity_type": "bill",
+                        "name": "HB101",
+                        "note": "consideration"
+                    }
+                ],
+                "subjects": [
+                    "Transportation",
+                    "Environment"
+                ]
+            }
+        ],
+        "all_day": false,
+        "classification": "event",
+        "description": "",
+        "documents": [],
+        "end_time": null,
+        "extras": {},
+        "links": [],
+        "location": {
+            "coordinates": null,
+            "name": "unknown",
+            "note": ""
+        },
+        "media": [
+            {
+                "date": "",
+                "links": [
+                    {
+                        "media_type": "video/mpeg",
+                        "url": "http://example.com/hearing/video.mpg"
+                    }
+                ],
+                "note": "Video of meeting"
+            },
+            {
+                "date": "",
+                "links": [
+                    {
+                        "media_type": "application/pdf",
+                        "url": "http://example.com/hearing/minutes.pdf"
+                    }
+                ],
+                "note": "Meeting minutes"
+            }
+        ],
+        "name": "Hearing",
+        "participants": [
+            {
+                "entity_type": "committee",
+                "name": "Transportation Committee",
+                "note": "participant"
+            },
+            {
+                "entity_type": "person",
+                "name": "Joe Smith",
+                "note": "Hearing Chair"
+            }
+        ],
+        "sources": [
+            {
+                "note": "",
+                "url": "http://example.com"
+            }
+        ],
+        "start_time": "1776-07-04T17:08:00+00:00",
+        "status": "confirmed",
+        "timezone": "US/Pacific"
+    }

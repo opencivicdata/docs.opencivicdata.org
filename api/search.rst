@@ -1,19 +1,15 @@
 Search Endpoints
 ================
 
-.. warning::
-    Parts of Open Civic Data underwent a large refactor as of mid-2014, some information on this
-    page may be out of date.   We're working on updating this documentation as soon as possible.
+.. caution::
+    The OCD API is in beta and under very active development during 2015. Endpoints and queries may be added, altered, or removed.
 
-    We'll remove these messages from pages as they're updated and vetted.
+This page describes each search endpoint, listing its parameters and noting which fields are included by default.
 
-General information about search endpoints can be found at :ref:`endpoints` and :ref:`search-response`.
+General information about search endpoints can be found at :ref:`endpoints` and :ref:`search-response`. Information on common parameters can be found at :ref:`common-parameters`.
 
-Information on common parameters can be found at :ref:`common-parameters`.
+For advanced filtering refer to :ref:`parameters`, for looking up data by non-Open-Civic-Data IDs look at :ref:`id-operator`.
 
-For advanced filtering refer to :ref:`parameters`, for looking up data by non-Open Civic Data IDs look at :ref:`id-operator`.
-
-This page provides specific parameters and notes on which fields are included in the default response for each of the search endpoints.
 
 .. _jurisdiction-search:
 
@@ -22,11 +18,11 @@ Jurisdiction Search
 
 **Endpoint:** ``/jurisdictions/``
 
-**Default Fields:** All fields in :doc:`/data/jurisdiction` except for terms, session_details, and chambers.
+**Default Fields:** `id`, `name`, `division`, `classification`, `url`, and `feature_flags`.
 
-**Sort Options:** Jurisdictions can only be sorted by name.
+**Sort Options:** None; jurisdictions can only be sorted by name.
 
-**Filter Parameters:** There are no filter parameters for jurisdictions.
+**Filter Parameters:** None.
 
 .. _division-search:
 
@@ -35,14 +31,13 @@ Division Search
 
 **Endpoint:** ``/divisions/``
 
-**Default Fields:** `id`, `country`, and `display_name`
+**Default Fields:** `id`, `country`, and `name`.
 
-**Sort Options:** Divisions can only be sorted by their division ID.
+**Sort Options:** None; divisions can only be sorted by division ID.
 
 **Filter Parameters:**
 
-* `lat` & `lon` - Must be specified together.  The resulting divisions will all contain the specified point.
-* `date` - For obtaining historical boundaries, divisions returned are based on boundaries at a given time. Must be specified in Y-m-d format.
+* `lat` & `lon` - All divisions will contain the specified point. Must be specified together.
 
 .. _organization-search:
 
@@ -51,13 +46,9 @@ Organization Search
 
 **Endpoint:** ``/organizations/``
 
-**Default Fields:** All fields in :doc:`/data/organization` except for contact_details, sources, posts,
-founding_date, and dissolution_date.
+**Default Fields:** `id`, `name`, `jurisdiction`, `classification`, `parent`, and `image`.
 
-**Sort Options:**
-
-* `created_at` - Sort by time object was created, newest objects first. (default)
-* `updated_at` - Sort by time object was updated, most recent first.
+**Sort Options:** None.
 
 **Filter Parameters:**
 
@@ -66,12 +57,9 @@ founding_date, and dissolution_date.
 * `dissolution_date`
 * `jurisdiction_id`
 * `parent_id`
-* `division_id`
-* `chamber`
-* `name` - Exact match is not necessary, checks for case-insensitive substring matches.
+* `name` - Searches for case-insensitive substring matches.
 * `updated_at` - See :ref:`timestamp-parameters`.
 * `created_at` - See :ref:`timestamp-parameters`.
-
 
 .. _person-search:
 
@@ -80,13 +68,9 @@ Person Search
 
 **Endpoint:** ``/people/``
 
-**Default Fields:** All fields in :doc:`/data/person` except for contact_details, sources, extras,
-links, birth_date, and death_date.
+**Default Fields:** `id`, `name`, `sort_name`, `memberships`, `gender`, and `image`.
 
-**Sort Options:**
-
-* `created_at` - Sort by time object was created, newest objects first. (default)
-* `updated_at` - Sort by time object was updated, most recent first.
+**Sort Options:** None.
 
 **Filter Parameters:**
 
@@ -94,12 +78,11 @@ links, birth_date, and death_date.
 * `gender`
 * `birth_date`
 * `death_date`
+* `member_of` - Parameter should be an Open Civic Data organization ID.
+* `ever_member_of` - Like ``member_of`` but checks all memberships, not just current ones.
+* `lat` & `lon` - Returns any people holding a post whose division's boundary contains the point. Must be specified together.
 * `updated_at` - See :ref:`timestamp-parameters`.
 * `created_at` - See :ref:`timestamp-parameters`.
-* `member_of` - Parameter should be an Open Civic Data organization_id, will filter returned people
-  to those that are a current member of the given organization.
-* `ever_member_of` - Like member_of but checks all memberships, not only current ones.
-* `lat` & `lon` - Must be specified together.  Returns any people holding a post whose division's boundary contains the point.
 
 .. _bill-search:
 
@@ -108,15 +91,14 @@ Bill Search
 
 **Endpoint:** ``/bills/``
 
-**Default Fields:** All fields in :doc:`/data/bill` except for sponsors, sources, actions, links,
-versions, related_bills, summaries, other_titles, and documents.
+**Default Fields:** `id`, `identifier`, `title`, `classification`, and `from_organization`.
 
-**Sort Options:**
-
-* `created_at` - Sort by time object was created, newest objects first. (default)
-* `updated_at` - Sort by time object was updated, most recent first.
+**Sort Options:** None.
 
 **Full Text Search:**
+
+.. caution::
+    As of May 2015, full text search is being written, but is not yet available.
 
 By specifying the `q` parameter a full text search can be performed against the text of the bill.
 
@@ -127,7 +109,7 @@ This parameter follows the following rules:
 +======================+============================+===========================================+
 | `q=termA termB`      | termA and termB must be present                                        |
 +----------------------+------------------------------------------------------------------------+
-| `q=termA AND termB`  | termA and termB must be present, same as not specifying an operator    |
+| `q=termA AND termB`  | termA and termB must be present; same as not specifying an operator    |
 +----------------------+------------------------------------------------------------------------+
 | `q=termA OR termB`   | termA or termB must be present                                         |
 +----------------------+------------------------------------------------------------------------+
@@ -136,17 +118,18 @@ This parameter follows the following rules:
 | `q=termA NOT termB`  | termA must be present without termB                                    |
 +----------------------+------------------------------------------------------------------------+
 
-Additionally, parentheses are allowed for grouping purposes.
+Additionally, parentheses are allowed for grouping purposes. For example, `q=(termA OR termB) NOT termC`.
 
 **Filter Parameters:**
 
-* `name`
+* `identifier`
 * `chamber`
 * `session`
 * `jurisdiction_id`
-* `type`
+* `classification`
 * `subject`
-* `sponsors.id` - Open Civic Data person ID of a sponsor.
+* `sponsorships__person__id` - Open Civic Data person ID of a sponsor.
+* `sponsorships__organization__id` - Open Civic Data organization ID of a sponsor.
 * `updated_at` - See :ref:`timestamp-parameters`.
 * `created_at` - See :ref:`timestamp-parameters`.
 
@@ -157,23 +140,19 @@ Vote Search
 
 **Endpoint:** ``/votes/``
 
-**Default Fields:** All fields in :doc:`/data/vote` except for roll_call and sources.
+**Default Fields:** `id`, `bill`, `motion_text`, `motion_classification`, `result`, `counts`, `organization`, `start_date`, `created_at`, `updated_at`, and `extras`
 
-**Sort Options:**
-
-* `created_at` - Sort by time object was created, newest objects first. (default)
-* `updated_at` - Sort by time object was updated, most recent first.
-* `date` - Sort by date that the vote took place.
+**Sort Options:** None.
 
 **Filter Parameters:**
 
 * `jurisdiction_id`
-* `date`
-* `passed` - pass `true` to filter to only passed votes, pass `false` to get only failed votes
+* `start_date`
+* `result` - Status of passage, including ``pass`` and ``fail``.
 * `chamber`
 * `session`
-* `type`
-* `bill.id` - Open Civic Data bill ID of bill vote is attached to.
+* `motion_classification`
+* `bill_id` - Open Civic Data bill ID of bill this vote is attached to.
 * `updated_at` - See :ref:`timestamp-parameters`.
 * `created_at` - See :ref:`timestamp-parameters`.
 
@@ -185,20 +164,19 @@ Event Search
 
 **Endpoint:** ``/events/``
 
-**Default Fields:** All fields in :doc:`/data/event` except for sources.
+**Default Fields:** `id`, `name`, `description`, `agenda`, `start_time`, `timezone`, `all_day`, `status`, and `classification`
 
-**Sort Options:**
-
-* `created_at` - Sort by time object was created, newest objects first. (default)
-* `updated_at` - Sort by time object was updated, most recent first.
-* `when` - Sort by when the event takes place.
+**Sort Options:** None.
 
 **Filter Parameters:**
 
-* `jurisdiction_id`
-* `participants.id` - filter by Open Civic Data ID of a participant.
-* `agenda.related_entities.id` filter by a related entity's Open Civic Data ID.
-* `when`
+* `participants_id` - filter by Open Civic Data ID of a participant.
+* Filter by related entities by Open Civic Data ID
+    * `agenda__related_entities__bill_id` - Filter by bill.
+    * `agenda__related_entities__organization_id` - Filter by organization.
+    * `agenda__related_entities__person_id` - Filter by person.
+    * `agenda__related_entities__vote_id` - Filter by vote.
+* `start_time`
 * `updated_at` - See :ref:`timestamp-parameters`.
 * `created_at` - See :ref:`timestamp-parameters`.
 
@@ -213,7 +191,7 @@ Operators
 
 All filter parameters are interpreted as direct lookups against the database unless otherwise noted.
 
-Additionally, operators are available.  You can apply an operator by appending ``__op`` to the filter, so ``birth_date`` would become ``birth_date__gt`` if you wanted to use the greater than operator.
+Additionally, operators are available.  You can apply an operator by appending ``__operator`` to the filter, so ``birth_date`` would become ``birth_date__gt`` if you wanted to use the greater than operator.
 
 Available operators are:
 
@@ -250,7 +228,7 @@ as a filter on any query.  For example ``/people/id__openstates=AKL000001`` woul
 had the Open States ID AKL000001.
 
 (This typically shouldn't be combined with other filters since it should always
-only return one item.)
+only return one item, similar to an object lookup.)
 
 
 .. _timestamp-parameters:
@@ -258,7 +236,7 @@ only return one item.)
 updated_at & created_at
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-These parameters are stored in the system as UTC timestamps, not strings.  The following formats are accepted:
+All objects have these fields, although by default they may not be in responses. These parameters are stored in the system as UTC timestamps, not strings, and can be denoted in any of these formats:
 
 * Y-m-d
 * Y-m
@@ -266,6 +244,6 @@ These parameters are stored in the system as UTC timestamps, not strings.  The f
 * Y-m-dTH:M
 * Y-m-dTH:M:S
 * Y-m-dTH:M:S.f
-* ``now``        - Special input interpreted as the current time. Useful for asking for events that haven't happened yet.
+* ``now``        - Special input interpreted as the current datetime. Useful for asking for events that haven't happened yet.
 
 For details on time formats see `Python strftime() and strptime() behavior <http://docs.python.org/2/library/datetime.html#strftime-strptime-behavior>`_.

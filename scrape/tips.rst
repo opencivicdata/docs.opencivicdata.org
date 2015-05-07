@@ -8,10 +8,7 @@ Common tips for writing scrapers
     We'll remove these messages from pages as they're updated and vetted.
 
 
-The following doc contains a list of simple recipies to help scrape data
-down from legislative websites. These are by no means the only way to do
-these things, but it's the way that we've settled on liking enough to use
-in a few places.
+The following doc contains a list of simple recipies to help scrape data down from legislative websites. These are by no means the only way to do these things, but it's the way that we've settled on liking enough to use in a few places.
 
 Fetching a page and setting URLs to absolute paths
 --------------------------------------------------
@@ -33,20 +30,20 @@ has no dependency on ``lxml``, this isn't the default behavior).
 Getting the current session
 ---------------------------
 
-The current session will be set (in any ``Scraper`` subclass) to the
-``session`` instance var. It's common to see this being used in the ``Event``
-objects::
+We might want to know what the current legislative session is. A legislative session is required for a bill, and can be helpful in limiting the duration of a scrape (for legislatures that have persistent pages, we probably don't want to scrape all bills/legislators/events back to when they started keeping track!) Sessions are created in :file:`__init__.py` as a list of dictionaries. Jurisdictions can do all kinds of weird things with sessions (we've seen them create sessions inside sessions) so keeping track based on date won't work. Instead, you'll need to order sessions chronologically, with the current one on top. For example::
 
-    e = Event(name=name,                                                 
-              session=self.session,                                      
-              when=when,                                                 
-              location='unknown')                                        
+    legislative_sessions = [{"identifier":"2015",
+                            "name":"2015 Regular Session",
+                            "start_date": "2015-01-01",
+                            "end_date": "2016-12-31"},
+                            {"identifier":"2013",
+                            "name":"2013 Regular Session",
+                            "start_date": "2013-01-01",
+                            "end_date": "2014-12-31"}]
 
-This also leads to a common way to gate scrapes (and limit them to the current
-session only)::
+Then to get the current session from any scraper, you can call::
 
-    if self.session != self.get_current_session():
-        raise Exception("We can't scrape past sessions")
+    self.jurisdiction.legislative_sessions[0]
 
 Common XPath tricks
 -------------------

@@ -1,3 +1,4 @@
+
 .. _pull_request:
 
 Submitting a Pull Request
@@ -41,7 +42,7 @@ If you cloned the ``opencivicdata`` repo before you forked the repo on GitHub, d
     `https://help.github.com/articles/fork-a-repo <https://help.github.com/articles/fork-a-repo>`_
 
 Submit a pull request
-------------------------------------------------------------------------
+--------------------------------------
 
 Before you submit your Pull Request, it's quite handy to run through a quick checklist of common (and easy to catch) gotchas:
 

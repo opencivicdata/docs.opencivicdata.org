@@ -1,5 +1,8 @@
+
+.. _basics:
+
 Getting Started Writing Scrapers
-================================
+===================================
 
 While we strive to make writing scrapers as simple as possible, there are a few prerequisites:
 
@@ -15,7 +18,7 @@ If you're already well-versed in Python, GitHub, and basics of web scraping you 
 
 
 Python
------
+---------
  
 If you aren't already familiar with Python you might want to start with `Python on Codecademy <http://www.codecademy.com/tracks/python>`_.
 
@@ -27,13 +30,13 @@ Having a local development environment is recommended, `virtualenv <httpe://pypi
 
 
 Understanding GitHub
---------------------
+-----------------------
 
 Contributing code requires a free `GitHub <http://github.com>`_ account, if you haven't use Git before there's a `Git tutorial <https://help.github.com/articles/set-up-git#platform-all>`_ to get you started.
 
 
 Scraping Basics
----------------
+------------------
 
 It is useful to understand the basic concept of web scraping before beginning, which is somewhat beyond the scope of this documentation. We recommend this `source <http://docs.python-guide.org/en/latest/scenarios/scrape/>`_.
 
@@ -43,7 +46,7 @@ In our experience spending a few minutes brushing up on the basics of `XPath <ht
 
 
 Getting Started
----------------
+-----------------
 
 The first thing to do is to choose a repository to work with, or create a new one.
 

@@ -1,3 +1,6 @@
+
+.. _tips:
+
 Common tips for writing scrapers
 ================================
 

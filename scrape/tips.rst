@@ -1,17 +1,10 @@
+
+.. _tips:
+
 Common tips for writing scrapers
 ================================
 
-.. warning::
-    Parts of Open Civic Data underwent a large refactor as of mid-2014, some information on this
-    page may be out of date.   We're working on updating this documentation as soon as possible.
-
-    We'll remove these messages from pages as they're updated and vetted.
-
-
-The following doc contains a list of simple recipies to help scrape data
-down from legislative websites. These are by no means the only way to do
-these things, but it's the way that we've settled on liking enough to use
-in a few places.
+The following doc contains a list of useful recipies to help scrape data down from legislative websites. These are by no means the only way to do these things, but it's a description of some of the things we've found to work well.
 
 Fetching a page and setting URLs to absolute paths
 --------------------------------------------------
@@ -22,31 +15,29 @@ It's handy to be able to set all the relative URL paths to absolute paths.
 It's not uncommon to see a method such as::
 
     def lxmlize(self, url):
-        entry = self.urlopen(url)
+        entry = self.get(url).text
         page = lxml.html.fromstring(entry)
         page.make_links_absolute(url)
         return page
 
-being used to proxy calls to ``urlopen`` (since ``scrapelib`` it's self
-has no dependency on ``lxml``, this isn't the default behavior).
 
 Getting the current session
 ---------------------------
 
-The current session will be set (in any ``Scraper`` subclass) to the
-``session`` instance var. It's common to see this being used in the ``Event``
-objects::
+We might want to know what the current legislative session is. A legislative session is required for a bill, and can be helpful in limiting the duration of a scrape (for legislatures that have persistent pages, we probably don't want to scrape all bills/legislators/events back to when they started keeping track!) Sessions are created in :file:`__init__.py` as a list of dictionaries. Jurisdictions can do all kinds of weird things with sessions (we've seen them create sessions inside sessions) so keeping track based on date won't work. Instead, you'll need to order sessions chronologically, with the current one on top. For example::
 
-    e = Event(name=name,                                                 
-              session=self.session,                                      
-              when=when,                                                 
-              location='unknown')                                        
+    legislative_sessions = [{"identifier":"2015",
+                            "name":"2015 Regular Session",
+                            "start_date": "2015-01-01",
+                            "end_date": "2016-12-31"},
+                            {"identifier":"2013",
+                            "name":"2013 Regular Session",
+                            "start_date": "2013-01-01",
+                            "end_date": "2014-12-31"}]
 
-This also leads to a common way to gate scrapes (and limit them to the current
-session only)::
+Then to get the current session from any scraper, you can call::
 
-    if self.session != self.get_current_session():
-        raise Exception("We can't scrape past sessions")
+    self.jurisdiction.legislative_sessions[0]
 
 Common XPath tricks
 -------------------
@@ -119,7 +110,7 @@ Array Access
     Be careful with this one!
 
 You can access indexes of returned lists using square brackets (just like in
-Python it's self), although this tends to not be advised (since the counts
+Python itself), although this tends to not be advised (since the counts
 can often change, and you may end up scraping in bad data).
 
 However, this is sometimes needed::
@@ -176,8 +167,7 @@ a broken scraper. Usually, you'd see something like::
     for row in page.xpath("//table[@id='foo']/tr"):
         name, district, email = row.xpath("./*")
 
-Which will trigger breakage if the number of rows change. Of course, you
-need to sill assert that you have sane values in such a table, since the
+Which will trigger breakage if the number of rows change. It still helps to sill assert that you have sane values in such a table, since the
 order of the entries may change, and you'll end up changing everyone's name
 to "District 5".
 

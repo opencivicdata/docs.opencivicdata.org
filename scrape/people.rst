@@ -10,7 +10,7 @@ This guide assumes you have a working pupa setup. If you don't please refer to t
 
 
 Special notes about People scrapers
------------------------------------
+------------------------------------
 
 The name is a bit misleading - so-called People scrapers actually scrape
 ``Person``, ``Organization`` and ``Membership`` objects.
@@ -83,7 +83,7 @@ Let's take a look at sample working Pupa scraper::
 A person requires a name and a membership. The district, role and primary_org fields allow us to find the post to which John Smith is assigned. Recall that we added this post in :file:`__init__`. You can go back and add more posts in :file:`__init__` if needed. In addition, each entity that's scraped needs a source, which is added using ``add_source``.
 
 Committees and Memberships
------------
+---------------------------
 
 As noted, the People scraper can also handle committees. We can use the following code to add committees::
 

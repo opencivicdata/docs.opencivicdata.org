@@ -1,3 +1,6 @@
+
+.. _run_scraper:
+
 Running the Scraper
 ====================
 

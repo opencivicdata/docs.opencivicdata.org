@@ -198,6 +198,11 @@ Bill actions should be one of the following:
     * veto-override-passage
     * veto-override-failure
 
+Note that when we actually scrape the site, we'd like to limit the bills we ingest to the current legislative session. Depending on the site, this can be done by navigating to a page that only contains information from the current session, or by limiting a search by the date range related to a session.
+
+Scraping Votes
+------------------
+
 
 In almost every case, votes are found on the same page as bills, so we tend to scrape them from the bill scraper. Below is an example (we've removed all but the required features of a bill to keep things shorter.)
 

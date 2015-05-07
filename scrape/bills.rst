@@ -203,7 +203,6 @@ Note that when we actually scrape the site, we'd like to limit the bills we inge
 Scraping Votes
 ------------------
 
-
 In almost every case, votes are found on the same page as bills, so we tend to scrape them from the bill scraper. Below is an example (we've removed all but the required features of a bill to keep things shorter.)
 
 Now, let's take a look at how we can add Vote information to a bill::

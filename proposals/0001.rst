@@ -4,7 +4,7 @@ OCDEP 1: Purpose and Guidelines
 
 :Created: 2014-06-05
 :Author: James Turk
-:Status: Draft
+:Status: Accepted
 
 What is an OCDEP?
 =================

@@ -187,8 +187,8 @@ Schema::
 Examples
 --------
 
-
 Lobbying Disclosure::
+
      {
       "id": "ocd-disclosure/000225e1-a1e1-43d4-9a73-44ec5955a036",
       "related_entities": [
@@ -233,8 +233,8 @@ Lobbying Disclosure::
       "classification": "lobbying"
     }
 
-
 Disclosed Lobbying Event::
+
     {
       "updated_at": "2015-04-03T04:31:59.066",
       "id": "ocd-event/a89e59a8-52fd-4ece-a4e3-e02366b57460",

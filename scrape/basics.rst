@@ -69,15 +69,15 @@ An example of how you might configure your setup:
 .. code-block:: bash
 
     # using a virtualenv highly recommended
-    $ mkvirtualenv -p `which python3` opencivicdata
+    $ mkvirtualenv --python `which python3` opencivicdata
     # Install pupa
-    $ pip install -U pupa
+    $ pip install --upgrade pupa
     # Clone the repo that you forked on GitHub
     $ git clone git@github.com:<yourusername>/scrapers-us-state.git
     # Switch to a branch to make pulling your work later as easy as possible
     $ cd scrapers-us-state
-    $ git checkout -b <new-branch-name>
+    $ git checkout --branch <new-branch-name>
     # ...do work...
-    $ git push -u origin <new-branch-name>
+    $ git push --set-upstream origin <new-branch-name>
 
 If you're all set up, you can move on to :doc:`new`.

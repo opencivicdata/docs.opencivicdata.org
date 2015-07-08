@@ -100,7 +100,7 @@ The event is now much more fleshed out. But we're still missing the meat of an e
   import datetime as dt
   import pytz
 
-  class BelmontmaEventScraper(Scraper):
+  class SeattleEventScraper(Scraper):
       def scrape(self):
           when = dt.datetime(1776,7,4,9,15)
           tz = pytz.timezone("US/Pacific") #set the timezone for this location

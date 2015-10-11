@@ -23,7 +23,6 @@ Pupa should provide a Document class, based on the current Bill type to record a
 
 Implementation
 ==============
-
 id
     A unique ID in the format ``ocd-document/{uuid}``.
 
@@ -37,6 +36,23 @@ from_organization, from_organization_id
     **optional**
     The organization that the document was originally sent to.  If this is a campaign candidate filing this     
     could be the Board of Elections that receives the filing
+    
+creators
+     An array of creators of the entities
+     
+    name
+        The upstream-given name of this creator.
+
+    entity_type
+        'organization' or 'person' - the type of the creator.
+
+    organization, organization_id
+        If the ``entity_type`` is 'organization' and the entity is resolved, will be the
+        creating organization.
+
+    person, person_id
+        If the ``entity_type`` is 'person' and the entity is resolved, will be the
+        creating individual.
 
 classification
     A list of classifications for this document, suggested values would be things like 'report',
@@ -109,10 +125,45 @@ links
     full_text
          If available, the full text of the document in text based format
 
+actions
+    A list of objects representing individual actions that take place on a actions, such as submissions and publications. Actions consist of the following properties:
+    
+    organization, organization_id
+        The organization that this action took place within.
+
+    description
+        Description of the action.
+
+    date
+        The date the action occurred in YYYY-MM-DD format. (can be partial by omitting -MM-DD or
+        -DD component).
+
+    classification
+        A list of classifications for this actions, suggested values would be things like
+        'submission', 'publication', etc.
+
+    related_entities
+        A list of all related entities (such as legislators mentioned by name in the action).
+        Each entity has the following fields:
+
+        name
+            The upstream-given name of this related entity.
+
+        entity_type
+            'organization' or 'person' - the type of entity that is related
+
+        organization, organization_id
+            If the ``entity_type`` is 'organization' and the entity is resolved, will be the
+            organization that is related.
+
+        person, person_id
+            If the ``entity_type`` is 'person' and the entity is resolved, will be the
+            person that is related.
 
 extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
     
+
     
 
 Copyright
@@ -121,11 +172,3 @@ Copyright
 This document has been placed in the public domain per the Creative Commons
 CC0 1.0 Universal license (http://creativecommons.org/publicdomain/zero/1.0/deed).
 
-
-Additional fields: 
-
-- effective dates
-- submitted dates 
-- signatures
-- creator
-- published dates

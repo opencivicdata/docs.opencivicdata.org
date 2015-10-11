@@ -84,7 +84,6 @@ sources
         Description of what this source was used for.
 
 related_documents
-
     List of all related documents. An example might be a an amended campaign finance document that supersedes an earlier filing. 
 
     An array of entities with the following fields:
@@ -92,11 +91,10 @@ related_documents
     identifier
         The identifier of the related documents, such as "D-1 Statement of Organization".
     relation_type
-
         Description of the relation between the two bills, can be:
 
-            replaced-by - A document that was replaced by another document.
-            replaces - A document that supercedes another document.
+            * replaced-by - A document that was replaced by another document.
+            * replaces - A document that supercedes another document.
 
     related_document_id
         If the related document exists in the data set, a link to the complete record for the document. (can be null if no such link has yet been made)

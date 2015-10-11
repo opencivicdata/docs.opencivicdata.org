@@ -28,14 +28,14 @@ id
     A unique ID in the format ``ocd-document/{uuid}``.
 
 identifier
-    A name for the bill, such as 'HB 1' or '2117'.
+    A name for the bill, such as 'Communication F2015-119'.
 
 title
-    The current title of the bill, such as 'The Patient Protection and Affordable Care Act'.
+    The current title of the bill, such as 'Office of Inspector General's Audit and Program Review Section's Draft 2015 Annual Plan'.
 
 from_organization, from_organization_id
     **optional**
-    The organization that the document was originally introduced in.  If this is a campaign candidate filing this     
+    The organization that the document was originally sent to.  If this is a campaign candidate filing this     
     could be the Board of Elections that receives the filing
 
 classification
@@ -44,7 +44,7 @@ classification
 
 subject
     **optional**
-    A curated list of subject areas that this bill is a part of.
+    A curated list of subject areas that this document covers.
 
 abstracts
     A list of objects representing available abstracts (sometimes called summaries) for the document, each with the
@@ -55,7 +55,7 @@ abstracts
 
     note
         **optional**
-        A note about the origin of the summary, such as "Republican Caucus Summary" or "Library of Congress Summary"
+        A note about the origin of the summary, such as "Clerk Staff Summary"
 
 other_titles
     A list of objects representing alternate titles for the document.
@@ -66,51 +66,6 @@ other_titles
     note
         **optional**
         A note describing the origin of the title.
-
-other_identifiers
-    A list of objects representing alternate identifiers for the bill.
-
-    Also note that this is to refer to bills that have multiple names, such as in Tennessee where
-    bills are given a House and Senate number but have shared history.  In states where there
-    are two related bills with distinct parallel histories, a second Bill object should be
-    created and the ``related_bill`` property (described below) should be used.
-
-    identifier
-        The alternate identifier (e.g. HB 7)
-
-    note
-        **optional**
-        A note describing the reason for the alternate name.
-
-    scheme
-        **optional**
-        If the identifier belongs to a 3rd-party site (such as OpenStates.org assigned bill ids)
-        it must provide a scheme, scheme should be omitted if it is an identifier from the
-        primary source.
-
-
-versions
-    All versions of the document.
-
-    note
-        Note describing the version 
-    date
-        The date the version was published in YYYY-MM-DD format (partial dates are acceptable).
-    links
-        Links to 'available forms' of the version.  Each version can be available in
-        multiple forms such as PDF and HTML.  (For those familiar with DCAT this is the same
-        as the ``Distribution`` class.)
-        Has the following properties:
-
-        url
-            URL of the link.
-        media_type
-            The `media type <http://en.wikipedia.org/wiki/Internet_media_type>`_ of the link.
-            
-    text
-        Full text of the document 
-
-
 
 created_at
     Time that this object was created at in the system, not to be confused with the date of
@@ -128,8 +83,39 @@ sources
         **optional**
         Description of what this source was used for.
 
+related_documents
+
+    List of all related documents. An example might be a an amended campaign finance document that supersedes an earlier filing. 
+
+    An array of entities with the following fields:
+
+    identifier
+        The identifier of the related documents, such as "D-1 Statement of Organization".
+    relation_type
+
+        Description of the relation between the two bills, can be:
+
+            replaced-by - A document that was replaced by another document.
+            replaces - A document that supercedes another document.
+
+    related_document_id
+        If the related document exists in the data set, a link to the complete record for the document. (can be null if no such link has yet been made)
+
+links
+    Links to ‘available forms’ of the document. Each document can be available in multiple forms such as PDF and HTML. (For those familiar with DCAT this is the same as the Distribution class.) Has the following properties:
+
+    url
+        URL of the link.
+    media_type
+        The media type of the link.
+    full_text
+         If available, the full text of the document in text based format
+
+
 extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
+    
+    
 
 Copyright
 =========

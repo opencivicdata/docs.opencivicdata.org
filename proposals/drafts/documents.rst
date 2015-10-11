@@ -93,8 +93,8 @@ related_documents
     relation_type
         Description of the relation between the two bills, can be:
 
-            * replaced-by - A document that was replaced by another document.
-            * replaces - A document that supercedes another document.
+        * replaced-by - A document that was replaced by another document.
+        * replaces - A document that supercedes another document.
 
     related_document_id
         If the related document exists in the data set, a link to the complete record for the document. (can be null if no such link has yet been made)

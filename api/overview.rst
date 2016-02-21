@@ -25,7 +25,7 @@ The Open Civic Data API consists of two types of endpoints: search, and object l
 
 Object lookup endpoints can be thought of as permanent URIs for objects, they take the form ``https://api.opencivicdata.org/<ocd-id>`` and return a single JSON object.
 
-Search endpoints are in the form ``https://api.opencivicdata.org/<type>/?<parameters>``. For example: ``https://api.opencivicdata.org/people/?name=Obama`` would return a list of all legislators named 'Obama'.
+Search endpoints are in the form ``https://api.opencivicdata.org/<type>/?<parameters>``. For example: ``https://api.opencivicdata.org/people/?name__contains=Obama`` would return a list of all legislators named 'Obama'.
 
 The search endpoints are:
 

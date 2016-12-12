@@ -90,6 +90,8 @@ Questions to answer
   models?
 * How to reconcile multiple reports that describe the same contribution,
   expenditure or other event?
+* How to handle different types of Committees beyond just imputing their types
+  based on (say) whether they are oriented toward more than one Candidate?
 
 Implementation
 ==============

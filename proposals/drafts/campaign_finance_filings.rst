@@ -80,6 +80,14 @@ likely future conflicts with other entities in the Open Civic Data namespace, so
 this proposal doesn't make any attempt to resolve those conflicts since they
 seem ancillary for now.
 
+TODO
+----
+* Make filing activity actions use same pattern as OCD bill actions (@aepton)
+
+Questions to answer
+-------------------
+* How to model Committee Status and Committee Purpose inside of OCD Organization
+  models?
 
 Implementation
 ==============

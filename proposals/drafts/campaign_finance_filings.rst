@@ -126,7 +126,7 @@ Committee
 ---------
 
 id
-    Open Civic Data-style id in the format ``ocd-cf-filingcommittee/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-cf-committee/{{uuid}}``
 
 name
     Name of the Committee
@@ -150,172 +150,276 @@ purpose
 Person
 ------
 
+This system assumes that each Person will be generated from a specific line item
+in a Filing. As such, we may know nothing about the Person but their name. Also,
+sometimes and as far as I can see inevitably, some Persons (many in fact) will
+be corporations or other distinctly non-human entities, Supremes Court
+notwithstanding.
+
 id
+    Open Civic Data-style id in the format ``ocd-cf-person/{{uuid}}``
 
-name
+first_name
+    **optional**
+    String
 
-first
+middle_name
+    **optional**
+    String
 
-middle
+last_name
+    **optional**
+    String
 
-last
+name_prefix
+    **optional**
+    String
 
-prefix
+name_suffix
+    **optional**
+    String
 
-suffix
+name_full
+    Fully-concatenated name with all prefix, suffix, etc
 
-full_legal
+street_address_1
+    **optional**
+    String
 
-full_colloquial
-
-address
-
-street_1
-
-street_2
+street_address_2
+    **optional**
+    String
 
 city
+    **optional**
+    String
 
 state
+    **optional**
+    String
 
 country
+    **optional**
+    String
 
 zip
+    **optional**
+    String
 
 coordinates
+    **optional**
+    Geocoded address coordinates (WGS 84)
 
 employer
+    **optional**
+    String
 
 occupation
+    **optional**
+    String
 
 Contribution (Section)
 ----------------------
 
 id
-    Open Civic Data-style id in the format ``ocd-cf-committeecontribution/{{uuid}}``
-
-filing
-    Filing
+    Open Civic Data-style id in the format ``ocd-cf-contribution/{{uuid}}``
 
 is_loan
-    Whether the contribution is a loan.
+    Whether the contribution is a loan. (This type of contribution could
+    potentially merit its own Section.)
+
+is_inkind
+    Whether the contribution is in-kind. (This type of contribution could
+    potentially merit its own Section.)
 
 contribution_amount
     Amount in Decimal of contribution.
 
-is_inkind
-
 donor
+    Person making contribution.
 
 date
+    Date reported for contribution.
 
 description
+    String (may simply need repeated "notes" fields for items of this type).
 
 memo
+    String (may simply need repeated "notes" fields for items of this type).
 
 Expenditure (Section)
 ---------------------
 
 id
-
-filing
+    Open Civic Data-style id in the format ``ocd-cf-expenditure/{{uuid}}``
 
 is_transfer
+    Whether this expenditure is a transfer to another committee. (This type of
+    expenditure could potentially merit its own Section.)
 
 amount
+    Amount in Decimal of expenditure.
 
 vendor
+    Person receiving expenditure.
 
 date
+    Date reported for expenditure.
 
 description
+    String (may simply need repeated "notes" fields for items of this type).
 
 memo
+    String (may simply need repeated "notes" fields for items of this type).
 
 Amendment (Section)
 -------------------
 
+id
+    Open Civic Data-style id in the format ``ocd-cf-amendment/{{uuid}}``
+
 filing_to_amend
+    Filing
 
 invalidates_prior_finding
+    Whether this amendment renders all content in the filing_to_amend invalid
+    (which is almost always the case IMHO) or merely appends to it or somesuch.
 
 CommitteeStatusUpdate (Section)
 -------------------------------
 
+id
+    Open Civic Data-style id in the format ``ocd-cf-committeestatusupdate/{{uuid}}``
+
 new_status
+    New status to set for Committee. This could be an enumerated type or a
+    free-text field.
 
 description
+    String containing whatever associated text we got along with the status
+    change.
 
 CommitteeAttributeUpdate (Section)
 ----------------------------------
 
+id
+    Open Civic Data-style id in the format ``ocd-cf-committeeattributeupdate/{{uuid}}``
+
 attribute_to_update
+    Attribute in the Committee object to change.
 
 new_attribute_value
+    Value to set for the attribute in the Committee object.
 
 Candidate
 ---------
 
+This is not necessarily a Person: for instance, "yes" or "no" to a ballot
+measure.
+
+id
+    Open Civic Data-style id in the format ``ocd-cf-candidate/{{uuid}}``
+
 election
+    Election this Candidate is contesting.
 
 party
+    **optional**
+    Party this Candidate is aligned with.
 
 office
+    Office for which this Candidate is running.
 
 regulator
+    **repeated**
+    **optional**
+    Any applicable Regulators who have jurisdiction over this Candidate. For
+    example, FEC and PDC have jurisdiction over different candidates in WA
+    on a given election day. I suppose it's possible some Candidates won't have
+    Regulators (God help us all).
 
 Jurisdiction
 ------------
 
 id
+    Open Civic Data-style id in the format ``ocd-cf-jurisdiction/{{uuid}}``
 
 name
+    Name to use for this Jurisdiction.
 
 geography
+    **optional**
+    Geography object containing the boundaries of this Jurisdiction. Reluctantly
+    optional.
 
 government_level
+    **repeated**
+    Government Level with...jurisdiction over this Jurisdiction.
 
 Office
 ------
 
 id
+    Open Civic Data-style id in the format ``ocd-cf-office/{{uuid}}``
 
 name
+    Name of the Office.
 
 government_level
+    Government Level that this Office belongs to.
 
 Party
 -----
 
 id
+    Open Civic Data-style id in the format ``ocd-cf-party/{{uuid}}``
 
 name
+    Name of the Party.
 
 Regulator
 ---------
 
 id
+    Open Civic Data-style id in the format ``ocd-cf-regulator/{{uuid}}``
 
 name
+    Name of the Regulator.
 
 url
+    **optional**
+    URL associated with the Regulator; this should probably either not be part
+    of the spec, or associated with a much more rigorous system of URL prefixes
+    for different report types, etc.
 
 government_level
+    Government Level that this Regulator belongs to.
 
 Election
 --------
 
+id
+    Open Civic Data-style id in the format ``ocd-cf-election/{{uuid}}``
+
 date
+    Date of the Election.
 
 jurisdiction
+    Jurisdiction with at least one race occurring on this Election date.
 
 is_primary
+    Whether this Election is a primary race or not for this Jurisdiction.
 
 primary_parties_involved
+    **repeated**
+    **optional**
+    If this is a primary, each Party involved in this Election.
 
 GovernmentLevel
 ---------------
 
 id
+    Open Civic Data-style id in the format ``ocd-cf-governmentlevel/{{uuid}}``
 
 name
+    Name of the Government Level.

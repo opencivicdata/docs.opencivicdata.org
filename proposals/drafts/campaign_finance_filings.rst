@@ -88,6 +88,8 @@ Questions to answer
 -------------------
 * How to model Committee Status and Committee Purpose inside of OCD Organization
   models?
+* How to reconcile multiple reports that describe the same contribution,
+  expenditure or other event?
 
 Implementation
 ==============

@@ -108,12 +108,24 @@ filing_coverage_end_date
     **optional**
     Date (and possibly time) when filing period of coverage ends.
 
-filing_regulator
-    Regulator
+from_organization
+    Regulator to which the Filing was submitted.
 
 filing_url
     **optional**
     Wish it wasn't optional.
+
+sources
+    **optional**
+    **repeated**
+    List of sources used in assembling this object. Has the following
+    properties:
+
+    url
+        URL of the resource.
+    note
+        **optional**
+        Description of what this source was used for.
 
 filing_relevant_election_date
     Date of (nearest? next?) relevant election.
@@ -131,10 +143,11 @@ id
 name
     Name of the Committee
 
-candidate
+candidate orientations
     **optional**
-    If Committee is a candidate committee, this is the Candidate; if not a
-    candidate committee, this field is null
+    **repeated**
+    What posture the Committee takes towards specific Candidates. Committee type
+    can be imputed based on the number and nature of these orientations.
 
 officers
     List of Persons who are the committee officers (maybe needs indication of
@@ -147,6 +160,22 @@ purpose
     **optional**
     Purpose of the Committee if any is given.
 
+Candidate Orientation
+---------------------
+
+A Committee may have no relation to any specific Candidate, but if they do have
+such a relationship, the options are complex. Hence this type.
+
+id
+    Open Civic Data-style id in the format ``ocd-cf-candidateorientation/{{uuid}}``
+
+candidate
+    Candidate
+
+orientation
+    Enumerated among "supports", "opposes", "primary vehicle for", "surplus
+    account for" and other relationship types.
+
 Person
 ------
 
@@ -156,67 +185,7 @@ sometimes and as far as I can see inevitably, some Persons (many in fact) will
 be corporations or other distinctly non-human entities, Supremes Court
 notwithstanding.
 
-id
-    Open Civic Data-style id in the format ``ocd-cf-person/{{uuid}}``
-
-first_name
-    **optional**
-    String
-
-middle_name
-    **optional**
-    String
-
-last_name
-    **optional**
-    String
-
-name_prefix
-    **optional**
-    String
-
-name_suffix
-    **optional**
-    String
-
-name_full
-    Fully-concatenated name with all prefix, suffix, etc
-
-street_address_1
-    **optional**
-    String
-
-street_address_2
-    **optional**
-    String
-
-city
-    **optional**
-    String
-
-state
-    **optional**
-    String
-
-country
-    **optional**
-    String
-
-zip
-    **optional**
-    String
-
-coordinates
-    **optional**
-    Geocoded address coordinates (WGS 84)
-
-employer
-    **optional**
-    String
-
-occupation
-    **optional**
-    String
+This type is an OCD Popolo Person.
 
 Contribution (Section)
 ----------------------
@@ -311,74 +280,10 @@ attribute_to_update
 new_attribute_value
     Value to set for the attribute in the Committee object.
 
-Candidate
----------
-
-This is not necessarily a Person: for instance, "yes" or "no" to a ballot
-measure.
-
-id
-    Open Civic Data-style id in the format ``ocd-cf-candidate/{{uuid}}``
-
-election
-    Election this Candidate is contesting.
-
-party
-    **optional**
-    Party this Candidate is aligned with.
-
-office
-    Office for which this Candidate is running.
-
-regulator
-    **repeated**
-    **optional**
-    Any applicable Regulators who have jurisdiction over this Candidate. For
-    example, FEC and PDC have jurisdiction over different candidates in WA
-    on a given election day. I suppose it's possible some Candidates won't have
-    Regulators (God help us all).
-
-Jurisdiction
-------------
-
-id
-    Open Civic Data-style id in the format ``ocd-cf-jurisdiction/{{uuid}}``
-
-name
-    Name to use for this Jurisdiction.
-
-geography
-    **optional**
-    Geography object containing the boundaries of this Jurisdiction. Reluctantly
-    optional.
-
-government_level
-    **repeated**
-    Government Level with...jurisdiction over this Jurisdiction.
-
-Office
-------
-
-id
-    Open Civic Data-style id in the format ``ocd-cf-office/{{uuid}}``
-
-name
-    Name of the Office.
-
-government_level
-    Government Level that this Office belongs to.
-
-Party
------
-
-id
-    Open Civic Data-style id in the format ``ocd-cf-party/{{uuid}}``
-
-name
-    Name of the Party.
-
 Regulator
 ---------
+
+Could probably also be an OCD Organization, but maybe not.
 
 id
     Open Civic Data-style id in the format ``ocd-cf-regulator/{{uuid}}``
@@ -394,26 +299,6 @@ url
 
 government_level
     Government Level that this Regulator belongs to.
-
-Election
---------
-
-id
-    Open Civic Data-style id in the format ``ocd-cf-election/{{uuid}}``
-
-date
-    Date of the Election.
-
-jurisdiction
-    Jurisdiction with at least one race occurring on this Election date.
-
-is_primary
-    Whether this Election is a primary race or not for this Jurisdiction.
-
-primary_parties_involved
-    **repeated**
-    **optional**
-    If this is a primary, each Party involved in this Election.
 
 GovernmentLevel
 ---------------

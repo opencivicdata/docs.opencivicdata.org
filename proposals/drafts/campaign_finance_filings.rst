@@ -291,28 +291,4 @@ new_attribute_value
 Regulator
 ---------
 
-Could probably also be an OCD Organization, but maybe not.
-
-id
-    Open Civic Data-style id in the format ``ocd-cf-regulator/{{uuid}}``
-
-name
-    Name of the Regulator.
-
-url
-    **optional**
-    URL associated with the Regulator; this should probably either not be part
-    of the spec, or associated with a much more rigorous system of URL prefixes
-    for different report types, etc.
-
-government_level
-    Government Level that this Regulator belongs to.
-
-GovernmentLevel
----------------
-
-id
-    Open Civic Data-style id in the format ``ocd-cf-governmentlevel/{{uuid}}``
-
-name
-    Name of the Government Level.
+OCD Organization model.

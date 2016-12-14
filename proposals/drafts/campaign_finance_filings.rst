@@ -92,6 +92,13 @@ Questions to answer
   expenditure or other event?
 * How to handle different types of Committees beyond just imputing their types
   based on (say) whether they are oriented toward more than one Candidate?
+* How should amendments work? Should there be some notion of versions of
+  filings? Should all data from a given filing, even if 99% is redundant with a
+  prior version of same filing, be stored, or should we store a diff?
+* Should we make/preserve the distinction FEC makes between contributions and
+  receipts (every contribution is a receipt; not every receipt is a
+  contribution)? How do we handle presumably-unique transaction IDs that
+  nevertheless have to get versioned somehow?
 
 Implementation
 ==============
@@ -104,7 +111,7 @@ id
 
 filing_type
     **optional**
-    FilingType (jurisdiction-specific)
+    Filing Type (jurisdiction-specific)
 
 filing_committee
     Committee
@@ -199,72 +206,66 @@ notwithstanding.
 
 This type is an OCD Popolo Person.
 
-Contribution (Section)
-----------------------
+Regulator
+---------
+
+OCD Organization model.
+
+Amendment
+---------
+
+Need to figure out how this system should work. It probably shouldn't be a
+Section.
+
+Transaction Type
+----------------
 
 id
-    Open Civic Data-style id in the format ``ocd-cf-contribution/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-cf-transactiontype/{{uuid}}``
 
-is_loan
-    Whether the contribution is a loan. (This type of contribution could
-    potentially merit its own Section.)
+name
+    Type of transaction - contribution, expenditure, loan, in-kind, transfer,
+    other receipt, etc.
 
-is_inkind
-    Whether the contribution is in-kind. (This type of contribution could
-    potentially merit its own Section.)
+Filing Type
+----------------
 
-contribution_amount
-    Amount in Decimal of contribution.
+id
+    Open Civic Data-style id in the format ``ocd-cf-filingtype/{{uuid}}``
 
-donor
-    Person making contribution.
+name
+    Name of filing type - "Last Minute Contributions", etc.
 
-date
-    Date reported for contribution.
+code
+    Probably-more-cryptic code for the form associated with the Filing - "A1",
+    etc.
 
-description
-    String (may simply need repeated "notes" fields for items of this type).
+jurisdiction
+    Jurisdiction for which the Filing Type is relevant.
 
-memo
-    String (may simply need repeated "notes" fields for items of this type).
-
-Expenditure (Section)
+Transaction (Section)
 ---------------------
 
 id
-    Open Civic Data-style id in the format ``ocd-cf-expenditure/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-cf-transaction/{{uuid}}``
 
-is_transfer
-    Whether this expenditure is a transfer to another committee. (This type of
-    expenditure could potentially merit its own Section.)
+transaction_type
+    From enumerated list of possible Transaction Types.
 
-amount
-    Amount in Decimal of expenditure.
+transaction_amount
+    Amount in Decimal of transaction.
 
-vendor
-    Person receiving expenditure.
+counterparty
+    Person making contribution, or receiving expenditure, etc.
 
 date
-    Date reported for expenditure.
+    Date reported for transaction.
 
 description
     String (may simply need repeated "notes" fields for items of this type).
 
 memo
     String (may simply need repeated "notes" fields for items of this type).
-
-Amendment (Section)
--------------------
-
-id
-    Open Civic Data-style id in the format ``ocd-cf-amendment/{{uuid}}``
-
-filing_to_amend
-    Filing
-
-invalidates_prior_finding
-    Whether this amendment renders all content in the filing_to_amend invalid
-    (which is almost always the case IMHO) or merely appends to it or somesuch.
 
 CommitteeStatusUpdate (Section)
 -------------------------------
@@ -291,8 +292,3 @@ attribute_to_update
 
 new_attribute_value
     Value to set for the attribute in the Committee object.
-
-Regulator
----------
-
-OCD Organization model.

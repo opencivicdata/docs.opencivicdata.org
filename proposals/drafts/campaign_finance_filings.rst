@@ -162,6 +162,9 @@ id
 name
     Name of the Committee
 
+committee_type
+    Committee Type
+
 candidate orientations
     **optional**
     **repeated**
@@ -178,6 +181,21 @@ status
 purpose
     **optional**
     Purpose of the Committee if any is given.
+
+Committee Type
+--------------
+
+id
+    Open Civic Data-style id in the format ``ocd-cf-committeetype/{{uuid}}``
+
+name
+    Name of the Committee Type
+
+jurisdiction
+    Presumably a state, but: whatever jurisdiction the Committe Type is
+    meaningful within. This allows us to have "Candidate Committee"s in 2
+    different states that adhere to whatever different rules apply in those
+    places.
 
 Candidate Orientation
 ---------------------

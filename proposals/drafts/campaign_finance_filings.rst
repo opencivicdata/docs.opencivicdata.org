@@ -22,11 +22,6 @@ Campaign Finance regulator
 Filing
     Any single document filed with a Regulator.
 
-Government Level
-    The most common of these will be "state", "federal" and "city" or perhaps
-    "local". But this allows for a distinction between city and county
-    authorities, or federal and tribal.
-
 Jurisdiction
     The region covered by an Office, or for which an Election is being held.
 
@@ -109,30 +104,31 @@ Filing
 id
     Open Civic Data-style id in the format ``ocd-cf-filing/{{uuid}}``
 
-filing_type
+original_id
+    **optional**
+    In some jurisdictions, the original jurisdictionally-assigned ID of a Filing
+    may be meaningful, so preserve it here.
+
+type
     **optional**
     Filing Type (jurisdiction-specific)
 
-filing_committee
-    Committee
+committee
+    Committee making the Filing.
 
-filing_date
-    Date (and possibly time) when filing was submitted.
+first_filing_date
+    Date (and possibly time) when filing was first submitted.
 
-filing_coverage_begin_date
+coverage_begin_date
     **optional**
     Date (and possibly time) when filing period of coverage begins.
 
-filing_coverage_end_date
+coverage_end_date
     **optional**
     Date (and possibly time) when filing period of coverage ends.
 
-from_organization
+regulator
     Regulator to which the Filing was submitted.
-
-filing_url
-    **optional**
-    Wish it wasn't optional.
 
 sources
     **optional**
@@ -146,12 +142,52 @@ sources
         **optional**
         Description of what this source was used for.
 
-filing_relevant_election_date
-    Date of (nearest? next?) relevant election.
+actions
+    A list of objects representing individual actions that take place on a
+    filing, such as initial filing, amendments, withdrawals, etc. Actions
+    consist of the following properties:
 
-filing_person
+    id
+        Open Civic Data-style id in the format ``ocd-cf-filingaction/{{uuid}}``
+
+    description
+        Description of the action.
+
+    date
+        The date the action occurred.
+
+    classification
+        **repeated**
+        A list of classifications for this action, such as "amendment" or
+        "revocation" - allows for consolidating different jurisdictional
+        amendment schemes into standard types.
+
+    inciting_person
+        **optional**
+        Person responsible for the action, usually the filer of the amendment or
+        withdrawal.
+
+    invalidates_prior_versions
+        Boolean indicating whether this action renders everything contained
+        in previous versions of this Filing invalid.
+
+    transactions
+        List of the Transactions attached to this version of the Filing.
+
+    is_current
+        Boolean indicating whether data from this action (primarily the
+        transaction list) should be considered current or not.
+
+relevant_election
+    **repeated**
     **optional**
-    Person responsible for the filing.
+    Election(s) relevant to this filing. This is the upcoming Election for which
+    a donation is being disclosed, say, or a recently-passed Election for which
+    a Committee is announcing the closing of its books.
+
+responsible_person
+    **optional**
+    Person responsible for the filing, often a campaign treasurer or attorney.
 
 Committee
 ---------
@@ -159,24 +195,40 @@ Committee
 id
     Open Civic Data-style id in the format ``ocd-cf-committee/{{uuid}}``
 
+original_id
+    **optional**
+    In some jurisdictions, the original jurisdictionally-assigned ID of a
+    Committee may be meaningful, so preserve it here.
+
 name
     Name of the Committee
 
 committee_type
     Committee Type
 
-candidate orientations
-    **optional**
-    **repeated**
-    What posture the Committee takes towards specific Candidates. Committee type
-    can be imputed based on the number and nature of these orientations.
-
 officers
-    List of Persons who are the committee officers (maybe needs indication of
-    their ranks?)
+    List of Popolo Posts who are the committee officers (maybe needs indication
+    of their ranks?)
 
 status
-    Current status of the Committee.
+    Current status of the Committee. List of date ranges and status types
+    (active, inactive, contesting election, not contesting election, etc)
+    describing the time period at which a given status applied to the Committee.
+
+    begin_date
+        First date at which the status applied (inclusive).
+
+    end_date
+        Last date at which the status applyed (inclusive).
+
+    description
+        Description of the status.
+
+    classification
+        **repeated**
+        A list of classifications for this status, such as "active" or
+        "contesting election" - allows for consolidating different
+        jurisdictional status schemes into standard types.    
 
 purpose
     **optional**
@@ -197,7 +249,7 @@ jurisdiction
     different states that adhere to whatever different rules apply in those
     places.
 
-Candidate Orientation
+Candidate Designation
 ---------------------
 
 A Committee may have no relation to any specific Candidate, but if they do have
@@ -209,9 +261,9 @@ id
 candidate
     Candidate
 
-orientation
+designation
     Enumerated among "supports", "opposes", "primary vehicle for", "surplus
-    account for" and other relationship types.
+    account for", "independent expenditure" and other relationship types.
 
 Person
 ------
@@ -229,11 +281,6 @@ Regulator
 
 OCD Organization model.
 
-Amendment
----------
-
-Need to figure out how this system should work. It probably shouldn't be a
-Section.
 
 Transaction Type
 ----------------
@@ -241,9 +288,7 @@ Transaction Type
 id
     Open Civic Data-style id in the format ``ocd-cf-transactiontype/{{uuid}}``
 
-name
-    Type of transaction - contribution, expenditure, loan, in-kind, transfer,
-    other receipt, etc.
+
 
 Filing Type
 ----------------
@@ -267,8 +312,19 @@ Transaction (Section)
 id
     Open Civic Data-style id in the format ``ocd-cf-transaction/{{uuid}}``
 
-transaction_type
-    From enumerated list of possible Transaction Types.
+original_id
+    **optional**
+    In some jurisdictions, the original jurisdictionally-assigned ID of a
+    Transaction may be meaningful, so preserve it here.
+
+type
+    Type of transaction - contribution, expenditure, loan, transfer, other
+    receipt, etc. Enumerated field based on the jurisdiction of the Committee
+    filing the Transaction.
+
+is_inkind
+    Boolean indicating whether transaction is in-kind or not (in which case,
+    it's probably cash.)
 
 transaction_amount
     Amount in Decimal of transaction.
@@ -287,6 +343,9 @@ memo
 
 CommitteeStatusUpdate (Section)
 -------------------------------
+
+These are instances in which committees are becoming active, inactive or
+indicating whether they're participating in the Election or not.
 
 id
     Open Civic Data-style id in the format ``ocd-cf-committeestatusupdate/{{uuid}}``

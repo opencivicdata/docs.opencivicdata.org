@@ -160,8 +160,10 @@ actions
 
     inciter
         **optional**
+        **repeated**
         Person responsible for the action, usually the filer of the amendment or
-        withdrawal.
+        withdrawal. Theoretically this could be an Organization of some kind as
+        well.
 
     invalidates_prior_versions
         Boolean indicating whether this action renders everything contained
@@ -183,6 +185,7 @@ relevant_election
 
 responsible_person
     **optional**
+    **repeated**
     Person responsible for the filing, often a campaign treasurer or attorney.
     
 created_at
@@ -220,7 +223,9 @@ status
 
     end_date
         **optional**
-        Last date at which the status applied (inclusive).
+        Last date at which the status applied (inclusive). In many cases, the
+        current status won't have a known end_date associated with it, so this
+        is optional to reflect that.
 
     description
         Description of the status.

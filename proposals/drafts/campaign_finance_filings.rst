@@ -104,20 +104,16 @@ Filing
 id
     Open Civic Data-style id in the format ``ocd-cf-filing/{{uuid}}``
 
-original_id
+identifiers
     **optional**
-    In some jurisdictions, the original jurisdictionally-assigned ID of a Filing
-    may be meaningful, so preserve it here.
+    Upstream ids of the disclosure if any exist, such as the filing ID assigned by the Senate Office of Public Record
 
-type
+classification
     **optional**
     Filing Type (jurisdiction-specific)
 
 committee
     Committee making the Filing.
-
-first_filing_date
-    Date (and possibly time) when filing was first submitted.
 
 coverage_begin_date
     **optional**
@@ -162,7 +158,7 @@ actions
         "revocation" - allows for consolidating different jurisdictional
         amendment schemes into standard types.
 
-    inciting_person
+    inciter
         **optional**
         Person responsible for the action, usually the filer of the amendment or
         withdrawal.
@@ -188,6 +184,14 @@ relevant_election
 responsible_person
     **optional**
     Person responsible for the filing, often a campaign treasurer or attorney.
+    
+created_at
+    Time that this object was created at in the system, not to be confused with the date of introduction.
+updated_at
+    Time that this object was last updated in the system, not to be confused with the last action.
+extras
+    Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.    
+    
 
 Committee
 ---------
@@ -195,7 +199,7 @@ Committee
 id
     Open Civic Data-style id in the format ``ocd-cf-committee/{{uuid}}``
 
-original_id
+identifier
     **optional**
     In some jurisdictions, the original jurisdictionally-assigned ID of a
     Committee may be meaningful, so preserve it here.
@@ -206,10 +210,6 @@ name
 committee_type
     Committee Type
 
-officers
-    List of Popolo Posts who are the committee officers (maybe needs indication
-    of their ranks?)
-
 status
     Current status of the Committee. List of date ranges and status types
     (active, inactive, contesting election, not contesting election, etc)
@@ -219,7 +219,8 @@ status
         First date at which the status applied (inclusive).
 
     end_date
-        Last date at which the status applyed (inclusive).
+        **optional**
+        Last date at which the status applied (inclusive).
 
     description
         Description of the status.
@@ -230,7 +231,7 @@ status
         "contesting election" - allows for consolidating different
         jurisdictional status schemes into standard types.    
 
-purpose
+description
     **optional**
     Purpose of the Committee if any is given.
 
@@ -282,14 +283,6 @@ Regulator
 OCD Organization model.
 
 
-Transaction Type
-----------------
-
-id
-    Open Civic Data-style id in the format ``ocd-cf-transactiontype/{{uuid}}``
-
-
-
 Filing Type
 ----------------
 
@@ -311,6 +304,9 @@ Transaction (Section)
 
 id
     Open Civic Data-style id in the format ``ocd-cf-transaction/{{uuid}}``
+    
+filing_version
+    Reference to the ``Filing.version`` that a transaction is reported in.
 
 original_id
     **optional**
@@ -334,6 +330,7 @@ counterparty
 
 date
     Date reported for transaction.
+
 
 description
     String (may simply need repeated "notes" fields for items of this type).

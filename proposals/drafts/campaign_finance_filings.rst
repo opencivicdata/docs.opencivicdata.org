@@ -102,7 +102,7 @@ Filing
 ------
 
 id
-    Open Civic Data-style id in the format ``ocd-cf-filing/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaignfinance-filing/{{uuid}}``
 
 identifiers
     **optional**
@@ -112,10 +112,10 @@ classification
     **optional**
     Filing Type (jurisdiction-specific)
 
-committee
+filer
     Committee making the Filing.
 
-coverage_begin_date
+coverage_start_date
     **optional**
     Date (and possibly time) when filing period of coverage begins.
 
@@ -123,7 +123,7 @@ coverage_end_date
     **optional**
     Date (and possibly time) when filing period of coverage ends.
 
-regulator
+recipient
     Regulator to which the Filing was submitted.
 
 sources
@@ -144,7 +144,7 @@ actions
     consist of the following properties:
 
     id
-        Open Civic Data-style id in the format ``ocd-cf-filingaction/{{uuid}}``
+        Open Civic Data-style id in the format ``ocd-campaignfinance-filingaction/{{uuid}}``
 
     description
         Description of the action.
@@ -158,14 +158,14 @@ actions
         "revocation" - allows for consolidating different jurisdictional
         amendment schemes into standard types.
 
-    inciter
+    agent
         **optional**
         **repeated**
         Person responsible for the action, usually the filer of the amendment or
         withdrawal. Theoretically this could be an Organization of some kind as
         well.
 
-    invalidates_prior_versions
+    supersedes_prior_versions
         Boolean indicating whether this action renders everything contained
         in previous versions of this Filing invalid.
 
@@ -176,17 +176,12 @@ actions
         Boolean indicating whether data from this action (primarily the
         transaction list) should be considered current or not.
 
-relevant_election
+election
     **repeated**
     **optional**
     Election(s) relevant to this filing. This is the upcoming Election for which
     a donation is being disclosed, say, or a recently-passed Election for which
     a Committee is announcing the closing of its books.
-
-responsible_person
-    **optional**
-    **repeated**
-    Person responsible for the filing, often a campaign treasurer or attorney.
     
 created_at
     Time that this object was created at in the system, not to be confused with the date of introduction.
@@ -199,8 +194,10 @@ extras
 Committee
 ---------
 
+Subclass of Popolo Organization.
+
 id
-    Open Civic Data-style id in the format ``ocd-cf-committee/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaignfinance-committee/{{uuid}}``
 
 identifier
     **optional**
@@ -213,12 +210,12 @@ name
 committee_type
     Committee Type
 
-status
+statuses
     Current status of the Committee. List of date ranges and status types
     (active, inactive, contesting election, not contesting election, etc)
     describing the time period at which a given status applied to the Committee.
 
-    begin_date
+    start_date
         First date at which the status applied (inclusive).
 
     end_date
@@ -227,7 +224,7 @@ status
         current status won't have a known end_date associated with it, so this
         is optional to reflect that.
 
-    description
+    note
         Description of the status.
 
     classification
@@ -240,11 +237,17 @@ description
     **optional**
     Purpose of the Committee if any is given.
 
+designations
+    **optional**
+    **repeated**
+    The Candidate Designations that apply to this Committee - i.e., is it supporting or
+    opposing certain candidates?
+
 Committee Type
 --------------
 
 id
-    Open Civic Data-style id in the format ``ocd-cf-committeetype/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaignfinance-committeetype/{{uuid}}``
 
 name
     Name of the Committee Type
@@ -262,7 +265,7 @@ A Committee may have no relation to any specific Candidate, but if they do have
 such a relationship, the options are complex. Hence this type.
 
 id
-    Open Civic Data-style id in the format ``ocd-cf-candidateorientation/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaignfinance-candidateorientation/{{uuid}}``
 
 candidate
     Candidate
@@ -292,7 +295,7 @@ Filing Type
 ----------------
 
 id
-    Open Civic Data-style id in the format ``ocd-cf-filingtype/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaignfinance-filingtype/{{uuid}}``
 
 name
     Name of filing type - "Last Minute Contributions", etc.
@@ -308,39 +311,47 @@ Transaction (Section)
 ---------------------
 
 id
-    Open Civic Data-style id in the format ``ocd-cf-transaction/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaignfinance-transaction/{{uuid}}``
     
-filing_version
-    Reference to the ``Filing.version`` that a transaction is reported in.
+filing_action
+    Reference to the ``Filing.action.id`` that a transaction is reported in.
 
-original_id
+identifier
     **optional**
     In some jurisdictions, the original jurisdictionally-assigned ID of a
     Transaction may be meaningful, so preserve it here.
 
-type
+classification
     Type of transaction - contribution, expenditure, loan, transfer, other
     receipt, etc. Enumerated field based on the jurisdiction of the Committee
     filing the Transaction.
 
-is_inkind
-    Boolean indicating whether transaction is in-kind or not (in which case,
-    it's probably cash.)
+amount
+    Amount of transaction.
 
-transaction_amount
-    Amount in Decimal of transaction.
+    value
+        Actual decimal amount of transaction.
 
-counterparty
-    Person making contribution, or receiving expenditure, etc.
+    currency
+        Currency denomination of transaction.
+
+    is_inkind
+        Boolean indicating whether transaction is in-kind or not (in which case,
+        it's probably cash.)
+
+sender
+    Person making contribution, or paying for expenditure, etc.
+
+recipient
+    Person receiving contribution, or being paid for an expenditure, etc.
 
 date
     Date reported for transaction.
 
-
 description
     String (may simply need repeated "notes" fields for items of this type).
 
-memo
+note
     String (may simply need repeated "notes" fields for items of this type).
 
 CommitteeStatusUpdate (Section)
@@ -350,7 +361,7 @@ These are instances in which committees are becoming active, inactive or
 indicating whether they're participating in the Election or not.
 
 id
-    Open Civic Data-style id in the format ``ocd-cf-committeestatusupdate/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaignfinance-committeestatusupdate/{{uuid}}``
 
 new_status
     New status to set for Committee. This could be an enumerated type or a
@@ -364,7 +375,7 @@ CommitteeAttributeUpdate (Section)
 ----------------------------------
 
 id
-    Open Civic Data-style id in the format ``ocd-cf-committeeattributeupdate/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaignfinance-committeeattributeupdate/{{uuid}}``
 
 attribute_to_update
     Attribute in the Committee object to change.

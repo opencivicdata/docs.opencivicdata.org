@@ -54,7 +54,8 @@ Important differences between this proposal and the current VIP specification ar
 Questions
 =========
 
-* Does ``Election`` need one property (or two properties) to store the election type (e.g., general, primary, special) and/or election level (e.g., federal, state, county, local)? VIP's `<Election> <>`_ element has an `ElectionType` field, but this is just a string that you can apparently populate with whatever.
+* Does ``Election`` need a property to label the election as "general", "primary", "special" or "runoff"? This will likely be somewhere in the name (e.g., "2016") anyway, and these labels don't feel mutually exclusive (e.g., aren't there special primary elections?) VIP's `<Election> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/election.html>`_ element has an `ElectionType` field, but this is just a string that you can apparently populate with whatever.
+* Does ``Election`` need a property (maybe ``division_id``) to describe how broad is the broadest geography/jurisdiction of contests? This might be more accurate/flexible than ``Election.is_statewide``.
 * Should ``Party`` be implemented as an ``Organization`` (or subclass)? If so, how do we handle national parties versus state parties (e.g., the DNC versus Missouri Democratic Party)? Would probably be more accurate to associate state and local candidates with state parties and federal candidates with the national parties. But would expect most users typically to want all Democrats to be grouped together regardless of the level of government, especially when analyzing election results.
 * Should the proposed subclasses of OCD data types (e.g., ``Election``, ``BallotMeasureContest``,  ``CandidateContest``) each implement its own ID or should it just inherit the id field of the base class?
 

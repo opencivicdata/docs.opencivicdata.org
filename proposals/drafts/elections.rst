@@ -82,7 +82,7 @@ identifiers
 
 administrative_org_id
     **optional**
-    Reference to the ``Organization`` that administers the election.
+    Reference to the OCD ``Organization`` that administers the election.
 
 state
     `FIPS code <https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code>`_ of the state where the election is being held. Recorded in the format ``st{{fips}}`` to match references to VIP `<State> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/state.html>`_  elements (string).
@@ -109,7 +109,7 @@ name
     Name of the contest, not necessarily as it appears on the ballot (string).
 
 division_id
-    Reference to the ``Division`` that defines the geographical scope of the contest, e.g., a specific Congressional or State Senate district.
+    Reference to the OCD ``Division`` that defines the geographical scope of the contest, e.g., a specific Congressional or State Senate district.
 
 election_id
     Reference to the OCD ``Election`` in which the contest is decided.

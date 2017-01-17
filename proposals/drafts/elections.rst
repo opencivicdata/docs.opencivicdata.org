@@ -534,12 +534,12 @@ Corresponds to VIP's `<CandidateContest> <http://vip-specification.readthedocs.i
 
     - required:
 
-        + ``is_runoff`` could be determined by the ``<ElectionType>`` or inferred from the date of the election.
         + ``is_unexpired_term`` could be determined by the ``<Name>`` or ``<ElectionType>`` (i.e., if either include the substring "special") or inferred from the date of the election.
 
     - optional:
 
         + ``filing_deadline`` is stored in the `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ element in VIP.
+        + ``runoff_for_contest_id`` is the id of the ``CandidateContest`` with the same ``post_ids`` and ``party_id`` values occurring on the previous election date.
 
 * VIP fields not implemented in this OCDEP:
 

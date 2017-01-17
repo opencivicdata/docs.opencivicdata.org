@@ -157,7 +157,7 @@ full_text
 
 passage_threshold
     **optional**
-    Specifies the threshold of votes the ballot measure needs in order to pass. The default is a simple majority, i.e., "50% plus one vote". Other common thresholds are "three-fifths" and "two-thirds".
+    Specifies the threshold of votes the ballot measure needs in order to pass (string). The default is a simple majority, i.e., "50% plus one vote". Other common thresholds are "three-fifths" and "two-thirds".
 
 pro_statement
     **optional**

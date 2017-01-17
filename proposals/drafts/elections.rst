@@ -193,8 +193,9 @@ filing_deadline
     **optional**
     Specifies the date and time when a candidate must have filed for the contest for the office (datetime).
 
-is_runoff
-    Indicates a contest to decide a prior contest that ended with no candidate receiving a majority of the votes (boolean).
+runoff_for_contest_id
+    **optional**
+    If this contest is a runoff to determine the outcome of a previously undecided contest, reference to that ``CandidateContest``.
 
 is_unexpired_term
     Indicates that the former public office holder vacated the post before serving a full term (boolean).

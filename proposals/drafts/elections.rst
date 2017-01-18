@@ -230,11 +230,8 @@ A subclass of ``BallotMeasureContest`` that represents a contest where a candida
 id
     Open Civic Data-style id in the format ``ocd-retentioncontest/{{uuid}}``.
 
-candidacy_id
-    Reference to the OCD ``Candidacy`` of the person who will either retain or lose a ``Post`` as a result of the contest.
-
-post_id
-    Reference to the OCD ``Post`` representing the public office the candidate will either retain or lose as a result of the contest.
+membership_id
+    Reference to the OCD ``Membership`` that represents the tenure of a particular person (i.e., OCD ``Person`` object) in a particular public office (i.e., ``Post`` object).
 
 
 Candidacy
@@ -391,15 +388,9 @@ A subclass of ``BallotSelectionBase`` representing an option on the ballot that 
 id
     Open Civic Data-style id in the format ``ocd-candidateselection/{{uuid}}``.
 
-candidates
+candidacy_ids
     **repeated**
-    Lists each ``Candidate`` associated with the ballot selection. The number of candidates is unbounded in cases where the ballot selection is for a ticket, e.g. "President/Vice President", "Governor/Lt Governor". Has the following properties:
-
-        candidate_id
-            References the ``Candidate``.
-
-        post_id
-            References the ``Post`` that represents the public office for which the candidate is competing.
+    Lists each identifier of a ``Candidacy`` associated with the ballot selection. Requires at least one ``candidacy_id``, but the number of candidates is unbounded in cases where the ballot selection is for a ticket, e.g. "President/Vice President", "Governor/Lt Governor".
 
 endorsement_party_ids
     **optional**
@@ -421,7 +412,7 @@ id
 
 party_ids
     **repeated**
-    Lists each ``Party`` associated with the ballot selection.
+    Lists each ``Party`` associated with the ballot selection. Requires at least one ``party_id``.
 
 
 Differences with VIP
@@ -563,12 +554,12 @@ Corresponds to VIP's `<RetentionContest> <http://vip-specification.readthedocs.i
 
 * Important differences between corresponding fields:
 
-    - ``<CandidateId>``, which is a required reference to a VIP `<Candidate> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate.html>`_ element, is replaced by ``candidacy_id``, which is a required reference to an OCD ``Candidacy``. If necessary, VIP's ``<CandidateId>`` could be stored in ``extras``.
-    - ``<OfficeId>``, which is an optional reference to a VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_, is replaced by ``post_id``, which is a required reference to an OCD ``Post``. If necessary, VIP's ``<OfficeId>`` could be stored in ``extras``.
+    - ``<CandidateId>``, which is a required reference to a VIP `<Candidate> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate.html>`_ element, and ``<OfficeId>``, which is an optional reference to a VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ element, are replaced by ``membership_id``, which is a required reference to an OCD ``Membership`` representing a particular person's tenure in a particular public office. If necessary, VIP's ``<CandidateId>`` could be stored in ``extras``.
 
 * No other OCD fields not implemented in VIP.
-* No other VIP fields not implemented in this OCDEP.
+* VIP fields not implemented in this OCDEP:
 
+    - ``<OfficeId>``, which is an optional reference to a VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_. VIP's ``<Office>`` element corresponds to OCD's ``Post`` data type. In this proposal, a candidate's ``post_id`` is stored on ``Candidacy``, including . If necessary, VIP's ``<OfficeId>`` could be stored in ``extras``.
 
 Candidacy
 ---------

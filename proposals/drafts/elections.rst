@@ -377,7 +377,7 @@ id
     Open Civic Data-style id in the format ``ocd-ballotmeasureselection/{{uuid}}``.
 
 selection
-    Selection text for the option on the ballot , e.g., "Yes", "No", "Recall", "Don't recall" (string).
+    Selection text for the option on the ballot, e.g., "Yes", "No", "Recall", "Don't recall" (string).
 
 
 CandidateSelection

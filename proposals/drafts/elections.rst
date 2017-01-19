@@ -225,7 +225,7 @@ id
 RetentionContest
 ----------------
 
-A subclass of ``BallotMeasureContest`` that represents a contest where a candidate is retained in a position, e.g. a judicial retention or recall election.
+A subclass of ``BallotMeasureContest`` that represents a contest where a person is retains or loses a public office, e.g. a judicial retention or recall election.
 
 id
     Open Civic Data-style id in the format ``ocd-retentioncontest/{{uuid}}``.

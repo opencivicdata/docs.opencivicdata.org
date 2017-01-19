@@ -395,7 +395,7 @@ candidacy_ids
 endorsement_party_ids
     **optional**
     **repeated**
-    Lists each ``Party`` that endorsing the candidates associated with the selection. The number of parties is unbounded in cases where multiple parties endorse a single candidate/ticket.
+    Lists each ``Party`` that is endorsing the candidates associated with the selection. The number of parties is unbounded in cases where multiple parties endorse a single candidate/ticket.
 
 is_write_in
     **optional**

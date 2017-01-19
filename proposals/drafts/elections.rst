@@ -257,7 +257,7 @@ committee_id
 
 filed_date
     **optional**
-    Specifics when the candidate filed for the contest (date).
+    Specifies when the candidate filed for the contest (date).
 
 is_incumbent
     **optional**

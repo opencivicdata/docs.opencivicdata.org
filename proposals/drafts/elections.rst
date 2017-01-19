@@ -206,7 +206,7 @@ number_elected
 
 post_ids
     **repeating**
-    References to the OCD ``Posts`` representing the public offices for which the candidates are competing. If multiple, the primary post should be listed first, e.g., the id for the President post should be listed before the id for Vice-President.
+    Lists each identifier of an OCD ``Post`` representing a public office for which the candidates are competing in the contest. If multiple, the primary post should be listed first, e.g., the id for the President post should be listed before the id for Vice-President.
 
 party_id
     **optional**
@@ -390,12 +390,12 @@ id
 
 candidacy_ids
     **repeated**
-    Lists each identifier of a ``Candidacy`` associated with the ballot selection. Requires at least one ``candidacy_id``, but the number of candidates is unbounded in cases where the ballot selection is for a ticket, e.g. "President/Vice President", "Governor/Lt Governor".
+    Lists each identifier of an OCD ``Candidacy`` associated with the ballot selection. Requires at least one ``candidacy_id``, but the number of candidates is unbounded in cases where the ballot selection is for a ticket, e.g. "President/Vice President", "Governor/Lt Governor".
 
 endorsement_party_ids
     **optional**
     **repeated**
-    Lists each ``Party`` that is endorsing the candidates associated with the selection. The number of parties is unbounded in cases where multiple parties endorse a single candidate/ticket.
+    Lists each identifer of an OCD ``Party`` that is endorsing the candidates associated with the selection. The number of parties is unbounded in cases where multiple parties endorse a single candidate/ticket.
 
 is_write_in
     **optional**
@@ -412,7 +412,7 @@ id
 
 party_ids
     **repeated**
-    Lists each ``Party`` associated with the ballot selection. Requires at least one ``party_id``.
+    Lists each identifier of an OCD ``Party`` associated with the ballot selection. Requires at least one ``party_id``.
 
 
 Differences with VIP

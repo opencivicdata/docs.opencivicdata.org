@@ -63,7 +63,7 @@ All search endpoints return paginated responses in the following format:
         "meta": {
             "count": 100,           // number of items on current page
             "per_page": 100,        // max number of items per page
-            "page": 0,              // current page number (0-indexed)
+            "page": 1,              // current page number (1-indexed)
             "max_page": 1,          // maximum ?page=<page> parameter
             "total_count": 180,     // total number of objects returned by query
         },
@@ -95,7 +95,7 @@ The following (optional) parameters are common across API endpoints:
     available values for each endpoint.
 
 **page**
-    Select a page (0-``meta.max_page``) from the result set in a search endpoint.
+    Select a page (1-``meta.max_page``) from the result set in a search endpoint.
 
 **per_page**
     Select a number of items per page (1-100) from the result set in a search endpoint.

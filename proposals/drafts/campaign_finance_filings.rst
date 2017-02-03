@@ -9,21 +9,22 @@ OCDEP: Campaign Finance Filings
 Overview
 ========
 
-Definition of the ``Filing`` type and associated other types to model campaign
-finance filings with a regulator.
+Definition of the Campaign Finance Filing type and associated other types to
+model campaign finance filings with a regulator.
 
 Definitions
 -----------
 
-Campaign Finance regulator
-    Any government agency (Regulator) in charge of gathering information and
-    enforcing transparency laws against political committees (Committees).
+Campaign Finance Regulator (Regulator)
 
-Filing
+    Any government agency in charge of gathering information and enforcing
+    transparency laws against political committees (Committees).
+
+Campaign Finance Filing (Filing)
     Any single document filed with a Regulator.
 
 Jurisdiction
-    The region covered by an Office, or for which an Election is being held.
+    The region covered by an office, or for which an Election is being held.
 
 Person
     The Person entity here will refer to many entities that are actually
@@ -41,16 +42,16 @@ Rationale
 =========
 
 Political committees file statements with their regulators in order to disclose
-funders, expenditures, organizational ties and other financial details.
-Filings encapsulate some number of possible specific disclosures, and some
-filings can contain more than one type of disclosure, so this proposed option is
-to consider each actual filing as an object and then each specific disclosed
-piece of information as associated with that object. So a CommitteeNameChange
-would be associated with a Filing, along with a CommitteeAddressChange and a
-CommitteeOfficerAddition. A series of CommitteeContributions and
-CommitteeExpenses would be attached to one Filing. This way we don't need to
-model the specific disclosure forms in each state, and just directly extract
-the most meaningful parts of the filing.
+funders, expenditures, organizational ties and other financial details. Filings
+encapsulate some number of possible specific disclosures, and some filings can
+contain more than one type of disclosure, so this proposed option is to consider
+each actual filing as an object and then each specific disclosed piece of
+information as associated with that object. So a committee name change would be
+associated with a Filing, along with a committee address change and a committee
+officer addition. A series of committee contributions and committee expenses
+would be attached to one Filing. This way we don't need to model the specific
+disclosure forms in each state, and just directly extract the most meaningful
+parts of the filing.
 
 We want to make it easy for people to do manipulations on top of this data,
 while ensuring that this system itself does as little manipulation as possible
@@ -98,15 +99,16 @@ Questions to answer
 Implementation
 ==============
 
-Filing
-------
+Campaign Finance Filing
+-----------------------
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-filing/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaign-finance-filing/{{uuid}}``
 
 identifiers
     **optional**
-    Upstream ids of the disclosure if any exist, such as the filing ID assigned by the Senate Office of Public Record
+    Upstream IDs of the disclosure if any exist, such as the filing ID assigned
+    by the Senate Office of Public Record
 
 classification
     **optional**
@@ -144,7 +146,7 @@ actions
     consist of the following properties:
 
     id
-        Open Civic Data-style id in the format ``ocd-campaignfinance-filingaction/{{uuid}}``
+        Open Civic Data-style id in the format ``ocd-campaign-finance-filing-action/{{uuid}}``
 
     description
         Description of the action.
@@ -197,15 +199,7 @@ Committee
 Subclass of Popolo Organization.
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-committee/{{uuid}}``
-
-identifier
-    **optional**
-    In some jurisdictions, the original jurisdictionally-assigned ID of a
-    Committee may be meaningful, so preserve it here.
-
-name
-    Name of the Committee
+    Open Civic Data-style id in the format ``ocd-campaign-finance-committee/{{uuid}}``
 
 committee_type
     Committee Type
@@ -233,10 +227,6 @@ statuses
         "contesting election" - allows for consolidating different
         jurisdictional status schemes into standard types.    
 
-description
-    **optional**
-    Purpose of the Committee if any is given.
-
 designations
     **optional**
     **repeated**
@@ -247,13 +237,13 @@ Committee Type
 --------------
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-committeetype/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaign-finance-committee-type/{{uuid}}``
 
 name
     Name of the Committee Type
 
 jurisdiction
-    Presumably a state, but: whatever jurisdiction the Committe Type is
+    Presumably a state, but: whatever jurisdiction the Committee Type is
     meaningful within. This allows us to have "Candidate Committee"s in 2
     different states that adhere to whatever different rules apply in those
     places.
@@ -265,7 +255,7 @@ A Committee may have no relation to any specific Candidate, but if they do have
 such a relationship, the options are complex. Hence this type.
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-candidateorientation/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaign-finance-candidate-designation/{{uuid}}``
 
 candidate
     Candidate
@@ -285,17 +275,17 @@ notwithstanding.
 
 This type is an OCD Popolo Person.
 
-Regulator
----------
+Campaign Finance Regulator
+--------------------------
 
 OCD Organization model.
 
 
 Filing Type
-----------------
+-----------
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-filingtype/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaign-finance-filing-type/{{uuid}}``
 
 name
     Name of filing type - "Last Minute Contributions", etc.
@@ -311,7 +301,7 @@ Transaction (Section)
 ---------------------
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-transaction/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaign-finance-transaction/{{uuid}}``
     
 filing_action
     Reference to the ``Filing.action.id`` that a transaction is reported in.
@@ -335,7 +325,7 @@ amount
     currency
         Currency denomination of transaction.
 
-    is_inkind
+    is_in_kind
         Boolean indicating whether transaction is in-kind or not (in which case,
         it's probably cash.)
 
@@ -354,14 +344,14 @@ description
 note
     String (may simply need repeated "notes" fields for items of this type).
 
-CommitteeStatusUpdate (Section)
--------------------------------
+Committee Status Update (Section)
+---------------------------------
 
 These are instances in which committees are becoming active, inactive or
 indicating whether they're participating in the Election or not.
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-committeestatusupdate/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaign-finance-committee-status-update/{{uuid}}``
 
 new_status
     New status to set for Committee. This could be an enumerated type or a
@@ -371,11 +361,11 @@ description
     String containing whatever associated text we got along with the status
     change.
 
-CommitteeAttributeUpdate (Section)
-----------------------------------
+Committee Attribute Update (Section)
+------------------------------------
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-committeeattributeupdate/{{uuid}}``
+    Open Civic Data-style id in the format ``ocd-campaign-finance-committee-attribute-update/{{uuid}}``
 
 attribute_to_update
     Attribute in the Committee object to change.

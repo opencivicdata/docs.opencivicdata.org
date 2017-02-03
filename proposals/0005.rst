@@ -49,10 +49,8 @@ Omitted Fields
 
 Several fields have been omitted:
 
-family_name, given_name, additional_name, honorific_prefix, honorific_suffix, patronymic_name
-    Due to the inherent fragile nature of trying to segment names, all name fields other than
-    ``name``, ``sort_name``, and ``other_names`` are omitted to avoid implying that they can be
-    relied upon.
+additional_name, honorific_prefix, honorific_suffix, patronymic_name
+    Due to the inherent fragile nature of trying to segment names, all name fields other than ``name``, ``sort_name``, ``family_name``, ``given_name``, and ``other_names`` are omitted to avoid implying that they can be relied upon.
 
 email
     Considered redundant with using an entry in ``Person.contact_details`` with type ``email``.

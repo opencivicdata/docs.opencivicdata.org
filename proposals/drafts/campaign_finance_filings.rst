@@ -25,13 +25,8 @@ Filing
 Jurisdiction
     The region covered by an Office, or for which an Election is being held.
 
-Person
-    The Person entity here will refer to many entities that are actually
-    corporations or other nonhuman entities. It's meant to refer to whoever or
-    whatever is taking a specific action, or having an action disclosed in which
-    they're involved. It will mostly be people but not always, and as lovely as
-    it would be to have some way to disambiguate the two I'm not optimistic that
-    will be possible anytime soon.
+Agent
+    A person or organization.
 
 Section
     A container for a unit of meaning inside a Filing, that isn't inherent to
@@ -55,7 +50,7 @@ the most meaningful parts of the filing.
 We want to make it easy for people to do manipulations on top of this data,
 while ensuring that this system itself does as little manipulation as possible
 to the underlying data from reports filed. For instance, many records include
-Person entities - these are deterministically extracted from just the available
+Agent entities - these are deterministically extracted from just the available
 filing data, e.g. an address, employer, occupation and name are all extracted
 for each contribution. Deduplication can then happen with each of these
 entities, but they are themselves totally reproducible from just the filing
@@ -112,7 +107,7 @@ classification
     **optional**
     Filing Type (jurisdiction-specific)
 
-filer
+agent
     Committee making the Filing.
 
 coverage_start_date
@@ -161,7 +156,7 @@ actions
     agent
         **optional**
         **repeated**
-        Person responsible for the action, usually the filer of the amendment or
+        Agent responsible for the action, usually the filer of the amendment or
         withdrawal. Theoretically this could be an Organization of some kind as
         well.
 
@@ -274,16 +269,16 @@ designation
     Enumerated among "supports", "opposes", "primary vehicle for", "surplus
     account for", "independent expenditure" and other relationship types.
 
-Person
-------
+Agent
+-----
 
-This system assumes that each Person will be generated from a specific line item
-in a Filing. As such, we may know nothing about the Person but their name. Also,
-sometimes and as far as I can see inevitably, some Persons (many in fact) will
+This system assumes that each Agent will be generated from a specific line item
+in a Filing. As such, we may know nothing about the Agent but their name. Also,
+sometimes and as far as I can see inevitably, some Agents (many in fact) will
 be corporations or other distinctly non-human entities, Supremes Court
 notwithstanding.
 
-This type is an OCD Popolo Person.
+This type is a proposed OCD Popolo Agent.
 
 Regulator
 ---------
@@ -340,10 +335,10 @@ amount
         it's probably cash.)
 
 sender
-    Person making contribution, or paying for expenditure, etc.
+    Agent making contribution, or paying for expenditure, etc.
 
 recipient
-    Person receiving contribution, or being paid for an expenditure, etc.
+    Agent receiving contribution, or being paid for an expenditure, etc.
 
 date
     Date reported for transaction.

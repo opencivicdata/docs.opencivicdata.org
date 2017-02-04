@@ -1,9 +1,11 @@
+:orphan:
+
 ===================
 Open Civic Data API
 ===================
 
 .. caution::
-    The OCD API is in beta and under very active development during 2015. Endpoints and queries may be added, altered, or removed.
+    We've removed the stale documentation for the Open Civic Data API.
 
 .. toctree::
    :maxdepth: 2

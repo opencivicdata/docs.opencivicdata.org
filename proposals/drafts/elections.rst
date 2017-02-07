@@ -294,22 +294,22 @@ Sample CandidateContest
 
 .. code:: javascript
 
-{
-    "id": "ocd-contest/24e7d3e0-0ac3-4a2d-bbd9-6082e37c6274",
-    "identifiers": [],
-    "name": "STATE SENATE 01",
-    "division_id": "ocd-division/country:us/state:ca/sldu:1",
-    "election_id": "ocd-event/acff908d-7420-4f2c-9688-8103d1736094",
-    "created_at": "2017-02-07T07:18:05.438Z",
-    "updated_at": "2017-02-07T07:18:05.442Z",
-    "sources": [],
-    "extras": {},
-    "filing_deadline": null,
-    "is_unexpired_term": false,
-    "number_elected": "",
-    "party_id": null,
-    "runoff_for_contest_id": null,
-}
+    {
+        "id": "ocd-contest/24e7d3e0-0ac3-4a2d-bbd9-6082e37c6274",
+        "identifiers": [],
+        "name": "STATE SENATE 01",
+        "division_id": "ocd-division/country:us/state:ca/sldu:1",
+        "election_id": "ocd-event/acff908d-7420-4f2c-9688-8103d1736094",
+        "created_at": "2017-02-07T07:18:05.438Z",
+        "updated_at": "2017-02-07T07:18:05.442Z",
+        "sources": [],
+        "extras": {},
+        "filing_deadline": null,
+        "is_unexpired_term": false,
+        "number_elected": "",
+        "party_id": null,
+        "runoff_for_contest_id": null,
+    }
 
 
 PartyContest
@@ -336,31 +336,31 @@ Sample RetentionContest
 
 .. code:: javascript
 
-{
-    "id": "ocd-contest/320d0dc1-9fed-4b77-82e9-a2517dc9f0be",
-    "identifiers": [
-        {
-            "scheme": "ScrapedProposition.scraped_id",
-            "identifier": "1256382"
-        }
-    ],
-    "name": "2003 RECALL QUESTION",
-    "division_id": "ocd-division/country:us/state:ca",
-    "election_id": "ocd-event/c2c4af12-6cb0-43d7-bd67-707abbd564d1"
-    "created_at": "2017-02-07T07:18:00.555Z",
-    "updated_at": "2017-02-07T07:18:00.555Z",
-    "sources": [],
-    "extras": {},
-    "con_statement": "",
-    "effect_of_abstain": "",
-    "passage_threshold": "",
-    "pro_statement": "",
-    "summary_text": "",
-    "full_text": "",
-    "ballot_measure_type": "initiative",
-    "other_type": "",
-    "membership_id": "ocd-membership/339e7268-1c66-45d9-a5d9-616a8e59ddcf",
-}
+    {
+        "id": "ocd-contest/320d0dc1-9fed-4b77-82e9-a2517dc9f0be",
+        "identifiers": [
+            {
+                "scheme": "ScrapedProposition.scraped_id",
+                "identifier": "1256382"
+            }
+        ],
+        "name": "2003 RECALL QUESTION",
+        "division_id": "ocd-division/country:us/state:ca",
+        "election_id": "ocd-event/c2c4af12-6cb0-43d7-bd67-707abbd564d1"
+        "created_at": "2017-02-07T07:18:00.555Z",
+        "updated_at": "2017-02-07T07:18:00.555Z",
+        "sources": [],
+        "extras": {},
+        "con_statement": "",
+        "effect_of_abstain": "",
+        "passage_threshold": "",
+        "pro_statement": "",
+        "summary_text": "",
+        "full_text": "",
+        "ballot_measure_type": "initiative",
+        "other_type": "",
+        "membership_id": "ocd-membership/339e7268-1c66-45d9-a5d9-616a8e59ddcf",
+    }
 
 
 Candidacy
@@ -427,21 +427,21 @@ Sample Candidacy
 
 .. code:: javascript
 
-{
-    "id": "ocd-candidacy/a8bb61ad-5551-470d-a8a0-e24e78d729fe",
-    "ballot_name": "ROWEN, ROBERT J.",
-    "person_id": "ocd-person/1d69c353-75e0-4572-bc1b-c401833e0dae",
-    "post_id": "ocd-post/5dd43b84-a5c2-46a9-8d07-aa82db483e42",
-    "committee_id": null,
-    "filed_date": null,
-    "is_incumbent": null,
-    "is_top_ticket": false
-    "created_at": "2017-02-07T07:18:05.473Z",
-    "updated_at": "2017-02-07T07:18:05.473Z",
-    "sources": [],
-    "extras": {},
-    "party_id": null,
-}
+    {
+        "id": "ocd-candidacy/a8bb61ad-5551-470d-a8a0-e24e78d729fe",
+        "ballot_name": "ROWEN, ROBERT J.",
+        "person_id": "ocd-person/1d69c353-75e0-4572-bc1b-c401833e0dae",
+        "post_id": "ocd-post/5dd43b84-a5c2-46a9-8d07-aa82db483e42",
+        "committee_id": null,
+        "filed_date": null,
+        "is_incumbent": null,
+        "is_top_ticket": false
+        "created_at": "2017-02-07T07:18:05.473Z",
+        "updated_at": "2017-02-07T07:18:05.473Z",
+        "sources": [],
+        "extras": {},
+        "party_id": null,
+    }
 
 
 Party
@@ -494,17 +494,17 @@ Sample Party
 
 .. code:: javascript
 
-{
-    "id": "ocd-party/866e7266-0c21-4476-a7a7-dc11d2ae8cd1"
-    "name": "DEMOCRATIC",
-    "abbreviation": "D",
-    "color": "",
-    "is_write_in": null,
-    "created_at": "2017-02-07T16:36:12.497Z",
-    "updated_at": "2017-02-07T16:36:12.497Z",
-    "sources": [],
-    "extras": {},
-}
+    {
+        "id": "ocd-party/866e7266-0c21-4476-a7a7-dc11d2ae8cd1"
+        "name": "DEMOCRATIC",
+        "abbreviation": "D",
+        "color": "",
+        "is_write_in": null,
+        "created_at": "2017-02-07T16:36:12.497Z",
+        "updated_at": "2017-02-07T16:36:12.497Z",
+        "sources": [],
+        "extras": {},
+    }
 
 
 BallotSelectionBase

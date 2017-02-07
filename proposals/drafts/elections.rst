@@ -72,9 +72,6 @@ A collection of political contests set to be decided on the same date.
 
 The typical implementation will be an ``all_day`` event witht a "election" ``classification`` value and a ``start_time`` set to midnight of the observed election date.
 
-id
-    Open Civic Data-style id in the format ``ocd-election/{{uuid}}``.
-
 identifiers
     **optional**
     **repeated**
@@ -91,6 +88,40 @@ is_statewide
     **optional**
     Indicates whether the election is statewide (boolean).
 
+
+Sample Election
++++++++++++++++
+
+
+.. code:: javascript
+
+    {
+        "id": "ocd-event/acff908d-7420-4f2c-9688-8103d1736094",
+        "name": "2016 GENERAL",
+        "description": "",
+        "start_time": "2016-11-08T00:00:00Z",
+        "end_time": null
+        "timezone": "US/Pacific",
+        "all_day": true,
+        "classification": "election",
+        "created_at": "2017-02-07T07:17:58.874Z",
+        "updated_at": "2017-02-07T07:17:58.874Z",
+        "sources": [],
+        "extras": {},
+        "administrative_org_id": "ocd-organization/5b3c95bc-c8fe-4faf-b66d-f9d3175a549c",
+        "identifiers": [
+            {
+                "scheme": "PropositionScrapedElection.id",
+                "identifier": "17"
+            },
+            {
+                "scheme": "calaccess_id",
+                "identifier": "65"
+            }
+        ],
+        "state": "st06",
+        "is_statewide": true,
+    }
 
 ContestBase
 -----------
@@ -135,13 +166,28 @@ extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
 
 
+Sample ContestBase
++++++++++++++++++++
+
+
+.. code:: javascript
+
+    {
+        "id": "ocd-contest/24e7d3e0-0ac3-4a2d-bbd9-6082e37c6274"
+        "identifiers": [],
+        "name": "STATE SENATE 01",
+        "division_id": "ocd-division/country:us/state:ca/sldu:1",
+        "election_id": "ocd-event/acff908d-7420-4f2c-9688-8103d1736094",
+        "created_at": "2017-02-07T07:18:05.438Z",
+        "updated_at": "2017-02-07T07:18:05.442Z",
+        "sources": [],
+        "extras": {},
+    }
+
 BallotMeasureContest
 --------------------
 
 A subclass of ``ContestBase`` for representing a ballot measure before the voters, including summary statements on each side.
-
-id
-    Open Civic Data-style id in the format ``ocd-ballotmeasurecontest/{{uuid}}``
 
 con_statement
     **optional**
@@ -167,7 +213,7 @@ summary_text
     **optional**
     Specifies a short summary of the ballot measure that is on the ballot, below the title, but above the text.
 
-type
+ballot_measure_type
     **optional**
     Enumerated among:
 
@@ -181,21 +227,46 @@ other_type
     Allows for cataloging a new type of ballot measure option, when type is specified as "other" (string).
 
 
+Sample BallotMeasureContest
++++++++++++++++++++++++++++
+
+
+.. code:: javascript
+
+    {
+        "id": "ocd-contest/8ae42b8b-4996-4134-af67-88cb8869c884",
+        "identifiers": [
+            {
+                "scheme": "ScrapedProposition.scraped_id",
+                "identifier": "1376195"
+            }
+        ],
+        "name": "PROPOSITION 060- ADULT FILMS. CONDOMS. HEALTH REQUIREMENTS. INITIATIVE STATUTE."
+        "division_id": "ocd-division/country:us/state:ca",
+        "election_id": "ocd-event/acff908d-7420-4f2c-9688-8103d1736094",
+        "created_at": "2017-02-07T07:17:59.818Z",
+        "updated_at": "2017-02-07T07:17:59.818Z",
+        "sources": [],
+        "extras": {},
+        "con_statement": "",
+        "effect_of_abstain": "",
+        "full_text": "",
+        "passage_threshold": "",
+        "pro_statement": "",
+        "summary_text": "",
+        "ballot_measure_type": "initiative",
+        "other_type": "",
+    }
+
+
 CandidateContest
 ----------------
 
 A subclass of ``ContestBase`` for repesenting a contest among candidates competing for election to a public office.
 
-id
-    Open Civic Data-style id in the format ``ocd-candidatecontest/{{uuid}}``.
-
 filing_deadline
     **optional**
     Specifies the date and time when a candidate must have filed for the contest for the office (datetime).
-
-runoff_for_contest_id
-    **optional**
-    If this contest is a runoff to determine the outcome of a previously undecided contest, reference to that ``CandidateContest``.
 
 is_unexpired_term
     Indicates that the former public office holder vacated the post before serving a full term (boolean).
@@ -212,6 +283,34 @@ party_id
     **optional**
     If the contest is among candidates of the same political party, e.g., a partisan primary election, reference to the OCD ``Party`` representing that political party.
 
+runoff_for_contest_id
+    **optional**
+    If this contest is a runoff to determine the outcome of a previously undecided contest, reference to that ``CandidateContest``.
+
+
+Sample CandidateContest
++++++++++++++++++++++++
+
+
+.. code:: javascript
+
+{
+    "id": "ocd-contest/24e7d3e0-0ac3-4a2d-bbd9-6082e37c6274",
+    "identifiers": [],
+    "name": "STATE SENATE 01",
+    "division_id": "ocd-division/country:us/state:ca/sldu:1",
+    "election_id": "ocd-event/acff908d-7420-4f2c-9688-8103d1736094",
+    "created_at": "2017-02-07T07:18:05.438Z",
+    "updated_at": "2017-02-07T07:18:05.442Z",
+    "sources": [],
+    "extras": {},
+    "filing_deadline": null,
+    "is_unexpired_term": false,
+    "number_elected": "",
+    "party_id": null,
+    "runoff_for_contest_id": null,
+}
+
 
 PartyContest
 ------------
@@ -227,11 +326,41 @@ RetentionContest
 
 A subclass of ``BallotMeasureContest`` that represents a contest where a person is retains or loses a public office, e.g. a judicial retention or recall election.
 
-id
-    Open Civic Data-style id in the format ``ocd-retentioncontest/{{uuid}}``.
-
 membership_id
     Reference to the OCD ``Membership`` that represents the tenure of a particular person (i.e., OCD ``Person`` object) in a particular public office (i.e., ``Post`` object).
+
+
+Sample RetentionContest
++++++++++++++++++++++++
+
+
+.. code:: javascript
+
+{
+    "id": "ocd-contest/320d0dc1-9fed-4b77-82e9-a2517dc9f0be",
+    "identifiers": [
+        {
+            "scheme": "ScrapedProposition.scraped_id",
+            "identifier": "1256382"
+        }
+    ],
+    "name": "2003 RECALL QUESTION",
+    "division_id": "ocd-division/country:us/state:ca",
+    "election_id": "ocd-event/c2c4af12-6cb0-43d7-bd67-707abbd564d1"
+    "created_at": "2017-02-07T07:18:00.555Z",
+    "updated_at": "2017-02-07T07:18:00.555Z",
+    "sources": [],
+    "extras": {},
+    "con_statement": "",
+    "effect_of_abstain": "",
+    "passage_threshold": "",
+    "pro_statement": "",
+    "summary_text": "",
+    "full_text": "",
+    "ballot_measure_type": "initiative",
+    "other_type": "",
+    "membership_id": "ocd-membership/339e7268-1c66-45d9-a5d9-616a8e59ddcf",
+}
 
 
 Candidacy
@@ -292,6 +421,29 @@ extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
 
 
+Sample Candidacy
++++++++++++++++++++++++
+
+
+.. code:: javascript
+
+{
+    "id": "ocd-candidacy/a8bb61ad-5551-470d-a8a0-e24e78d729fe",
+    "ballot_name": "ROWEN, ROBERT J.",
+    "person_id": "ocd-person/1d69c353-75e0-4572-bc1b-c401833e0dae",
+    "post_id": "ocd-post/5dd43b84-a5c2-46a9-8d07-aa82db483e42",
+    "committee_id": null,
+    "filed_date": null,
+    "is_incumbent": null,
+    "is_top_ticket": false
+    "created_at": "2017-02-07T07:18:05.473Z",
+    "updated_at": "2017-02-07T07:18:05.473Z",
+    "sources": [],
+    "extras": {},
+    "party_id": null,
+}
+
+
 Party
 -----
 
@@ -334,6 +486,25 @@ sources
 
 extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
+
+
+Sample Party
+++++++++++++
+
+
+.. code:: javascript
+
+{
+    "id": "ocd-party/866e7266-0c21-4476-a7a7-dc11d2ae8cd1"
+    "name": "DEMOCRATIC",
+    "abbreviation": "D",
+    "color": "",
+    "is_write_in": null,
+    "created_at": "2017-02-07T16:36:12.497Z",
+    "updated_at": "2017-02-07T16:36:12.497Z",
+    "sources": [],
+    "extras": {},
+}
 
 
 BallotSelectionBase

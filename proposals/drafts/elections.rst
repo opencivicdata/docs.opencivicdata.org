@@ -161,7 +161,7 @@ passage_threshold
 
 pro_statement
     **optional**
-    Specifies a statement in favor of the referendum. It does not necessarily appear on the ballot (string).
+    Specifies a statement in favor of the ballot measure. It does not necessarily appear on the ballot (string).
 
 summary_text
     **optional**

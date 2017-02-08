@@ -29,7 +29,7 @@ The proposed data types are:
     - ``CandidateSelection``
     - ``PartySelection``
 
-Supplements the "Campaign Finance Filings" proposal being prepared by Abraham Epton.
+Supplements the "Campaign Finance Filings" proposal prepared by Abraham Epton.
 
 Rationale
 =========
@@ -41,7 +41,7 @@ Elections are a primary focal point of civic activity in which eligible voters c
 
 Modeling the potential outcomes of these contests is a service to voters who may cast their ballots in an impending election. Modeling the contests' actual outcomes legitimizes the election's results and enables historical electoral analysis.
 
-This proposal is submitted in response to on-going discussion around a related OCDEP focused on campaign-finance disclosures. Representing elections and their contests is necessary for modeling these disclosures because they reveal money raised and spent in support or opposition to specific candidates and ballot measures. However, since notions of elections and their contests run up against other domains, we've separated the definition of these types.
+This proposal is submitted in response to on-going discussion around a related OCDEP focused on campaign finance disclosures. Representing elections and their contests is necessary for modeling these disclosures because they reveal money raised and spent in support or opposition to specific candidates and ballot measures. However, since notions of elections and their contests run up against other domains, we've separated the definition of these types.
 
 The goal of this proposal is to cover the use cases related to the campaign finance domain while laying the foundation for models that will include election results (to be covered in a future OCDEP).
 
@@ -54,9 +54,9 @@ Important differences between this proposal and the current VIP specification ar
 Questions
 =========
 
-* Does ``Election`` need a property to label the election as "general", "primary", "special" or "runoff"? This will likely be somewhere in the name (e.g., "2016") anyway, and these labels don't feel mutually exclusive (e.g., aren't there special primary elections?) VIP's `<Election> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/election.html>`_ element has an `ElectionType` field, but this is just a string that you can apparently populate with whatever.
-* Does ``Election`` need a property (maybe ``division_id``) to describe how broad is the broadest geography/jurisdiction of contests? This might be more accurate/flexible than ``Election.is_statewide``.
-* Should ``Party`` be implemented as an ``Organization`` (or subclass)? If so, how do we handle national parties versus state parties (e.g., the DNC versus Missouri Democratic Party)? Would probably be more accurate to associate state and local candidates with state parties and federal candidates with the national parties. But would expect most users typically to want all Democrats to be grouped together regardless of the level of government, especially when analyzing election results.
+* Does ``Election`` need a property to label the election as "general", "primary", "special" or "runoff"? This will likely be somewhere in the name (e.g., "2016 General") anyway, and these labels don't feel mutually exclusive (e.g., aren't there special primary elections?) VIP's `<Election> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/election.html>`_ element has an ``ElectionType`` field, but this is just a string that you can apparently populate with whatever.
+* Does ``Election`` need a property (maybe ``division_id``) to describe how broad is the broadest geography/jurisdiction of contests? This might be more accurate/flexible than ``Election.is_statewide``. This point might be more relevant to discuss later in the supplement proposal regarding election results.
+* Should ``Party`` be implemented as an ``Organization`` (or subclass)? If so, how do we handle national parties versus state parties (e.g., the DNC versus Missouri Democratic Party)? Would probably be more accurate to associate state and local candidates with state parties and federal candidates with the national parties. But most users will to want all Democrats to be grouped together regardless of the level of government, especially when analyzing election results.
 * Should the proposed subclasses of OCD data types (e.g., ``Election``, ``BallotMeasureContest``,  ``CandidateContest``) each implement its own ID or should it just inherit the id field of the base class?
 
 
@@ -96,7 +96,7 @@ Sample Election
 .. code:: javascript
 
     {
-        "id": "ocd-event/acff908d-7420-4f2c-9688-8103d1736094",
+        "id": ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
         "name": "2016 GENERAL",
         "description": "",
         "start_time": "2016-11-08T00:00:00Z",
@@ -106,22 +106,28 @@ Sample Election
         "classification": "election",
         "created_at": "2017-02-07T07:17:58.874Z",
         "updated_at": "2017-02-07T07:17:58.874Z",
-        "sources": [],
-        "extras": {},
-        "administrative_org_id": "ocd-organization/5b3c95bc-c8fe-4faf-b66d-f9d3175a549c",
-        "identifiers": [
+        "sources": [
             {
-                "scheme": "PropositionScrapedElection.id",
-                "identifier": "17"
+                "note": "Last scraped on 2017-02-08",
+                "url": "http://cal-access.ss.ca.gov/Campaign/Candidates/list.aspx?view=certified&electNav=65"
             },
             {
-                "scheme": "calaccess_id",
+                "note": "Last scraped on 2017-02-07",
+                "url": "http://cal-access.ss.ca.gov/Campaign/Measures/list.aspx?session=2015"
+            }
+        ],
+        "extras": {},
+        "administrative_org_id": "ocd-organization/436b4d67-b5aa-402c-9e20-0e56a8432c80",
+        "identifiers": [
+            {
+                "scheme": "calaccess_election_id",
                 "identifier": "65"
             }
         ],
         "state": "st06",
-        "is_statewide": true,
+        "is_statewide": true
     }
+
 
 ContestBase
 -----------
@@ -173,16 +179,22 @@ Sample ContestBase
 .. code:: javascript
 
     {
-        "id": "ocd-contest/24e7d3e0-0ac3-4a2d-bbd9-6082e37c6274"
+        "id": "ocd-contest/eff6e5bd-10dc-4930-91a0-06e2298ca15c"
         "identifiers": [],
         "name": "STATE SENATE 01",
         "division_id": "ocd-division/country:us/state:ca/sldu:1",
-        "election_id": "ocd-event/acff908d-7420-4f2c-9688-8103d1736094",
+        "election_id": "ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
         "created_at": "2017-02-07T07:18:05.438Z",
         "updated_at": "2017-02-07T07:18:05.442Z",
-        "sources": [],
-        "extras": {},
+        "sources": [
+            {
+                "note": "Last scraped on 2017-02-08",
+                "url": "http://cal-access.ss.ca.gov/Campaign/Candidates/list.aspx?view=certified&electNav=65"
+            }
+        ],
+        "extras": {}
     }
+
 
 BallotMeasureContest
 --------------------
@@ -234,28 +246,33 @@ Sample BallotMeasureContest
 .. code:: javascript
 
     {
-        "id": "ocd-contest/8ae42b8b-4996-4134-af67-88cb8869c884",
+        "id": "ocd-contest/2ce7e19b-3feb-4318-9908-eb3fdf456fb0",
         "identifiers": [
             {
-                "scheme": "ScrapedProposition.scraped_id",
+                "scheme": "calaccess_measure_id",
                 "identifier": "1376195"
             }
         ],
         "name": "PROPOSITION 060- ADULT FILMS. CONDOMS. HEALTH REQUIREMENTS. INITIATIVE STATUTE."
         "division_id": "ocd-division/country:us/state:ca",
-        "election_id": "ocd-event/acff908d-7420-4f2c-9688-8103d1736094",
+        "election_id": "ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
         "created_at": "2017-02-07T07:17:59.818Z",
         "updated_at": "2017-02-07T07:17:59.818Z",
-        "sources": [],
+        "sources": [
+            {
+                "note": "Last scraped on 2017-02-07",
+                "url": "http://cal-access.ss.ca.gov/Campaign/Measures/Detail.aspx?id=1376195&session=2015"
+            }
+        ],
         "extras": {},
         "con_statement": "",
         "effect_of_abstain": "",
         "full_text": "",
-        "passage_threshold": "",
+        "passage_threshold": "50% plus one vote",
         "pro_statement": "",
-        "summary_text": "",
+        "summary_text": "Requires adult film performers to use condoms during filming of sexual intercourse. Requires producers to pay for performer vaccinations, testing, and medical examinations. Requires producers to post condom requirement at film sites. Fiscal Impact: Likely reduction of state and local tax revenues of several million dollars annually. Increased state spending that could exceed $1 million annually on regulation, partially offset by new fees",
         "ballot_measure_type": "initiative",
-        "other_type": "",
+        "other_type": ""
     }
 
 
@@ -295,30 +312,32 @@ Sample CandidateContest
 .. code:: javascript
 
     {
-        "id": "ocd-contest/24e7d3e0-0ac3-4a2d-bbd9-6082e37c6274",
+        "id": "ocd-contest/eff6e5bd-10dc-4930-91a0-06e2298ca15c",
         "identifiers": [],
         "name": "STATE SENATE 01",
         "division_id": "ocd-division/country:us/state:ca/sldu:1",
-        "election_id": "ocd-event/acff908d-7420-4f2c-9688-8103d1736094",
+        "election_id": "ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
         "created_at": "2017-02-07T07:18:05.438Z",
         "updated_at": "2017-02-07T07:18:05.442Z",
-        "sources": [],
+        "sources": [
+            {
+                "note": "Last scraped on 2017-02-08",
+                "url": "http://cal-access.ss.ca.gov/Campaign/Candidates/list.aspx?view=certified&electNav=65"
+            }
+        ],
         "extras": {},
-        "filing_deadline": null,
+        "filing_deadline": 2016-06-07,
         "is_unexpired_term": false,
-        "number_elected": "",
+        "number_elected": 1,
         "party_id": null,
-        "runoff_for_contest_id": null,
+        "runoff_for_contest_id": null
     }
 
 
 PartyContest
 ------------
 
-A subclass of ``ContestBase`` which describes a contest in which the possible ballot selections are all political parties. These could include contests in which straight-party selections are allowed, or party-list contests (although these are more common outside of the United States).
-
-id
-    Open Civic Data-style id in the format ``ocd-partycontest/{{uuid}}``.
+A subclass of ``ContestBase`` which represents a contest in which the possible ballot selections are all political parties. These could include contests in which straight-party selections are allowed, or party-list contests (although these are more common outside of the United States).
 
 
 RetentionContest
@@ -337,29 +356,34 @@ Sample RetentionContest
 .. code:: javascript
 
     {
-        "id": "ocd-contest/320d0dc1-9fed-4b77-82e9-a2517dc9f0be",
+        "id": "ocd-contest/d0455060-44ee-4fbf-bc7e-7db86084a11e",
         "identifiers": [
             {
-                "scheme": "ScrapedProposition.scraped_id",
+                "scheme": "calaccess_measure_id",
                 "identifier": "1256382"
             }
         ],
         "name": "2003 RECALL QUESTION",
         "division_id": "ocd-division/country:us/state:ca",
-        "election_id": "ocd-event/c2c4af12-6cb0-43d7-bd67-707abbd564d1"
+        "election_id": "ocd-event/3f904160-d304-4753-a542-578cfcb86e76",
         "created_at": "2017-02-07T07:18:00.555Z",
         "updated_at": "2017-02-07T07:18:00.555Z",
-        "sources": [],
+        "sources": [
+            {
+                "note": "Last scraped on 2017-02-07",
+                "url": "http://cal-access.ss.ca.gov/Campaign/Measures/Detail.aspx?id=1256382&session=2003"
+            }
+        ],
         "extras": {},
         "con_statement": "",
         "effect_of_abstain": "",
         "passage_threshold": "",
         "pro_statement": "",
-        "summary_text": "",
+        "summary_text": "SHALL GRAY DAVIS BE RECALLED (REMOVED) FROM THE OFFICE OF GOVERNOR?",
         "full_text": "",
         "ballot_measure_type": "initiative",
         "other_type": "",
-        "membership_id": "ocd-membership/339e7268-1c66-45d9-a5d9-616a8e59ddcf",
+        "membership_id": "ocd-membership/181a0826-f458-403f-ae65-e1ce97b8dd34"
     }
 
 
@@ -428,19 +452,20 @@ Sample Candidacy
 .. code:: javascript
 
     {
-        "id": "ocd-candidacy/a8bb61ad-5551-470d-a8a0-e24e78d729fe",
+        "id": "ocd-candidacy/054f0a6e-9c06-4611-8c2c-3e143843c9d8",
         "ballot_name": "ROWEN, ROBERT J.",
-        "person_id": "ocd-person/1d69c353-75e0-4572-bc1b-c401833e0dae",
-        "post_id": "ocd-post/5dd43b84-a5c2-46a9-8d07-aa82db483e42",
+        "person_id": "ocd-person/edfafa56-686d-49ea-80e5-64bc795493f8",
+        "post_id": "ocd-post/0f169eea-0ad6-48c2-8bc5-ca86e08643d0",
         "committee_id": null,
-        "filed_date": null,
-        "is_incumbent": null,
-        "is_top_ticket": false
-        "created_at": "2017-02-07T07:18:05.473Z",
-        "updated_at": "2017-02-07T07:18:05.473Z",
+        "filed_date": 2016-03-10,
+        "ballot_selection_id": "ocd-ballotselection/d2716878-99fa-467b-b3b6-d28862a6802f",
+        "is_incumbent": false,
+        "is_top_ticket": false,
+        "party_id": 'ocd-party/866e7266-0c21-4476-a7a7-dc11d2ae8cd1',
+        "created_at": "2017-02-08T04:17:30.818Z",
+        "updated_at": "2017-02-08T04:17:30.818Z",
         "sources": [],
-        "extras": {},
-        "party_id": null,
+        "extras": {}
     }
 
 
@@ -498,12 +523,12 @@ Sample Party
         "id": "ocd-party/866e7266-0c21-4476-a7a7-dc11d2ae8cd1"
         "name": "DEMOCRATIC",
         "abbreviation": "D",
-        "color": "",
-        "is_write_in": null,
+        "color": "1d0ee9",
+        "is_write_in": false,
         "created_at": "2017-02-07T16:36:12.497Z",
         "updated_at": "2017-02-07T16:36:12.497Z",
         "sources": [],
-        "extras": {},
+        "extras": {}
     }
 
 
@@ -515,28 +540,28 @@ A base class with the properties shared by all ballot selection types: ``BallotM
 id
     Open Civic Data-style id in the format ``ocd-ballotselection/{{uuid}}``.
 
-contest_id
-    References the ``BallotMeasureContest``, ``CandidateContest``, ``PartyContest`` or ``RetentionContest`` in which the ballot selection is an option.
-
 created_at
     Time that this object was created at in the system.
 
 updated_at
     Time that this object was last updated in the system.
 
-sources
-    **optional**
-    **repeated**
-    List of sources used in assembling this object. Has the following properties:
-
-    url
-        URL of the resource.
-    note
-        **optional**
-        Description of what this source was used for.
-
 extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
+
+
+Sample BallotSelectionBase
+++++++++++++++++++++++++++
+
+
+.. code:: javascript
+
+    {
+        "id": "ocd-ballotselection/d2716878-99fa-467b-b3b6-d28862a6802f"
+        "created_at": "2017-02-08T04:17:30.817Z",
+        "updated_at": "2017-02-08T04:17:30.817Z",
+        "extras": {}
+    }
 
 
 BallotMeasureSelection
@@ -550,6 +575,25 @@ id
 selection
     Selection text for the option on the ballot, e.g., "Yes", "No", "Recall", "Don't recall" (string).
 
+contest_id
+    References the ``BallotMeasureContest`` in which the ballot selection is an option.
+
+
+Sample BallotMeasureSelection
++++++++++++++++++++++++++++++
+
+
+.. code:: javascript
+
+    {
+        "id": "ocd-ballotselection/85399ed5-b91d-4a7c-a868-dd152ce28ed4",
+        "contest_id": "ocd-contest/2ce7e19b-3feb-4318-9908-eb3fdf456fb0",
+        "selection": "Yes",
+        "created_at": "2017-02-08T04:17:24.486Z",
+        "updated_at": "2017-02-08T04:17:24.486Z",
+        "extras": {}
+    }
+
 
 CandidateSelection
 ------------------
@@ -558,6 +602,9 @@ A subclass of ``BallotSelectionBase`` representing an option on the ballot that 
 
 id
     Open Civic Data-style id in the format ``ocd-candidateselection/{{uuid}}``.
+
+contest_id
+    References the ``CandidateContest`` in which the ballot selection is an option.
 
 candidacy_ids
     **repeated**
@@ -571,6 +618,25 @@ endorsement_party_ids
 is_write_in
     **optional**
     Indicates that the particular ballot selection allows for write-in candidates. If true, one or more write-in candidates are allowed for this contest (boolean).
+
+
+Sample CandidateSelection
++++++++++++++++++++++++++
+
+
+.. code:: javascript
+
+    {
+        "id": "ocd-ballotselection/d2716878-99fa-467b-b3b6-d28862a6802f"
+        "contest_id": "ocd-contest/eff6e5bd-10dc-4930-91a0-06e2298ca15c",
+        "candidacy_ids": [
+            "ocd-candidacy/054f0a6e-9c06-4611-8c2c-3e143843c9d8"
+        ],
+        "is_write_in": false,
+        "created_at": "2017-02-08T04:17:30.817Z",
+        "updated_at": "2017-02-08T04:17:30.817Z",
+        "extras": {},
+    }
 
 
 PartySelection

@@ -96,7 +96,7 @@ Sample Election
 .. code:: javascript
 
     {
-        "id": ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
+        "id": "ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
         "name": "2016 GENERAL",
         "description": "",
         "start_time": "2016-11-08T00:00:00Z",

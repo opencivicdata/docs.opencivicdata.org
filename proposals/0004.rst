@@ -55,6 +55,9 @@ timezone
 Optional Fields
 ---------------
 
+agenda
+    List of agenda items as defined in the ``Agenda Items`` section below.
+
 description
     Description of the Event.
 

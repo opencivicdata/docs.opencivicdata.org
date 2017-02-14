@@ -2,7 +2,7 @@
 OCDEP: Campaign Finance Filings
 ====================
 
-:Created: 
+:Created:
 :Author: Abraham Epton
 :Status: Draft
 
@@ -23,7 +23,8 @@ Filing
     Any single document filed with a Regulator.
 
 Jurisdiction
-    The region covered by an Office, or for which an Election is being held.
+    OCD Jurisdiction indicating the region covered by an office, or for which an
+    Election is being held.
 
 Person
     The Person entity here will refer to many entities that are actually
@@ -75,25 +76,32 @@ likely future conflicts with other entities in the Open Civic Data namespace, so
 this proposal doesn't make any attempt to resolve those conflicts since they
 seem ancillary for now.
 
-TODO
-----
-* Make filing activity actions use same pattern as OCD bill actions (@aepton)
-
 Questions to answer
 -------------------
 * How to model Committee Status and Committee Purpose inside of OCD Organization
   models?
+      Just add additional fields for those. Not sure why this was ever a question.
 * How to reconcile multiple reports that describe the same contribution,
   expenditure or other event?
-* How to handle different types of Committees beyond just imputing their types
-  based on (say) whether they are oriented toward more than one Candidate?
+      Same transactions should have same IDs. Multiple filings can point to one
+      transaction. How to handle this for jurisdictions where no transaction IDs
+      are provided by the regulator will be...very dependent on that jurisdiction.
 * How should amendments work? Should there be some notion of versions of
   filings? Should all data from a given filing, even if 99% is redundant with a
   prior version of same filing, be stored, or should we store a diff?
+      We should use filings and filing_actions for this. The implementing
+      system is responsible for determining what's current, using the is_current
+      and supersedes_prior_versions fields of the Filing filing_action.
 * Should we make/preserve the distinction FEC makes between contributions and
   receipts (every contribution is a receipt; not every receipt is a
   contribution)? How do we handle presumably-unique transaction IDs that
   nevertheless have to get versioned somehow?
+      This is handled acceptably by Transactions and specifically,
+      the classification field. Versioning is tricky - we could pack it into the
+      transaction ID somehow; or use the filing_action; or not care about
+      versions at all and just represent the current state of the world. I vote
+      for using the filing_action for this - makes it easy to find all versions
+      of a given transaction, and does the least-weird thing.
 
 Implementation
 ==============
@@ -102,11 +110,11 @@ Filing
 ------
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-filing/{{uuid}}``
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-filing/{{uuid}}``
 
 identifiers
     **optional**
-    Upstream ids of the disclosure if any exist, such as the filing ID assigned by the Senate Office of Public Record
+    Upstream IDs of the disclosure if any exist, such as the filing ID assigned by the Senate Office of Public Record
 
 classification
     **optional**
@@ -124,7 +132,7 @@ coverage_end_date
     Date (and possibly time) when filing period of coverage ends.
 
 recipient
-    Regulator to which the Filing was submitted.
+    OCD Organization indicating the regulator to which the Filing was submitted.
 
 sources
     **optional**
@@ -144,7 +152,7 @@ actions
     consist of the following properties:
 
     id
-        Open Civic Data-style id in the format ``ocd-campaignfinance-filingaction/{{uuid}}``
+        Open Civic Data-style ID in the format ``ocd-campaignfinance-filingaction/{{uuid}}``
 
     description
         Description of the action.
@@ -182,14 +190,14 @@ election
     Election(s) relevant to this filing. This is the upcoming Election for which
     a donation is being disclosed, say, or a recently-passed Election for which
     a Committee is announcing the closing of its books.
-    
+
 created_at
     Time that this object was created at in the system, not to be confused with the date of introduction.
 updated_at
     Time that this object was last updated in the system, not to be confused with the last action.
 extras
-    Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.    
-    
+    Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
+
 
 Committee
 ---------
@@ -197,7 +205,7 @@ Committee
 Subclass of Popolo Organization.
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-committee/{{uuid}}``
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-committee/{{uuid}}``
 
 identifier
     **optional**
@@ -231,7 +239,7 @@ statuses
         **repeated**
         A list of classifications for this status, such as "active" or
         "contesting election" - allows for consolidating different
-        jurisdictional status schemes into standard types.    
+        jurisdictional status schemes into standard types.
 
 description
     **optional**
@@ -247,16 +255,13 @@ Committee Type
 --------------
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-committeetype/{{uuid}}``
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-committeetype/{{uuid}}``
 
 name
     Name of the Committee Type
 
 jurisdiction
-    Presumably a state, but: whatever jurisdiction the Committe Type is
-    meaningful within. This allows us to have "Candidate Committee"s in 2
-    different states that adhere to whatever different rules apply in those
-    places.
+    An OCD Jurisdiction.
 
 Candidate Designation
 ---------------------
@@ -265,10 +270,10 @@ A Committee may have no relation to any specific Candidate, but if they do have
 such a relationship, the options are complex. Hence this type.
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-candidateorientation/{{uuid}}``
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-candidateorientation/{{uuid}}``
 
 candidate
-    Candidate
+    OCD Person indicating the candidate
 
 designation
     Enumerated among "supports", "opposes", "primary vehicle for", "surplus
@@ -283,19 +288,13 @@ sometimes and as far as I can see inevitably, some Persons (many in fact) will
 be corporations or other distinctly non-human entities, Supremes Court
 notwithstanding.
 
-This type is an OCD Popolo Person.
-
-Regulator
----------
-
-OCD Organization model.
-
+This type is an OCD Person.
 
 Filing Type
 ----------------
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-filingtype/{{uuid}}``
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-filingtype/{{uuid}}``
 
 name
     Name of filing type - "Last Minute Contributions", etc.
@@ -305,14 +304,14 @@ code
     etc.
 
 jurisdiction
-    Jurisdiction for which the Filing Type is relevant.
+    OCD Jurisdiction for which the Filing Type is relevant.
 
 Transaction (Section)
 ---------------------
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-transaction/{{uuid}}``
-    
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-transaction/{{uuid}}``
+
 filing_action
     Reference to the ``Filing.action.id`` that a transaction is reported in.
 
@@ -340,10 +339,32 @@ amount
         it's probably cash.)
 
 sender
-    Person making contribution, or paying for expenditure, etc.
+    This can be a person or some kind of organization or committee.
+
+    entity_type
+        Indicates whether this is an "organization" or "person"
+
+    organization
+        OCD Organization committing ("sending") this transaction (only if
+        entity_type is "organization")
+
+    person
+        OCD Person making contribution, or paying for expenditure, etc. (only if
+        entity_type is "person")
 
 recipient
-    Person receiving contribution, or being paid for an expenditure, etc.
+    This can be a person or some kind of organization or committee.
+
+    entity_type
+        Indicates whether this is an "organization" or "person"
+
+    organization
+        OCD Organization receiving this transaction (only if entity_type is
+        "organization")
+
+    person
+        OCD Person receiving contribution, or being paid for an expenditure, etc.
+        (only if entity_type is "person")
 
 date
     Date reported for transaction.
@@ -354,31 +375,21 @@ description
 note
     String (may simply need repeated "notes" fields for items of this type).
 
-CommitteeStatusUpdate (Section)
--------------------------------
-
-These are instances in which committees are becoming active, inactive or
-indicating whether they're participating in the Election or not.
-
-id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-committeestatusupdate/{{uuid}}``
-
-new_status
-    New status to set for Committee. This could be an enumerated type or a
-    free-text field.
-
-description
-    String containing whatever associated text we got along with the status
-    change.
-
 CommitteeAttributeUpdate (Section)
 ----------------------------------
 
-id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-committeeattributeupdate/{{uuid}}``
+This includes updates in which committees are becoming active, inactive or
+indicating whether they're participating in the Election or not.
 
-attribute_to_update
+id
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-committeeattributeupdate/{{uuid}}``
+
+property
     Attribute in the Committee object to change.
 
-new_attribute_value
+value
     Value to set for the attribute in the Committee object.
+
+description
+    String containing whatever associated text we got along with the attribute
+    change.

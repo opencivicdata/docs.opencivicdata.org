@@ -26,14 +26,6 @@ Jurisdiction
     OCD Jurisdiction indicating the region covered by an office, or for which an
     Election is being held.
 
-Person
-    The Person entity here will refer to many entities that are actually
-    corporations or other nonhuman entities. It's meant to refer to whoever or
-    whatever is taking a specific action, or having an action disclosed in which
-    they're involved. It will mostly be people but not always, and as lovely as
-    it would be to have some way to disambiguate the two I'm not optimistic that
-    will be possible anytime soon.
-
 Section
     A container for a unit of meaning inside a Filing, that isn't inherent to
     the basic process of filing a document with an agency.
@@ -110,15 +102,17 @@ Filing
 ------
 
 id
-    Open Civic Data-style ID in the format ``ocd-campaignfinance-filing/{{uuid}}``
+    Open Civic Data-style ID in the format
+    ``ocd-campaignfinance-filing/{{uuid}}``.
 
 identifiers
     **optional**
-    Upstream IDs of the disclosure if any exist, such as the filing ID assigned by the Senate Office of Public Record
+    Upstream IDs of the disclosure if any exist, such as the filing ID assigned
+    by the Senate Office of Public Record.
 
 classification
     **optional**
-    Filing Type (jurisdiction-specific)
+    Filing Type (jurisdiction-specific).
 
 filer
     Committee making the Filing.
@@ -152,7 +146,8 @@ actions
     consist of the following properties:
 
     id
-        Open Civic Data-style ID in the format ``ocd-campaignfinance-filingaction/{{uuid}}``
+        Open Civic Data-style ID in the format
+        ``ocd-campaignfinance-filingaction/{{uuid}}``.
 
     description
         Description of the action.
@@ -205,7 +200,8 @@ Committee
 Subclass of Popolo Organization.
 
 id
-    Open Civic Data-style ID in the format ``ocd-campaignfinance-committee/{{uuid}}``
+    Open Civic Data-style ID in the format
+    ``ocd-campaignfinance-committee/{{uuid}}``.
 
 identifier
     **optional**
@@ -213,10 +209,10 @@ identifier
     Committee may be meaningful, so preserve it here.
 
 name
-    Name of the Committee
+    Name of the Committee.
 
 committee_type
-    Committee Type
+    Committee Type.
 
 statuses
     Current status of the Committee. List of date ranges and status types
@@ -255,10 +251,11 @@ Committee Type
 --------------
 
 id
-    Open Civic Data-style ID in the format ``ocd-campaignfinance-committeetype/{{uuid}}``
+    Open Civic Data-style ID in the format
+    ``ocd-campaignfinance-committeetype/{{uuid}}``.
 
 name
-    Name of the Committee Type
+    Name of the Committee Type.
 
 jurisdiction
     An OCD Jurisdiction.
@@ -270,38 +267,28 @@ A Committee may have no relation to any specific Candidate, but if they do have
 such a relationship, the options are complex. Hence this type.
 
 id
-    Open Civic Data-style ID in the format ``ocd-campaignfinance-candidateorientation/{{uuid}}``
+    Open Civic Data-style ID in the format
+    ``ocd-campaignfinance-candidateorientation/{{uuid}}``.
 
 candidate
-    OCD Person indicating the candidate
+    OCD Person indicating the candidate.
 
 designation
     Enumerated among "supports", "opposes", "primary vehicle for", "surplus
     account for", "independent expenditure" and other relationship types.
 
-Person
-------
-
-This system assumes that each Person will be generated from a specific line item
-in a Filing. As such, we may know nothing about the Person but their name. Also,
-sometimes and as far as I can see inevitably, some Persons (many in fact) will
-be corporations or other distinctly non-human entities, Supremes Court
-notwithstanding.
-
-This type is an OCD Person.
-
 Filing Type
 ----------------
 
 id
-    Open Civic Data-style ID in the format ``ocd-campaignfinance-filingtype/{{uuid}}``
+    Open Civic Data-style ID in the format
+    ``ocd-campaignfinance-filingtype/{{uuid}}``.
 
 name
     Name of filing type - "Last Minute Contributions", etc.
 
 code
-    Probably-more-cryptic code for the form associated with the Filing - "A1",
-    etc.
+    Code for the form associated with the Filing - "A1", etc.
 
 jurisdiction
     OCD Jurisdiction for which the Filing Type is relevant.
@@ -310,7 +297,8 @@ Transaction (Section)
 ---------------------
 
 id
-    Open Civic Data-style ID in the format ``ocd-campaignfinance-transaction/{{uuid}}``
+    Open Civic Data-style ID in the format
+    ``ocd-campaignfinance-transaction/{{uuid}}``.
 
 filing_action
     Reference to the ``Filing.action.id`` that a transaction is reported in.
@@ -336,35 +324,35 @@ amount
 
     is_inkind
         Boolean indicating whether transaction is in-kind or not (in which case,
-        it's probably cash.)
+        it's probably cash).
 
 sender
     This can be a person or some kind of organization or committee.
 
     entity_type
-        Indicates whether this is an "organization" or "person"
+        Indicates whether this is an "organization" or "person".
 
     organization
         OCD Organization committing ("sending") this transaction (only if
-        entity_type is "organization")
+        entity_type is "organization").
 
     person
         OCD Person making contribution, or paying for expenditure, etc. (only if
-        entity_type is "person")
+        entity_type is "person").
 
 recipient
     This can be a person or some kind of organization or committee.
 
     entity_type
-        Indicates whether this is an "organization" or "person"
+        Indicates whether this is an "organization" or "person".
 
     organization
         OCD Organization receiving this transaction (only if entity_type is
-        "organization")
+        "organization").
 
     person
         OCD Person receiving contribution, or being paid for an expenditure, etc.
-        (only if entity_type is "person")
+        (only if entity_type is "person").
 
 date
     Date reported for transaction.
@@ -382,7 +370,8 @@ This includes updates in which committees are becoming active, inactive or
 indicating whether they're participating in the Election or not.
 
 id
-    Open Civic Data-style ID in the format ``ocd-campaignfinance-committeeattributeupdate/{{uuid}}``
+    Open Civic Data-style ID in the format
+    ``ocd-campaignfinance-committeeattributeupdate/{{uuid}}``.
 
 property
     Attribute in the Committee object to change.

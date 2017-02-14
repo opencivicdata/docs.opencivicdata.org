@@ -23,7 +23,7 @@ Filing
     Any single document filed with a Regulator.
 
 Jurisdiction
-    OCD Jurisdiction indicating the region covered by an Office, or for which an
+    OCD Jurisdiction indicating the region covered by an office, or for which an
     Election is being held.
 
 Person
@@ -83,12 +83,9 @@ Questions to answer
       Just add additional fields for those. Not sure why this was ever a question.
 * How to reconcile multiple reports that describe the same contribution,
   expenditure or other event?
-      Same transactions should have same ids. Multiple filings can point to one
-      transaction. How to handle this for jurisdictions where no transaction ids
+      Same transactions should have same IDs. Multiple filings can point to one
+      transaction. How to handle this for jurisdictions where no transaction IDs
       are provided by the regulator will be...very dependent on that jurisdiction.
-* How to handle different types of Committees beyond just imputing their types
-  based on (say) whether they are oriented toward more than one Candidate?
-      I don't think this is an issue.
 * How should amendments work? Should there be some notion of versions of
   filings? Should all data from a given filing, even if 99% is redundant with a
   prior version of same filing, be stored, or should we store a diff?
@@ -101,7 +98,7 @@ Questions to answer
   nevertheless have to get versioned somehow?
       This is handled acceptably by Transactions and specifically,
       the classification field. Versioning is tricky - we could pack it into the
-      transaction id somehow; or use the filing_action; or not care about
+      transaction ID somehow; or use the filing_action; or not care about
       versions at all and just represent the current state of the world. I vote
       for using the filing_action for this - makes it easy to find all versions
       of a given transaction, and does the least-weird thing.
@@ -113,11 +110,11 @@ Filing
 ------
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-filing/{{uuid}}``
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-filing/{{uuid}}``
 
 identifiers
     **optional**
-    Upstream ids of the disclosure if any exist, such as the filing ID assigned by the Senate Office of Public Record
+    Upstream IDs of the disclosure if any exist, such as the filing ID assigned by the Senate Office of Public Record
 
 classification
     **optional**
@@ -155,7 +152,7 @@ actions
     consist of the following properties:
 
     id
-        Open Civic Data-style id in the format ``ocd-campaignfinance-filingaction/{{uuid}}``
+        Open Civic Data-style ID in the format ``ocd-campaignfinance-filingaction/{{uuid}}``
 
     description
         Description of the action.
@@ -208,7 +205,7 @@ Committee
 Subclass of Popolo Organization.
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-committee/{{uuid}}``
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-committee/{{uuid}}``
 
 identifier
     **optional**
@@ -258,7 +255,7 @@ Committee Type
 --------------
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-committeetype/{{uuid}}``
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-committeetype/{{uuid}}``
 
 name
     Name of the Committee Type
@@ -273,10 +270,10 @@ A Committee may have no relation to any specific Candidate, but if they do have
 such a relationship, the options are complex. Hence this type.
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-candidateorientation/{{uuid}}``
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-candidateorientation/{{uuid}}``
 
 candidate
-    OCD Person representing the candidate
+    OCD Person indicating the candidate
 
 designation
     Enumerated among "supports", "opposes", "primary vehicle for", "surplus
@@ -297,7 +294,7 @@ Filing Type
 ----------------
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-filingtype/{{uuid}}``
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-filingtype/{{uuid}}``
 
 name
     Name of filing type - "Last Minute Contributions", etc.
@@ -313,7 +310,7 @@ Transaction (Section)
 ---------------------
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-transaction/{{uuid}}``
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-transaction/{{uuid}}``
 
 filing_action
     Reference to the ``Filing.action.id`` that a transaction is reported in.
@@ -342,10 +339,32 @@ amount
         it's probably cash.)
 
 sender
-    OCD Person making contribution, or paying for expenditure, etc.
+    This can be a person or some kind of organization or committee.
+
+    entity_type
+        Indicates whether this is an "organization" or "person"
+
+    organization
+        OCD Organization committing ("sending") this transaction (only if
+        entity_type is "organization")
+
+    person
+        OCD Person making contribution, or paying for expenditure, etc. (only if
+        entity_type is "person")
 
 recipient
-    OCD Person receiving contribution, or being paid for an expenditure, etc.
+    This can be a person or some kind of organization or committee.
+
+    entity_type
+        Indicates whether this is an "organization" or "person"
+
+    organization
+        OCD Organization receiving this transaction (only if entity_type is
+        "organization")
+
+    person
+        OCD Person receiving contribution, or being paid for an expenditure, etc.
+        (only if entity_type is "person")
 
 date
     Date reported for transaction.
@@ -363,7 +382,7 @@ This includes updates in which committees are becoming active, inactive or
 indicating whether they're participating in the Election or not.
 
 id
-    Open Civic Data-style id in the format ``ocd-campaignfinance-committeeattributeupdate/{{uuid}}``
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-committeeattributeupdate/{{uuid}}``
 
 property
     Attribute in the Committee object to change.
@@ -372,5 +391,5 @@ value
     Value to set for the attribute in the Committee object.
 
 description
-    String containing whatever associated text we got along with the status
+    String containing whatever associated text we got along with the attribute
     change.

@@ -9,12 +9,12 @@ OCDEP: Elections
 Overview
 ========
 
-Definition of data types to model elections within which political contests are decided, including relationships to ballot measures and candidates competing for public office.
+Definition of data types to model elections and political contests they are held in order to decided.
 
 The proposed data types are:
 
 * ``Election``
-* ``ContestBase``, a base class for:
+* ``Contest``, a base class for:
 
     - ``BallotMeasureContest``
     - ``CandidateContest``
@@ -23,13 +23,77 @@ The proposed data types are:
 
 * ``Candidacy``
 * ``Party``
-* ``BallotSelectionBase``, a base class for:
+* ``BallotSelection``, a base class for:
 
     - ``BallotMeasureSelection``
     - ``CandidateSelection``
     - ``PartySelection``
 
 Supplements the "Campaign Finance Filings" proposal prepared by Abraham Epton.
+
+Definitions
+===========
+
+Ballot
+    An official form containing all available selections in each contest in which a voter may vote in an election.
+
+Ballot Measure
+    A proposition (aka, "question") included on the ballot of an election so as to be approved or rejected directly by voters. These propositions include:
+
+    * The enactment or repeal of a statute, constitutional amendment or other form of law.
+    * Approval or rejection of a new tax or additional spending of public funds.
+    * The recall or retention of a previously elected public office holder.
+
+Candidacy
+    The condition of a person being a candidate. A single person may have multiple candidacies if:
+
+    * The person competed to hold the same public office in more than one election, including a primary election followed by a general election.
+    * The person competed to hold multiple public offices, even in the same election.
+
+Candidate
+    A person competing to be elected to hold particular public office.
+
+Contest
+    A specific decision with a set of mostly pre-defined options (aka, selections) put before voters via a ballot in an election. These contests include the selection of a person from a list of candidates to hold a public office or the approval or rejection of a ballot measure.
+
+Election
+    A collection of political contests decided in parallel through a process of compiling official ballots cast by voters and adding up the total votes for each selection in each contest.
+
+Election Day
+    The final or only date when eligible voters may cast their ballots in an election. Typically this is also the same date when results of the election's contests are first publicly reported.
+
+Incumbent
+    The candidate for a public office who also currently holds that public office.
+
+Party
+    A political organization to which public office holders and candidates can be affiliated.
+
+Public Office
+    A position within a governmental body which is filled through an election contest.
+
+Runoff Contest
+    A contest conducted to decide a previous contest in which no single selection received the number of votes required to decide the election.
+
+Selection
+    An option available to a voter in an election contest.
+
+Term of Office
+    The period of time a person elected to a public office is expected to hold the public office before being re-elected or replaced.
+
+    For a variety of reasons, a public office holder may vacate an elected office before serving a full term. This is known as an "unexpired term", a situation which could require an additional contest (known as a "Special Election" in U.S. politics) to fill the empty public office.
+
+Ticket
+    A collection of allied candidates competing together in the same contest in which multiple public offices are decided. For example, in U.S. politics, candidates for President and Vice President run together on the same ticket, with the President at the top of the ticket.
+
+Vote
+    A specific selection selected by a voter by a voter in an election contest.
+
+Voter
+    A person who is eligible to vote in an election.
+
+Write-in
+    A vote in a contest wherein the voter explicitly names a preferred selection, forgoing the selections listed on the ballot.
+
 
 Rationale
 =========
@@ -49,7 +113,14 @@ Our use cases require unique representations of both previous elections and cont
 
 VIP 5, the specification's current version, incorporates elements from the `Election Results Common Data Format Specification <https://www.nist.gov/itl/voting/nist-election-results-common-data-format-specification>`_ defined by the National Institute of Standard and Technology. As such, we have borrowed eagerly from NIST's current specification also.
 
-Important differences between this proposal and the current VIP specification are noted below.
+Differences from VIP
+++++++++++++++++++++
+
+Each of the data types described in this proposal corresponds to an element described in the VIP's current `XML format specification <http://vip-specification.readthedocs.io/en/vip5/xml/index.html#elements>`_. While interoperability with VIP data is a goal of this proposal, there is not a one-to-one mapping between the tags within a VIP element and the properties of its corresponding data type in this OCDEP.
+
+Important differences between the proposed OCD data type and its corresponding VIP element are noted, if any, in Implementation_.
+
+One general note: VIP describes `<InternationalizedText> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html>`_ and `<LanguageString> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html#languagestring>`_ elements for the purposes of representing certain texts in multiple languages, e.g., the English and Spanish translations of the ``pro_statement`` and ``con_statement`` of a ``BallotMeasureContest``. In this proposal, these data types are described as simple strings.
 
 Questions
 =========
@@ -58,6 +129,7 @@ Questions
 * Does ``Election`` need a property (maybe ``division_id``) to describe how broad is the broadest geography/jurisdiction of contests? This might be more accurate/flexible than ``Election.is_statewide``. This point might be more relevant to discuss later in the supplement proposal regarding election results.
 * Should ``Party`` be implemented as an ``Organization`` (or subclass)? If so, how do we handle national parties versus state parties (e.g., the DNC versus Missouri Democratic Party)? Would probably be more accurate to associate state and local candidates with state parties and federal candidates with the national parties. But most users will to want all Democrats to be grouped together regardless of the level of government, especially when analyzing election results.
 * Should the proposed subclasses of OCD data types (e.g., ``Election``, ``BallotMeasureContest``,  ``CandidateContest``) each implement its own ID or should it just inherit the id field of the base class?
+* Should competing to hold a public office in both the primary and the general election count as one candidacy or two?
 
 
 Implementation
@@ -68,25 +140,48 @@ Election
 
 A collection of political contests set to be decided on the same date.
 
-``Election`` is a subclass of OCD's ``Event`` data type, defined in `OCDEP 4: Events <http://opencivicdata.readthedocs.io/en/latest/proposals/0004.html>`_, which was accepted in June 2014. All of core and optional properties of ``Event`` are inherited by ``Election``.
-
-The typical implementation will be an ``all_day`` event witht a "election" ``classification`` value and a ``start_time`` set to midnight of the observed election date.
+id
+    Open Civic Data-style id in the format ``ocd-contest/{{uuid}}``.
 
 identifiers
     **optional**
     **repeated**
     Upstream identifiers of the election if any exist, such as those assigned by a Secretary of State, county or city elections office.
 
-administrative_org_id
-    **optional**
-    Reference to the OCD ``Organization`` that administers the election.
+name
+    Common name for the election, which will typically describe approximately when the election occurred and the scope of the contests to be decided, e.g., "2014 Primaries", "2015 Boone County Elections" or "2016 General Elections".
 
-state
-    `FIPS code <https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code>`_ of the state where the election is being held. Recorded in the format ``st{{fips}}`` to match references to VIP `<State> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/state.html>`_  elements (string).
+date
+    Date on which the election is set to be decided (aka, Election Day). Typically this corresponds to the last day when voters can cast a ballot and the first day when the election's results a publicly reported.
 
-is_statewide
+    This date should be considered to be in the timezone local to the election's division.
+
+division_id
+    Reference to the OCD ``Division`` that defines the broadest geographical scope of any contest decided by the election. For example, an election that includes a contest to elect the governor of California would include the division identifier for the entire state of California.
+
+administrative_organization_id
     **optional**
-    Indicates whether the election is statewide (boolean).
+    Reference to the OCD ``Organization`` that administers the election and publishes the official results.
+
+created_at
+    Time that this object was created at in the system.
+
+updated_at
+    Time that this object was last updated in the system.
+
+sources
+    **optional**
+    **repeated**
+    List of sources used in assembling this object. Has the following properties:
+
+    url
+        URL of the resource.
+    note
+        **optional**
+        Description of what this source was used for.
+
+extras
+    Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
 
 
 Sample Election
@@ -96,14 +191,17 @@ Sample Election
 .. code:: javascript
 
     {
-        "id": "ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
+        "id": "ocd-election/4c25d655-c380-46a4-93d7-28bc0c389629",
+        "identifiers": [
+            {
+                "scheme": "calaccess_election_id",
+                "identifier": "65"
+            }
+        ],
         "name": "2016 GENERAL",
-        "description": "",
-        "start_time": "2016-11-08T00:00:00Z",
-        "end_time": null
-        "timezone": "US/Pacific",
-        "all_day": true,
-        "classification": "election",
+        "date": "2016-11-08",
+        "division_id": 'ocd-division/country:us/state:ca/'
+        "administrative_organization_id": "ocd-organization/436b4d67-b5aa-402c-9e20-0e56a8432c80",
         "created_at": "2017-02-07T07:17:58.874Z",
         "updated_at": "2017-02-07T07:17:58.874Z",
         "sources": [
@@ -117,20 +215,38 @@ Sample Election
             }
         ],
         "extras": {},
-        "administrative_org_id": "ocd-organization/436b4d67-b5aa-402c-9e20-0e56a8432c80",
-        "identifiers": [
-            {
-                "scheme": "calaccess_election_id",
-                "identifier": "65"
-            }
-        ],
-        "state": "st06",
-        "is_statewide": true
     }
 
 
-ContestBase
------------
+Differences from VIP
+++++++++++++++++++++
+
+``Election`` corresponds to VIP's `<Election> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/election.html>`_ element.
+
+* Important differences between corresponding fields:
+
+    - ``<Name>`` is not required on VIP, but ``name`` is required on OCD's ``Event``.
+    - ``<StateId>``, which is a required reference to a VIP `<State> http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/state.html`_ element, roughly corresponds to ``division_id`` which should reference the same state (if ``<IsStatewide>`` is true on the VIP election) or any of its subdivisions.
+
+* OCD fields not implemented in VIP:
+
+    - ``administrative_organization_id`` is optional.
+
+* VIP fields not implemented in this OCDEP:
+
+    - ``<ElectionType>``, which is an optional string that conflates the level of government to which a candidate might be elected (e.g., "federal", "state", "county", etc.) with the point when the election occurs in the overall cycle (e.g., "general", "primary", "runoff" and "special").
+    - ``<HoursOpenId>``, which is an optional reference to a VIP `<HoursOpen> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/hours_open.html>`_ element that represents when polling locations for the election are generally open.
+    - ``<IsStatewide>``, which is an optional boolean.
+    - ``<RegistrationInfo>``, which is an optional string.
+    - ``<RegistrationDeadline>`, which is an optional date.
+    - ``<HasElectionDayRegistration>``, which is an optional boolean.
+    - ``<AbsenteeBallotInfo>``, which is an optional string.
+    - ``<AbsenteeRequestDeadline>``, which is an optional date.
+    - ``<ResultsUri>``, which is optional.
+
+
+Contest
+-------
 
 A base class with the properties shared by all contest types: ``BallotMeasureContest``, ``CandidateContest``, ``PartyContest`` and ``RetentionContest``.
 
@@ -146,7 +262,7 @@ name
     Name of the contest, not necessarily as it appears on the ballot (string).
 
 division_id
-    Reference to the OCD ``Division`` that defines the geographical scope of the contest, e.g., a specific Congressional or State Senate district.
+    Reference to the OCD ``Division`` that defines the geographical scope of the contest, e.g., a specific Congressional or State Senate district. The ``Division`` referenced by each ``Contest`` should be a subdivision of the ``Divsion`` referenced by its ``Election``.
 
 election_id
     Reference to the OCD ``Election`` in which the contest is decided.
@@ -172,8 +288,8 @@ extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
 
 
-Sample ContestBase
-+++++++++++++++++++
+Sample Contest
+++++++++++++++
 
 
 .. code:: javascript
@@ -183,7 +299,7 @@ Sample ContestBase
         "identifiers": [],
         "name": "STATE SENATE 01",
         "division_id": "ocd-division/country:us/state:ca/sldu:1",
-        "election_id": "ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
+        "election_id": "ocd-election/4c25d655-c380-46a4-93d7-28bc0c389629",
         "created_at": "2017-02-07T07:18:05.438Z",
         "updated_at": "2017-02-07T07:18:05.442Z",
         "sources": [
@@ -196,10 +312,36 @@ Sample ContestBase
     }
 
 
+Differences from VIP
+++++++++++++++++++++
+
+``Contest`` corresponds to VIP's `<ContestBase> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/contest_base.html>`_ element.
+
+* Important differences between corresponding fields:
+
+    - ``<ElectoralDistrictId>``, which is an optional reference to a VIP `<ElectoralDistrict> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/electoral_district.html>`_ element, is replaced by ``division_id``, which is a required reference to an OCD ``Division``.
+
+* OCD fields not implemented in VIP:
+
+    - ``election_id`` is a required reference to an OCD ``Election``.
+
+* VIP fields not implemented in this OCDEP:
+
+    - ``Abbreviation``, which is an optional string.
+    - ``<BallotSelectionIds>``, which is an optional single element that contains a set of references to ballot selections for the contest. Instead, ``BallotSelection`` includes a single, required ``contest_id``.
+    - ``<ElectorateSpecification>``, which an optional string.
+    - ``<HasRotation>``, which is an optional boolean.
+    - ``<BallotSubTitle>``,  which is an optional string.
+    - ``<BallotTitle>``,  which is an optional string.
+    - ``<SequenceOrder>``,  which is an optional integer.
+    - ``<VoteVariation>``,  which is an optional reference to a VIP `<VoteVariation> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/enumerations/vote_variation.html>`_.
+    - ``<OtherVoteVariation>``, which is an optional string.
+
+
 BallotMeasureContest
 --------------------
 
-A subclass of ``ContestBase`` for representing a ballot measure before the voters, including summary statements on each side.
+A subclass of ``Contest`` for representing a ballot measure before the voters, including summary statements on each side.
 
 con_statement
     **optional**
@@ -225,7 +367,7 @@ summary_text
     **optional**
     Specifies a short summary of the ballot measure that is on the ballot, below the title, but above the text.
 
-ballot_measure_type
+classification
     **optional**
     Enumerated among:
 
@@ -255,7 +397,7 @@ Sample BallotMeasureContest
         ],
         "name": "PROPOSITION 060- ADULT FILMS. CONDOMS. HEALTH REQUIREMENTS. INITIATIVE STATUTE."
         "division_id": "ocd-division/country:us/state:ca",
-        "election_id": "ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
+        "election_id": "ocd-election/4c25d655-c380-46a4-93d7-28bc0c389629",
         "created_at": "2017-02-07T07:17:59.818Z",
         "updated_at": "2017-02-07T07:17:59.818Z",
         "sources": [
@@ -276,10 +418,18 @@ Sample BallotMeasureContest
     }
 
 
+Differences from VIP
+++++++++++++++++++++
+
+``BallotMeasureContest`` corresponds to VIP's `<BallotMeasureContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_measure_contest.html>`_ element.
+
+``<InfoUri>``, which is optional in VIP, is not implemented in this OCDEP.
+
+
 CandidateContest
 ----------------
 
-A subclass of ``ContestBase`` for repesenting a contest among candidates competing for election to a public office.
+A subclass of ``Contest`` for repesenting a contest among candidates competing for election to a public office.
 
 filing_deadline
     **optional**
@@ -316,7 +466,7 @@ Sample CandidateContest
         "identifiers": [],
         "name": "STATE SENATE 01",
         "division_id": "ocd-division/country:us/state:ca/sldu:1",
-        "election_id": "ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
+        "election_id": "ocd-election/4c25d655-c380-46a4-93d7-28bc0c389629",
         "created_at": "2017-02-07T07:18:05.438Z",
         "updated_at": "2017-02-07T07:18:05.442Z",
         "sources": [
@@ -334,10 +484,40 @@ Sample CandidateContest
     }
 
 
+Differences from VIP
+++++++++++++++++++++
+
+``CandidateContest`` corresponds to VIP's `<CandidateContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate_contest.html>`_ element.
+
+* Important differences between corresponding fields:
+
+    - ``<OfficeIds>``, which is an optional set of references to VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ elements, is replaced by ``post_ids``, which is a repeating field that requires at least one reference to an OCD ``Post``.
+
+* OCD fields not implemented in VIP:
+
+    - required:
+
+        + ``is_unexpired_term`` could be determined by the ``<Name>`` or ``<ElectionType>`` (i.e., if either include the substring "special") or inferred from the date of the election.
+
+    - optional:
+
+        + ``filing_deadline`` is stored in the `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ element in VIP.
+        + ``runoff_for_contest_id`` is the id of the ``CandidateContest`` with the same ``post_ids`` and ``party_id`` values occurring on the previous election date.
+
+* VIP fields not implemented in this OCDEP:
+
+    - ``<VotesAllowed>``, which is an optional integer.
+
+
 PartyContest
 ------------
 
-A subclass of ``ContestBase`` which represents a contest in which the possible ballot selections are all political parties. These could include contests in which straight-party selections are allowed, or party-list contests (although these are more common outside of the United States).
+A subclass of ``Contest`` which represents a contest in which the possible ballot selections are all political parties. These could include contests in which straight-party selections are allowed, or party-list contests (although these are more common outside of the United States).
+
+Differences from VIP
+++++++++++++++++++++
+
+``PartyContest`` corresponds to VIP's `<PartyContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party_contest.html>`_ element. The two have no signicant differences.
 
 
 RetentionContest
@@ -365,7 +545,7 @@ Sample RetentionContest
         ],
         "name": "2003 RECALL QUESTION",
         "division_id": "ocd-division/country:us/state:ca",
-        "election_id": "ocd-event/3f904160-d304-4753-a542-578cfcb86e76",
+        "election_id": "ocd-election/3f904160-d304-4753-a542-578cfcb86e76",
         "created_at": "2017-02-07T07:18:00.555Z",
         "updated_at": "2017-02-07T07:18:00.555Z",
         "sources": [
@@ -385,6 +565,20 @@ Sample RetentionContest
         "other_type": "",
         "membership_id": "ocd-membership/181a0826-f458-403f-ae65-e1ce97b8dd34"
     }
+
+
+Differences from VIP
+++++++++++++++++++++
+
+``RetentionContest`` corresponds to VIP's `<RetentionContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/retention_contest.html>`_ element.
+
+* Important differences between corresponding fields:
+
+    - ``<CandidateId>``, which is a required reference to a VIP `<Candidate> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate.html>`_ element, and ``<OfficeId>``, which is an optional reference to a VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ element, are replaced by ``membership_id``, which is a required reference to an OCD ``Membership`` representing a particular person's tenure in a particular public office.
+
+* VIP fields not implemented in this OCDEP:
+
+    - ``<OfficeId>``, which is an optional reference to a VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_. VIP's ``<Office>`` element corresponds to OCD's ``Post`` data type. In this proposal, a candidate's ``post_id`` is stored on ``Candidacy``, including .
 
 
 Candidacy
@@ -446,7 +640,7 @@ extras
 
 
 Sample Candidacy
-+++++++++++++++++++++++
+++++++++++++++++
 
 
 .. code:: javascript
@@ -469,10 +663,37 @@ Sample Candidacy
     }
 
 
+Differences from VIP
+++++++++++++++++++++
+
+``Candidacy`` corresponds to VIP's `<Candidate> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate.html>`_ element.
+
+* Important differences between corresponding fields:
+
+    - ``party_id`` is an optional reference an OCD ``Party``, not a VIP `<Party> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party.html>`_ element.
+    - ``person_id`` is a required reference an OCD ``Person``, not a VIP `<Person> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/person.html>`_ element.
+
+* OCD fields not implemented in VIP:
+
+    - required:
+      
+        + ``post_id`` is required to link the candidate to the public office for which they are competing. In VIP, this is represented as an `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ element, which is stored on the ``<CandidateContest>`` element.
+
+    - optional:
+      
+        + ``committee_id``
+
+* VIP fields not implemented in this OCDEP:
+
+    - ``<ContactInformation>`` refers to an element that describes the contact of physical address information for the candidate or their campaign. On and OCD ``Candidacy``, this information would be found on the associated ``Person`` or ``Committee`` object.
+    - ``<PostElectionStatus>``, which is an optional reference to a VIP `<CandidatePostElectionStatus> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/enumerations/candidate_post_election_status.html>`_.
+    - ``<PreElectionStatus>``, which is an optional reference to a VIP `<CandidatePreElectionStatus> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/enumerations/candidate_pre_election_status.html>`_.
+
+
 Party
 -----
 
-Political party with which candidates may be affiliated.
+Political organization with which office holders and candidates may be affiliated.
 
 id
     Open Civic Data-style id in the format ``ocd-party/{{uuid}}``.
@@ -532,8 +753,22 @@ Sample Party
     }
 
 
-BallotSelectionBase
--------------------
+Differences from VIP
++++++++++++++++++++
+
+``Party`` corresponds to VIP's `<Party> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party.html>`_ element.
+
+* Important differences between corresponding fields:
+
+    - ``name`` is required.
+
+* VIP fields not implemented in this OCDEP:
+  
+    - ``logo_uri``, which is optional.
+
+
+BallotSelection
+---------------
 
 A base class with the properties shared by all ballot selection types: ``BallotMeasureSelection``, ``CandidateSelection`` and ``PartySelection``.
 
@@ -550,8 +785,8 @@ extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
 
 
-Sample BallotSelectionBase
-++++++++++++++++++++++++++
+Sample BallotSelection
+++++++++++++++++++++++
 
 
 .. code:: javascript
@@ -564,10 +799,24 @@ Sample BallotSelectionBase
     }
 
 
+Differences from VIP
+++++++++++++++++++++
+
+``BallotMeasureSelection`` corresponds to VIP's `<BallotSelectionBase> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_selection_base.html>`_ element.
+
+* OCD fields not implemented in VIP:
+
+    - ``contest_id`` is required in order to link the selection to its associated contest. In VIP, this link is stored in `<OrderedContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ordered_contest.html>`_, which allows for modeling ballot layouts that vary between electoral districts, but is outside the scope of this proposal.
+
+* Other VIP fields not implemented in this OCDEP:
+
+    - ``<SequenceOrder>``, which is an optional integer.
+
+
 BallotMeasureSelection
 ----------------------
 
-A subclass of ``BallotSelectionBase`` representing a ballot option that a voter could select in a ballot measure contest.
+A subclass of ``BallotSelection`` representing a ballot option that a voter could select in a ballot measure contest.
 
 id
     Open Civic Data-style id in the format ``ocd-ballotmeasureselection/{{uuid}}``.
@@ -595,10 +844,16 @@ Sample BallotMeasureSelection
     }
 
 
+Differences from VIP
+++++++++++++++++++++
+
+``BallotMeasureSelection`` corresponds to VIP's `<BallotMeasureSelection> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_measure_selection.html>`_ element. There are no significant differences between the two.
+
+
 CandidateSelection
 ------------------
 
-A subclass of ``BallotSelectionBase`` representing an option on the ballot that a voter could select in a candidate contest, e.g., a particular candidate or "ticket".
+A subclass of ``BallotSelection`` representing an option on the ballot that a voter could select in a candidate contest, e.g., a particular candidate or "ticket".
 
 id
     Open Civic Data-style id in the format ``ocd-candidateselection/{{uuid}}``.
@@ -639,10 +894,21 @@ Sample CandidateSelection
     }
 
 
+Differences from VIP
+++++++++++++++++++++
+
+``CandidateSelection`` corresponds to VIP's `<CandidateSelection> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate_selection.html>`_ element.
+
+* Important differences between corresponding fields:
+
+    - ``<CandidateIds>``, which is an optional set of references to VIP `<Candidate> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate.html>`_ elements, is replaced by ``candidates``, which is a repeating field that requires at least one reference to an OCD ``Candidacy``.
+    - ``<EndorsementPartyIds>``, which is an optional set of references to VIP `<Party> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party.html>`_ elements, is replaced by ``endorsement_party_ids``, which is an optional repeating field that list references to each OCD ``Party`` endorsing the candidate(s).
+
+
 PartySelection
 --------------
 
-A subclass of ``BallotSelectionBase`` representing an option on the ballot that a voter could select in a party contest.
+A subclass of ``BallotSelection`` representing an option on the ballot that a voter could select in a party contest.
 
 id
     Open Civic Data-style id in the format ``ocd-partyselection/{{uuid}}``.
@@ -651,245 +917,14 @@ party_ids
     **repeated**
     Lists each identifier of an OCD ``Party`` associated with the ballot selection. Requires at least one ``party_id``.
 
+Differences from VIP
+++++++++++++++++++++
 
-Differences with VIP
-====================
-
-Each of the data types described in this proposal corresponds to an element described in the VIP's current `XML format specification <http://vip-specification.readthedocs.io/en/vip5/xml/index.html#elements>`_. While interoperability with VIP data is a goal of this proposal, there is not a one-to-one mapping between the tags within a VIP element and the properties of its corresponding data type in this OCDEP.
-
-First, a few general differences.
-
-Our use cases require a model of public offices that persist from one election to the next. Thus, in place of VIP's `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ element, this proposal describes reuse of OCD ``Post`` and ``Organization`` data types.
-
-Similarly, this proposal swaps in OCD's ``Division`` type in place of the `<ElectoralDistrict> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/electoral_district.html>`_ and ``<GpUnit>`` (i.e., "Geo-political Unit") elements defined in the VIP and NIST specifications.
-
-VIP describes `<InternationalizedText> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html>`_ and `<LanguageString> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html#languagestring>`_ elements for the purposes of representing certain texts in multiple languages, e.g., the English and Spanish translations of the ``pro_statement`` and ``con_statement`` of a ``BallotMeasureContest``. In this proposal, these data types are described as simple strings.
-
-VIP describes an `<ExternalIdentifier> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/external_identifiers.html>`_ element, which allows connecting VIP data to external data sets. In place of this element, this proposal includes repeating ``indentifiers`` properties on data types that users may want to link to external data sets.
-
-The detailed differences between VIP elements and their corresponding data type in this OCDEP are described below.
-
-Election
---------
-
-Corresponds to VIP's `<Election> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/election.html>`_ element.
+``PartySelection`` corresponds to VIP's `<PartySelection> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party_selection.html>`_ element.
 
 * Important differences between corresponding fields:
 
-    - ``<Name>`` is not required on VIP, but ``name`` is required on OCD's ``Event``.
-    - ``<Date>`` is a typed as ``xs:date`` in VIP, but ``start_time`` is a datetime on OCD's ``Event``.
-
-* OCD fields not implemented in VIP:
-
-    - required:
-
-        + ``classification`` inherited from ``Event`` and should always be "election".
-        + ``timezone`` inherited from ``Event`` and should always be local to the state where the election occurs.
-
-    - optional:
-
-        + ``administrative_org_id``
-        + ``description`` inherited from ``Event``
-        + ``location`` inherited from ``Event``
-        + ``all_day`` inherited from ``Event``
-        + ``end_time`` inherited from ``Event``
-        + ``status`` inherited from ``Event``
-        + ``links`` inherited from ``Event``
-        + ``participants`` inherited from ``Event``
-        + ``documents`` inherited from ``Event``
-        + ``media`` inherited from ``Event``
-
-* VIP fields not implemented in this OCDEP:
-
-    - ``<ElectionType>``, which is an optional string that conflates the level of government to which a candidate might be elected (e.g., "federal", "state", "county", etc.) with the point when the election occurs in the overall cycle (e.g., "general", "primary", "runoff" and "special"). If necessary, this could be stored in ``extras``.
-    - ``<HoursOpenId>``, which is an optional reference to a VIP `<HoursOpen> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/hours_open.html>`_ element that represents when polling locations for the election are generally open. If necessary, this unique id and its associated VIP information could be stored in ``extras``.
-    - ``<RegistrationInfo>``, which is an optional string. If the value is a URL, this could be stored in ``links`` or otherwise in ``extras``, if necessary.
-    - ``<RegistrationDeadline>`, which is an optional date that could be stored in ``extras``, if necessary.
-    - ``<HasElectionDayRegistration>``, which is an optional boolean that, if necessary, could be stored in ``extras``, if necessary.
-    - ``<AbsenteeBallotInfo>``, which is an optional string. If the value is a URL, this could be stored in ``links`` or otherwise in ``extras``, if necessary.
-    - ``<AbsenteeRequestDeadline>``, which is an optional date that, if necessary, could be stored in ``extras``, if necessary.
-    - ``<ResultsUri>``, which is optional and could be stored in ``links`` or otherwise in ``extras``, if necessary.
-
-
-ContestBase
------------
-
-Corresponds to VIP's `<ContestBase> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/contest_base.html>`_ element.
-
-* Important differences between corresponding fields:
-
-    - ``<ElectoralDistrictId>``, which is an optional reference to a VIP `<ElectoralDistrict> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/electoral_district.html>`_ element, is replaced by ``division_id``, which is a required reference to an OCD ``Division``. If necessary, VIP's ``<CandidateId>`` could be stored in ``extras``.
-
-* OCD fields not implemented in VIP:
-
-    - ``election_id`` is a required reference to an OCD ``Election``.
-
-* VIP fields not implemented in this OCDEP:
-
-    - ``Abbreviation``, which is an optional string that could be stored in ``extras``, if necessary.
-    - ``<BallotSelectionIds>``, which is an optional single element that contains a set of references to ballot selections for the contest. Instead, ``BallotSelectionBase`` includes a single, required ``contest_id``.
-    - ``<ElectorateSpecification>``, which an optional string that could be stored in ``extras``, if necessary.
-    - ``<HasRotation>``, which is an optional boolean that could be stored in ``extras``, if necessary.
-    - ``<BallotSubTitle>``,  which is an optional string that could be stored in ``extras``, if necessary.
-    - ``<BallotTitle>``,  which is an optional string that could be stored in ``extras``, if necessary.
-    - ``<SequenceOrder>``,  which is an optional integer that could be stored in ``extras``, if necessary.
-    - ``<VoteVariation>``,  which is an optional reference to a VIP `<VoteVariation> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/enumerations/vote_variation.html>`_ that could be stored in ``extras``, if necessary.
-    - ``<OtherVoteVariation>``, which is an optional string that could be stored in ``extras``, if necessary.
-
-
-BallotMeasureContest
---------------------
-
-Corresponds to VIP's `<BallotMeasureContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_measure_contest.html>`_ element.
-
-* No important differences between corresponding fields.
-* No other OCD fields not implemented in VIP.
-* VIP fields not implemented in this OCDEP:
-    
-    - ``<InfoUri>``, which is optional and could be stored in in ``extras``, if necessary.
-
-
-CandidateContest
-----------------
-
-Corresponds to VIP's `<CandidateContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate_contest.html>`_ element.
-
-* Important differences between corresponding fields:
-
-    - ``<OfficeIds>``, which is an optional set of references to VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ elements, is replaced by ``post_ids``, which is a repeating field that requires at least one reference to an OCD ``Post``. If necessary, VIP's ``<OfficeIds>`` could be stored in ``extras``.
-
-* OCD fields not implemented in VIP:
-
-    - required:
-
-        + ``is_unexpired_term`` could be determined by the ``<Name>`` or ``<ElectionType>`` (i.e., if either include the substring "special") or inferred from the date of the election.
-
-    - optional:
-
-        + ``filing_deadline`` is stored in the `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ element in VIP.
-        + ``runoff_for_contest_id`` is the id of the ``CandidateContest`` with the same ``post_ids`` and ``party_id`` values occurring on the previous election date.
-
-* VIP fields not implemented in this OCDEP:
-
-    - ``<VotesAllowed>``, which is an optional integer that could be stored in ``extras``, if necessary.
-
-
-PartyContest
-------------
-
-Corresponds to VIP's `<PartyContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party_contest.html>`_ element.
-
-* No important differences between corresponding fields.
-* No other OCD fields not implemented in VIP.
-* No other VIP fields not implemented in this OCDEP.
-
-
-RetentionContest
-----------------
-
-Corresponds to VIP's `<RetentionContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/retention_contest.html>`_ element.
-
-* Important differences between corresponding fields:
-
-    - ``<CandidateId>``, which is a required reference to a VIP `<Candidate> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate.html>`_ element, and ``<OfficeId>``, which is an optional reference to a VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ element, are replaced by ``membership_id``, which is a required reference to an OCD ``Membership`` representing a particular person's tenure in a particular public office. If necessary, VIP's ``<CandidateId>`` could be stored in ``extras``.
-
-* No other OCD fields not implemented in VIP.
-* VIP fields not implemented in this OCDEP:
-
-    - ``<OfficeId>``, which is an optional reference to a VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_. VIP's ``<Office>`` element corresponds to OCD's ``Post`` data type. In this proposal, a candidate's ``post_id`` is stored on ``Candidacy``, including . If necessary, VIP's ``<OfficeId>`` could be stored in ``extras``.
-
-Candidacy
----------
-
-Corresponds to VIP's `<Candidate> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate.html>`_ element.
-
-* Important differences between corresponding fields:
-
-    - ``party_id`` is an optional reference an OCD ``Party``, not a VIP `<Party> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party.html>`_ element. If necessary, VIP's ``<PartyId>`` could be stored in ``extras``.
-    - ``person_id`` is a required reference an OCD ``Person``, not a VIP `<Person> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/person.html>`_ element. If necessary, VIP's ``<PersonId>`` could be stored in ``extras``.
-
-* OCD fields not implemented in VIP:
-
-    - required:
-      
-        + ``post_id`` is required to link the candidate to the public office for which they are competing. In VIP, this is represented as an `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ element, which is stored on the ``<CandidateContest>`` element.
-
-    - optional:
-      
-        + ``committee_id``
-
-* VIP fields not implemented in this OCDEP:
-
-    - ``<ContactInformation>`` refers to an element that describes the contact of physical address information for the candidate or their campaign. On and OCD ``Candidacy``, this information would be found on the associated ``Person`` or ``Committee`` object.
-    - ``<PostElectionStatus>``, which is an optional reference to a VIP `<CandidatePostElectionStatus> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/enumerations/candidate_post_election_status.html>`_ that could be stored in ``extras``, if necessary.
-    - ``<PreElectionStatus>``, which is an optional reference to a VIP `<CandidatePreElectionStatus> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/enumerations/candidate_pre_election_status.html>`_ that could be stored in ``extras``, if necessary.
-
-
-Party
------
-
-Corresponds to VIP's `<Party> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party.html>`_ element.
-
-* Important differences between corresponding fields:
-
-    - ``name`` is required.
-
-* No other OCD fields not implemented in VIP.
-* VIP fields not implemented in this OCDEP:
-  
-    - ``logo_uri``, which is optional and could be stored in in ``extras``, if necessary.
-
-
-BallotSelectionBase
--------------------
-
-Corresponds to VIP's `<BallotSelectionBase> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_selection_base.html>`_ element.
-
-* No important differences between corresponding fields.
-* OCD fields not implemented in VIP:
-
-    - ``contest_id`` is required in order to link the selection to its associated contest. In VIP, this link is stored in `<OrderedContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ordered_contest.html>`_, which allows for modeling ballot layouts that vary between electoral districts, but is outside the scope of this proposal.
-
-* Other VIP fields not implemented in this OCDEP:
-
-    - ``<SequenceOrder>``, which is an optional integer that could be stored in in ``extras``, if necessary.
-
-
-BallotMeasureSelection
-----------------------
-
-Corresponds to VIP's `<BallotMeasureSelection> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_measure_selection.html>`_ element.
-
-* No important differences between corresponding fields.
-* No other OCD fields not implemented in VIP.
-* No other VIP fields not implemented in this OCDEP.
-
-
-CandidateSelection
-------------------
-
-Corresponds to VIP's `<CandidateSelection> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate_selection.html>`_ element.
-
-* Important differences between corresponding fields:
-
-    - ``<CandidateIds>``, which is an optional set of references to VIP `<Candidate> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate.html>`_ elements, is replaced by ``candidates``, which is a repeating field that requires at least one reference to an OCD ``Candidacy``. If necessary, VIP's ``<CandidateIds>`` could be stored in ``extras``.
-    - ``<EndorsementPartyIds>``, which is an optional set of references to VIP `<Party> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party.html>`_ elements, is replaced by ``endorsement_party_ids``, which is an optional repeating field that list references to each OCD ``Party`` endorsing the candidate(s). If necessary, VIP's ``<EndorsementPartyIds>`` could be stored in ``extras``.
-
-* No other OCD fields not implemented in VIP.
-* No other VIP fields not implemented in this OCDEP.
-
-
-PartySelection
---------------
-
-Corresponds to VIP's `<PartySelection> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party_selection.html>`_ element.
-
-* Important differences between corresponding fields:
-
-    - ``<PartyIds>``, which is an optional, set of references to VIP `<Party> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party.html>`_ elements, is replaced by ``endorsement_party_ids``, which is an optional repeating field that list references to each OCD ``Party`` associated with the selection. If necessary, VIP's ``<PartyIds>`` could be stored in ``extras``.
-
-* No other OCD fields not implemented in VIP.
-* No other VIP fields not implemented in this OCDEP.
+    - ``<PartyIds>``, which is an optional, set of references to VIP `<Party> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party.html>`_ elements, is replaced by ``endorsement_party_ids``, which is an optional repeating field that list references to each OCD ``Party`` associated with the selection.
 
 
 Copyright

@@ -47,14 +47,17 @@ Ballot Measure
 Candidacy
     The condition of a person being a candidate. A single person may have multiple candidacies if:
 
-    * The person competed to hold the same public office in more than one election, including a primary election followed by a general election.
     * The person competed to hold multiple public offices, even in the same election.
+    * The person competed to hold the same public office in more than one election. This includes:
+
+        - A person who is elected to a public office, serves a full term and runs for re-election as an incumbent candidate.
+        - A person who wins a contest to become a nominee for a public office (known as a "primary election" in U.S. politics) who goes on to face who advances the final contest of candidates (e.g., the "general election" in U.S. politics).
 
 Candidate
     A person competing to be elected to hold particular public office.
 
 Contest
-    A specific decision with a set of mostly pre-defined options (aka, selections) put before voters via a ballot in an election. These contests include the selection of a person from a list of candidates to hold a public office or the approval or rejection of a ballot measure.
+    A specific decision with a set of predetermined options (aka, "selections") put before voters via a ballot in an election. These contests include the selection of a person from a list of candidates to hold a public office or the approval or rejection of a ballot measure.
 
 Election
     A collection of political contests decided in parallel through a process of compiling official ballots cast by voters and adding up the total votes for each selection in each contest.
@@ -75,7 +78,7 @@ Runoff Contest
     A contest conducted to decide a previous contest in which no single selection received the number of votes required to decide the election.
 
 Selection
-    An option available to a voter in an election contest.
+    A predetermined option that voters could select on a ballot in an election contest.
 
 Term of Office
     The period of time a person elected to a public office is expected to hold the public office before being re-elected or replaced.
@@ -83,10 +86,10 @@ Term of Office
     For a variety of reasons, a public office holder may vacate an elected office before serving a full term. This is known as an "unexpired term", a situation which could require an additional contest (known as a "Special Election" in U.S. politics) to fill the empty public office.
 
 Ticket
-    A collection of allied candidates competing together in the same contest in which multiple public offices are decided. For example, in U.S. politics, candidates for President and Vice President run together on the same ticket, with the President at the top of the ticket.
+    Two or more allied candidates competing together in the same contest in which multiple public offices are decided. For example, in U.S. politics, candidates for President and Vice President run together on the same ticket, with the President at the top of the ticket.
 
 Vote
-    A specific selection selected by a voter by a voter in an election contest.
+    A specific selection selected by a voter on a ballot in an election contest.
 
 Voter
     A person who is eligible to vote in an election.
@@ -118,15 +121,13 @@ Differences from VIP
 
 Each of the data types described in this proposal corresponds to an element described in the VIP's current `XML format specification <http://vip-specification.readthedocs.io/en/vip5/xml/index.html#elements>`_. While interoperability with VIP data is a goal of this proposal, there is not a one-to-one mapping between the tags within a VIP element and the properties of its corresponding data type in this OCDEP.
 
-Important differences between the proposed OCD data type and its corresponding VIP element are noted, if any, in Implementation_.
+Important differences between the proposed OCD data type and its corresponding VIP element are noted, if any, in each data type's "Mapping to VIP" subsection in Implementation_.
 
 One general note: VIP describes `<InternationalizedText> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html>`_ and `<LanguageString> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html#languagestring>`_ elements for the purposes of representing certain texts in multiple languages, e.g., the English and Spanish translations of the ``pro_statement`` and ``con_statement`` of a ``BallotMeasureContest``. In this proposal, these data types are described as simple strings.
 
 Questions
 =========
 
-* Does ``Election`` need a property to label the election as "general", "primary", "special" or "runoff"? This will likely be somewhere in the name (e.g., "2016 General") anyway, and these labels don't feel mutually exclusive (e.g., aren't there special primary elections?) VIP's `<Election> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/election.html>`_ element has an ``ElectionType`` field, but this is just a string that you can apparently populate with whatever.
-* Does ``Election`` need a property (maybe ``division_id``) to describe how broad is the broadest geography/jurisdiction of contests? This might be more accurate/flexible than ``Election.is_statewide``. This point might be more relevant to discuss later in the supplement proposal regarding election results.
 * Should ``Party`` be implemented as an ``Organization`` (or subclass)? If so, how do we handle national parties versus state parties (e.g., the DNC versus Missouri Democratic Party)? Would probably be more accurate to associate state and local candidates with state parties and federal candidates with the national parties. But most users will to want all Democrats to be grouped together regardless of the level of government, especially when analyzing election results.
 * Should the proposed subclasses of OCD data types (e.g., ``Election``, ``BallotMeasureContest``,  ``CandidateContest``) each implement its own ID or should it just inherit the id field of the base class?
 * Should competing to hold a public office in both the primary and the general election count as one candidacy or two?
@@ -136,12 +137,12 @@ Implementation
 ==============
 
 Election
---------
+---------
 
 A collection of political contests set to be decided on the same date.
 
 id
-    Open Civic Data-style id in the format ``ocd-contest/{{uuid}}``.
+    Open Civic Data-style id in the format ``ocd-election/{{uuid}}``.
 
 identifiers
     **optional**
@@ -149,15 +150,15 @@ identifiers
     Upstream identifiers of the election if any exist, such as those assigned by a Secretary of State, county or city elections office.
 
 name
-    Common name for the election, which will typically describe approximately when the election occurred and the scope of the contests to be decided, e.g., "2014 Primaries", "2015 Boone County Elections" or "2016 General Elections".
+    Common name for the election, which will typically describe approximately when the election occurred and the scope of the contests to be decided, e.g., "2014 Primaries", "2015 Boone County Elections" or "2016 General Elections" (string).
 
 date
-    Date on which the election is set to be decided (aka, Election Day). Typically this corresponds to the last day when voters can cast a ballot and the first day when the election's results a publicly reported.
+    Date on which the election is set to be decided (aka, Election Day). Typically this corresponds to the last day when voters can cast a ballot and the first day when the election's results a publicly reported (date).
 
     This date should be considered to be in the timezone local to the election's division.
 
 division_id
-    Reference to the OCD ``Division`` that defines the broadest geographical scope of any contest decided by the election. For example, an election that includes a contest to elect the governor of California would include the division identifier for the entire state of California.
+    Reference to the OCD ``Division`` that defines the broadest geographical scope of any contest to be decided by the election. For example, an election that includes a contest to elect the governor of California would include the division identifier for the entire state of California.
 
 administrative_organization_id
     **optional**
@@ -218,15 +219,15 @@ Sample Election
     }
 
 
-Differences from VIP
-++++++++++++++++++++
+Mapping to VIP
+++++++++++++++
 
 ``Election`` corresponds to VIP's `<Election> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/election.html>`_ element.
 
 * Important differences between corresponding fields:
 
     - ``<Name>`` is not required on VIP, but ``name`` is required on OCD's ``Event``.
-    - ``<StateId>``, which is a required reference to a VIP `<State> http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/state.html`_ element, roughly corresponds to ``division_id`` which should reference the same state (if ``<IsStatewide>`` is true on the VIP election) or any of its subdivisions.
+    - ``<StateId>``, which is a required reference to a VIP `<State> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/state.html>`_ element, roughly corresponds to ``division_id`` which should reference the same state (if ``<IsStatewide>`` is true on the VIP election) or any of its subdivisions.
 
 * OCD fields not implemented in VIP:
 
@@ -248,7 +249,7 @@ Differences from VIP
 Contest
 -------
 
-A base class with the properties shared by all contest types: ``BallotMeasureContest``, ``CandidateContest``, ``PartyContest`` and ``RetentionContest``.
+A base class representing a specific decision set before voters in an election. Includes properties shared by all contest types: ``BallotMeasureContest``, ``CandidateContest``, ``PartyContest`` and ``RetentionContest``.
 
 id
     Open Civic Data-style id in the format ``ocd-contest/{{uuid}}``.
@@ -312,8 +313,8 @@ Sample Contest
     }
 
 
-Differences from VIP
-++++++++++++++++++++
+Mapping to VIP
+++++++++++++++
 
 ``Contest`` corresponds to VIP's `<ContestBase> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/contest_base.html>`_ element.
 
@@ -341,44 +342,35 @@ Differences from VIP
 BallotMeasureContest
 --------------------
 
-A subclass of ``Contest`` for representing a ballot measure before the voters, including summary statements on each side.
+A subclass of ``Contest`` for representing a ballot measure before the voters, including summary statements on each side. Inherits all of the required and optional properties of ``Contest``.
 
 con_statement
     **optional**
-    Specifies a statement in opposition to the ballot measure. It does not necessarily appear on the ballot (string).
+    A statement in opposition to the ballot measure. It does not necessarily appear on the ballot (string).
 
 effect_of_abstain
     **optional**
     Specifies the effect abstaining from voting on the ballot measure, i.e., whether abstaining is considered a vote against it (string).
 
-full_text
+requirement
     **optional**
-    Specifies the full text of the ballot measure as it appears on the ballot (string).
-
-passage_threshold
-    **optional**
-    Specifies the threshold of votes the ballot measure needs in order to pass (string). The default is a simple majority, i.e., "50% plus one vote". Other common thresholds are "three-fifths" and "two-thirds".
+    The threshold of votes the ballot measure needs in order to pass (string). The default is a simple majority, i.e., "50% plus one vote". Other common thresholds are "three-fifths" and "two-thirds".
 
 pro_statement
     **optional**
-    Specifies a statement in favor of the ballot measure. It does not necessarily appear on the ballot (string).
+    A statement in favor of the ballot measure. It does not necessarily appear on the ballot (string).
 
-summary_text
+summary
     **optional**
-    Specifies a short summary of the ballot measure that is on the ballot, below the title, but above the text.
+    Short summary of the ballot measure that is on the ballot, below the title, but above the text.
+
+text
+    **optional**
+    The full text of the ballot measure as it appears on the ballot (string).
 
 classification
     **optional**
-    Enumerated among:
-
-    * ballot-measure: A catch-all for generic types of non-candidate-based contests.
-    * initiative: These are usually citizen-driven measures to be placed on the ballot. These could include both statutory changes and constitutional amendments.
-    * referendum: These could include measures to repeal existing acts of legislation, legislative referrals, and legislatively-referred state constitutional amendments.
-    * other: Anything that does not fall into the above categories.
-
-other_type
-    **optional**
-    Allows for cataloging a new type of ballot measure option, when type is specified as "other" (string).
+    Describes the origin and/or potential outcome of the ballot measure, e.g., "initiative statute", "legislative constitutional amendment" (string).
 
 
 Sample BallotMeasureContest
@@ -409,17 +401,16 @@ Sample BallotMeasureContest
         "extras": {},
         "con_statement": "",
         "effect_of_abstain": "",
-        "full_text": "",
+        "text": "",
         "passage_threshold": "50% plus one vote",
         "pro_statement": "",
-        "summary_text": "Requires adult film performers to use condoms during filming of sexual intercourse. Requires producers to pay for performer vaccinations, testing, and medical examinations. Requires producers to post condom requirement at film sites. Fiscal Impact: Likely reduction of state and local tax revenues of several million dollars annually. Increased state spending that could exceed $1 million annually on regulation, partially offset by new fees",
-        "ballot_measure_type": "initiative",
-        "other_type": ""
+        "summary": "Requires adult film performers to use condoms during filming of sexual intercourse. Requires producers to pay for performer vaccinations, testing, and medical examinations. Requires producers to post condom requirement at film sites. Fiscal Impact: Likely reduction of state and local tax revenues of several million dollars annually. Increased state spending that could exceed $1 million annually on regulation, partially offset by new fees",
+        "ballot_measure_type": "initiative statute"
     }
 
 
-Differences from VIP
-++++++++++++++++++++
+Mapping to VIP
+++++++++++++++
 
 ``BallotMeasureContest`` corresponds to VIP's `<BallotMeasureContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_measure_contest.html>`_ element.
 
@@ -429,7 +420,7 @@ Differences from VIP
 CandidateContest
 ----------------
 
-A subclass of ``Contest`` for repesenting a contest among candidates competing for election to a public office.
+A subclass of ``Contest`` for repesenting a contest among candidates competing for election to a public office. Inherits all of the required and optional properties of ``Contest``.
 
 filing_deadline
     **optional**
@@ -484,8 +475,8 @@ Sample CandidateContest
     }
 
 
-Differences from VIP
-++++++++++++++++++++
+Mapping to VIP
+++++++++++++++
 
 ``CandidateContest`` corresponds to VIP's `<CandidateContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate_contest.html>`_ element.
 
@@ -497,7 +488,7 @@ Differences from VIP
 
     - required:
 
-        + ``is_unexpired_term`` could be determined by the ``<Name>`` or ``<ElectionType>`` (i.e., if either include the substring "special") or inferred from the date of the election.
+        + ``is_unexpired_term`` could be inferred from ``<Name>`` or ``<ElectionType>`` tags (e.g., for U.S. elections, these tags would likely include "special") or from the date of the election.
 
     - optional:
 
@@ -512,18 +503,18 @@ Differences from VIP
 PartyContest
 ------------
 
-A subclass of ``Contest`` which represents a contest in which the possible ballot selections are all political parties. These could include contests in which straight-party selections are allowed, or party-list contests (although these are more common outside of the United States).
+A subclass of ``Contest`` which represents a contest in which the possible ballot selections are all political parties. These could include contests in which straight-party selections are allowed, or party-list contests (although these are more common outside of the United States). Inherits all of the required and optional properties of ``Contest``.
 
-Differences from VIP
-++++++++++++++++++++
+Mapping to VIP
+++++++++++++++
 
-``PartyContest`` corresponds to VIP's `<PartyContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party_contest.html>`_ element. The two have no signicant differences.
+``PartyContest`` corresponds to VIP's `<PartyContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party_contest.html>`_ element. The two have no significant differences.
 
 
 RetentionContest
 ----------------
 
-A subclass of ``BallotMeasureContest`` that represents a contest where a person is retains or loses a public office, e.g. a judicial retention or recall election.
+A subclass of ``BallotMeasureContest`` that represents a contest where a person is retains or loses a public office, e.g. a judicial retention or recall election. Inherits all of the required and optional properties of ``BallotMeasureContest``.
 
 membership_id
     Reference to the OCD ``Membership`` that represents the tenure of a particular person (i.e., OCD ``Person`` object) in a particular public office (i.e., ``Post`` object).
@@ -567,8 +558,8 @@ Sample RetentionContest
     }
 
 
-Differences from VIP
-++++++++++++++++++++
+Mapping to VIP
+++++++++++++++
 
 ``RetentionContest`` corresponds to VIP's `<RetentionContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/retention_contest.html>`_ element.
 
@@ -608,7 +599,7 @@ filed_date
 
 is_incumbent
     **optional**
-    Indicates whether the candidate is the incumbent for the office associated with the contest.
+    Indicates whether the candidate is the incumbent for the office associated with the contest (boolean).
 
 is_top_ticket
     **optional**
@@ -663,8 +654,8 @@ Sample Candidacy
     }
 
 
-Differences from VIP
-++++++++++++++++++++
+Mapping to VIP
+++++++++++++++
 
 ``Candidacy`` corresponds to VIP's `<Candidate> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate.html>`_ element.
 
@@ -753,8 +744,8 @@ Sample Party
     }
 
 
-Differences from VIP
-+++++++++++++++++++
+Mapping to VIP
+++++++++++++++
 
 ``Party`` corresponds to VIP's `<Party> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party.html>`_ element.
 
@@ -770,7 +761,7 @@ Differences from VIP
 BallotSelection
 ---------------
 
-A base class with the properties shared by all ballot selection types: ``BallotMeasureSelection``, ``CandidateSelection`` and ``PartySelection``.
+A base class representing a predetermined option on a ballot that voters could select in an election contest. Includes the properties shared by all ballot selection types: ``BallotMeasureSelection``, ``CandidateSelection`` and ``PartySelection``.
 
 id
     Open Civic Data-style id in the format ``ocd-ballotselection/{{uuid}}``.
@@ -799,8 +790,8 @@ Sample BallotSelection
     }
 
 
-Differences from VIP
-++++++++++++++++++++
+Mapping to VIP
+++++++++++++++
 
 ``BallotMeasureSelection`` corresponds to VIP's `<BallotSelectionBase> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_selection_base.html>`_ element.
 
@@ -816,10 +807,7 @@ Differences from VIP
 BallotMeasureSelection
 ----------------------
 
-A subclass of ``BallotSelection`` representing a ballot option that a voter could select in a ballot measure contest.
-
-id
-    Open Civic Data-style id in the format ``ocd-ballotmeasureselection/{{uuid}}``.
+A subclass of ``BallotSelection`` representing an option that voters could select on a ballot in a ballot measure contest, e.g., "yes" or "no". Inherits all of the required and optional properties of ``BallotSelection``.
 
 selection
     Selection text for the option on the ballot, e.g., "Yes", "No", "Recall", "Don't recall" (string).
@@ -844,8 +832,8 @@ Sample BallotMeasureSelection
     }
 
 
-Differences from VIP
-++++++++++++++++++++
+Mapping to VIP
+++++++++++++++
 
 ``BallotMeasureSelection`` corresponds to VIP's `<BallotMeasureSelection> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_measure_selection.html>`_ element. There are no significant differences between the two.
 
@@ -853,7 +841,7 @@ Differences from VIP
 CandidateSelection
 ------------------
 
-A subclass of ``BallotSelection`` representing an option on the ballot that a voter could select in a candidate contest, e.g., a particular candidate or "ticket".
+A subclass of ``BallotSelection`` representing an option that voters could select on a ballot in a candidate contest, e.g., a particular candidate or "ticket". Inherits all of the required and optional properties of ``BallotSelection``.
 
 id
     Open Civic Data-style id in the format ``ocd-candidateselection/{{uuid}}``.
@@ -894,8 +882,8 @@ Sample CandidateSelection
     }
 
 
-Differences from VIP
-++++++++++++++++++++
+Mapping to VIP
+++++++++++++++
 
 ``CandidateSelection`` corresponds to VIP's `<CandidateSelection> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate_selection.html>`_ element.
 
@@ -908,7 +896,7 @@ Differences from VIP
 PartySelection
 --------------
 
-A subclass of ``BallotSelection`` representing an option on the ballot that a voter could select in a party contest.
+A subclass of ``BallotSelection`` representing an option that voters could select on a ballot in a party contest. Inherits all of the required and optional properties of ``BallotSelection``.
 
 id
     Open Civic Data-style id in the format ``ocd-partyselection/{{uuid}}``.
@@ -917,8 +905,8 @@ party_ids
     **repeated**
     Lists each identifier of an OCD ``Party`` associated with the ballot selection. Requires at least one ``party_id``.
 
-Differences from VIP
-++++++++++++++++++++
+Mapping to VIP
+++++++++++++++
 
 ``PartySelection`` corresponds to VIP's `<PartySelection> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party_selection.html>`_ element.
 

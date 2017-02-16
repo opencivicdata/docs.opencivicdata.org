@@ -128,7 +128,7 @@ One general note: VIP describes `<InternationalizedText> <http://vip-specificati
 Questions
 =========
 
-* Should either ``Election`` subclass ``Event``?
+* Should ``Election`` subclass ``Event``?
 * Should ``Contest`` subclass ``VoteEvent``?
 * Should ``Party`` be implemented as an ``Organization`` (or subclass)?
 * Should the proposed subclasses of OCD data types (e.g., ``Election``, ``BallotMeasureContest``,  ``CandidateContest``) each implement its own ID or should it just inherit the id field of the base class?
@@ -157,7 +157,7 @@ name
 date
     Date on which the election is set to be decided (aka, Election Day). This tends to be the last day when voters can cast their ballots and the first day when the election's results a publicly reported (date).
 
-    This date should be considered to be in the timezone local to the election's division.
+    This date is considered to be in the timezone local to the election's division.
 
 division_id
     Reference to the OCD ``Division`` that defines the broadest geographical scope of any contest to be decided by the election. For example, an election that includes a contest to elect the governor of California would include the division identifier for the entire state of California.
@@ -436,7 +436,7 @@ A subclass of ``Contest`` for repesenting a contest among candidates competing f
 
 filing_deadline
     **optional**
-    Specifies the date and time when a candidate must have filed for the contest for the office (datetime).
+    Specifies the date and time when a candidate must have filed for the contest for the office (datetime). This date is considered to be in the timezone local to the contest's division.
 
 is_unexpired_term
     Indicates that the former public office holder vacated the post before serving a full term (boolean).
@@ -620,7 +620,7 @@ committee_id
 
 filed_date
     **optional**
-    Specifies when the candidate filed for the contest (date).
+    Specifies when the candidate filed for the contest (date). This is considered to be in the timezone local to contest's division.
 
 is_incumbent
     **optional**

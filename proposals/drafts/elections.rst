@@ -51,10 +51,10 @@ Candidacy
     * The person competed to hold the same public office in more than one election. This includes:
 
         - A person who is elected to a public office, serves a full term and runs for re-election as an incumbent candidate.
-        - A person who wins a contest to become a nominee for a public office (known as a "primary election" in U.S. politics) who goes on to face who advances the final contest of candidates (e.g., the "general election" in U.S. politics).
+        - A person who wins a contest to become a nominee for a public office (known as a "primary election" in U.S. politics) who advances to the final contest of candidates (aka, the "general election").
 
 Candidate
-    A person competing to be elected to hold particular public office.
+    A person competing to be elected to hold a particular public office.
 
 Contest
     A specific decision with a set of predetermined options (aka, "selections") put before voters via a ballot in an election. These contests include the selection of a person from a list of candidates to hold a public office or the approval or rejection of a ballot measure.
@@ -75,18 +75,18 @@ Public Office
     A position within a governmental body which is filled through an election contest.
 
 Runoff Contest
-    A contest conducted to decide a previous contest in which no single selection received the number of votes required to decide the election.
+    A contest conducted to decide a previous contest in which no single selection received the required number of votes to decide the contest.
 
 Selection
     A predetermined option that voters could select on a ballot in an election contest.
 
 Term of Office
-    The period of time a person elected to a public office is expected to hold the public office before being re-elected or replaced.
+    The period of time a person elected to a public office is expected retain the position before being re-elected or replaced.
 
-    For a variety of reasons, a public office holder may vacate an elected office before serving a full term. This is known as an "unexpired term", a situation which could require an additional contest (known as a "Special Election" in U.S. politics) to fill the empty public office.
+    For a variety of reasons, an office holder may vacate an elected office before serving a full term. This is known as an "unexpired term", a situation which could require an additional contest (known as a "Special Election" in U.S. politics) to fill the empty public office.
 
 Ticket
-    Two or more allied candidates competing together in the same contest in which multiple public offices are decided. For example, in U.S. politics, candidates for President and Vice President run together on the same ticket, with the President at the top of the ticket.
+    Two or more allied candidates competing together in the same contest fill two or more public offices. For example, in U.S. politics, candidates for President and Vice President run together on the same ticket, with the President at the top of the ticket.
 
 Vote
     A specific selection selected by a voter on a ballot in an election contest.
@@ -95,7 +95,7 @@ Voter
     A person who is eligible to vote in an election.
 
 Write-in
-    A vote in a contest wherein the voter explicitly names a preferred selection, forgoing the selections listed on the ballot.
+    A vote in a contest wherein the voter explicitly names a preferred selection for an election contest, rather than choosing from among the predetermined selections listed on the ballot.
 
 
 Rationale
@@ -121,14 +121,16 @@ Differences from VIP
 
 Each of the data types described in this proposal corresponds to an element described in the VIP's current `XML format specification <http://vip-specification.readthedocs.io/en/vip5/xml/index.html#elements>`_. While interoperability with VIP data is a goal of this proposal, there is not a one-to-one mapping between the tags within a VIP element and the properties of its corresponding data type in this OCDEP.
 
-Important differences between the proposed OCD data type and its corresponding VIP element are noted, if any, in each data type's "Mapping to VIP" subsection in Implementation_.
+Important differences between the proposed OCD data type and its corresponding VIP element, if any, are noted in each data type's "Mapping to VIP" subsection in Implementation_.
 
 One general note: VIP describes `<InternationalizedText> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html>`_ and `<LanguageString> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html#languagestring>`_ elements for the purposes of representing certain texts in multiple languages, e.g., the English and Spanish translations of the ``pro_statement`` and ``con_statement`` of a ``BallotMeasureContest``. In this proposal, these data types are described as simple strings.
 
 Questions
 =========
 
-* Should ``Party`` be implemented as an ``Organization`` (or subclass)? If so, how do we handle national parties versus state parties (e.g., the DNC versus Missouri Democratic Party)? Would probably be more accurate to associate state and local candidates with state parties and federal candidates with the national parties. But most users will to want all Democrats to be grouped together regardless of the level of government, especially when analyzing election results.
+* Should either ``Election`` subclass ``Event``?
+* Should ``Contest`` subclass ``VoteEvent``?
+* Should ``Party`` be implemented as an ``Organization`` (or subclass)?
 * Should the proposed subclasses of OCD data types (e.g., ``Election``, ``BallotMeasureContest``,  ``CandidateContest``) each implement its own ID or should it just inherit the id field of the base class?
 * Should competing to hold a public office in both the primary and the general election count as one candidacy or two?
 
@@ -150,10 +152,10 @@ identifiers
     Upstream identifiers of the election if any exist, such as those assigned by a Secretary of State, county or city elections office.
 
 name
-    Common name for the election, which will typically describe approximately when the election occurred and the scope of the contests to be decided, e.g., "2014 Primaries", "2015 Boone County Elections" or "2016 General Elections" (string).
+    Common name for the election. Typically describes roughly when the election occurred and the scope of the contests to be decided, e.g., "2014 Primaries", "2015 Boone County Elections" or "2016 General Elections" (string).
 
 date
-    Date on which the election is set to be decided (aka, Election Day). Typically this corresponds to the last day when voters can cast a ballot and the first day when the election's results a publicly reported (date).
+    Date on which the election is set to be decided (aka, Election Day). This tends to be the last day when voters can cast their ballots and the first day when the election's results a publicly reported (date).
 
     This date should be considered to be in the timezone local to the election's division.
 
@@ -227,7 +229,7 @@ Mapping to VIP
 * Important differences between corresponding fields:
 
     - ``<Name>`` is not required on VIP, but ``name`` is required on OCD's ``Event``.
-    - ``<StateId>``, which is a required reference to a VIP `<State> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/state.html>`_ element, roughly corresponds to ``division_id`` which should reference the same state (if ``<IsStatewide>`` is true on the VIP election) or any of its subdivisions.
+    - ``<StateId>``, which is a required reference to a VIP `<State> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/state.html>`_ element, maps to ``division_id``. If ``<IsStatewide>`` is true on the VIP election, then ``division_id`` will reference the same state. Otherwise, it should reference one of the state's subdivisions.
 
 * OCD fields not implemented in VIP:
 
@@ -344,7 +346,20 @@ BallotMeasureContest
 
 A subclass of ``Contest`` for representing a ballot measure before the voters, including summary statements on each side. Inherits all of the required and optional properties of ``Contest``.
 
-con_statement
+
+summary
+    **optional**
+    Short summary of the ballot measure that is on the ballot, below the title, but above the text.
+
+text
+    **optional**
+    The full text of the ballot measure as it appears on the ballot (string).
+
+support_statement
+    **optional**
+    A statement in favor of the ballot measure. It does not necessarily appear on the ballot (string).
+
+oppose_statement
     **optional**
     A statement in opposition to the ballot measure. It does not necessarily appear on the ballot (string).
 
@@ -355,18 +370,6 @@ effect_of_abstain
 requirement
     **optional**
     The threshold of votes the ballot measure needs in order to pass (string). The default is a simple majority, i.e., "50% plus one vote". Other common thresholds are "three-fifths" and "two-thirds".
-
-pro_statement
-    **optional**
-    A statement in favor of the ballot measure. It does not necessarily appear on the ballot (string).
-
-summary
-    **optional**
-    Short summary of the ballot measure that is on the ballot, below the title, but above the text.
-
-text
-    **optional**
-    The full text of the ballot measure as it appears on the ballot (string).
 
 classification
     **optional**
@@ -399,11 +402,11 @@ Sample BallotMeasureContest
             }
         ],
         "extras": {},
-        "con_statement": "",
+        "support_statement": "",
+        "oppose_statement": "",
         "effect_of_abstain": "",
         "text": "",
-        "passage_threshold": "50% plus one vote",
-        "pro_statement": "",
+        "requirement": "50% plus one vote",
         "summary": "Requires adult film performers to use condoms during filming of sexual intercourse. Requires producers to pay for performer vaccinations, testing, and medical examinations. Requires producers to post condom requirement at film sites. Fiscal Impact: Likely reduction of state and local tax revenues of several million dollars annually. Increased state spending that could exceed $1 million annually on regulation, partially offset by new fees",
         "ballot_measure_type": "initiative statute"
     }
@@ -412,9 +415,7 @@ Sample BallotMeasureContest
 Mapping to VIP
 ++++++++++++++
 
-``BallotMeasureContest`` corresponds to VIP's `<BallotMeasureContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_measure_contest.html>`_ element.
-
-``<InfoUri>``, which is optional in VIP, is not implemented in this OCDEP.
+``BallotMeasureContest`` corresponds to VIP's `<BallotMeasureContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_measure_contest.html>`_ element. It includes an optional ``<InfoUri>``, which is not implemented in this OCDEP.
 
 
 CandidateContest
@@ -434,8 +435,15 @@ number_elected
     Number of candidates that are elected in the contest, i.e. 'N' of N-of-M (integer).
 
 post_ids
-    **repeating**
-    Lists each identifier of an OCD ``Post`` representing a public office for which the candidates are competing in the contest. If multiple, the primary post should be listed first, e.g., the id for the President post should be listed before the id for Vice-President.
+    **repeated**
+    Lists each identifier of an OCD ``Post`` representing a public office for which the candidates are competing in the contest. Has the following properties:
+
+        post_id
+            Reference to an OCD ``Post``.
+
+        sort_order
+            **optional**
+            Useful sorting posts in contests where two or more public offices are at stake.
 
 party_id
     **optional**
@@ -468,6 +476,12 @@ Sample CandidateContest
         ],
         "extras": {},
         "filing_deadline": 2016-06-07,
+        "posts": [
+            {
+                "id": "ocd-post/f204b117-24af-42fd-a3fc-c5772533fdf5",
+                "sort_order": 0
+            }
+        ],
         "is_unexpired_term": false,
         "number_elected": 1,
         "party_id": null,
@@ -482,7 +496,7 @@ Mapping to VIP
 
 * Important differences between corresponding fields:
 
-    - ``<OfficeIds>``, which is an optional set of references to VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ elements, is replaced by ``post_ids``, which is a repeating field that requires at least one reference to an OCD ``Post``.
+    - ``<OfficeIds>``, which is an optional set of references to VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ elements, is replaced by ``post_ids``, which is a repeated field that requires at least one reference to an OCD ``Post``. In VIP, the primary office should be listed first. In OCD, the primary post should have ``is_primary`` set to true.
 
 * OCD fields not implemented in VIP:
 
@@ -601,10 +615,6 @@ is_incumbent
     **optional**
     Indicates whether the candidate is the incumbent for the office associated with the contest (boolean).
 
-is_top_ticket
-    **optional**
-    Indicates that the candidate is the top of a ticket that includes multiple candidates (boolean). For example, the candidate running for President is consider the top of the President/Vice President ticket. In many states, this is also true of the Governor/Lieutenant Governor.
-
 party_id
     **optional**
     Reference to and OCD ``Party`` with which the candidate is affiliated.
@@ -645,7 +655,6 @@ Sample Candidacy
         "filed_date": 2016-03-10,
         "ballot_selection_id": "ocd-ballotselection/d2716878-99fa-467b-b3b6-d28862a6802f",
         "is_incumbent": false,
-        "is_top_ticket": false,
         "party_id": 'ocd-party/866e7266-0c21-4476-a7a7-dc11d2ae8cd1',
         "created_at": "2017-02-08T04:17:30.818Z",
         "updated_at": "2017-02-08T04:17:30.818Z",

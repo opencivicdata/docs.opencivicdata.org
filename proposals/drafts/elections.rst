@@ -123,7 +123,7 @@ Each of the data types described in this proposal corresponds to an element desc
 
 Important differences between the proposed OCD data type and its corresponding VIP element, if any, are noted in each data type's "Mapping to VIP" subsection in Implementation_.
 
-One general note: VIP describes `<InternationalizedText> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html>`_ and `<LanguageString> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html#languagestring>`_ elements for the purposes of representing certain texts in multiple languages, e.g., the English and Spanish translations of the ``pro_statement`` and ``con_statement`` of a ``BallotMeasureContest``. In this proposal, these data types are described as simple strings.
+One general note: VIP describes `<InternationalizedText> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html>`_ and `<LanguageString> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html#languagestring>`_ elements for the purposes of representing certain texts in multiple languages, e.g., the English and Spanish translations of the ``support_statement`` and ``oppose_statement`` of a ``BallotMeasureContest``. In this proposal, these data types are described as simple strings.
 
 Questions
 =========
@@ -408,15 +408,26 @@ Sample BallotMeasureContest
         "text": "",
         "requirement": "50% plus one vote",
         "summary": "Requires adult film performers to use condoms during filming of sexual intercourse. Requires producers to pay for performer vaccinations, testing, and medical examinations. Requires producers to post condom requirement at film sites. Fiscal Impact: Likely reduction of state and local tax revenues of several million dollars annually. Increased state spending that could exceed $1 million annually on regulation, partially offset by new fees",
-        "ballot_measure_type": "initiative statute"
+        "classification": "initiative statute"
     }
 
 
 Mapping to VIP
 ++++++++++++++
 
-``BallotMeasureContest`` corresponds to VIP's `<BallotMeasureContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_measure_contest.html>`_ element. It includes an optional ``<InfoUri>``, which is not implemented in this OCDEP.
+``BallotMeasureContest`` corresponds to VIP's `<BallotMeasureContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_measure_contest.html>`_ element.
 
+* Important differences between corresponding fields:
+
+    - ``<ConStatement>`` maps to ``oppose_statement``.
+    - ``<ProStatement>`` maps to ``support_statement``.
+    - ``<PassageThreshold>`` maps to ``requirement``.
+    - ``<Type>``, which is an optional reference to a VIP `<BallotMeasureType> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/enumerations/ballot_measure_type.html#multi-xml-ballot-measure-type>`_ maps to ``classification`` which is a simple string.
+
+* VIP fields not implemented in this OCDEP:
+
+    - ``<InfoUri>``, which is optional.
+    - ``<OtherType>``, which is optional.
 
 CandidateContest
 ----------------
@@ -443,7 +454,7 @@ post_ids
 
         sort_order
             **optional**
-            Useful sorting posts in contests where two or more public offices are at stake.
+            Useful for sorting posts in contests where two or more public offices are at stake, e.g., in a U.S. presidential contest, the President post would have a lower sort order than the Vice President post.
 
 party_id
     **optional**
@@ -560,13 +571,13 @@ Sample RetentionContest
             }
         ],
         "extras": {},
-        "con_statement": "",
+        "support_statement": "",
+        "oppose_statement": "",
         "effect_of_abstain": "",
-        "passage_threshold": "",
-        "pro_statement": "",
-        "summary_text": "SHALL GRAY DAVIS BE RECALLED (REMOVED) FROM THE OFFICE OF GOVERNOR?",
-        "full_text": "",
-        "ballot_measure_type": "initiative",
+        "requirement": "",
+        "summary": "SHALL GRAY DAVIS BE RECALLED (REMOVED) FROM THE OFFICE OF GOVERNOR?",
+        "text": "",
+        "classification": "recall",
         "other_type": "",
         "membership_id": "ocd-membership/181a0826-f458-403f-ae65-e1ce97b8dd34"
     }
@@ -688,6 +699,7 @@ Mapping to VIP
     - ``<ContactInformation>`` refers to an element that describes the contact of physical address information for the candidate or their campaign. On and OCD ``Candidacy``, this information would be found on the associated ``Person`` or ``Committee`` object.
     - ``<PostElectionStatus>``, which is an optional reference to a VIP `<CandidatePostElectionStatus> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/enumerations/candidate_post_election_status.html>`_.
     - ``<PreElectionStatus>``, which is an optional reference to a VIP `<CandidatePreElectionStatus> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/enumerations/candidate_pre_election_status.html>`_.
+    - ``<IsTopTicket>``, which is an optional boolean indicating the candidate is the top of a ticket that includes multiple candidates. OCD relies on the ``candidacies`` property of ``CandidateSelection`` to represent the ticket and the ``sort_order`` property of each ``post_id`` listed on ``CandidateContest`` to indicate which candidates are running and the top of their respective tickets.
 
 
 Party
@@ -898,7 +910,7 @@ Mapping to VIP
 
 * Important differences between corresponding fields:
 
-    - ``<CandidateIds>``, which is an optional set of references to VIP `<Candidate> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate.html>`_ elements, is replaced by ``candidates``, which is a repeating field that requires at least one reference to an OCD ``Candidacy``.
+    - ``<CandidateIds>``, which is an optional set of references to VIP `<Candidate> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/candidate.html>`_ elements, is replaced by ``candidacy_ids``, which is a repeating field that requires at least one reference to an OCD ``Candidacy``.
     - ``<EndorsementPartyIds>``, which is an optional set of references to VIP `<Party> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party.html>`_ elements, is replaced by ``endorsement_party_ids``, which is an optional repeating field that list references to each OCD ``Party`` endorsing the candidate(s).
 
 

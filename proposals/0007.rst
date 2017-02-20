@@ -11,7 +11,7 @@ OCDEP 7: Votes
 Overview
 ========
 
-Definition of the Open Civic Data Vote type.
+Definition of the Open Civic Data vote types.
 
 (Based in part on `Popolo <http://popoloproject.com/>`_ types for the Open Civic Data Vote and VoteEvent).
 
@@ -20,11 +20,11 @@ Rationale
 =========
 
 Determining how legislators have voted on specific proposals is a vital component to creating
-legislative accountability.  The ``Vote`` type and its related subtypes exist to enable the recording
-of Votes (meaning the outcome of a proposal as well as the individual positions of legislators).
+legislative accountability.  The ``VoteEvent`` type and its related subtypes exist to enable the recording
+of votes (meaning the outcome of a proposal as well as the individual positions of legislators).
 
-An attempt has been made to reconcile our ``Vote`` type (originally based in Open States work)
-with the schema put forward by the `Popolo specification <http://popoloproject.com/specs/vote-event.html>`_.
+An attempt has been made to reconcile our vote types (originally based in Open States work)
+with the schemas put forward by the `Popolo specification <http://popoloproject.com/specs/vote-event.html>`_.
 
 
 Implementation
@@ -155,7 +155,7 @@ Additional values will be added in the future as needed.
 Differences from Popolo
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-* ``VoteEvent`` has ``classification`` and ``extra`` attributes which are not defined in Popolo.
+* ``VoteEvent`` has an ``extra`` attribute which is not defined in Popolo.
 
 * ``Vote`` objects (within ``VoteEvent.votes``) have a ``voter_name`` property that is used for when a voter cannot be linked to a known ``Person``.  Additionally, ``voter`` can only link to a ``Person``.
 

@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 
+"""
+echo "SECRET_KEY = 'x'
+INSTALLED_APPS = ('django.contrib.contenttypes', 'opencivicdata.apps.BaseConfig')" > settings.py
+PYTHONPATH=$PYTHONPATH:$PWD DJANGO_SETTINGS_MODULE=settings ./jsonschema2rst.py
+"""
+
 from __future__ import print_function
 import copy
 
@@ -17,7 +23,7 @@ def process(fh, obj, depth=1):
         if section:
             fh.write('%s\n%s\n\n' % (section, HEADER_SYMBOL[depth]*len(section)))
 
-        for key in keys:
+        for key in list(keys):
             schema = obj['properties'].pop(key)
             allowed_types = []
             enum = None
@@ -31,7 +37,7 @@ def process(fh, obj, depth=1):
             nullable = None
             list_property_type = None
             list_property_enum = None
-            for sk, sv in schema.iteritems():
+            for sk, sv in schema.items():
                 if sk == 'type':
                     allowed_types = sv
                 elif sk == 'enum':
@@ -59,6 +65,8 @@ def process(fh, obj, depth=1):
                                 list_property_type = iv
                             elif ik == 'enum':
                                 list_property_enum = iv
+                elif sk == 'blank':
+                    pass
                 else:
                     raise ValueError('NEW KEY:', sk)
 
@@ -66,7 +74,10 @@ def process(fh, obj, depth=1):
                     nullable = True
 
                 if isinstance(allowed_types, list):
-                    allowed_types = ', '.join(allowed_types)
+                    if all(isinstance(allowed_type, str) for allowed_type in allowed_types):
+                        allowed_types = ', '.join(allowed_types)
+                    else:
+                        print('complex allowed types:', repr(allowed_types))
 
             spaces = '    '*depth
 
@@ -119,8 +130,10 @@ def process(fh, obj, depth=1):
         print('Unused keys:', '; '.join(obj['properties'].keys()))
 
 if __name__ == '__main__':
-    from pupa.models.schemas import vote, bill, event, jurisdiction, person, organization
-    process(open('data/_vote.rst-include', 'w'), vote.schema)
+    import django
+    django.setup()
+    from pupa.scrape.schemas import vote_event, bill, event, jurisdiction, person, organization
+    process(open('data/_vote.rst-include', 'w'), vote_event.schema)
     process(open('data/_bill.rst-include', 'w'), bill.schema)
     process(open('data/_event.rst-include', 'w'), event.schema)
     process(open('data/_jurisdiction.rst-include', 'w'), jurisdiction.schema)

@@ -260,12 +260,16 @@ Documents and Versions
 
         Each element in links is an object with the following keys: 
 
-        **mimetype** (*string, null*)
-            mimetype of document **(required)**
+        **media_type** (*string*)
+            IANA Media Type of document **(required)**
 
 
         **url** (*string*)
             URL to document **(required)**
+
+
+        **text** (*string*)
+            Text of the document
 
 
 **versions** (*array*)
@@ -296,11 +300,15 @@ Documents and Versions
 
         Each element in links is an object with the following keys: 
 
-        **mimetype** (*string, null*)
-            mimetype of document **(required)**
+        **media_type** (*string*)
+            IANA Media Type of document **(required)**
 
 
         **url** (*string*)
             URL to document **(required)**
+
+
+        **text** (*string*)
+            Text of the document
 
 

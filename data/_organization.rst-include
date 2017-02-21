@@ -38,7 +38,7 @@ Basics
 
 
     **label** (*string, null*)
-        human readable label **(required)**
+        human-readable label **(required)**
 
 
 **links** (*array*)
@@ -83,7 +83,7 @@ Posts
 
 
         **label** (*string, null*)
-            human readable label **(required)**
+            human-readable label **(required)**
 
 
     **end_date** (*string, null*)

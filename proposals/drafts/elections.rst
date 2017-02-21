@@ -656,7 +656,7 @@ Sample Candidacy
         "filed_date": 2016-03-10,
         "ballot_selection_id": "ocd-ballotselection/d2716878-99fa-467b-b3b6-d28862a6802f",
         "is_incumbent": false,
-        "party_id": 'ocd-party/866e7266-0c21-4476-a7a7-dc11d2ae8cd1',
+        "party_id": 'ocd-organization/866e7266-0c21-4476-a7a7-dc11d2ae8cd1',
         "created_at": "2017-02-08T04:17:30.818Z",
         "updated_at": "2017-02-08T04:17:30.818Z",
         "sources": [],
@@ -695,13 +695,7 @@ Mapping to VIP
 Party
 -----
 
-Political organization with which office holders and candidates may be affiliated.
-
-id
-    Open Civic Data-style id in the format ``ocd-party/{{uuid}}``.
-
-name
-    The name of the party (string).
+A subclass of ``Organization`` (as described in [OCDEP 5](http://opencivicdata.readthedocs.io/en/latest/proposals/0005.html) for representing a political party with which office holders and candidates may be affiliated.
 
 abbreviation
     **optional**
@@ -715,26 +709,6 @@ is_write_in
     **optional**
     Indicates that the party is not officially recognized by a local, state, or federal organization but, rather, is a "write-in" in jurisdictions which allow candidates to free-form enter their political affiliation (boolean).
 
-created_at
-    Time that this object was created at in the system.
-
-updated_at
-    Time that this object was last updated in the system.
-
-sources
-    **optional**
-    **repeated**
-    List of sources used in assembling this object. Has the following properties:
-
-    url
-        URL of the resource.
-    note
-        **optional**
-        Description of what this source was used for.
-
-extras
-    Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
-
 
 Sample Party
 ++++++++++++
@@ -743,8 +717,20 @@ Sample Party
 .. code:: javascript
 
     {
-        "id": "ocd-party/866e7266-0c21-4476-a7a7-dc11d2ae8cd1"
+        "id": "ocd-organization/866e7266-0c21-4476-a7a7-dc11d2ae8cd1"
         "name": "DEMOCRATIC",
+        "image": "",
+        "parent": null,
+        "jurisdiction": null,
+        "classification": "party",
+        "founding_date": "",
+        "dissolution_date": "",
+        "identifiers": [],
+        "other_names": [],
+        "contact_details": [],
+        "links": [],
+        "memberships": [],
+        "posts": [],
         "abbreviation": "D",
         "color": "1d0ee9",
         "is_write_in": false,

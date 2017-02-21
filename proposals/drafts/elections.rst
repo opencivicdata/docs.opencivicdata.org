@@ -133,21 +133,14 @@ Election
 
 A collection of political contests set to be decided on the same date.
 
-id
-    Open Civic Data-style id in the format ``ocd-election/{{uuid}}``.
+``Election`` is a subclass of OCD's ``Event`` data type, defined in `OCDEP 4: Events <http://opencivicdata.readthedocs.io/en/latest/proposals/0004.html>`_, which was accepted in June 2014. All of core and optional properties of ``Event`` are inherited by ``Election``.    
+ 
+The typical implementation will be an ``all_day`` event with an "election" ``classification`` value and a ``start_time`` set to midnight of the observed election date.
 
 identifiers
     **optional**
     **repeated**
     Upstream identifiers of the election if any exist, such as those assigned by a Secretary of State, county or city elections office.
-
-name
-    Common name for the election. Typically describes roughly when the election occurred and the scope of the contests to be decided, e.g., "2014 Primaries", "2015 Boone County Elections" or "2016 General Elections" (string).
-
-date
-    Date on which the election is set to be decided (aka, Election Day). This tends to be the last day when voters can cast their ballots and the first day when the election's results a publicly reported (date).
-
-    This date is considered to be in the timezone local to the election's division.
 
 division_id
     Reference to the OCD ``Division`` that defines the broadest geographical scope of any contest to be decided by the election. For example, an election that includes a contest to elect the governor of California would include the division identifier for the entire state of California.
@@ -155,12 +148,6 @@ division_id
 administrative_organization_id
     **optional**
     Reference to the OCD ``Organization`` that administers the election and publishes the official results.
-
-created_at
-    Time that this object was created at in the system.
-
-updated_at
-    Time that this object was last updated in the system.
 
 sources
     **optional**
@@ -173,9 +160,6 @@ sources
         **optional**
         Description of what this source was used for.
 
-extras
-    Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
-
 
 Sample Election
 +++++++++++++++
@@ -184,7 +168,7 @@ Sample Election
 .. code:: javascript
 
     {
-        "id": "ocd-election/4c25d655-c380-46a4-93d7-28bc0c389629",
+        "id": "ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
         "identifiers": [
             {
                 "scheme": "calaccess_election_id",
@@ -192,7 +176,13 @@ Sample Election
             }
         ],
         "name": "2016 GENERAL",
-        "date": "2016-11-08",
+        "description": "",
+        "start_time": "2016-11-08T00:00:00Z",
+        "division_id": 'ocd-division/country:us/state:ca/',
+        "end_time": null,
+        "timezone": "US/Pacific",     
+        "all_day": true,      
+        "classification": "election",
         "division_id": 'ocd-division/country:us/state:ca/'
         "administrative_organization_id": "ocd-organization/436b4d67-b5aa-402c-9e20-0e56a8432c80",
         "created_at": "2017-02-07T07:17:58.874Z",
@@ -224,6 +214,15 @@ Mapping to VIP
 * OCD fields not implemented in VIP:
 
     - ``administrative_organization_id`` is optional.
+    - ``description`` (inherited from ``Event``) is optional.
+    - ``location`` (inherited from ``Event``) is optional.
+    - ``all_day`` (inherited from ``Event``) is optional.
+    - ``end_time`` (inherited from ``Event``) is optional.
+    - ``status`` (inherited from ``Event``) is optional.
+    - ``links`` (inherited from ``Event``) is optional.
+    - ``participants`` (inherited from ``Event``) is optional.
+    - ``documents`` (inherited from ``Event``) is optional.
+    - ``media`` (inherited from ``Event``) is optional.
 
 * VIP fields not implemented in this OCDEP:
 
@@ -292,7 +291,7 @@ Sample Contest
         "identifiers": [],
         "name": "STATE SENATE 01",
         "division_id": "ocd-division/country:us/state:ca/sldu:1",
-        "election_id": "ocd-election/4c25d655-c380-46a4-93d7-28bc0c389629",
+        "election_id": "ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
         "created_at": "2017-02-07T07:18:05.438Z",
         "updated_at": "2017-02-07T07:18:05.442Z",
         "sources": [
@@ -382,7 +381,7 @@ Sample BallotMeasureContest
         ],
         "name": "PROPOSITION 060- ADULT FILMS. CONDOMS. HEALTH REQUIREMENTS. INITIATIVE STATUTE."
         "division_id": "ocd-division/country:us/state:ca",
-        "election_id": "ocd-election/4c25d655-c380-46a4-93d7-28bc0c389629",
+        "election_id": "ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
         "created_at": "2017-02-07T07:17:59.818Z",
         "updated_at": "2017-02-07T07:17:59.818Z",
         "sources": [
@@ -466,7 +465,7 @@ Sample CandidateContest
         "identifiers": [],
         "name": "STATE SENATE 01",
         "division_id": "ocd-division/country:us/state:ca/sldu:1",
-        "election_id": "ocd-election/4c25d655-c380-46a4-93d7-28bc0c389629",
+        "election_id": "ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
         "created_at": "2017-02-07T07:18:05.438Z",
         "updated_at": "2017-02-07T07:18:05.442Z",
         "sources": [
@@ -551,7 +550,7 @@ Sample RetentionContest
         ],
         "name": "2003 RECALL QUESTION",
         "division_id": "ocd-division/country:us/state:ca",
-        "election_id": "ocd-election/3f904160-d304-4753-a542-578cfcb86e76",
+        "election_id": "ocd-event/3f904160-d304-4753-a542-578cfcb86e76",
         "created_at": "2017-02-07T07:18:00.555Z",
         "updated_at": "2017-02-07T07:18:00.555Z",
         "sources": [
@@ -695,7 +694,9 @@ Mapping to VIP
 Party
 -----
 
-A subclass of ``Organization`` (as described in [OCDEP 5](http://opencivicdata.readthedocs.io/en/latest/proposals/0005.html) for representing a political party with which office holders and candidates may be affiliated.
+A political party with which office holders and candidates may be affiliated.
+
+``Party`` is a subclass of OCD's ``Organization`` data type, defined in `OCDEP 5: People, Organizations, Posts, and Memberships <http://opencivicdata.readthedocs.io/en/latest/proposals/0005.html>`_, which was accepted in June 2014. All of core and optional properties of ``Organization`` are inherited by ``Party``.
 
 abbreviation
     **optional**

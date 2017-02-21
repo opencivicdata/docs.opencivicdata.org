@@ -125,16 +125,6 @@ Important differences between the proposed OCD data type and its corresponding V
 
 One general note: VIP describes `<InternationalizedText> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html>`_ and `<LanguageString> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/internationalized_text.html#languagestring>`_ elements for the purposes of representing certain texts in multiple languages, e.g., the English and Spanish translations of the ``support_statement`` and ``oppose_statement`` of a ``BallotMeasureContest``. In this proposal, these data types are described as simple strings.
 
-Questions
-=========
-
-* Should ``Election`` subclass ``Event``?
-* Should ``Contest`` subclass ``VoteEvent``?
-* Should ``Party`` be implemented as an ``Organization`` (or subclass)?
-* Should the proposed subclasses of OCD data types (e.g., ``Election``, ``BallotMeasureContest``,  ``CandidateContest``) each implement its own ID or should it just inherit the id field of the base class?
-* Should competing to hold a public office in both the primary and the general election count as one candidacy or two?
-
-
 Implementation
 ==============
 

@@ -68,7 +68,7 @@ classification
     * *park*              - An independent park district.
     * *sewer*             - An independent sewer district.
     * *forest*            - An independent forest preserve district.
-    * *transit_authority* - An independent transit district or authority
+    * *transit_authority* - An independent transit district or authority.
 
 division, division_id
     A link to an Open Civic Data division (or the object itself embedded within the Jurisdiction).

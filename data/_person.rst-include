@@ -48,12 +48,28 @@ Basics
 Extended Details
 ----------------
 
+**sort_name** (*string, null*)
+    A name to use in a lexicographically ordered list **(required)**
+
+
+**family_name** (*string, null*)
+    One or more family names **(required)**
+
+
+**given_name** (*string, null*)
+    One or more primary given names **(required)**
+
+
 **gender** (*string, null*)
     A gender **(required)**
 
 
 **summary** (*string, null*)
     A one-line account of a person's life **(required)**
+
+
+**national_identity** (*string, null*)
+    A national identity **(required)**
 
 
 **biography** (*string, null*)

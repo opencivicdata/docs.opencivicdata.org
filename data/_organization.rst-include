@@ -9,16 +9,16 @@ Basics
     An organization category, e.g. committee **(required)**
 
     Allowed values:
-        * legislature
-        * executive
-        * upper
-        * lower
-        * party
-        * committee
-        * commission
-        * corporation
-        * agency
-        * department
+         * legislature
+         * executive
+         * upper
+         * lower
+         * party
+         * committee
+         * commission
+         * corporation
+         * agency
+         * department
 
 
 **parent_id** (*string, null*)

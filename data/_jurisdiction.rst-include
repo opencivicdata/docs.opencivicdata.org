@@ -13,11 +13,11 @@ Basic Details
     A jurisdiction category. **(required)**
 
     Allowed values:
-        * government
-        * legislature
-        * executive
-        * school_system
-        * transit_authority
+         * government
+         * legislature
+         * executive
+         * school_system
+         * transit_authority
 
 
 **legislative_sessions** (*object*)

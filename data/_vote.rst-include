@@ -12,7 +12,7 @@ Basic Fields
 **_type** (*string*)
     All vote objects must have a _type field set to vote. **(required)**
 
-    Allowed Values:
+    Allowed values:
          * vote
 
 
@@ -23,7 +23,7 @@ Basic Fields
 **chamber** (*string, null*)
     chamber vote took place in (if legislature is bicameral, otherwise null) **(required)**
 
-    Allowed Values:
+    Allowed values:
          * upper
          * lower
          * joint
@@ -44,13 +44,10 @@ Basic Fields
 
 
     Each element in type is of type (string)
-        Allowed Values:
-         * passage
-         * amendment
-         * reading:2
-         * reading:3
-         * veto_override
-         * other
+        Allowed values:
+         * bill-passage
+         * amendment-passage
+         * veto-override
 
 
 **passed** (*boolean*)
@@ -92,7 +89,7 @@ Relationship to Bill
     **chamber** (*string, null*)
         bill's chamber if vote was on a bill (and legislature is bicameral, otherwise null) **(required)**
 
-        Allowed Values:
+        Allowed values:
              * upper
              * lower
 
@@ -123,11 +120,14 @@ Vote Counts
     **vote_type** (*string*)
         (e.g. yes, no, not-voting) **(required)**
 
-        Allowed Values:
+        Allowed values:
              * yes
              * no
+             * absent
              * abstain
-             * not-voting
+             * not voting
+             * paired
+             * excused
              * other
 
 
@@ -152,11 +152,14 @@ Vote Counts
     **vote_type** (*string*)
         (e.g. yes, no, not-voting) **(required)**
 
-        Allowed Values:
+        Allowed values:
              * yes
              * no
+             * absent
              * abstain
-             * not-voting
+             * not voting
+             * paired
+             * excused
              * other
 
 

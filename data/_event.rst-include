@@ -4,7 +4,7 @@ Basics
 **_type** (*string*)
     All events must have a _type field set to one of the entries in the enum below. **(required)**
 
-    Allowed Values:
+    Allowed values:
          * event
 
 
@@ -39,7 +39,7 @@ Basics
 **status** (*string*)
     String that denotes the status of the meeting. This is useful for showing the meeting is cancelled in a machine-readable way. **(required)**
 
-    Allowed Values:
+    Allowed values:
          * cancelled
          * tentative
          * confirmed
@@ -142,7 +142,7 @@ Linked Entities
     **entity_type** (*string*)
         What type of entity is this? `person` may be used if the person is not a legislator, but attending the event, such as an invited speaker or one who is offering testimony.
 
-        Allowed Values:
+        Allowed values:
              * organization
              * person
 
@@ -204,7 +204,7 @@ Linked Entities
         **entity_type** (*string*)
             Type of the related object.
 
-        Allowed Values:
+        Allowed values:
              * bill
              * organization
              * person

@@ -9,55 +9,32 @@ Basic Details
     URL pointing to jurisdiction's website. **(required)**
 
 
-**chambers** (*object*)
-    Dictionary where keys are slugs for chambers (e.g. upper, lower)  and values describe the chamber in human-readable terms.  (only needs to be specified if there are multiple chambers) **(required)**
+**classification** (*string*)
+    A jurisdiction category. **(required)**
+
+    Allowed values:
+        * government
+        * legislature
+        * executive
+        * school_system
+        * transit_authority
 
 
-    Each element in chambers is an object with the following keys: 
-
-    **name** (*string*)
-        Human-readable name of chamber (e.g. Senate) **(required)**
-
-
-    **title** (*string*)
-        Title of an individual in this chamber (e.g. Senator) **(required)**
-
-
-**terms** (*array*)
-    List of all terms, in chronological order. **(required, minItems: 1)**
-
-
-    Each element in terms is an object with the following keys: 
-
-    **end_year** (*integer*)
-        Year that term ended. **(required)**
-
-        (minimum value: 1000)
-
-
-    **start_year** (*integer*)
-        Year that term started. **(required)**
-
-        (minimum value: 1000)
-
-
-    **name** (*string*)
-        Name of term, typically a year span (e.g. 2011-2012) **(required)**
-
-
-    **sessions** (*array*)
-        List of sessions within this term. Each session must also appear in session_details **(required, minItems: 1)**
-
-
-        Each element in sessions is of type (string)
-
-**session_details** (*object*)
+**legislative_sessions** (*object*)
     Dictionary describing sessions, each key is a session slug that must also appear in one ``sessions`` list in ``terms``.  Values consist of several fields giving more detail about the session. **(required)**
 
 
     Each element in session_details is an object with the following keys: 
 
-    **type** (*string*)
+    **name** (*string*)
+        Name of session, typically a year span like 2011-2012. **(required)**
+
+
+    **identifier** (*string*)
+        Identifier of session. **(required)**
+
+
+    **classification** (*string*)
         Type of session: primary or special.
 
 
@@ -77,18 +54,5 @@ Additional Metadata
 
 
     Each element in feature_flags is of type (string)
-
-**building_maps** (*array*)
-    Links to image/PDF maps of the building. **(required, minItems: 0)**
-
-
-    Each element in building_maps is an object with the following keys: 
-
-    **url** (*string*)
-        URL to map image/PDF **(required)**
-
-
-    **name** (*string*)
-        Name of map (e.g. Floor 1) **(required)**
 
 

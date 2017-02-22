@@ -16,7 +16,6 @@ Definitions
 -----------
 
 Campaign Finance Regulator (Regulator)
-
     Any government agency in charge of gathering information and enforcing
     transparency laws against political committees (Committees).
 

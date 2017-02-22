@@ -70,7 +70,7 @@ The scraper above contains the minimum elements required to create an event. But
           e = Event(name="Hearing",  # Event Name
                         start_time=when,  # When the event will take place
                         timezone=tz.zone, #the local timezone for the event
-                        location='unknown')  # Where the event will be
+                        location_name='unknown')  # Where the event will be
           e.add_source("http://example.com")
 
           #add a committee
@@ -108,7 +108,7 @@ The event is now much more fleshed out. But we're still missing the meat of an e
           e = Event(name="Hearing",  # Event Name
                         start_time=when,  # When the event will take place
                         timezone=tz.zone, #the local timezone for the event
-                        location='unknown')  # Where the event will be
+                        location_name='unknown')  # Where the event will be
           e.add_source("http://example.com")
 
           #add a committee

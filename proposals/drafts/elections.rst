@@ -791,15 +791,9 @@ Sample BallotSelection
 Mapping to VIP
 ++++++++++++++
 
-``BallotMeasureSelection`` corresponds to VIP's `<BallotSelectionBase> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_selection_base.html>`_ element.
+``BallotSelection`` corresponds to VIP's `<BallotSelectionBase> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ballot_selection_base.html>`_ element.
 
-* OCD fields not implemented in VIP:
-
-    - ``contest_id`` is required in order to link the selection to its associated contest. In VIP, this link is stored in `<OrderedContest> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/ordered_contest.html>`_, which allows for modeling ballot layouts that vary between electoral districts, but is outside the scope of this proposal.
-
-* Other VIP fields not implemented in this OCDEP:
-
-    - ``<SequenceOrder>``, which is an optional integer.
+VIP includes ``<SequenceOrder>``, which is an optional integer that is not implemented in this proposal.
 
 
 BallotMeasureSelection

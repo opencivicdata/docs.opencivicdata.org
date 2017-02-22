@@ -232,12 +232,6 @@ statuses
         "contesting election" - allows for consolidating different
         jurisdictional status schemes into standard types.
 
-designations
-    **optional**
-    **repeated**
-    The Candidate Designations that apply to this Committee - i.e., is it supporting or
-    opposing certain candidates?
-
 contest_positions
     **optional**
     **repeated**
@@ -265,22 +259,6 @@ name
 
 jurisdiction
     An OCD Jurisdiction.
-
-Candidate Designation
----------------------
-
-A Committee may have no relation to any specific Candidate, but if they do have
-such a relationship, the options are complex. Hence this type.
-
-id
-    Open Civic Data-style ID in the format
-    ``ocd-campaign-finance-candidate-designation/{{uuid}}``.
-
-candidate
-    OCD Person indicating the candidate.
-
-designation
-    Enumerated among "primary vehicle for", "surplus account for", "independent expenditure" and other relationship types.
 
 Filing Type
 -----------

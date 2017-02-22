@@ -31,6 +31,9 @@ Section
     A container for a unit of meaning inside a Filing, that isn't inherent to
     the basic process of filing a document with an agency.
 
+Contest
+    A specific decision with a set of predetermined options put before voters via a ballot in an election. These contests include the selection of a person from a list of candidates to hold a public office or the approval or rejection of a ballot measure.
+
 Rationale
 =========
 
@@ -236,6 +239,21 @@ designations
     The Candidate Designations that apply to this Committee - i.e., is it supporting or
     opposing certain candidates?
 
+contest_positions
+    **optional**
+    **repeated**
+    List of the election contests in which the committee has declared a preferred outcome. Has the following properties:
+
+    contest_id
+        Reference to the OCD ``Contest`` in which the committee has declared a position.
+
+    position
+        Enumerated among "supports" and "opposes".
+
+    candidacy_id
+        **optional**
+        If the contest is a ``CandidateContest``, reference to a specific ``Candidacy`` the committee supports or opposes.
+
 Committee Type
 --------------
 
@@ -263,8 +281,7 @@ candidate
     OCD Person indicating the candidate.
 
 designation
-    Enumerated among "supports", "opposes", "primary vehicle for", "surplus
-    account for", "independent expenditure" and other relationship types.
+    Enumerated among "primary vehicle for", "surplus account for", "independent expenditure" and other relationship types.
 
 Filing Type
 -----------

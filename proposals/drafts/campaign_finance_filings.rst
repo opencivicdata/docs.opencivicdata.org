@@ -30,8 +30,19 @@ Section
     A container for a unit of meaning inside a Filing, that isn't inherent to
     the basic process of filing a document with an agency.
 
+Ballot Measure
+    A proposition or question with two or more predetermined options that voters may select as part of an election. These include:
+
+    * The enactment or repeal of a statute, constitutional amendment or other form of law.
+    * Approval or rejection of a new tax or additional spending of public funds.
+    * The recall or retention of a previously elected public office holder.
+
+Candidacy
+    The condition of a person competing to hold a public office for defined term of office.
+
 Contest
-    A specific decision with a set of predetermined options put before voters via a ballot in an election. These contests include the selection of a person from a list of candidates to hold a public office or the approval or rejection of a ballot measure.
+    A specific decision with a set of predetermined options put before voters in an election. These contests include the selection of a person from a list of candidates to hold a public office or the approval or rejection of a ballot measure.
+
 
 Rationale
 =========
@@ -232,20 +243,28 @@ statuses
         "contesting election" - allows for consolidating different
         jurisdictional status schemes into standard types.
 
-contest_positions
+candidacy_designations
     **optional**
     **repeated**
-    List of the election contests in which the committee has declared a preferred outcome. Has the following properties:
-
-    contest_id
-        Reference to the OCD ``Contest`` in which the committee has declared a position.
-
-    position
-        Enumerated among "supports" and "opposes".
+    List of the candidacies for which the committee has declared a position (e.g., support or oppose) or has otherwise focused its activity. Has the following properties:
 
     candidacy_id
-        **optional**
-        If the contest is a ``CandidateContest``, reference to a specific ``Candidacy`` the committee supports or opposes.
+        Reference to an OCD ``Candidacy``.
+    
+    designation
+        Enumerated among "supports", "opposes", "primary vehicle for", "surplus account for", "independent expenditure" and other relationship types.
+
+ballot_measure_options_supported
+    **optional**
+    **repeated**
+    List of the ballot measure contests in which the committee has declared support for a specific option. Has the following properties:
+
+    ballot_measure_contest_id
+        Reference to an OCD ``BallotMeasureContest``.
+
+    option
+        The specific ballot measure option supported by the committee, which are enumerated in ``BallotMeasureContest.options``.
+
 
 Committee Type
 --------------

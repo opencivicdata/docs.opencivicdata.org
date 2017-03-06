@@ -202,7 +202,7 @@ Mapping to VIP
 
 * OCD fields not implemented in VIP:
 
-    - ``administrative_organization_id`` is optional.
+    - ``administrative_organization_id`` is an optional reference to an OCD ``Organization`` that can be equivalent to the ``<Department>`` tag in VIP's `<ElectionAdministration> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/election_administration.html>`_   element.
     - ``classification`` (inherited from ``Event``) should be "election".
     - ``description`` (inherited from ``Event``) is optional.
     - ``location`` (inherited from ``Event``) is optional.

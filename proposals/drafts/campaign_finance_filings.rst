@@ -320,6 +320,10 @@ identifier
     In some jurisdictions, the original jurisdictionally-assigned ID of a
     Transaction may be meaningful, so preserve it here.
 
+url
+    **optional**
+    URL pointing to documentation at the Regulator, if any exists, for this Transaction.
+
 classification
     Type of transaction - contribution, expenditure, loan, transfer, other
     receipt, etc. Enumerated field based on the jurisdiction of the Committee

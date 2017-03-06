@@ -55,7 +55,7 @@ Contest
     * Selecting a preferred political party to hold power.
 
 Election
-    A collection of political contests held within a political geography that are decided in parallel through a process of compiling official ballots cast by voters and adding up the total votes for each selection in each contest.
+    A collection of political contests held within a political geography that are decided in parallel through a process of compiling official ballots cast by voters and adding up the total votes for each option in each contest.
 
 Election Day
     The final or only date when eligible voters may cast their ballots in an election. Typically this is also the same date when results of the election's contests are first publicly reported.
@@ -83,7 +83,7 @@ Ticket
     Note that candidates on the same ticket are not necessarily affiliated with the same political party.
 
 Write-in
-    A vote in a contest wherein the voter explicitly names a preferred selection for an election contest, rather than choosing from among the predetermined selections listed on the ballot.
+    A vote in a contest wherein the voter explicitly names a preferred option for an election contest, rather than choosing from among the predetermined options listed on the ballot.
 
 
 Rationale
@@ -107,10 +107,11 @@ VIP 5, the specification's current version, incorporates elements from the `Elec
 Differences from VIP
 --------------------
 
-The two major differences are:
+The three major differences are:
 
 1. VIP models a single election, whereas this proposal intends to model previous and pending elections. As such, certain OCD data types are independent of and linked to multiple elections and/or election contests, unlike their corresponding VIP elements. 
-2. VIP models more precise details of elections, including where voters can vote and variations in the order of contests and options as they appear on ballots. These details are beyond the scope of this proposal, which is more focused on representing the distinct election contests and their potential outcomes.
+2. VIP models precise details about ballots, including the exact wording and order of the options (VIP refers to these as "selections") presented to voters in a given jurisdiction. These details are beyond the scope of this proposal.
+3. VIP models details about polling locations, including their addresses and hours. These details are also beyond the scope of this proposal.
 
 Important differences between the proposed OCD data type and its corresponding VIP element, if any, are noted in each data type's "Mapping to VIP" subsection in Implementation_.
 

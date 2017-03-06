@@ -137,8 +137,7 @@ recipient
 sources
     **optional**
     **repeated**
-    List of sources used in assembling this object. Has the following
-    properties:
+    List of sources used in assembling this object. Has the following properties:
 
     url
         URL of the resource.
@@ -320,9 +319,16 @@ identifier
     In some jurisdictions, the original jurisdictionally-assigned ID of a
     Transaction may be meaningful, so preserve it here.
 
-url
+sources
     **optional**
-    URL pointing to documentation at the Regulator, if any exists, for this Transaction.
+    **repeated**
+    List of sources used in assembling this object. Has the following properties:
+
+    url
+        URL of the resource.
+    note
+        **optional**
+        Description of what this source was used for.
 
 classification
     Type of transaction - contribution, expenditure, loan, transfer, other

@@ -25,7 +25,7 @@ The proposed data types are:
 * ``OfficeTerm``
 * ``Party``
 
-Supplements the "Campaign Finance Filings" proposal prepared by Abraham Epton.
+Supplements the "Campaign Finance Filings" proposal prepared by Abraham Epton, and lays the foundation for a future proposal covering election results.
 
 Definitions
 ===========
@@ -412,10 +412,6 @@ CandidateContest
 
 A subclass of ``Contest`` for repesenting a contest among candidates seeking for election to one or more public offices. Inherits all the required and optional properties of ``Contest``.
 
-number_elected
-    **optional**
-    Number of candidates that are elected in the contest, i.e. 'N' of N-of-M (integer).
-
 posts
     **repeated**
     List of references to each OCD ``Post`` representing a public office for which the candidates in the contest are seeking election. Requires at least one. Has the following properties:
@@ -430,6 +426,14 @@ posts
 party_id
     **optional**
     If the contest is among candidates of the same political party, e.g., a partisan primary election, reference to the OCD ``Party`` representing that political party.
+
+previous_term_unexpired
+    Indicates the previous public office holder vacated the post before serving a full term (boolean).
+
+number_elected
+    **optional**
+    Number of candidates that are elected in the contest, i.e. 'N' of N-of-M (integer).
+
 
 runoff_for_contest_id
     **optional**
@@ -463,7 +467,7 @@ Sample CandidateContest
                 "sort_order": 0
             }
         ],
-        "is_unexpired_term": false,
+        "previous_term_unexpired": false,
         "number_elected": 1,
         "party_id": null,
         "runoff_for_contest_id": null
@@ -477,10 +481,12 @@ Mapping to VIP
 
 * Important differences between corresponding fields:
 
-    - ``<OfficeIds>``, which is an optional set of references to VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ elements, correpsonds to ``posts``. Each ``<OfficeId>``should map to an equivalent OCD ``Post`` and the order in which the ``<OfficeIds>`` are listed should be preserved in ``sort_order``.
+    - ``<OfficeIds>``, which is an optional set of references to VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ elements, correpsonds to ``posts``. Each ``<OfficeId>`` should map to an equivalent OCD ``Post`` and the order in which the ``<OfficeIds>`` are listed should be preserved in ``sort_order``.
+    - ``<PrimaryPartyIds>`` is an optional set of references to each `<Party> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party.html>`_ related to the contest. This proposal allows for a ``CandidateContest`` to be linked to a single equivalent OCD ``Party``.
 
 * OCD fields not implemented in VIP:
 
+    + ``previous_term_unexpired`` should be ``true`` if the ``<OfficeTermType>`` referenced by the ``<Term>`` tag in VIP's `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ element is "unexpired-term". Otherwise, ``previous_term_unexpired`` should be ``false``.
     + ``runoff_for_contest_id`` is optional.
 
 * VIP fields not implemented in this OCDEP:

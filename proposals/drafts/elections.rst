@@ -22,7 +22,6 @@ The proposed data types are:
     - ``RetentionContest``
 
 * ``Candidacy``
-* ``OfficeTerm``
 * ``Party``
 
 Supplements the "Campaign Finance Filings" proposal prepared by Abraham Epton, and lays the foundation for a future proposal covering election results.

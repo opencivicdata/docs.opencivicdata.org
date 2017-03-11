@@ -10,4 +10,5 @@ If you're looking to contribute to the project or learn how to use the data, you
 
     scrape/index
     data/index
+    style-guide
     proposals/index

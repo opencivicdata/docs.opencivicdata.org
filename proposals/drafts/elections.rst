@@ -430,8 +430,7 @@ previous_term_unexpired
     Indicates the previous public office holder vacated the post before serving a full term (boolean).
 
 number_elected
-    **optional**
-    Number of candidates that are elected in the contest, i.e. 'N' of N-of-M (integer).
+    Number of candidates that are elected in the contest, i.e. 'N' of N-of-M (integer). Default is 1.
 
 
 runoff_for_contest_id
@@ -482,6 +481,7 @@ Mapping to VIP
 
     - ``<OfficeIds>``, which is an optional set of references to VIP `<Office> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/office.html>`_ elements, correpsonds to ``posts``. Each ``<OfficeId>`` should map to an equivalent OCD ``Post`` and the order in which the ``<OfficeIds>`` are listed should be preserved in ``sort_order``.
     - ``<PrimaryPartyIds>`` is an optional set of references to each `<Party> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party.html>`_ related to the contest. This proposal allows for a ``CandidateContest`` to be linked to a single equivalent OCD ``Party``.
+    - ``<NumberElected>`` is an optional integer in VIP but not in OCD, where it defaults to 1.
 
 * OCD fields not implemented in VIP:
 

@@ -242,7 +242,7 @@ name
     Name of the contest, not necessarily as it appears on the ballot (string).
 
 division_id
-    Reference to the OCD ``Division`` that defines the political geography of the contest, e.g., a specific Congressional or State Senate district. The ``Division`` referenced by each ``Contest`` should be a subdivision of the ``Division`` referenced by its ``Election``.
+    Reference to the OCD ``Division`` that defines the political geography of the contest, e.g., a specific Congressional or State Senate district. The ``Division`` referenced by each ``Contest`` should be a subdivision of the ``Division`` referenced by the contest's ``Election``.
 
 election_id
     Reference to the OCD ``Election`` in which the contest is decided.
@@ -409,7 +409,7 @@ Mapping to VIP
 CandidateContest
 ----------------
 
-A subclass of ``Contest`` for repesenting a contest among candidates seeking for election to one or more public offices. Inherits all the required and optional properties of ``Contest``.
+A subclass of ``Contest`` for repesenting a contest among candidates seeking election to one or more public offices. Inherits all the required and optional properties of ``Contest``.
 
 posts
     **repeated**
@@ -632,7 +632,7 @@ contest_id
 
 candidate_name
     **optional**
-    For preserving the candidate's name as it was when the person sought election to hold the public office term, which may differ from the person's current name (string).
+    For preserving the candidate's name as it was of the candidacy. (string).
 
 filed_date
     **optional**
@@ -640,11 +640,11 @@ filed_date
 
 is_incumbent
     **optional**
-    Indicates whether the candidate is seeking re-election a public office he/she currently holds (boolean).
+    Indicates whether the candidate is seeking re-election to a public office he/she currently holds (boolean).
 
 party_id
     **optional**
-    Reference to and OCD ``Party`` with which the candidate is affiliated.
+    Reference to an OCD ``Party`` with which the candidate is affiliated.
 
 top_ticket_candidacy_id
     **optional**

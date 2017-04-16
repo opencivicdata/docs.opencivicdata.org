@@ -19,7 +19,7 @@ If you're already well-versed in Python, GitHub, and basics of web scraping you 
 
 Python
 ---------
- 
+
 If you aren't already familiar with Python you might want to start with `Python on Codecademy <http://www.codecademy.com/tracks/python>`_.
 
 .. note::
@@ -42,7 +42,7 @@ It is useful to understand the basic concept of web scraping before beginning, w
 
 We recommend the `lxml.html <http://lxml.de/lxmlhtml.html>`_ library. If you work with jQuery but haven't used XPath you may also find `lxml.cssselect <http://lxml.de/cssselect.html>`_ useful, though it is a bit more limited.
 
-In our experience spending a few minutes brushing up on the basics of `XPath <http://www.w3schools.com/xpath/xpath_syntax.asp>`_ is well worth it as it makes scrapers easier to write and more maintainable in the long run.
+In our experience spending a few minutes brushing up on the basics of `XPath <https://www.w3schools.com/xml/xpath_syntax.asp>`_ is well worth it as it makes scrapers easier to write and more maintainable in the long run.
 
 
 Getting Started

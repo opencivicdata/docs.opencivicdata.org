@@ -640,7 +640,7 @@ filed_date
 
 registration_status
     **optional**
-    Registration of the candidate. Enumerated among:
+    Enumerated among:
 
     - *filed:* The candidate filed for office but is not qualified.
     - *qualified:* The candidate qualified for the contest.

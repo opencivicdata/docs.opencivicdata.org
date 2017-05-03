@@ -638,6 +638,15 @@ filed_date
     **optional**
     Specifies when the candidate filed for the contest (date).
 
+registration_status
+    **optional**
+    Registration of the candidate. Enumerated among:
+
+    - *filed:* The candidate filed for office but is not qualified.
+    - *qualified:* The candidate qualified for the contest.
+    - *withdrawn:* The candidate withdrew from the contest (but may still be on the ballot).
+    - *write-in:* While the candidate's name did not appear on the ballot, he or she nonetheless campaigned for voter to write in his or her name.
+
 is_incumbent
     **optional**
     Indicates whether the candidate is seeking re-election to a public office he/she currently holds (boolean).
@@ -685,6 +694,7 @@ Sample Candidacy
         "candidate_name": "ROWEN, ROBERT J.",
         "filed_date": "2016-03-10",
         "is_incumbent": false,
+        "registration_status": "qualified",
         "party_id": "ocd-organization/866e7266-0c21-4476-a7a7-dc11d2ae8cd1",
         "top_ticket_candidacy_id": null,
         "created_at": "2017-02-08T04:17:30.818Z",
@@ -703,7 +713,8 @@ Mapping to VIP
   
     - ``<PartyId>``, which is an optional reference a VIP `<Party> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/party.html>`_ element, can map to an equivalent OCD ``Party``.
     - ``person_id`` , which is an optional reference a VIP `<Person> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/elements/person.html>`_ element, can map to an equivalent OCD ``Person``.
-    - ``<IsTopTicket>``, which is an optional boolean indicating the candidate is the top of a ticket that includes multiple candidates, is replaced by an optional ``top_ticket_candidacy_id``. 
+    - ``<IsTopTicket>``, which is an optional boolean indicating the candidate is the top of a ticket that includes multiple candidates, is replaced by an optional ``top_ticket_candidacy_id``.
+    - ``<PreElectionStatus>``, which is an optional reference to a VIP `<CandidatePreElectionStatus> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/enumerations/candidate_pre_election_status.html>`_ is replaced by an optional ``registration_status``.
 
 * OCD fields not implemented in VIP:
       
@@ -714,7 +725,6 @@ Mapping to VIP
 
     - ``<ContactInformation>`` refers to an element that describes the contact and physical address information for the candidate or their campaign. On and OCD ``Candidacy``, this information would be stored on the associated ``Person`` or ``Committee`` object.
     - ``<PostElectionStatus>``, which is an optional reference to a VIP `<CandidatePostElectionStatus> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/enumerations/candidate_post_election_status.html>`_.
-    - ``<PreElectionStatus>``, which is an optional reference to a VIP `<CandidatePreElectionStatus> <http://vip-specification.readthedocs.io/en/release/built_rst/xml/enumerations/candidate_pre_election_status.html>`_.
 
 
 Party

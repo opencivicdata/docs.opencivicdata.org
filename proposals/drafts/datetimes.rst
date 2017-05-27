@@ -39,8 +39,7 @@ The field is used in the following places:
 * Post.{start_date,end_date}
 
 "Fuzzy Datetime Field"
-
-    For VoteEvents sometimes the time is important too, so we extended the aove field to 19 characters, allowing an additional inclusion of time in HH:MM:SS.
+    For VoteEvents sometimes the time is important too, so we extended the above field to 19 characters, allowing an additional inclusion of time in HH:MM:SS.
 
 This field is used only in
 
@@ -61,21 +60,19 @@ Issues with current approach
 
 For the most part this is OK, and we're fairly consistent.  Most uses of fuzzy date align with the goals, but in a few cases it seems like we've made some mistakes:
 
-VoteEvent's special case of fuzzy time is a problem in two ways:
+1) VoteEvent and Event have very similar start/end times with completely different semantics.  VoteEvent's special case of fuzzy time can have a time but lacks a timezone, while Event's fields are named start_time/end_time and use a DateTime object, the only place one is used (requiring more precision than we're guaranteed to have).
 
-1) it can have a time but lacks a timezone
-2) it is misnamed, ending in _date while allowing a time to be stored
+And two other issues:
 
-And three other issues:
-
+2) The extended format is almost ISO8601 datetime, but uses a space instead of a 'T' as the separator of date & time.
 3) We need the ability to set times on BillAction.date, just like VoteEvent.  We are frequently forced to truncate times.
-4) The VoteEvent/Event mismatch between real DateTimeField and "fuzzy date time field" seems likely to trip people up.
-5) The extended format is almost ISO8601 datetime, but uses a space instead of a 'T' as the separator of date & time.
 
 Implementation
 ===============
 
-1) To address #1 and #5: add timezone to "fuzzy datetime" and bring the full format in line w/ ISO8601, changing the format from:
+We'd make the following changes:
+
+1) To address #1 and #2: add timezone to "fuzzy datetime" and bring the full format in line w/ ISO8601, changing the format from:
         YYYY[[[-MM]-DD] HH:MM:SS]
             to 
         YYYY[[[-MM]-DD]THH:MM:SS(Z|+XX:YY)]
@@ -87,18 +84,17 @@ Also considered:
 * Define that time is always stored in UTC, but this would be more
   error prone than being explicit.
 
-2) To address #2, rename VoteEvent.start_date,end_date to start_time,end_time to match Event and be more clear.
+2) To further address #1, rename Event.start_time,end_time to start_date,end_date to match Event and have it adopt the fuzzy datetime.  This was chosen instead of renaming VoteEvent's fields to remain consistent w/ Popolo & other standards.
 
 Also considered:
 
-* Leaving this be, but I think we should take this opportunity to fix as many time related issues as we can and this is a definite mistake in naming.
+* Leaving this be, but I think we should take this opportunity to fix as many time related issues as we can.
 
-3) To address #3, extend BillAction.date to match "fuzzy datetime" rules and rename it to BillAction.time
+3) To address #3, extend BillAction.date to allow "fuzzy datetimes".
 
 * It could also become a full datetime (see #1), but would mostly have to fake the time.
-* The name of the field isn't great this way either, other options?
+* Naming the field 'time' was initially recommended, but since we aren't changing other fields that has been withdrawn.
 
-4) To address #4, I propose we have Event adopt the fuzzy datetime.  This would make it consistent w/ VoteEvent and BillAction if the other proposals are adopted.
 
 
 Copyright

@@ -19,24 +19,24 @@ The current situation:
 "Fuzzy Date Field"
     This is implemented as a char field allowing up to 10 characters.  Dates are expected to conform to the YYYY[-MM[-DD]] format.
 
-    This comes from Popolo, and allows dates to be specified with varying degrees of accuracy depending on what is known.  (e.g. sometimes we only know a person's birth year, or the month something came into being)
+This comes from Popolo, and allows dates to be specified with varying degrees of accuracy depending on what is known.  (e.g. sometimes we only know a person's birth year, or the month something came into being)
 
 The field is used in the following places:
 
-    BillAbstract.date
-    BillAction.date
-    BillDocument.date
-    BillVersion.date
-    EventDocument.date
-    EventMedia.date         (via EventMediaBase)
-    EventAgendaMedia.date   (via EventMediaBase)
-    LegislativeSession.{start_date,end_date}
-    Membership.{start_date,end_date}
-    Organization.{founding_date,dissolution_date}
-    OrganizationName.{start_date,end_date}      (via OtherNameBase)
-    Person.{birth_date,death_date}
-    PersonName.{start_date,end_date}            (via OtherNameBase)
-    Post.{start_date,end_date}
+* BillAbstract.date
+* BillAction.date
+* BillDocument.date
+* BillVersion.date
+* EventDocument.date
+* EventMedia.date         (via EventMediaBase)
+* EventAgendaMedia.date   (via EventMediaBase)
+* LegislativeSession.{start_date,end_date}
+* Membership.{start_date,end_date}
+* Organization.{founding_date,dissolution_date}
+* OrganizationName.{start_date,end_date}      (via OtherNameBase)
+* Person.{birth_date,death_date}
+* PersonName.{start_date,end_date}            (via OtherNameBase)
+* Post.{start_date,end_date}
 
 "Fuzzy Datetime Field"
 
@@ -44,15 +44,15 @@ The field is used in the following places:
 
 This field is used only in
 
-    VoteEvent.{start_date,end_date}
+* VoteEvent.{start_date,end_date}
 
 Finally, we sometimes use native DateTime fields.
 
-    Notably this is used for every model's created_at/updated_at timestamp.
+Notably this is used for every model's created_at/updated_at timestamp.
 
 It is also used for 
 
-    Event.{start_time,end_time}
+* Event.{start_time,end_time}
 
 This has the advantage of being timezone-aware.
 
@@ -62,6 +62,7 @@ Issues with current approach
 For the most part this is OK, and we're fairly consistent.  Most uses of fuzzy date align with the goals, but in a few cases it seems like we've made some mistakes:
 
 VoteEvent's special case of fuzzy time is a problem in two ways:
+
 1) it can have a time but lacks a timezone
 2) it is misnamed, ending in _date while allowing a time to be stored
 
@@ -81,20 +82,21 @@ Implementation
 
 Also considered:
 
-    * Convert it to a full datetime, but this would require a time on
-      every vote.  We might not have one.
-    * Define that time is always stored in UTC, but this would be more
-      error prone than being explicit.
+* Convert it to a full datetime, but this would require a time on
+  every vote.  We might not have one.
+* Define that time is always stored in UTC, but this would be more
+  error prone than being explicit.
 
 2) To address #2, rename VoteEvent.start_date,end_date to start_time,end_time to match Event and be more clear.
 
 Also considered:
-    * Leaving this be, but I think we should take this opportunity to fix as many time related issues as we can and this is a definite mistake in naming.
+
+* Leaving this be, but I think we should take this opportunity to fix as many time related issues as we can and this is a definite mistake in naming.
 
 3) To address #3, extend BillAction.date to match "fuzzy datetime" rules and rename it to BillAction.time
 
-    * It could also become a full datetime (see #1), but would mostly have to fake the time.
-    * The name of the field isn't great this way either, other options?
+* It could also become a full datetime (see #1), but would mostly have to fake the time.
+* The name of the field isn't great this way either, other options?
 
 4) To address #4, I propose we have Event adopt the fuzzy datetime.  This would make it consistent w/ VoteEvent and BillAction if the other proposals are adopted.
 

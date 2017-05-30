@@ -99,7 +99,7 @@ Also considered:
 * Define that time is always stored in UTC, but this would be more
   error prone than being explicit.
 
-2) To further address #1, rename Event.start_stime,end_time to start_date,end_date to match Event and have it adopt the fuzzy datetime.  This was chosen instead of renaming VoteEvent's fields to remain consistent w/ Popolo & other standards.  This also makes the separate timezone field on event redundant and confusing, so it would be removed.
+2) To further address #1, rename Event.start_time,end_time to start_date,end_date to match Event and have it adopt the fuzzy datetime.  This was chosen instead of renaming VoteEvent's fields to remain consistent w/ Popolo & other standards.  This also makes the separate timezone field on event redundant and confusing, so it would be removed.
 
 Also considered:
 

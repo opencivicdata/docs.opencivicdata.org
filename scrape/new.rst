@@ -13,8 +13,8 @@ To copy a skeleton project into a new scraper directory, use pupa's :program:`in
 .. code-block:: bash
 
     $ pupa init seattle
-    jurisdiction name: Seattle City Council
     division id (look this up in the opencivicdata/ocd-division-ids repository):
+    jurisdiction name: Seattle City Council
     official URL: http://seattle.gov/council/
     create people scraper? [Y/n]: y
     create events scraper? [y/N]: n

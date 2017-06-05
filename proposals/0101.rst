@@ -1,12 +1,12 @@
 .. _OCDEP101:
 
-============================================
-OCDEP 10: Standardize Usage of Dates & Times
-============================================
+=============================================
+OCDEP 101: Standardize Usage of Dates & Times
+=============================================
 
 :Created: 2017-05-26
 :Author: James Turk
-:Status: Proposed
+:Status: Accepted
 
 Overview
 ========

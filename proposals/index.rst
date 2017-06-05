@@ -7,3 +7,7 @@ Open Civic Data Enhancement Proposals
    :glob:
 
    *
+
+
+   
+For proposals under consideration see :ref:`drafts`.

@@ -16,19 +16,18 @@ Civic Data identifiers and governance for managing those identifiers.
 Rationale
 =========
 
-Different publishers of civic data often release data about the same
-people or organizations. However, the data almost never use the same
-identifiers. An end user who wants to use multiple data sources--say
-researching the relation between campaign finances and electoral
-success--has to do all the work of figuring out which records are
-about the same people and organizations.
+Publishers of civic data often release data about the same set of
+people and organizations. Different sources almost never use the same
+identifiers, leaving it to end users to attempt to combine data.
 
-This record linkage task acts as major obstacle between the civic data
-and the ultimate task that data users want to accomplish.
+This record linkage task is difficult and, at scale, is beyond the
+ability and resources available to most data users.  This obstacle
+prevents many of the uses that civic data publishers would like their
+data to enable.
 
 A reconciliation service would allow data publishers to coordinate, in
 a loosely coupled way, to use the same identifiers to refer the same
-people and organizations--removing this barrier for our data users.
+people and organizations--removing obstacle for data users.
 
 
 Implementation
@@ -37,49 +36,99 @@ Implementation
 Scope
 -----
 
-Let's start with politicians. Let's define a politician as someone who
-has ever run elected office. (We need a tighter definition of "run for elected office")
+This current proposal is limited to a service to support common
+identifiers for politicians. In the future it may be extended to other
+types of civic entities.
+
+For our purposes, a politician is person who has formed a political
+committee to pursue elected office. This definition should be adequate
+for the current target set of publishers those who publish data on
+campaign finance, electioneering, election results, and legislative
+actions. Individual campaign donors, lobbyists, civil servants,
+campaign operatives are currently not in scope.
+
+
+Reconciliation Service
+----------------------
+
+The reconciliation service will be a web service that data publishers
+will largely interact with through a REST API. 
+
+While, the internal implementation details of the service are outside
+of the scope of this proposal, this proposal will discuss data access
+provisions necessary to allow for continuity if the service provider
+is unable or unwilling to maintain the service.
+
 
 API
 ---
 
-match
-_____
+.. http:get:: /search
 
-match endpoint can takes 1 or more match fields and returns possible matches with identifiers
+   Attempts to find the ocd identifier for a politician
 
-GET
+   :query name: a name of the politician
+   :query jurisdiction_id: an OCD id for the jurisdiction of the organization that the politician is seeking election into or is a member of
+   :query office: (optional) a name of the office
+   :query birth_date: (optional) the birth date of the politician
+   :query active_date: (optional) a date, date range, year, year range when the politician was seeking or held this office
+   :status 200 OK: no error, returns a list of possible ids with match scores
+   :status 404 Not Found: could not find any possible matches
 
-id
-___
+.. http:get:: /identifier/(str:ocd_identifier)
 
-for a specific id return all the information we associated
+   Shows all existing records and linkage history for a politician
 
-if the id has been subsumed, 302 to the correct place
+   :param ocd_identifier: politician's OCD identifier
+   :type ocd_identifier: str
+   :status 200 OK: no error
+   :status 404 Not Found: no politician with that identifier found
+   :status 301 Moved Permanently: if an ocd_identifier has been merged into another identifier, redirect to :http:get:`/identifier/(str:new_ocd_identifier)`
 
-GET
+.. http:post:: /identifier
 
-mint
-____
+   Mint new ocd identifier 
 
-Submit minimum data fields for new entity return new id
+   :form name: a name of the politician
+   :form jurisdiction_id: an OCD id for the jurisdiction of the organization that the politician is seeking election into or is a member of
+   :form office: (optional) a name of the office
+   :form birth_date: (optional) the birth date of the politician
+   :form active_date: (optional) a date, date range, year, year range when the politician was seeking or held this office
+   :reqheader Authorization: OAuth token to authenticate		      
+   :status 201 Created: returns ocd_identifier
 
-maybe require a token from match?
+.. http:put:: /identifier/(str:ocd_identifier)
+
+   Add data about politician
+
+   :param ocd_identifier: politician's OCD identifier
+   :type ocd_identifier: str
+   :form name: a name of the politician
+   :form jurisdiction_id: an OCD id for the jurisdiction of the organization that the politician is seeking election into or is a member of
+   :form office: (optional) a name of the office
+   :form birth_date: (optional) the birth date of the politician
+   :form active_date: (optional) a date, date range, year, year range when the politician was seeking or held this office
+   :reqheader Authorization: OAuth token to authenticate		      
+   :status 201 Created: return existing records and linkage history for a politician
+
+.. http:post:: /merge
+
+   Merges identifiers
+
+   :form ids: array of ids to merge
+   :reqheader Authorization: OAuth token to authenticate		      
+   :status 201 Created: returns surviving ocd_identifier 
+			
+.. http:post:: /split/(str:ocd_identifier)
+
+   Split identifiers
+
+   :param ocd_identifier: politician's OCD identifier
+   :type ocd_identifier: str
+   :form ids: array of reference ids to remove and turn into new id
+   :reqheader Authorization: OAuth token to authenticate		      
+   :status 201 Created: returns ocd_identifier for the split data
  
-
-merge
-_____
-submit identifiers, returns new identifier
-
-POST
-
-
-split
-_____
-
-submit arrays of reference identfiers from within a id and split into new ids, return new ids
-
-POST
 
 Governance
 __________
@@ -99,7 +148,8 @@ publisher
 - merge method
 - split method
 
-publishers will get notifications if the entities they uploaded are changed by another publisher, and can take action?
+publishers will get notifications if the entities they uploaded are
+changed by another publisher, and can take action.
 
 
 Bulk access
@@ -107,9 +157,6 @@ Bulk access
 
 The underlying data for the service will be available as a daily backup
 
-Backend
--------
-The reconcilliation engine supporting this API will be unspecified.
 
 
 Copyright of OCD identifiers
@@ -127,7 +174,7 @@ Publisshers will need to agree that they will not upload data that is under copy
 
 
 
-
+- http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2001414
 - https://web.archive.org/web/20161108220043/https://www.newschallenge.org/challenge/elections/entries/politician-reconciliation-service
 - https://web.archive.org/web/20130609195642/https://www.newschallenge.org/open/open-government/submission/civic-data-standardization-bootstrapper/
 - https://github.com/newsdev/nyt-entity-service

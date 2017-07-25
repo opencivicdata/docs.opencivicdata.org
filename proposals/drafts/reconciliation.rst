@@ -84,6 +84,7 @@ API
    :status 200 OK: no error
    :status 404 Not Found: no politician with that identifier found
    :status 301 Moved Permanently: if an ocd_identifier has been merged into another identifier, redirect to :http:get:`/identifier/(str:new_ocd_identifier)`
+   :status 300 Multiple Choices: this id has split, return options				  
 
 .. http:post:: /identifier
 
@@ -109,7 +110,11 @@ API
    :form birth_date: (optional) the birth date of the politician
    :form active_date: (optional) a date, date range, year, year range when the politician was seeking or held this office
    :reqheader Authorization: OAuth token to authenticate		      
-   :status 201 Created: return existing records and linkage history for a politician
+   :status 201 Created: return record id
+
+.. http::delete:: /identifier/(str:ocd_identifier)
+
+   Delete the record from politician id
 
 .. http:post:: /merge
 
@@ -121,13 +126,15 @@ API
 			
 .. http:post:: /split/(str:ocd_identifier)
 
-   Split identifiers
+   Split identifiers. This will create new ids for both sides of the split.
+   The old id will return a 300
 
    :param ocd_identifier: politician's OCD identifier
    :type ocd_identifier: str
    :form ids: array of reference ids to remove and turn into new id
    :reqheader Authorization: OAuth token to authenticate		      
-   :status 201 Created: returns ocd_identifier for the split data
+   :status 201 Created: returns new ocd_identifiers for both sides of the split
+			
  
 
 Governance
@@ -164,7 +171,8 @@ Copyright of OCD identifiers
 
 They will be dedicated to the public domain
 
-Publisshers will need to agree that they will not upload data that is under copyright.
+Publisshers will need to agree that they will not upload data that is
+under copyright, and agree to dedicate all data to the public domain. 
 
 
 

@@ -22,7 +22,6 @@ The proposed data types are:
     - ``RetentionContest``
 
 * ``Candidacy``
-* ``Party``
 
 Supplements the :doc:`Campaign Finance Filings <campaign_finance_filings>` proposal prepared by Abraham Epton, and lays the foundation for a future proposal covering election results.
 
@@ -416,7 +415,7 @@ posts
 
 party_id
     **optional**
-    If the contest is among candidates of the same political party, e.g., a partisan primary election, reference to the OCD ``Party`` representing that political party.
+    If the contest is among candidates of the same political party, e.g., a partisan primary election, reference to the OCD ``Organization`` representing that political party.
 
 previous_term_unexpired
     Indicates the previous public office holder vacated the post before serving a full term (boolean).
@@ -472,7 +471,7 @@ Mapping to VIP
 * Important differences between corresponding fields:
 
     - ``<OfficeIds>``, which is an optional set of references to VIP `<Office>`_ elements, correpsonds to ``posts``. Each ``<OfficeId>`` should map to an equivalent OCD ``Post`` and the order in which the ``<OfficeIds>`` are listed should be preserved in ``sort_order``.
-    - ``<PrimaryPartyIds>`` is an optional set of references to each `<Party>`_ related to the contest. This proposal allows for a ``CandidateContest`` to be linked to a single equivalent OCD ``Party``.
+    - ``<PrimaryPartyIds>`` is an optional set of references to each `<Party>`_ related to the contest. This proposal allows for a ``CandidateContest`` to be linked to a single equivalent OCD ``Organization``.
     - ``<NumberElected>`` is an optional integer in VIP but is required in OCD, where it defaults to 1.
 
 * OCD fields not implemented in VIP:
@@ -492,10 +491,10 @@ A subclass of ``Contest`` for representing a contest in which voters can vote di
 
 parties
     **repeated**
-    List of references to each OCD ``Party`` for which a voter could vote in the election contest. Requires at list one. Has the following properties:
+    List of references to each party for which a voter could vote in the contest. Requires at list one. Has the following properties:
 
     party_id
-        Reference to an OCD ``Party``.
+        Reference to an OCD ``Organization``, with the `"party"` classification.
 
     is_incumbent
         **optional**
@@ -543,7 +542,7 @@ Mapping to VIP
 
 * OCD fields not implemented in VIP:
     
-    - ``parties`` should list the distinct party selections across all ballots that include the ``<PartyContest>`` (i.e., each OCD ``Party`` equivalent to each VIP ``<Party>`` referenced in the ``<PartyIds>`` tag in the `<PartySelection>`_ element).
+    - ``parties`` should list the distinct party selections across all ballots that include the ``<PartyContest>`` (i.e., each OCD ``Organization`` equivalent to each VIP ``<Party>`` referenced in the ``<PartyIds>`` tag in the `<PartySelection>`_ element).
     - ``runoff_for_contest_id`` an optional field.
 
 
@@ -645,7 +644,7 @@ is_incumbent
 
 party_id
     **optional**
-    Reference to an OCD ``Party`` with which the candidate is affiliated.
+    Reference to an OCD ``Organzation`` with which the candidate is affiliated.
 
 top_ticket_candidacy_id
     **optional**
@@ -703,7 +702,7 @@ Mapping to VIP
 
 * Important differences between corresponding fields:
   
-    - ``<PartyId>``, which is an optional reference a VIP `<Party>`_ element, can map to an equivalent OCD ``Party``.
+    - ``<PartyId>``, which is an optional reference a VIP `<Party>`_ element, can map to an equivalent OCD ``Organization``.
     - ``person_id`` , which is an optional reference a VIP `<Person>`_ element, can map to an equivalent OCD ``Person``.
     - ``<IsTopTicket>``, which is an optional boolean indicating the candidate is the top of a ticket that includes multiple candidates, is replaced by an optional ``top_ticket_candidacy_id``.
     - ``<PreElectionStatus>``, which is an optional reference to a VIP `<CandidatePreElectionStatus>`_ is replaced by an optional ``registration_status``.
@@ -717,80 +716,6 @@ Mapping to VIP
 
     - ``<ContactInformation>`` refers to an element that describes the contact and physical address information for the candidate or their campaign. On and OCD ``Candidacy``, this information would be stored on the associated ``Person`` or ``Committee`` object.
     - ``<PostElectionStatus>``, which is an optional reference to a VIP `<CandidatePostElectionStatus>`_.
-
-
-Party
------
-
-A political party with which office holders and candidates may be affiliated.
-
-``Party`` is a subclass of OCD's ``Organization`` data type, defined in :doc:`../0005`, which was accepted in June 2014. All of required and optional properties of ``Organization`` are inherited by ``Party``.
-
-abbreviation
-    **optional**
-    An abbreviation for the party name (string).
-
-color
-    **optional**
-    Six-character hex code representing an HTML color string. The pattern is ``[0-9a-f]{6}``.
-
-is_write_in
-    **optional**
-    Indicates that the party is not officially recognized by a local, state, or federal organization but, rather, is a "write-in" in jurisdictions which allow candidates to free-form enter their political affiliation (boolean).
-
-
-Sample Party
-++++++++++++
-
-
-.. code:: javascript
-
-    {
-        "id": "ocd-organization/866e7266-0c21-4476-a7a7-dc11d2ae8cd1"
-        "name": "DEMOCRATIC",
-        "image": "",
-        "parent": null,
-        "jurisdiction": null,
-        "classification": "party",
-        "founding_date": null,
-        "dissolution_date": null,
-        "identifiers": [],
-        "other_names": [],
-        "contact_details": [],
-        "links": [],
-        "abbreviation": "D",
-        "color": "1d0ee9",
-        "is_write_in": false,
-        "created_at": "2017-02-07T16:36:12.497Z",
-        "updated_at": "2017-02-07T16:36:12.497Z",
-        "sources": [],
-        "extras": {}
-    }
-
-
-Mapping to VIP
-++++++++++++++
-
-``Party`` corresponds to VIP's `<Party>`_ element.
-
-* Important differences between corresponding fields:
-
-    - ``<Name>`` is not required on VIP's ``<Party>``, but ``name`` (inherited from OCD's ``Organization``) is required.
-
-* OCD fields not implemented in VIP:
-
-    - ``classification`` (inherited from ``Organization``) should be "party".
-    - ``parent`` (inherited from ``Organization``) is optional.
-    - ``jurisdiction`` (inherited from ``Organization``) is optional.
-    - ``founding_date`` (inherited from ``Organization``) is optional.
-    - ``dissolution_date`` (inherited from ``Organization``) is optional.
-    - ``other_names`` (inherited from ``Organization``) is optional.
-    - ``contact_details`` (inherited from ``Organization``) is optional.
-    - ``links`` (inherited from ``Organization``) is optional.
-
-* VIP fields not implemented in this OCDEP:
-  
-    - ``<LogoUri>``, which is optional.
 
 
 Copyright

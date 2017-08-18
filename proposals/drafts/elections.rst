@@ -135,7 +135,14 @@ date
 identifiers
     **optional**
     **repeated**
-    Upstream identifiers of the election if any exist, such as those assigned by a Secretary of State, county or city elections office.
+    Upstream identifiers of the election, such as those assigned by a Secretary of State, county or city elections office.
+
+    Each element in identifiers is an object with the following keys:
+
+    scheme
+        The name of the service that created the identifier.
+    identifier
+        A unique identifier developed by an upstream or third party source.
 
 division_id
     Reference to the OCD ``Division`` that defines the broadest political geography of any contest to be decided by the election. For example, an election that includes a contest to elect the governor of California would include the division identifier for the entire state of California.
@@ -227,7 +234,14 @@ id
 identifiers
     **optional**
     **repeated**
-    Upstream identifiers of the contest if any exist, such as those assigned by a Secretary of State, county or city elections office.
+    Upstream identifiers of the contest, such as those assigned by a Secretary of State, county or city elections office.
+
+    Each element in identifiers is an object with the following keys:
+
+    scheme
+        The name of the service that created the identifier.
+    identifier
+        A unique identifier developed by an upstream or third party source.
 
 name
     Name of the contest, not necessarily as it appears on the ballot (string).

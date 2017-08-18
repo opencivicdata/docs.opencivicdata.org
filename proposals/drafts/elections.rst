@@ -326,7 +326,9 @@ Mapping to VIP
 BallotMeasureContest
 --------------------
 
-A subclass of ``Contest`` for representing a ballot measure before the voters, including options voters may select. Inherits all the required and optional properties of ``Contest``.
+A contest in which voters select from among options proposed in a ballot measure.
+
+``BallotMeasureContest`` inherits all the required and optional properties of ``Contest``.
 
 options
     **repeated**
@@ -414,7 +416,9 @@ Mapping to VIP
 CandidateContest
 ----------------
 
-A subclass of ``Contest`` for repesenting a contest among candidates seeking election to one or more public offices. Inherits all the required and optional properties of ``Contest``.
+A contest among candidates seeking election to one or more public offices. 
+
+``CandidateContest`` inherits all the required and optional properties of ``Contest``.
 
 posts
     **repeated**
@@ -501,7 +505,11 @@ Mapping to VIP
 PartyContest
 ------------
 
-A subclass of ``Contest`` for representing a contest in which voters can vote directly for a political party in lieu of/in addition voting for to candidates endorsed by that party (as in the case of `party-list proportional representation`_). Inherits all the required and optional properties of ``Contest``.
+A contest in which voters can vote directly for a political party.
+
+In these contests, voters can vote for a party in lieu of/in addition to voting for candidates endorsed by that party (as in the case of `party-list proportional representation`_). 
+
+``PartyContest`` inherits all the required and optional properties of ``Contest``.
 
 parties
     **repeated**
@@ -563,9 +571,11 @@ Mapping to VIP
 RetentionContest
 ----------------
 
-A subclass of ``BallotMeasureContest`` that represents a contest where voters vote to retain or recall a current office holder, e.g. a judicial retention or recall election. Inherits all the required and optional properties of ``BallotMeasureContest``.
+A contest where voters vote to retain or recall a current office holder.
 
-In a ``RetentionContest``, voters typically have two options (e.g., "yes" or "no", "recall" or "don't recall"), unlike in a ``CandidateContest`` where voters can choose from among multiple different candidates.
+These contests include judicial retention or recall elections.
+
+``RetentionContest`` inherits all the required and optional properties of ``BallotMeasureContest``.
 
 membership_id
     Reference to the OCD ``Membership`` that represents the tenure of a specific person (i.e., OCD ``Person`` object) in a specific public office (i.e., ``Post`` object).

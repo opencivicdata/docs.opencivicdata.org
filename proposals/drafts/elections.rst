@@ -13,7 +13,7 @@ Definition of data types to model elections, candidacies for public office and b
 
 The proposed data types are:
 
-* ``Election``
+* ``Election`` [#]_
 * ``Contest``, a base class for:
 
     - ``BallotMeasureContest``
@@ -68,7 +68,7 @@ Office Term
     For a variety of reasons, an office holder may vacate an elected office before serving a full term. This is known as an "unexpired term", a situation which could require an additional contest (known as a "Special Election" in U.S. politics) to fill the empty public office.
 
 Party
-    A political organization to which public office holders and candidates can be affiliated. In some electoral systems, such as `party-list proportional representation`_, voters may also directly elect political parties to hold power in lieu of or in addition to specific candidates endorsed by the political party.
+    A political organization to which public office holders and candidates can be affiliated. In some electoral systems, such as `party-list proportional representation`_, voters may also directly elect political parties to hold power in lieu of or in addition to voting for specific candidates endorsed by the political party.
 
 Public Office
     A position within a governmental body which is filled through an election contest.
@@ -122,9 +122,16 @@ Implementation
 Election
 --------
 
-A collection of political contests set to be decided on the same date within a political geography (aka, ``Division``).
+A collection of political contests set to be decided on the same date within a Division.    
 
-``Election`` is a subclass of OCD's ``Event`` data type, defined in :doc:`../0004`, which was accepted in June 2014. All of the required and optional properties of ``Event`` are inherited by ``Election``. The typical implementation will be an ``all_day`` event with an "election" ``classification`` value and a ``start_time`` set to midnight of the observed election date.
+id
+    Open Civic Data-style id, in the format ocd-election/{{uuid}}.
+
+name
+    Name of the election.
+
+date
+    Final or only date when eligible voters may cast their ballots in the Election. Typically this is also the same date when results of the election's contests are first publicly reported.
 
 identifiers
     **optional**
@@ -157,20 +164,15 @@ Sample Election
 .. code:: javascript
 
     {
-        "id": "ocd-event/4c25d655-c380-46a4-93d7-28bc0c389629",
+        "id": "ocd-election/4c25d655-c380-46a4-93d7-28bc0c389629",
+        "name": "2016 GENERAL",
+        "date": "2016-11-08",
         "identifiers": [
             {
                 "scheme": "calaccess_election_id",
                 "identifier": "65"
             }
         ],
-        "name": "2016 GENERAL",
-        "description": "",
-        "start_time": "2016-11-08T00:00:00Z",
-        "end_time": null,
-        "timezone": "US/Pacific",     
-        "all_day": true,      
-        "classification": "election",
         "division_id": "ocd-division/country:us/state:ca/",
         "administrative_organization_id": "ocd-organization/436b4d67-b5aa-402c-9e20-0e56a8432c80",
         "created_at": "2017-02-07T07:17:58.874Z",
@@ -185,7 +187,7 @@ Sample Election
                 "url": "http://cal-access.ss.ca.gov/Campaign/Measures/list.aspx?session=2015"
             }
         ],
-        "extras": {},
+        "extras": {"calaccess_election_type": ["GENERAL"]},
     }
 
 
@@ -196,22 +198,12 @@ Mapping to VIP
 
 * Important differences between corresponding fields:
 
-    - ``<Name>`` is not required on VIP's ``<Election>``, but ``name`` (inherited from OCD's ``Event``) is required.
+    - ``<Name>`` is not required on VIP's ``<Election>`` but is required in OCD.
     - ``<StateId>``, which is a required reference to a VIP `<State>`_ element, should map to an equivalent OCD ``division_id`` if ``<IsStatewide>`` is ``true``. Otherwise, ``division_id`` should reference the appropriate subdivision of the equivalent to ``<StateId>``.
 
 * OCD fields not implemented in VIP:
 
     - ``administrative_organization_id`` is an optional reference to an OCD ``Organization`` that's equivalent to the ``<Department>`` tag in VIP's `<ElectionAdministration>`_ element.
-    - ``classification`` (inherited from ``Event``) should be "election".
-    - ``description`` (inherited from ``Event``) is optional.
-    - ``location`` (inherited from ``Event``) is optional.
-    - ``all_day`` (inherited from ``Event``) is optional.
-    - ``end_time`` (inherited from ``Event``) is optional.
-    - ``status`` (inherited from ``Event``) is optional.
-    - ``links`` (inherited from ``Event``) is optional.
-    - ``participants`` (inherited from ``Event``) is optional.
-    - ``documents`` (inherited from ``Event``) is optional.
-    - ``media`` (inherited from ``Event``) is optional.
 
 * VIP fields not implemented in this OCDEP:
 
@@ -806,6 +798,8 @@ Copyright
 
 This document has been placed in the public domain per the `Creative Commons CC0 1.0 Universal license <http://creativecommons.org/publicdomain/zero/1.0/deed>`_.
 
+
+.. [#] ``Election`` is conceptually similar to a couple of existing OCD data types: 1) ``Event`` which represents a hearing or opportunity for public testimony, as defined in :doc:`../0004`; and 2) ``VoteEvent`` which represents the event of a legislative vote taking place, as defined in :doc:`../0007`. A future OCDEP might define a base class with properties shared by all event-like data types, including a shared id format (e.g., ``ocd-event/{{uuid}}``).
 
 .. _California Civic Data Coalition: http://www.californiacivicdata.org/
 .. _party-list proportional representation: https://en.wikipedia.org/wiki/Party-list_proportional_representation

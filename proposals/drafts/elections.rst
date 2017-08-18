@@ -149,7 +149,7 @@ division_id
 
 administrative_organization_id
     **optional**
-    Reference to the OCD ``Organization`` that administers the election and publishes the official results.
+    Reference to the ``OCD`` Organization that administers the election.
 
 sources
     **optional**
@@ -157,10 +157,10 @@ sources
     List of sources used in assembling this object. Has the following properties:
 
     url
-        URL of the resource.
+        A hyperlink related to an object.
     note
         **optional**
-        Description of what this source was used for.
+        A short, optional note related to an object.
 
 
 Sample Election
@@ -264,10 +264,10 @@ sources
     List of sources used in assembling this object. Has the following properties:
 
     url
-        URL of the resource.
+        A hyperlink related to an object.
     note
         **optional**
-        Description of what this source was used for.
+        A short, optional note related to an object
 
 extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
@@ -425,7 +425,7 @@ posts
     List of references to each OCD ``Post`` representing a public office for which the candidates in the contest are seeking election. Requires at least one. Has the following properties:
 
     post_id
-        Reference to an OCD ``OfficeTerm``.
+        Reference to the OCD ``Post`` at stake in the CandidateContest.
 
     sort_order
         **optional**
@@ -668,7 +668,7 @@ is_incumbent
 
 party_id
     **optional**
-    Reference to an OCD ``Organzation`` with which the candidate is affiliated.
+    Reference to the political party (an OCD ``Organzation``) that nominated the candidate or would nominate the candidate (as in the case of a partisan primary).
 
 top_ticket_candidacy_id
     **optional**
@@ -686,10 +686,10 @@ sources
     List of sources used in assembling this object. Has the following properties:
 
     url
-        URL of the resource.
+        A hyperlink related to an object.
     note
         **optional**
-        Description of what this source was used for.
+        A short, optional note related to an object.
 
 extras
     Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.

@@ -121,7 +121,7 @@ Implementation
 Election
 --------
 
-A collection of political contests set to be decided on the same date within a Division.    
+A collection of political contests set to be decided on the same date within a ``Division``.
 
 id
     Open Civic Data-style id, in the format ocd-election/{{uuid}}.
@@ -135,9 +135,7 @@ date
 identifiers
     **optional**
     **repeated**
-    Upstream identifiers of the election, such as those assigned by a Secretary of State, county or city elections office.
-
-    Each element in identifiers is an object with the following keys:
+    Upstream identifiers of the election, such as those assigned by a Secretary of State, county or city elections office. Has the following properties:
 
     scheme
         The name of the service that created the identifier.
@@ -234,9 +232,7 @@ id
 identifiers
     **optional**
     **repeated**
-    Upstream identifiers of the contest, such as those assigned by a Secretary of State, county or city elections office.
-
-    Each element in identifiers is an object with the following keys:
+    Upstream identifiers of the contest, such as those assigned by a Secretary of State, county or city elections office. Has the following properties:
 
     scheme
         The name of the service that created the identifier.
@@ -416,7 +412,7 @@ Mapping to VIP
 CandidateContest
 ----------------
 
-A contest among candidates seeking election to one or more public offices. 
+A contest among candidates seeking election to one or more public offices.
 
 ``CandidateContest`` inherits all the required and optional properties of ``Contest``.
 
@@ -507,16 +503,16 @@ PartyContest
 
 A contest in which voters can vote directly for a political party.
 
-In these contests, voters can vote for a party in lieu of/in addition to voting for candidates endorsed by that party (as in the case of `party-list proportional representation`_). 
+In these contests, voters can vote for a party in lieu of/in addition to voting for candidates endorsed by that party (as in the case of `party-list proportional representation`_).
 
 ``PartyContest`` inherits all the required and optional properties of ``Contest``.
 
 parties
     **repeated**
-    List of references to each party for which a voter could vote in the contest. Requires at list one. Has the following properties:
+    List of references to each party voters may choose in the contest. Requires at list one. Has the following properties:
 
     party_id
-        Reference to an OCD ``Organization``, with the `"party"` classification.
+        Reference to an OCD ``Organization``, with the "party" classification.
 
     is_incumbent
         **optional**
@@ -631,7 +627,7 @@ Mapping to VIP
 Candidacy
 ---------
 
-A person competing in an election contest to hold a specific office for a term.
+A person seeking election to hold a specific public office for a term.
 
 id
     Open Civic Data-style id in the format ``ocd-candidacy/{{uuid}}``.

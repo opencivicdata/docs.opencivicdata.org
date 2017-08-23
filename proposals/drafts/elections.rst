@@ -673,7 +673,7 @@ is_incumbent
 
 party_id
     **optional**
-    Reference to the political party (an OCD ``Organzation``) that nominated the candidate or would nominate the candidate (as in the case of a partisan primary).
+    Reference to an OCD ``Organzation`` representing the political party that nominated the candidate or would nominate the candidate (as in the case of a partisan primary).
 
 top_ticket_candidacy_id
     **optional**

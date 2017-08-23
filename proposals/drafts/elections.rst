@@ -521,7 +521,7 @@ parties
     List of references to each party voters may choose in the contest. Requires at list one. Has the following properties:
 
     party_id
-        Reference to an OCD ``Organization``, with the "party" classification.
+        Reference to an OCD ``Organization`` representing a political party voters may choose in the contest.
 
     is_incumbent
         **optional**

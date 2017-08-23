@@ -150,10 +150,10 @@ administrative_organization_id
     Reference to the ``OCD`` Organization that administers the election.
 
 created_at
-    Time that this object was created at in the system.
+    Date and time when the object was created at in the system.
 
 updated_at
-    Time that this object was last updated in the system.
+    Date and time when the object was last updated in the system.
 
 sources
     **optional**
@@ -258,10 +258,10 @@ election_id
     Reference to the OCD ``Election`` in which the contest is decided.
 
 created_at
-    Time that this object was created at in the system.
+    Date and time when this object was created at in the system.
 
 updated_at
-    Time that this object was last updated in the system.
+    Date and time when object was last updated in the system.
 
 sources
     **optional**
@@ -680,10 +680,10 @@ top_ticket_candidacy_id
     If the candidate is running as part of ticket, e.g., a Vice Presidential candidate running with a Presidential candidate, reference to candidacy at the top of the ticket.
 
 created_at
-    Specifies when this object was created in the system (datetime).
+    Date and time when this object was created at in the system.
 
 updated_at
-    Specifies when this object was last updated in the system (datetime).
+    Date and time when this object was last updated in the system (datetime).
 
 sources
     **optional**

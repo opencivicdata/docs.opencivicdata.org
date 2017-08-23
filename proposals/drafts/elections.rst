@@ -149,6 +149,12 @@ administrative_organization_id
     **optional**
     Reference to the ``OCD`` Organization that administers the election.
 
+created_at
+    Time that this object was created at in the system.
+
+updated_at
+    Time that this object was last updated in the system.
+
 sources
     **optional**
     **repeated**
@@ -159,6 +165,9 @@ sources
     note
         **optional**
         A short, optional note related to an object.
+
+extras
+    Common to all Open Civic Data types, the value is a key-value store suitable for storing arbitrary information not covered elsewhere.
 
 
 Sample Election

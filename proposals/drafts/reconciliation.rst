@@ -69,11 +69,45 @@ API
 
    :query name: a name of the politician
    :query jurisdiction_id: an OCD id for the jurisdiction of the organization that the politician is seeking election into or is a member of
-   :query office: (optional) a name of the office
+   :query role: (optional) a name of the role associated with a post
+   :query active_date: (optional) a date, date range, year, year range
+                       when the politician was seeking or held this
+                       role
+   :query post_label: the label of the post
    :query birth_date: (optional) the birth date of the politician
-   :query active_date: (optional) a date, date range, year, year range when the politician was seeking or held this office
    :status 200 OK: no error, returns a list of possible ids with match scores
    :status 404 Not Found: could not find any possible matches
+   :status 402 Payment required: If the balance between data added (puts and posts on `/identifier`) and searches is out of wack. This reduce
+   :status 429 Too Many Requests: Rate limiting
+
+   :reqheader Authorization: optional OAuth token to authenticate
+   :resheader Balance: Balance between data added and data searched
+		       
+
+   **Example request**:
+
+   .. sourcecode:: http
+
+      GET /search?jurisdiction_id=ocd-jurisdiction/country:us/state:il/place:chicago/government&name="Ed Burke" HTTP/1.1
+      Host: example.com
+      Accept: application/json, text/javascript
+
+   **Example response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Vary: Accept
+      Content-Type: text/javascript
+
+      [{"politician": {"jurisdiction_id": "ocd-jurisdiction/country:us/state:il/place:chicago/government",
+                      "name": "Ed Burke",
+                      "ocd_id": "ocd-person/912c8ddf-8d04-4f7f-847d-2daf84e096e2"
+                      "birth_date": null,
+                      "posts": {"role": "Alderman", "label": "Ward 3"}
+                      },
+        "match_score": 0.74}
+      ]			  
 
 .. http:get:: /identifier/(str:ocd_identifier)
 

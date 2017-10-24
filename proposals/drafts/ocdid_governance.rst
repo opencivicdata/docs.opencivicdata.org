@@ -29,15 +29,15 @@ Implementation
 
 Roles & Responsibilities
 ------------------------
-``User``
+``User`` 
 Anyone using OCDIDs may contribute through Slack/Google group discussion, reporting issues, or assisting with subject-matter expertise.
 These channels for communication will be publicaly displayed on the Open Civic Data website.
 
-``Contributor``
-Any individual or organization ``user` may become a ``contributor`` by submitting a pull request adding, correcting, or aliasing jurisdictional OCDIDs.
+``Contributor`` 
+Any individual or organization ``user`` may become a ``contributor`` by submitting a pull request adding, correcting, or aliasing jurisdictional OCDIDs.
 First time ``contributors`` will be advised to consult with an existing ``committer`` before submitting their first PR.
 
-``Committer``
+``Committer`` 
 ``Committers`` have the ability to approve and commit pull requests from ``contributors`` and other ``committers``. 
 An initial cohort of ``committers`` will be determined by current project contributors.
 Any individual or organization who is a ``contributor`` and who agrees to the repsonsibilities listed here may apply to become a ``committer``. 

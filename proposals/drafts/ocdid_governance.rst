@@ -29,24 +29,30 @@ Implementation
 
 Roles & Responsibilities
 ------------------------
-''User''
+``User``
 Anyone using OCDIDs may contribute through Slack/Google group discussion, reporting issues, or assisting with subject-matter expertise.
 These channels for communication will be publicaly displayed on the Open Civic Data website.
-''Contributor''
-Any individual user or organization may become a contributor by submitting a pull request adding, correcting, or aliasing jurisdictional OCDIDs.
-First time contributors will be advised to consult with an existing committer before submitting their first PR.
-Committer
-An initial cohort of committers will be determined by current project contributors.
-Any individual or organization who is a contributor may apply to become a committer.  
-There will be a two month period where existing committers may raise objections to an applicant, otherwise the applying organization/individual will be considered approved.
-In the case that an objection is raised, a discussion and vote will be had amongst existing committers, with a simple majority necessary for approval.
-Committers will be approved on an organizational basis, unless explicitly noted for an individual.
-Multiple members of an organization may have committing ability, but the organization itself will be counted for all voting and approval processes.
-Organizations will be asked to designate a primary point of contact who will act on behalf of the organization in procedural matters.
-Committers are expected to participate in approval, support, maintenance, and other community related activities or may have their committing status revoked. 
-Committers will have their status reviewed on a calendar year basis. 
+
+``Contributor``
+Any individual or organization ``user` may become a ``contributor`` by submitting a pull request adding, correcting, or aliasing jurisdictional OCDIDs.
+First time ``contributors`` will be advised to consult with an existing ``committer`` before submitting their first PR.
+
+``Committer``
+``Committers`` have the ability to approve and commit pull requests from ``contributors`` and other ``committers``. 
+An initial cohort of ``committers`` will be determined by current project contributors.
+Any individual or organization who is a ``contributor`` and who agrees to the repsonsibilities listed here may apply to become a ``committer``. 
+* There will be a two month period where existing ``committers`` may raise objections to an applicant, otherwise the applying organization/individual will be considered approved.
+* In the case that an objection is raised, a discussion and vote will be had amongst existing ``committers``, with a simple majority necessary for approval.
+``Committers`` will be approved on an organizational basis, unless explicitly noted for an individual.
+* Multiple members of an organization may have committing ability, but the organization itself will be counted for all voting and approval processes.
+* Organizations will be asked to designate a primary point of contact who will act on behalf of the organization in procedural matters.
+``Committers`` are expected to participate in approval, support, maintenance, and other community related activities or may have their ``committer`` status revoked. 
+* ``Committers`` will have their status reviewed on a calendar year basis. 
+
 Contribution Process
+--------------------
 General contributions
+~~~~~~~~~~~~~~~~~~~~~
 Anyone contributor may create a pull request for generative IDs, corrections, aliases, etc. via the repository. 
 A contributor’s request will be considered acceptable when reviewed by and approved by two committers.
 If the contribution is from a current committer in good standing, only one additional committer’s review is necessary.

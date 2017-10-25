@@ -53,22 +53,28 @@ Contribution Process
 --------------------
 General contributions
 ~~~~~~~~~~~~~~~~~~~~~
-Anyone contributor may create a pull request for generative IDs, corrections, aliases, etc. via the repository. 
-A contributor’s request will be considered acceptable when reviewed by and approved by two committers.
-If the contribution is from a current committer in good standing, only one additional committer’s review is necessary.
-No two members of the same organization may be involved in the acceptance of a pull request.
-The expectation for commits will be reviewed within 2 weeks of a pull request
-If, after two months there is neither a formal approval or an ongoing conversation around a request, that request will be considered accepted.
-If a conversation around a request cannot reach consensus, after two months the contributor may request a final vote from the cohort of existing committers.
-Approval will be handled on a per-file basis
-Timelines may be accelerated for time sensitive issues at the approval of committers.
-New commits must have a well-formed explanation attached, especially on new generative IDs or type
-Formalized guidelines for approval
-Syntax checks
-Type checks
-Dupe checks
-Including sameAs
-Difference between generating/correcting
+Any ``contributor`` may create a pull request for generative IDs, corrections, aliases, etc. 
+
+* A pull request from a ``contributor`` will be considered accepted when reviewed by and approved by two ``committers``.
+* If the contribution is from a current ``committer`` in good standing, only one additional ``committer`` review is necessary.
+* No two members of the same organization may be involved in the acceptance of a pull request.
+
+Commits should be reviewed within 2 weeks of a pull request. Accellerated timeline needs should be communicated via Slack/email.
+
+* If, after two months there is neither a formal approval or an ongoing conversation around a request, that request will be considered accepted.
+* If a conversation around a request cannot reach consensus, after two months the ``contributor`` may request a final vote from the cohort of existing ``committers``.
+
+Approval will be handled on a per-file, rather than a per-commit, basis.
+
+New commits should include have a well-formed explanations, especially if generating new IDs or types.
+
+Formalized guidelines for approval will be created for use by ``committers``. These guidelines will include:
+
+* Syntax check guidelines
+* Type check guidelines and a glossary of existing types
+* Dupe check guidelines
+* Instructions for including and checking for correct sameAs aliasing
+* Differentiating standards of review between generative/corrective requests
 
 Government contributions
 Should a government entity wish to contribute to the repository, they will initially be asked to work directly with an existing committer to prepare to integrate their identifier set.

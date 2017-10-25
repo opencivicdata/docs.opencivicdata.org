@@ -29,15 +29,18 @@ Implementation
 
 Roles & Responsibilities
 ------------------------
-``User`` 
+``User``
+~~~~~~~~
 Anyone using OCDIDs may contribute through Slack/Google group discussion, reporting issues, or assisting with subject-matter expertise.
 These channels for communication will be publicaly displayed on the Open Civic Data website.
 
-``Contributor`` 
+``Contributor``
+~~~~~~~~~~~~~~~
 Any individual or organization ``user`` may become a ``contributor`` by submitting a pull request adding, correcting, or aliasing jurisdictional OCDIDs.
 First time ``contributors`` will be advised to consult with an existing ``committer`` before submitting their first PR.
 
 ``Committer`` 
+~~~~~~~~~~~~~
 ``Committers`` have the ability to approve and commit pull requests from ``contributors`` and other ``committers``. 
 An initial cohort of ``committers`` will be determined by current project contributors.
 Any individual or organization who is a ``contributor`` and who agrees to the repsonsibilities listed here may apply to become a ``committer``. 
@@ -77,21 +80,24 @@ Formalized guidelines for approval will be created for use by ``committers``. Th
 * Differentiating standards of review between generative/corrective requests
 
 Government contributions
-Should a government entity wish to contribute to the repository, they will initially be asked to work directly with an existing committer to prepare to integrate their identifier set.
-A second committer is still required for approving government contributions, even if a government contributor becomes a committer themselves.
-Even so, government contributors should be given wide deference, particularly for their expertise on their particular geographic focus.
-If, because of naming conventions, geographic edge cases, etc. a government contributor requests a deviation from existing OCDID nomenclature, the community will attempt to reasonably accommodate that request
-E.g. requiring “police_jury” as a type in lieu of “county_council” for Louisiana's county legislature
-Government entities (and the contributors they work with) will be expected to reconcile and appropriately alias these cases with existing OCDIDs in order to ensure maximum compatibility.
-Officially created identifiers will be marked as such in the repository, and may only be changed with the permission of the submitting government entity, and should be deferred to whenever possible,
-Denoted by contributor type?
-What makes it “official” - contractual/long term commitment
-Cf “local expert”
-Create a section specifically aimed at government staff that is publically discoverable, letting them know where they can get help
+~~~~~~~~~~~~~~~~~~~~~~~~
+Should a government entity wish to contribute to the repository, they will initially be asked to work directly with an existing ``committer`` to prepare to integrate their identifier set.
+
+* A second ``committer`` is still required for approving government contributions, even if a government contributor becomes a ``committer`` themselves.
+* Even so, government contributors should be given wide deference within their geographic area.
+* If, because of naming conventions, geographic edge cases, etc. a government contributor requests a deviation from existing OCDID nomenclature, the community will attempt to reasonably accommodate that request (e.g. using “police_jury” as a type in lieu of “county_council” for Louisiana's county legislative body)
+
+Government entities (and the ``committers`` they work with) will be expected to reconcile and appropriately alias these cases with existing OCDIDs in order to ensure maximum compatibility.
+
+Identifiers created by government officials that are used in official data will be marked as such in the repository, so that developers can quickly identify the preferred identifier in case of conflict. Caution should be used, and the orginal submitter consulted with if possible, before changing government submitted identifiers.
+
+A section of documentatoin specifically aimed at government staff will be created, where they can learn more about the project and how to get involved, as well as how to reach out to the community to get help.
+
 Support
-Committers will be required to participate in a quarterly review of new OCDIDs in order to ensure quality on-going
-Committers will be requested to contribute and maintain an ongoing style guide for creating new district types.
-Committers will be required to participate in > 60% of all formal votes/actions as announced
+--------
+``Committers`` will be required to participate in a quarterly review of new OCDIDs in order to ensure quality on-going.
+``Committers`` will be requested to contribute and maintain an ongoing style guide for creating new district types.
+``Committers`` will be required to participate in > 60% of all formal votes/actions as announced.
 
 
 Copyright

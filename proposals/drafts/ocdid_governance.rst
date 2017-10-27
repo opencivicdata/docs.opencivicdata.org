@@ -19,7 +19,7 @@ Recently, a number of civic data organizations, tech companies, and US state gov
 
 * Bottlenecks arising when large amounts of new identifiers are proposed but only a few people have permission to review and approve pull requests.
 * Subject-matter experts and organizations that have extensive experience working with OCDIDs are willing to take greater responsibility, but currently do not have a formal path for doing so.
-* Government entities and other local experts who may wish to contribute to the OCDID repository do not have a clear idea of how the process for contirbution works, making it more difficult for them to justify contributing.
+* Government entities and other local experts who may wish to contribute to the OCDID repository do not have a clear idea of how the process for contribution works, making it more difficult for them to justify contributing.
 
 We propose to formalize this structure in order to relieve some of the burden on those currently responsible for maintaining the repository, as well as allowing those whose work depends on OCDIDs to have more direct control on their upkeep.
 
@@ -32,7 +32,7 @@ Roles & Responsibilities
 ``User``
 ~~~~~~~~
 Anyone using OCDIDs may contribute through Slack/Google group discussion, reporting issues, or assisting with subject-matter expertise.
-These channels for communication will be publicaly displayed on the Open Civic Data website.
+These channels for communication will be publicly displayed on the Open Civic Data website.
 
 ``Contributor``
 ~~~~~~~~~~~~~~~
@@ -43,7 +43,7 @@ First time ``contributors`` will be advised to consult with an existing ``commit
 ~~~~~~~~~~~~~
 ``Committers`` have the ability to approve and commit pull requests from ``contributors`` and other ``committers``. 
 An initial cohort of ``committers`` will be determined by current project contributors.
-Any individual or organization who is a ``contributor`` and who agrees to the repsonsibilities listed here may apply to become a ``committer``. 
+Any individual or organization who is a ``contributor`` and who agrees to the responsibilities listed here may apply to become a ``committer``. 
 
 * There will be a two month period where existing ``committers`` may raise objections to an applicant, otherwise the applying organization/individual will be considered approved.
 * In the case that an objection is raised, a discussion and vote will be had amongst existing ``committers``, with a simple majority necessary for approval.
@@ -68,7 +68,7 @@ Any ``contributor`` may create a pull request for generative IDs, corrections, a
 * If the contribution is from a current ``committer`` in good standing, only one additional ``committer`` review is necessary.
 * No two members of the same organization may be involved in the acceptance of a pull request.
 
-Commits should be reviewed within 2 weeks of a pull request. Accellerated timeline needs should be communicated via Slack/email.
+Commits should be reviewed within 2 weeks of a pull request. Accelerated timeline needs should be communicated via Slack/email.
 
 * If, after two months there is neither a formal approval or an ongoing conversation around a request, that request will be considered accepted.
 * If a conversation around a request cannot reach consensus, after two months the ``contributor`` may request a final vote from the cohort of existing ``committers``.
@@ -95,9 +95,9 @@ Should a government entity wish to contribute to the repository, they will initi
 
 Government entities (and the ``committers`` they work with) will be expected to reconcile and appropriately alias these cases with existing OCDIDs in order to ensure maximum compatibility.
 
-Identifiers created by government officials that are used in official data will be marked as such in the repository, so that developers can quickly identify the preferred identifier in case of conflict. Caution should be used, and the orginal submitter consulted with if possible, before changing government submitted identifiers.
+Identifiers created by government officials that are used in official data will be marked as such in the repository, so that developers can quickly identify the preferred identifier in case of conflict. Caution should be used, and the original submitter consulted with if possible, before changing government submitted identifiers.
 
-A section of documentatoin specifically aimed at government staff will be created, where they can learn more about the project and how to get involved, as well as how to reach out to the community to get help.
+A section of documentation specifically aimed at government staff will be created, where they can learn more about the project and how to get involved, as well as how to reach out to the community to get help.
 
 Support
 --------
@@ -111,3 +111,5 @@ Copyright
 
 This document has been placed in the public domain per the Creative Commons
 CC0 1.0 Universal license (http://creativecommons.org/publicdomain/zero/1.0/deed).
+
+

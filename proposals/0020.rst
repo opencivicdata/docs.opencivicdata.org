@@ -1,10 +1,12 @@
+.. _OCDEP20: 
+
 ====================
-OCDEP: Elections
+OCDEP 20: Elections
 ====================
 
 :Created: 2016-12-28
 :Author: James Gordon, Forest Gregg, `California Civic Data Coalition`_
-:Status: Proposed
+:Status: Accepted
 
 Overview
 ========
@@ -23,7 +25,7 @@ The proposed data types are:
 
 * ``Candidacy``
 
-Supplements the :doc:`Campaign Finance Filings <campaign_finance_filings>` proposal prepared by Abraham Epton, and lays the foundation for a future proposal covering election results.
+Supplements the :doc:`Campaign Finance Filings <./drafts/campaign_finance_filings>` proposal prepared by Abraham Epton, and lays the foundation for a future proposal covering election results.
 
 Definitions
 ===========
@@ -753,7 +755,7 @@ Copyright
 This document has been placed in the public domain per the `Creative Commons CC0 1.0 Universal license <http://creativecommons.org/publicdomain/zero/1.0/deed>`_.
 
 
-.. [#] ``Election`` is conceptually similar to a couple of existing OCD data types: 1) ``Event`` which represents a hearing or opportunity for public testimony, as defined in :doc:`../0004`; and 2) ``VoteEvent`` which represents the event of a legislative vote taking place, as defined in :doc:`../0007`. A future OCDEP might define a base class with properties shared by all event-like data types, including a shared id format (e.g., ``ocd-event/{{uuid}}``).
+.. [#] ``Election`` is conceptually similar to a couple of existing OCD data types: 1) ``Event`` which represents a hearing or opportunity for public testimony, as defined in :doc:`./0004`; and 2) ``VoteEvent`` which represents the event of a legislative vote taking place, as defined in :doc:`./0007`. A future OCDEP might define a base class with properties shared by all event-like data types, including a shared id format (e.g., ``ocd-event/{{uuid}}``).
 
 .. _California Civic Data Coalition: http://www.californiacivicdata.org/
 .. _party-list proportional representation: https://en.wikipedia.org/wiki/Party-list_proportional_representation

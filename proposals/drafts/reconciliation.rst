@@ -77,11 +77,10 @@ API
    :query birth_date: (optional) the birth date of the politician
    :status 200 OK: no error, returns a list of possible ids with match scores
    :status 404 Not Found: could not find any possible matches
-   :status 402 Payment required: If the balance between data added (puts and posts on `/identifier`) and searches is out of wack. This reduce
    :status 429 Too Many Requests: Rate limiting
 
    :reqheader Authorization: optional OAuth token to authenticate
-   :resheader Balance: Balance between data added and data searched
+   :resheader Balance: Balance between data added (search requests) and data searched (identifier post)
 		       
 
    **Example request**:
@@ -98,14 +97,14 @@ API
 
       HTTP/1.1 200 OK
       Vary: Accept
-      Content-Type: text/javascript
+      Content-Type: text/json
 
-      [{"politician": {"jurisdiction_id": "ocd-jurisdiction/country:us/state:il/place:chicago/government",
-                      "name": "Ed Burke",
-                      "ocd_id": "ocd-person/912c8ddf-8d04-4f7f-847d-2daf84e096e2"
-                      "birth_date": null,
-                      "posts": {"role": "Alderman", "label": "Ward 3"}
-                      },
+      [{"best reference": {"jurisdiction_id": "ocd-jurisdiction/country:us/state:il/place:chicago/government",  
+                           "name": "Ed Burke",
+                           "birth_date": null,
+                           "post": {"role": "Alderman", "label": "Ward 3"}
+                          },
+	"ocd_id": "ocd-person/912c8ddf-8d04-4f7f-847d-2daf84e096e2",
         "match_score": 0.74}
       ]			  
 
@@ -118,7 +117,29 @@ API
    :status 200 OK: no error
    :status 404 Not Found: no politician with that identifier found
    :status 301 Moved Permanently: if an ocd_identifier has been merged into another identifier, redirect to :http:get:`/identifier/(str:new_ocd_identifier)`
-   :status 300 Multiple Choices: this id has split, return options				  
+   :status 300 Multiple Choices: this id has split, return options
+
+   **Example request**:
+
+   .. sourcecode:: http
+
+      GET /identifier/ocd-person/912c8ddf-8d04-4f7f-847d-2daf84e096e2 HTTP/1.1
+      Host: example.com
+      Accept: application/json, text/javascript
+
+   **Example response**:
+
+      HTTP/1.1 200 OK
+      Vary: Accept
+      Content-Type: text/json
+
+      {"references": [{"jurisdiction_id": "ocd-jurisdiction/country:us/state:il/place:chicago/government",  
+                       "name": "Ed Burke",
+                       "birth_date": null,
+                       "post": {"role": "Alderman", "label": "Ward 3"}
+                       }],
+       "ocd_id": "ocd-person/912c8ddf-8d04-4f7f-847d-2daf84e096e2"}
+
 
 .. http:post:: /identifier
 
@@ -126,11 +147,35 @@ API
 
    :form name: a name of the politician
    :form jurisdiction_id: an OCD id for the jurisdiction of the organization that the politician is seeking election into or is a member of
-   :form office: (optional) a name of the office
+   :form post: (optional) a name of the office
    :form birth_date: (optional) the birth date of the politician
    :form active_date: (optional) a date, date range, year, year range when the politician was seeking or held this office
    :reqheader Authorization: OAuth token to authenticate		      
    :status 201 Created: returns ocd_identifier
+   :status 412 Precondition Failed: required information is missing or malformed
+   :status 401 Unauthorized: missing or invalid authorization token
+
+   **Example Request**:
+
+   .. sourcecode:: http
+			
+      POST /identifier HTTP/1.1
+      Host: example.com
+      Accept: application/json, text/javascript
+      Content-Type: application/json
+      Authorization: "Authorization: credentials"
+
+      {"name": "Danny Solis",
+       "jurisdiction_id": "ocd-jurisdiction/country:us/state:il/place:chicago/government",
+       "post": {"role": "Alderman", "label": "Ward 14"}}
+
+   **Example Response**:
+       
+      HTTP/1.1 201 OK
+      Vary: Accept
+      Content-Type: text/json
+
+      {"ocd_id": "ocd-person/v12caddf-gdag-2faf-147d-bfas84e096e2"}
 
 .. http:put:: /identifier/(str:ocd_identifier)
 
@@ -138,17 +183,51 @@ API
 
    :param ocd_identifier: politician's OCD identifier
    :type ocd_identifier: str
-   :form name: a name of the politician
+   :form name: (optional) a name of the politician
    :form jurisdiction_id: an OCD id for the jurisdiction of the organization that the politician is seeking election into or is a member of
    :form office: (optional) a name of the office
    :form birth_date: (optional) the birth date of the politician
    :form active_date: (optional) a date, date range, year, year range when the politician was seeking or held this office
    :reqheader Authorization: OAuth token to authenticate		      
-   :status 201 Created: return record id
+   :status 200 Created: return record
+
+   **Example Request**:
+			
+   .. sourcecode:: http
+			
+      PUT /identifier/ocd-person/912c8ddf-8d04-4f7f-847d-2daf84e096e2 HTTP/1.1
+      Host: example.com
+      Accept: application/json, text/javascript
+      Content-Type: application/json
+      Authorization: "Authorization: credentials"
+
+      {"name": "Edward Burke",
+       "ocd-jurisdiction/country:us/state:il/place:chicago/government"}
+
+   **Example Response**:
+       
+      HTTP/1.1 201 OK
+      Vary: Accept
+      Content-Type: text/json
+
+      {"references": {109234: {"jurisdiction_id": "ocd-jurisdiction/country:us/state:il/place:chicago/government",  
+                               "name": "Ed Burke",
+                               "birth_date": null,
+                               "post": {"role": "Alderman", "label": "Ward 3"}
+                               },
+		      109236:  {"jurisdiction_id": "ocd-jurisdiction/country:us/state:il/place:chicago/government",  
+                                "name": "Edward Burke",
+                                "birth_date": null,
+                                "post": null
+                                }},
+       "ocd_id": "ocd-person/912c8ddf-8d04-4f7f-847d-2daf84e096e2"}			
 
 .. http::delete:: /identifier/(str:ocd_identifier)
 
    Delete the record from politician id
+
+   :reqheader Authorization: OAuth token to authenticate		      
+   :status 204 No Content: delete identifier
 
 .. http:post:: /merge
 
@@ -157,6 +236,39 @@ API
    :form ids: array of ids to merge
    :reqheader Authorization: OAuth token to authenticate		      
    :status 201 Created: returns surviving ocd_identifier 
+
+   **Example Request**:
+			
+   .. sourcecode:: http
+			
+      POST /merge HTTP/1.1
+      Host: example.com
+      Accept: application/json, text/javascript
+      Content-Type: application/json
+      Authorization: "Authorization: credentials"
+
+      ["ocd-person/912c8ddf-8d04-4f7f-847d-2daf84e096e2", "ocd-person/v12caddf-gdag-2faf-147d-bfas84e096e2"]
+
+   **Example Response**:
+       
+      HTTP/1.1 201 OK
+      Vary: Accept
+      Content-Type: text/json
+
+      {"references": {109234: {"jurisdiction_id": "ocd-jurisdiction/country:us/state:il/place:chicago/government",  
+                               "name": "Ed Burke",
+                               "birth_date": null,
+                               "post": {"role": "Alderman", "label": "Ward 3"}
+                               },
+		      109236: {"jurisdiction_id": "ocd-jurisdiction/country:us/state:il/place:chicago/government",  
+                               "name": "Edward Burke",
+                               "birth_date": null,
+                               "post": null
+                               },
+		      109235: {"name": "Danny Solis",
+                               "jurisdiction_id": "ocd-jurisdiction/country:us/state:il/place:chicago/government",
+                               "post": {"role": "Alderman", "label": "Ward 14"}},
+       "ocd_id": "ocd-person/912c8ddf-8d04-4f7f-847d-2daf84e096e2"}			
 			
 .. http:post:: /split/(str:ocd_identifier)
 
@@ -167,30 +279,35 @@ API
    :type ocd_identifier: str
    :form ids: array of reference ids to remove and turn into new id
    :reqheader Authorization: OAuth token to authenticate		      
-   :status 201 Created: returns new ocd_identifiers for both sides of the split
+   :status 201 Created: returns new ocd_identifiers for the split
 			
+   .. sourcecode:: http
+			
+      POST /split/ocd-person/912c8ddf-8d04-4f7f-847d-2daf84e096e2 HTTP/1.1
+      Host: example.com
+      Accept: application/json, text/javascript
+      Content-Type: application/json
+      Authorization: "Authorization: credentials"
+
+      [109235]
+
+   **Example Response**:
+       
+      HTTP/1.1 201 OK
+      Vary: Accept
+      Content-Type: text/json
+
+      {"ocd_id": "ocd-person/912c8ddf-8d04-4f7f-847d-2daf84e096e2"}
  
 
 Governance
 __________
 
-mint, merge, and split are powerful claims that can will affect other users.
+`mint`, `merge`, and `split` are powerful claims that should be reserved
+to trusted publishers. 
 
-proposed permission model
-
-unprivileged
-
-- match methods
-- id methods
-
-publisher
-
-- mint method
-- merge method
-- split method
-
-publishers will get notifications if the entities they uploaded are
-changed by another publisher, and can take action.
+Publishers will get notifications if the entities they uploaded are
+changed by another publisher.
 
 
 Bulk access
@@ -199,29 +316,13 @@ Bulk access
 The underlying data for the service will be available as a daily backup
 
 
-
 Copyright of OCD identifiers
 ----------------------------
 
 They will be dedicated to the public domain
 
-Publisshers will need to agree that they will not upload data that is
+Publishers will need to agree that they will not upload data that is
 under copyright, and agree to dedicate all data to the public domain. 
-
-
-
-
-
-
-
-
-
-- http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2001414
-- https://web.archive.org/web/20161108220043/https://www.newschallenge.org/challenge/elections/entries/politician-reconciliation-service
-- https://web.archive.org/web/20130609195642/https://www.newschallenge.org/open/open-government/submission/civic-data-standardization-bootstrapper/
-- https://github.com/newsdev/nyt-entity-service
-- https://github.com/pudo/nomenklatura
-- google refine reconcilliation and freebase
 
 
 Copyright

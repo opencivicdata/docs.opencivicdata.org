@@ -125,11 +125,11 @@ filer
 
 coverage_start_date
     **optional**
-    Date (and possibly time) when filing period of coverage begins.
+    Date when filing period of coverage begins.
 
 coverage_end_date
     **optional**
-    Date (and possibly time) when filing period of coverage ends.
+    Date when filing period of coverage ends.
 
 recipient
     OCD Organization indicating the regulator to which the Filing was submitted.
@@ -183,12 +183,31 @@ actions
         Boolean indicating whether data from this action (primarily the
         transaction list) should be considered current or not.
 
-election
+totals
+    **optional**
+    **repeated**
+    A list of totals or other aggregations reported in this filing, often summing up different
+    sections. These can sometimes be correctly imputed from the transactions associated with this
+    filing.
+
+    description
+        String containing a description of the total.
+
+    value
+        Actual decimal amount of transaction.
+
+    currency
+        Currency denomination of transaction.
+
+designation
     **repeated**
     **optional**
-    Election(s) relevant to this filing. This is the upcoming Election for which
-    a donation is being disclosed, say, or a recently-passed Election for which
-    a Committee is announcing the closing of its books.
+    Election(s) or other jurisdictionally-specific events relevant to this filing. This is the
+    upcoming Election for which a donation is being disclosed; a recently-passed Election
+    for which a Committee is announcing the closing of its books; an inauguration for which campaign
+    funds can be used; or some other event or cause for which this filing is being generated. The
+    exact nature of these will depend on the jurisdiction, but the intent is for referring to, say,
+    a specific year's party primary in a jurisdiction or that party's inauguration festivities.
 
 created_at
     Time that this object was created at in the system, not to be confused with the date of introduction.
@@ -215,7 +234,8 @@ name
     Name of the Committee
 
 committee_type
-    Committee Type
+    Type of the Committee, as a string. Presumably unique within the namespace of this Committee's
+    geographic area (opengov:area).
 
 statuses
     Current status of the Committee. List of date ranges and status types
@@ -249,18 +269,6 @@ designations
     **repeated**
     The Candidate Designations that apply to this Committee - i.e., is it supporting or
     opposing certain candidates?
-
-Committee Type
---------------
-
-id
-    Open Civic Data-style ID in the format ``ocd-campaignfinance-committeetype/{{uuid}}``
-
-name
-    Name of the Committee Type
-
-jurisdiction
-    An OCD Jurisdiction.
 
 Candidate Designation
 ---------------------
@@ -336,7 +344,8 @@ classification
     filing the Transaction.
 
 amount
-    Amount of transaction.
+    Amount of transaction. This amount may be negative, often to indicate a returned contribution,
+    but in such cases the is_rejected field should be omitted to avoid ambiguity.
 
     value
         Actual decimal amount of transaction.
@@ -347,6 +356,11 @@ amount
     is_inkind
         Boolean indicating whether transaction is in-kind or not (in which case,
         it's probably cash.)
+
+    is_rejected
+        **optional**
+        Boolean indicating whether transaction has been rejected by the recipient (for example, a
+        returned contribution).
 
 sender
     This can be a person or some kind of organization or committee.
@@ -377,13 +391,13 @@ recipient
         (only if entity_type is "person")
 
 date
+    **optional**
     Date reported for transaction.
 
-description
-    String (may simply need repeated "notes" fields for items of this type).
-
-note
-    String (may simply need repeated "notes" fields for items of this type).
+notes
+    **repeated**
+    Strings containing notes, descriptions and other miscellaneous bits of text attached to this
+    transaction.
 
 CommitteeAttributeUpdate (Section)
 ----------------------------------
@@ -403,3 +417,6 @@ value
 description
     String containing whatever associated text we got along with the attribute
     change.
+
+filing_action
+    Reference to the ``Filing.action.id`` that an update is reported in.

@@ -4,7 +4,7 @@ OCDEP: Disclosures
 
 :Created: 
 :Author: Bob Lannon
-:Status: Draft
+:Status: Withdrawn
 
 Overview
 ========
@@ -66,9 +66,9 @@ related_entities
 classification
     The classification of the discosure, meant to identify the arena of public
     disclosure to which it applies. Some suggested classifications:
-        * lobbying
-        * contributions
-        * post_employment
+    * lobbying
+    * contributions
+    * post_employment
 
 submitted_date
     Date (and possibly time) when document was submitted.

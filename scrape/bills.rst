@@ -78,13 +78,14 @@ Only identifier, legislative_session and title are required. Classification will
     * nomination
     * contract
     * claim
-    * appointment,
+    * appointment
     * constitutional amendment
     * petition
     * order
     * concurrent order
     * appropriation
     * ordinance
+    * motion
 
 For a bicameral legislature, the chamber should also be included in the bill initialization (as 'upper' or 'lower').
 
@@ -185,18 +186,21 @@ Bill actions should be one of the following:
     * amendment-passage
     * amendment-withdrawal
     * amendment-failure
-    * amendment-amended
-    * committee-referral
+    * amendment-amendment
     * committee-passage
     * committee-passage-favorable
     * committee-passage-unfavorable
     * committee-failure
-    * executive-received
+    * executive-receipt
     * executive-signature
     * executive-veto
     * executive-veto-line-item
     * veto-override-passage
     * veto-override-failure
+    * deferral
+    * receipt
+    * referral
+    * referral-committee
 
 Note that when we actually scrape the site, we'd like to limit the bills we ingest to the current legislative session. Depending on the site, this can be done by navigating to a page that only contains information from the current session, or by limiting a search by the date range related to a session.
 

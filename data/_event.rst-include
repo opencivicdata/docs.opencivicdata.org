@@ -4,7 +4,7 @@ Basics
 **_type** (*string*)
     All events must have a _type field set to one of the entries in the enum below. **(required)**
 
-    Allowed Values:
+    Allowed values:
          * event
 
 
@@ -12,34 +12,42 @@ Basics
     A simple name of the event, such as "Fiscal subcommittee hearing on pudding cups" **(required)**
 
 
-**description** (*string, null*)
+**description** (*string*)
     A longer description describing the event. As an example, "Topics for discussion include this that and the other thing. In addition, lunch will be served". **(required)**
 
 
-**when** (*datetime*)
+**classification** (*string*)
+    An event category, e.g. town hall. **(required)**
+
+
+**start_time** (*datetime*)
     Starting date / time of the event. This should be fully timezone qualified. **(required)**
 
 
-**end** (*datetime, null*)
+**timezone** (*string*)
+    Time zone of the event. **(required)**
+
+
+**end_time** (*datetime, null*)
     Ending date / time of the event. This should be fully timezone qualified. **(required)**
 
 
-**status** (*string, null*)
+**all_day** (*boolean*)
+    Whether the event is a full-day event. **(required)**
+
+
+**status** (*string*)
     String that denotes the status of the meeting. This is useful for showing the meeting is cancelled in a machine-readable way. **(required)**
 
-    Allowed Values:
+    Allowed values:
          * cancelled
          * tentative
          * confirmed
          * passed
 
 
-**location** (*object*)
+**location** (*object, null*)
     Where the event will take place. **(required)**
-
-
-    **note** (*string, null*)
-        human readable notes regarding the location, something like "The meeting will take place at the Minority Whip's desk on the floor" **(required)**
 
 
     **url** (*string*)
@@ -71,18 +79,18 @@ Linked Entities
 
     Each element in media is an object with the following keys: 
 
-    **date** (*string, null*)
-        date of the recording. **(required)**
+    **note** (*string*)
+        Human-readable name of the media link, such as "Recording of the meeting" or "Discussion of construction near the watershed" **(required)**
+
+
+    **date** (*string*)
+        Date of the recording
 
         (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
-    **type** (*string*)
-        type of the set of recordings, such as "recording" or "testimony". **(required)**
-
-
-    **name** (*string*)
-        name of the media link, such as "Recording of the meeting" or "Discussion of construction near the watershed" **(required)**
+    **offset** (*number, null*)
+        Offset where the related part starts. This is optional and may be ommited entirely. **(required)**
 
 
     **links** (*array*)
@@ -91,16 +99,16 @@ Linked Entities
 
         Each element in links is an object with the following keys: 
 
-        **mimetype** (*string, null*)
-            Mimetype of the media, such as video/mp4 or audio/webm **(required)**
+        **media_type** (*string*)
+            IANA Media Type of the media, such as video/mp4 or audio/webm **(required)**
 
 
         **url** (*string*)
             URL where this media may be accessed **(required)**
 
 
-    **offset** (*number, null*)
-        Offset where the related part starts. This is optional and may be ommited entirely. **(required)**
+        **text** (*string*)
+            Text of the media
 
 
 **links** (*array*)
@@ -109,8 +117,8 @@ Linked Entities
 
     Each element in links is an object with the following keys: 
 
-    **note** (*string, null*)
-        Human-readable name of the link. Something like "Historical precedent for popsicle procurement" **(required)**
+    **note** (*string*)
+        Human-readable name of the link. Something like "Historical precedent for popsicle procurement"
 
 
     **url** (*string*)
@@ -127,24 +135,24 @@ Linked Entities
         Note regarding the relationship, such as `chair` for the chair of a meeting. **(required)**
 
 
-    **chamber** (*string, null*)
-        Optional field storing the chamber of the related participant. **(required)**
+    **name** (*string*)
+        Human-readable name of the participant. **(required)**
 
 
-    **type** (*string*)
-        What type of entity is this? `person` may be used if the person is not a Legislator, butattending the event, such as an invited speaker or one who is offering testimony. **(required)**
+    **entity_type** (*string*)
+        What type of entity is this? `person` may be used if the person is not a legislator, but attending the event, such as an invited speaker or one who is offering testimony.
 
-        Allowed Values:
+        Allowed values:
              * organization
              * person
 
 
-    **name** (*string*)
-        Human readable name of the entitity. **(required)**
+    **entity_name** (*string*)
+        Reconciled name of the participant. **(required)**
 
 
-    **id** (*string, null*)
-        ID of the participant **(required)**
+    **entity_id** (*string, null*)
+        Reconciled ID of the participant. **(required)**
 
 
 **agenda** (*array*)
@@ -153,26 +161,61 @@ Linked Entities
 
     Each element in agenda is an object with the following keys: 
 
+    **description** (*string*)
+        Human-readable string that represents this agenda item. A good example would be something like The Committee will consider SB 2339, HB 100 **(required)**
+
+
+    **classification** (*string*)
+        An agenda item category.
+
+
+    **order** (*string*)
+        order of this item, useful for re-creating meeting minutes. This may be ommited entirely. It may also optionally contains "dots" to denote nested agenda items, such as "1.1.2.1" or "2", which may go on as needed.
+
+
+    **subjects** (*array*)
+        List of related topics of this agenda item relates to. **(minItems: 0)**
+
+
+        Each element in subjects is of type (string)
+
+
+    **notes** (*array*)
+        List of notes taken during this agenda item, may be used to construct meeting minutes. **(minItems: 0)**
+
+
+        Each element in notes is of type (string)
+`
+
     **related_entities** (*array*)
         Entities that relate to this agenda item, such as presenters, legislative instruments, or committees. **(required, minItems: 0)**
 
 
         Each element in related_entities is an object with the following keys: 
 
-        **note** (*string, null*)
-            human readable string (if any) noting the relationship between the entity and the agenda item, such as "Jeff will be presenting on the effects of too much cookie dough" **(required)**
-
-
-        **type** (*string*)
-            type of the related object, like `bill` or `organization`. **(required)**
-
-
-        **id** (*string, null*)
-            ID of the related entity **(required)**
+        **note** (*string*)
+            Human-readable string (if any) noting the relationship between the entity and the agenda item, such as "Jeff will be presenting on the effects of too much cookie dough" **(required)**
 
 
         **name** (*string*)
-            human readable string representing the entity, such as `John Q. Smith`. **(required)**
+            Human-readable string representing the entity, such as `John Q. Smith`. **(required)**
+
+
+        **entity_type** (*string*)
+            Type of the related object.
+
+        Allowed values:
+             * bill
+             * organization
+             * person
+             * vote_event
+
+        **entity_name** (*string*)
+            Reconciled name of the entity. **(required)**
+
+
+        **entity_id** (*string, null*)
+            Reconciled ID of the entity. **(required)**
 
 
     **media** (*array*)
@@ -181,18 +224,18 @@ Linked Entities
 
         Each element in media is an object with the following keys: 
 
-        **date** (*string, null*)
-            date of the recording. **(required)**
+        **note** (*string*)
+            Human-readable name of the media link, such as "Recording of the meeting" or "Discussion of construction near the watershed" **(required)**
+
+
+        **date** (*string*)
+            Date of the recording
 
             (must match format: ``^[0-9]{4}(-[0-9]{2}){0,2}$``)
 
 
-        **type** (*string*)
-            type of the set of recordings, such as "recording" or "testimony". **(required)**
-
-
-        **name** (*string*)
-            name of the media link, such as "Recording of the meeting" or "Discussion of construction near the watershed" **(required)**
+        **offset** (*number, null*)
+            Offset where the related part starts. This is optional and may be ommited entirely. **(required)**
 
 
         **links** (*array*)
@@ -201,40 +244,16 @@ Linked Entities
 
             Each element in links is an object with the following keys: 
 
-            **mimetype** (*string, null*)
-                Mimetype of the media, such as video/mp4 or audio/webm **(required)**
+            **media_type** (*string*)
+                IANA Media Type of the media, such as video/mp4 or audio/webm **(required)**
 
 
             **url** (*string*)
                 URL where this media may be accessed **(required)**
 
 
-        **offset** (*number, null*)
-            Offset where the related part starts. This is optional and may be ommited entirely. **(required)**
-
-
-    **notes** (*array*)
-        List of notes taken during this agenda item, may be used to construct meeting minutes. **(required, minItems: 0)**
-
-
-        Each element in notes is an object with the following keys: 
-
-        **description** (*string*)
-            simple string containing the content of the note. **(required)**
-
-
-    **subjects** (*array*)
-        List of related topics of this agenda item relates to. **(required, minItems: 0)**
-
-
-        Each element in subjects is of type (string)
-
-    **order** (*string, null*)
-        order of this item, useful for re-creating meeting minutes. This may be ommited entirely. It may also optionally contains "dots" to denote nested agenda items, such as "1.1.2.1" or "2", which may go on as needed. **(required)**
-
-
-    **description** (*string*)
-        Human-readable string that represents this agenda item. A good example would be something like The Committee will consider SB 2339, HB 100 **(required)**
+            **text** (*string*)
+                Text of the media
 
 
 **documents** (*array*)
@@ -243,16 +262,42 @@ Linked Entities
 
     Each element in documents is an object with the following keys: 
 
+    **note** (*string*)
+        Human-readable name of the document. Something like "Fiscal Report" or "John Smith's Slides". **(required)**
+
+
+    **date** (*string*)
+        Document posting date **(required)**
+
+
+    **media_type** (*string*)
+        IANA Media Type of document **(required)**
+
+
     **url** (*string*)
-        URL where the content may be found. **(required)**
+        URL to document **(required)**
 
 
-    **mimetype** (*string*)
-        Mimetype of the document. **(required)**
+    **text** (*string*)
+        Text of the document
 
 
-    **name** (*string*)
-        name of the document. Something like "Fiscal Report" or "John Smith's Slides". **(required)**
+    **links** (*array*)
+        List of links to text for this document (pdf, html, etc.). **(required, minItems: 0)**
+
+
+        Each element in links is an object with the following keys: 
+
+        **media_type** (*string*)
+            IANA Media Type of document **(required)**
+
+
+        **url** (*string*)
+            URL to document **(required)**
+
+
+        **text** (*string*)
+            Text of the document
 
 
 Common Fields

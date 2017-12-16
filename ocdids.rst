@@ -4,14 +4,8 @@
 OCD Identifiers
 ===============
 
-.. warning::
-    Parts of Open Civic Data underwent a large refactor as of mid-2014, some information on this
-    page may be out of date.   We're working on updating this documentation as soon as possible.
-
-    We'll remove these messages from pages as they're updated and vetted.
-
 Open Civic Data Identifiers (or OCD IDs) are a common Identifier format used
-in the OpenCivicData projects, in a defined format, ripe for reuse with
+in the Open Civic Data projects, in a defined format, ripe for reuse with
 any legislative dataset.
 
 Creating a new OCD ID
@@ -34,22 +28,20 @@ it's OK (and not OK) to create new IDs without reaching rough consensus.
 +-----------------+-------------------------------+
 | jurisdiction    | No (needs to undergo a review |
 |                 | to ensure we have consistent  |
-|                 | names for legislative bodies  |
+|                 | names for legislative bodies) |
 +-----------------+-------------------------------+
 
 If you need to create a new ID that requires rough consensus, emailing the
-`OpenCivic Data Mailing List <https://groups.google.com/forum/#!forum/open-civic-data>`_
+`Open Civic Data mailing list <https://groups.google.com/forum/#!forum/open-civic-data>`_
 with as much detail regarding the situation as you can generally proves
 to be the best way to solicit feedback.
 
 General Format
 --------------
 
-OCD IDs have the general format of:
-
-``ocd-${type}/${data}``. Some valid types are ``division``, ``jurisdiction``,
-and ``person``. Each type has its own format (for the data half of the ID),
-and a brief overview can be found below.
+OCD IDs have the general format of: ``ocd-${type}/${data}``. Some valid types
+are ``division``, ``jurisdiction``, and ``person``. Each type has its own format
+(for the data half of the ID), and a brief overview can be found below.
 
 
 Division IDs
@@ -57,21 +49,18 @@ Division IDs
 
 Division IDs are one of the more common OpenCivic identifiers. Division IDs
 denote a particular geopolitical division. Information regarding valid
-Division IDs can be found in the
-`ocd-division-ids repo <https://github.com/opencivicdata/ocd-division-ids>`_.
+Division IDs can be found in
+`OCDEP 2: Open Civic Data Divisions <http://docs.opencivicdata.org/en/latest/proposals/0002.html>`_.
 
-The general format is:
-
-``ocd-division/country:<country_code>[/<type>:<type_id>]+``.
-
+The general format is: ``ocd-division/country:<country_code>[/<type>:<type_id>]+``.
 ``country_code`` must be a valid ISO 3166-1 alpha-2 code for the country.
 ``type`` shall be the type of boundary (such as ``country``, ``state``,
 ``city``), while ``type_id`` shall be the unique ID for the entity at this
 level.
 
 For more information on what exactly is correct in this format, please
-do take a look at the
-`ocd-division-ids repo <https://github.com/opencivicdata/ocd-division-ids>`_.
+do take a look at
+`OCDEP 2: Open Civic Data Divisions <http://docs.opencivicdata.org/en/latest/proposals/0002.html>`_.
 
 
 .. _jurisdiction-ids:
@@ -81,11 +70,10 @@ Jurisdiction IDs
 
 Jurisdiction IDs are based on the Division IDs, but have a slightly adjusted
 format. The ``type`` shall be set to ``jurisdiction``, and the data half of the
-ID shall have a trailing ``type``, which matches the jurisdiction type. Currently,
-the only used types are ``legislature`` and ``council``.
+ID shall have a trailing ``type``, which matches the jurisdiction type.
 
 The ID looks something like
-``ocd-jurisdiction/country:us/state:ex/place:example``.
+``ocd-jurisdiction/country:us/state:ex/place:example/legislature``.
 
 This format isn't fully formalized yet, so please take care when using
 these.

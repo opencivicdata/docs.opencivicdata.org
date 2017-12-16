@@ -102,7 +102,7 @@ name
     or "221B Baker Street".
 
 note
-    Optional human readable note to help with getting to the meeting place,
+    Optional human-readable note to help with getting to the meeting place,
     such as "The meeting will take place at the Minority Whip's desk on the
     floor"
 
@@ -127,7 +127,7 @@ type
     Type of the participant, either ``person`` or ``organization``.
 
 note
-    Human readable note regarding the relationship
+    Human-readable note regarding the relationship
 
 
 Agenda Items

@@ -49,11 +49,11 @@ Let's take a look at a sample Pupa event scraper::
           e = Event(name="Hearing",  # Event Name
                         start_time=when,  # When the event will take place
                         timezone=tz.zone, #the local timezone for the event
-                        location='unknown')  # Where the event will be
+                        location_name='Town Hall')  # Where the event will be
           e.add_source("http://example.com")
           yield e
 
-The events scraper looks a lot like a person scraper - the same stuff is going on here - the magic ``scrape`` method, returns an iterable of OpenCivic objects. Unlike people, where we often found committees or other organizations, it's not common to come across other OpenCivic objects while scraping events, so this scraper will usually just return ``Event`` objects.
+The events scraper looks a lot like a person scraper - the same stuff is going on here - the magic ``scrape`` method, returns an iterable of objects. Unlike people, where we often found committees or other organizations, it's not common to come across other objects while scraping events, so this scraper will usually just return ``Event`` objects.
 
 The scraper above contains the minimum elements required to create an event. But there's much more we might want to add. The following scraper adds particpants and documents that are relevant to the hearing::
 
@@ -70,7 +70,7 @@ The scraper above contains the minimum elements required to create an event. But
           e = Event(name="Hearing",  # Event Name
                         start_time=when,  # When the event will take place
                         timezone=tz.zone, #the local timezone for the event
-                        location='unknown')  # Where the event will be
+                        location_name='unknown')  # Where the event will be
           e.add_source("http://example.com")
 
           #add a committee
@@ -108,7 +108,7 @@ The event is now much more fleshed out. But we're still missing the meat of an e
           e = Event(name="Hearing",  # Event Name
                         start_time=when,  # When the event will take place
                         timezone=tz.zone, #the local timezone for the event
-                        location='unknown')  # Where the event will be
+                        location_name='unknown')  # Where the event will be
           e.add_source("http://example.com")
 
           #add a committee

@@ -4,7 +4,7 @@ Basics
 **_type** (*string*)
     All bills have a _type field set to bill. **(required)**
 
-    Allowed Values:
+    Allowed values:
          * bill
 
 
@@ -27,7 +27,7 @@ Basics
 **chamber** (*string, null*)
     chamber vote took place in (if legislature is bicameral, otherwise null) **(required)**
 
-    Allowed Values:
+    Allowed values:
          * upper
          * lower
          * joint
@@ -134,10 +134,13 @@ Other/Related Bills
 
 
     **relation_type** (*string*)
-        Currently should be 'companion', others may be added in the future. **(required)**
+        **(required)**
 
-        Allowed Values:
+        Allowed values:
              * companion
+             * prior-session
+             * replaced-by
+             * replaces
 
 
 Sponsors and Actions
@@ -152,7 +155,7 @@ Sponsors and Actions
     **_type** (*string, null*)
         Type of entity if the sponsor has been resolved to another entity in the database. **(required)**
 
-        Allowed Values:
+        Allowed values:
              * organization
              * person
 
@@ -172,7 +175,7 @@ Sponsors and Actions
     **chamber** (*string, null*)
         Chamber of sponsor. **(required)**
 
-        Allowed Values:
+        Allowed values:
              * upper
              * lower
 
@@ -216,7 +219,7 @@ Sponsors and Actions
         **_type** (*string, null*)
             Type of entity if the sponsor has been resolved to another entity in the database. **(required)**
 
-            Allowed Values:
+            Allowed values:
                  * organization
                  * person
 
@@ -247,8 +250,6 @@ Documents and Versions
     **type** (*string, null*)
         Type of document **(required)**
 
-        Allowed Values:
-
 
     **name** (*string*)
         Name of document **(required)**
@@ -260,12 +261,16 @@ Documents and Versions
 
         Each element in links is an object with the following keys: 
 
-        **mimetype** (*string, null*)
-            mimetype of document **(required)**
+        **media_type** (*string*)
+            IANA Media Type of document **(required)**
 
 
         **url** (*string*)
             URL to document **(required)**
+
+
+        **text** (*string*)
+            Text of the document
 
 
 **versions** (*array*)
@@ -283,8 +288,6 @@ Documents and Versions
     **type** (*string, null*)
         Type of version **(required)**
 
-        Allowed Values:
-
 
     **name** (*string*)
         Name of version **(required)**
@@ -296,11 +299,15 @@ Documents and Versions
 
         Each element in links is an object with the following keys: 
 
-        **mimetype** (*string, null*)
-            mimetype of document **(required)**
+        **media_type** (*string*)
+            IANA Media Type of document **(required)**
 
 
         **url** (*string*)
             URL to document **(required)**
+
+
+        **text** (*string*)
+            Text of the document
 
 

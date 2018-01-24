@@ -1,11 +1,11 @@
 
 ==============
-OCDEP: Division Identifier Governance
+OCDEP 8: Division Identifier Governance
 ==============
 
 :Created: 2017-10-26
 :Author: Donny Bridges
-:Status: Proposed
+:Status: Accepted
 
 Overview
 ========

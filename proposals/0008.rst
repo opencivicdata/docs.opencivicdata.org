@@ -53,7 +53,7 @@ An initial cohort of ``committers`` will be determined by current project contri
 
 A separate ``committers`` communication channel for each country-based community will be established. A list of each country's ``committer`` email addresses will be maintained and email will be used to conduct official actions unless otherwise specified. 
 
-Any individual who is a ``contributor`` and who agrees to the responsibilities listed here may request to become a ``committer``via a country's agreed upon communication channel. That request will then be shared with the group of that country's current ``committers`` for approval. 
+Any individual who is a ``contributor`` and who agrees to the responsibilities listed here may request to become a ``committer`` via a country's agreed upon communication channel. That request will then be shared with the group of that country's current ``committers`` for approval. 
 
 * There will be a two month period where existing ``committers`` may raise objections to a request, otherwise the request will be considered approved.
 * In the case that an objection is raised, a discussion and vote will be had amongst the country's existing ``committers``, with a simple majority necessary for approval.

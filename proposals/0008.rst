@@ -81,7 +81,7 @@ General contributions
 ~~~~~~~~~~~~~~~~~~~~~
 Any ``contributor`` may create a pull request for generative IDs, corrections, aliases, etc. 
 
-* A pull request from a ``contributor`` will be considered accepted when reviewed by and approved by two of the country's ``committers`.
+* A pull request from a ``contributor`` will be considered accepted when reviewed by and approved by two of the country's ``committers``.
 * If the contribution is from a current ``committer`` in good standing with the country's community, only one additional ``committer`` review is necessary.
 * No two members of the same organization may be involved in the acceptance of a pull request.
 

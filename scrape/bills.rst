@@ -104,7 +104,7 @@ We can add a variety of other pieces of information to a bill. All are optional 
                     title="More cookies for children",
                     classification="resolution")
             bill.add_source("http://example.com")
-            
+
             #add a sponsor
             bill.add_sponsorship(name="Joe Smith", #name of person or org
                     classification="Primary", #primary? secondary? first? co-sponsor? etc
@@ -162,7 +162,7 @@ We can add a variety of other pieces of information to a bill. All are optional 
                             date="2015-05-05",
                             classification="introduction", #see note about allowed classifications
                             )
-            
+
             #add entities to the action. This is how you'd add
             #committees or people who participated
             act.add_related_entity(name="Transportation Committee",
@@ -195,6 +195,7 @@ Bill actions should be one of the following:
     * executive-signature
     * executive-veto
     * executive-veto-line-item
+    * became-law
     * veto-override-passage
     * veto-override-failure
     * deferral
@@ -224,7 +225,7 @@ Now, let's take a look at how we can add Vote information to a bill::
                     title="More cookies for children",
                     classification="resolution")
             bill.add_source("http://example.com")
-            
+
             #create a vote
             v = Vote(legislative_session=session["identifier"],
                         motion_text = 'Shall the bill pass the first reading?',

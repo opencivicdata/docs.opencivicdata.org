@@ -7,4 +7,4 @@ This repository contains documentation for developers including:
 * Open Civic Data's Data Type Specifications
 * Open Civic Data Proposals
 
-Read these docs at http://docs.opencivicdata.org/
+Read these docs at https://open-civic-data.readthedocs.io/en/latest/

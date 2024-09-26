@@ -133,11 +133,11 @@ filer
 
 coverage_start_date
     **optional**
-    Date (and possibly time) when filing period of coverage begins.
+    Date when filing period of coverage begins.
 
 coverage_end_date
     **optional**
-    Date (and possibly time) when filing period of coverage ends.
+    Date when filing period of coverage ends.
 
 recipient
     OCD Organization indicating the regulator to which the Filing was submitted.
@@ -192,12 +192,31 @@ actions
         Boolean indicating whether data from this action (primarily the
         transaction list) should be considered current or not.
 
-election
+totals
+    **optional**
+    **repeated**
+    A list of totals or other aggregations reported in this filing, often summing up different
+    sections. These can sometimes be correctly imputed from the transactions associated with this
+    filing.
+
+    description
+        String containing a description of the total.
+
+    value
+        Actual decimal amount of transaction.
+
+    currency
+        Currency denomination of transaction.
+
+designation
     **repeated**
     **optional**
-    Election(s) relevant to this filing. This is the upcoming Election for which
-    a donation is being disclosed, say, or a recently-passed Election for which
-    a Committee is announcing the closing of its books.
+    Election(s) or other jurisdictionally-specific events relevant to this filing. This is the
+    upcoming Election for which a donation is being disclosed; a recently-passed Election
+    for which a Committee is announcing the closing of its books; an inauguration for which campaign
+    funds can be used; or some other event or cause for which this filing is being generated. The
+    exact nature of these will depend on the jurisdiction, but the intent is for referring to, say,
+    a specific year's party primary in a jurisdiction or that party's inauguration festivities.
 
 created_at
     Time that this object was created at in the system, not to be confused with the date of introduction.
@@ -217,7 +236,8 @@ id
     ``ocd-campaign-finance-committee/{{uuid}}``.
 
 committee_type
-    Committee Type.
+    Type of the Committee, as a string. Presumably unique within the namespace of this Committee's
+    geographic area (opengov:area).
 
 statuses
     Current status of the Committee. List of date ranges and status types
@@ -249,7 +269,7 @@ candidacy_designations
 
     candidacy_id
         Reference to an OCD ``Candidacy``.
-    
+
     designation
         Enumerated among "supports", "opposes", "primary vehicle for", "surplus account for", "independent expenditure" and other relationship types.
 
@@ -265,18 +285,32 @@ ballot_measure_options_supported
         The specific ballot measure option supported by the committee, which are enumerated in ``BallotMeasureContest.options``.
 
 
-Committee Type
---------------
+Candidate Designation
+---------------------
+
+A Committee may have no relation to any specific Candidate, but if they do have
+such a relationship, the options are complex. Hence this type.
 
 id
-    Open Civic Data-style ID in the format
-    ``ocd-campaign-finance-committee-type/{{uuid}}``.
+    Open Civic Data-style ID in the format ``ocd-campaignfinance-candidateorientation/{{uuid}}``
 
-name
-    Name of the Committee Type.
+candidate
+    OCD Person indicating the candidate
 
-jurisdiction
-    An OCD Jurisdiction.
+designation
+    Enumerated among "supports", "opposes", "primary vehicle for", "surplus
+    account for", "independent expenditure" and other relationship types.
+
+Person
+------
+
+This system assumes that each Person will be generated from a specific line item
+in a Filing. As such, we may know nothing about the Person but their name. Also,
+sometimes and as far as I can see inevitably, some Persons (many in fact) will
+be corporations or other distinctly non-human entities, Supremes Court
+notwithstanding.
+
+This type is an OCD Person.
 
 Filing Type
 -----------
@@ -326,7 +360,8 @@ classification
     filing the Transaction.
 
 amount
-    Amount of transaction.
+    Amount of transaction. This amount may be negative, often to indicate a returned contribution,
+    but in such cases the is_rejected field should be omitted to avoid ambiguity.
 
     value
         Actual decimal amount of transaction.
@@ -337,6 +372,11 @@ amount
     is_in_kind
         Boolean indicating whether transaction is in-kind or not (in which case,
         it's probably cash).
+
+    is_rejected
+        **optional**
+        Boolean indicating whether transaction has been rejected by the recipient (for example, a
+        returned contribution).
 
 sender
     This can be a person or some kind of organization or committee.
@@ -367,13 +407,13 @@ recipient
         (only if entity_type is "person").
 
 date
+    **optional**
     Date reported for transaction.
 
-description
-    String (may simply need repeated "notes" fields for items of this type).
-
-note
-    String (may simply need repeated "notes" fields for items of this type).
+notes
+    **repeated**
+    Strings containing notes, descriptions and other miscellaneous bits of text attached to this
+    transaction.
 
 Committee Attribute Update (Section)
 ------------------------------------
@@ -394,3 +434,6 @@ value
 description
     String containing whatever associated text we got along with the attribute
     change.
+
+filing_action
+    Reference to the ``Filing.action.id`` that an update is reported in.

@@ -191,7 +191,7 @@ Special notes regarding Posts, Memberships and Districts
 
 The keen observer will note that we're using role, district and primary_org to note the person's primary position.
 
-Looking at the `Popolo spec <http://popoloproject.com/>`_, you might be
+Looking at the `Popolo spec <https://www.popoloproject.com/>`_, you might be
 confused on why this isn't an opaque ID, or some sort of slug.
 
 We use full strings to help avoid having to search through all available organizations at scrape-time. The resolution is done at import-time.

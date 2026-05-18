@@ -13,7 +13,7 @@ Overview
 
 Definition of the Open Civic Data vote types.
 
-(Based in part on `Popolo <http://popoloproject.com/>`_ types for the Open Civic Data Vote and VoteEvent).
+(Based in part on `Popolo <https://www.popoloproject.com/>`_ types for the Open Civic Data Vote and VoteEvent).
 
 
 Rationale
@@ -24,7 +24,7 @@ legislative accountability.  The ``VoteEvent`` type and its related subtypes exi
 of votes (meaning the outcome of a proposal as well as the individual positions of legislators).
 
 An attempt has been made to reconcile our vote types (originally based in Open States work)
-with the schemas put forward by the `Popolo specification <http://popoloproject.com/specs/vote-event.html>`_.
+with the schemas put forward by the `Popolo specification <https://www.popoloproject.com/specs/vote-event.html>`_.
 
 
 Implementation
@@ -57,7 +57,7 @@ motion
 
     ``classification`` is a list of classifiers (e.g. 'bill-passage') and can also be an empty list.
 
-    In Popolo there is a `Motion <http://popoloproject.com/specs/motion.html>`_ class that has additional properties, only text and classification are supported at this time.
+    In Popolo there is a `Motion <https://www.popoloproject.com/specs/motion.html>`_ class that has additional properties, only text and classification are supported at this time.
 
 
 start_date
@@ -82,7 +82,7 @@ bill, bill_id
 
 votes
     A list of objects representing individual legislator's votes.  (Popolo refers to these as
-    `Vote <http://popoloproject.com/specs/vote.html>`_).
+    `Vote <https://www.popoloproject.com/specs/vote.html>`_).
 
     This list may not be present if the individual voters are not known, for example in the case of a
     voice vote.
@@ -105,7 +105,7 @@ votes
         might be an excuse if the option is 'excused'.
 
 counts
-    A list of count objects (what Popolo calls `Count <http://popoloproject.com/specs/count.html>`_).
+    A list of count objects (what Popolo calls `Count <https://www.popoloproject.com/specs/count.html>`_).
 
     These represent the total number of individuals voting a particular way.  Each has two properties:
 

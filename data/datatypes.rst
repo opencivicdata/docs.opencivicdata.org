@@ -22,7 +22,7 @@ The Open Civic Data specifications define the following core types:
 **person**
     A person, typically a politician or government official.
 
-    The `Popolo person schema <http://popoloproject.com/specs/person.html>`_ is used to represent
+    The `Popolo person schema <https://www.popoloproject.com/specs/person.html>`_ is used to represent
     person data.
 
     See :doc:`person` for details.
@@ -30,7 +30,7 @@ The Open Civic Data specifications define the following core types:
 **organization**
     A group of people, such as a city council, state senate, or committee.
 
-    The `Popolo organization schema <http://popoloproject.com/specs/organization.html>`_ is used to
+    The `Popolo organization schema <https://www.popoloproject.com/specs/organization.html>`_ is used to
     represent organization data.
 
     See :doc:`organization` for details.
